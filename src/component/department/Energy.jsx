@@ -15,7 +15,7 @@ export default function Energy() {
             {/* Left: Image */}
             <figure className="relative">
               <img
-                src={img1}
+                src="https://images.takeshape.io/86ce9525-f5f2-4e97-81ba-54e8ce933da7/dev/9d498117-3179-4718-81f4-f1c7fe8e892b/Pillar%201%20Energy%20Transition%20wind%20energy%20solar%20panels%20dreamstime.png?auto=compress%2Cformat&w=1440"
                 alt="Solar mini-plant site"
                 className="w-full h-72 md:h-[26rem] lg:h-[30rem] object-cover rounded-2xl shadow-md ring-1 ring-slate-200"
               />
