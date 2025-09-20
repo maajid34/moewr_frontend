@@ -1,4 +1,4 @@
-import img1 from '../../assets/Energy/bg.jpg'
+// import img1 from '../../assets/Energy/bg.jpg'
 import MoewrFooter from '../../pages/footer';
 import Header from '../../pages/header';
 export default function Energy() {
