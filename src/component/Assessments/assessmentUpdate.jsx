@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 
-const API_BASE = "http://localhost:3000";
+const API_BASE = "https://moewr-backend.onrender.com";
 
 export default function AssessmentUpdateForm() {
   const { id } = useParams();              // <-- expects route like /documents/edit/:id
