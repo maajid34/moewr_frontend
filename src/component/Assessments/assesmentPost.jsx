@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-const API_BASE = "http://localhost:3000";
+const API_BASE = "https://moewr-backend.onrender.com";
 const LIST_URL = `${API_BASE}/ReadAssess/DocumentFile`; // backend endpoint
 
 export default function AssessmentsPost() {

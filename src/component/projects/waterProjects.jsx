@@ -10,7 +10,7 @@ export default function WaterProject() {
      
    const handleReadData = () =>{
 
-     axios.get("http://localhost:3000/readProjectWater/waterProject").then((res) =>{
+     axios.get("https://moewr-backend.onrender.com/readProjectWater/waterProject").then((res) =>{
       setData(res.data)
     
       

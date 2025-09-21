@@ -14,7 +14,7 @@ export default function AdminForm() {
       function handleInsert(e){
 
           e.preventDefault()
-        axios.post("http://localhost:3000/createAdmin/Admin", {
+        axios.post("https://moewr-backend.onrender.com/createAdmin/Admin", {
             name:Custname,
             Email:email,
             Password:password

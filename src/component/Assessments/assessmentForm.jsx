@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const API_BASE = "http://localhost:3000";
+const API_BASE = "https://moewr-backend.onrender.com";
 
 export default function DocumentManagerForm() {
   const [title, setTitle] = useState("");

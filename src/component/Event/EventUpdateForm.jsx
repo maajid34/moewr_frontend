@@ -4,7 +4,7 @@ import { useNavigate, useParams, useLocation, Link } from "react-router-dom";
 import axios from "axios";
 
 export default function EventUpdateForm() {
-  const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
+  const API = import.meta.env.VITE_API_BASE_URL || "https://moewr-backend.onrender.com";
   const STATIC_PREFIX = `${API}/allimages`;
   const { id } = useParams();
   const navigate = useNavigate();

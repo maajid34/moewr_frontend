@@ -9,7 +9,7 @@ export default function EnergyProject() {
    const [Data, setData] = useState([])
    const handleReadData = () =>{
 
-     axios.get("http://localhost:3000/readProjectEnergy/EnergyProject").then((res) =>{
+     axios.get("https://moewr-backend.onrender.com/readProjectEnergy/EnergyProject").then((res) =>{
       setData(res.data)
       
       

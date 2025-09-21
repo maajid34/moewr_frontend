@@ -15,7 +15,7 @@ export default function Eventproject() {
       try {
         setLoading(true);
         const res = await axios.get(
-          `http://localhost:3000/readProjectEvent/Event?page=${page}&limit=${limit}`
+          `https://moewr-backend.onrender.com/readProjectEvent/Event?page=${page}&limit=${limit}`
         );
         // ✅ your controller sends { items, page, limit, total }
         setData(Array.isArray(res.data?.items) ? res.data.items : []);
