@@ -16,18 +16,18 @@ export default function AdminForm() {
           e.preventDefault()
         axios.post("https://moewr-backend.onrender.com/createAdmin", {
             name:Custname,
-            email:email,
-            password:password
+            Email:email,
+            Password:password
         }).then((res) =>{
               navigate("/AdminLogin")
             alert("registered succes")
           
         }).catch((error) =>{
-            // if(error.res){
-            //     alert(error.res.error)
-            // }else{
-            //      alert('server error')
-            // }
+            if(error.res){
+                alert(error.res.error)
+            }else{
+                 alert('server error')
+            }
 
             if(error){
                 alert("email or password is invalid")
