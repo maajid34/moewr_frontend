@@ -401,7 +401,7 @@ export default function SingalProjectsEnergy() {
   const { id } = useParams();
 
   // API bases
-  const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
+  const API = import.meta.env.VITE_API_BASE_URL || "https://moewr-backend.onrender.com";
   const IMG_BASE = import.meta.env.VITE_IMG_BASE_URL || API; // serves /allimages
 
   // Page state

@@ -83,16 +83,16 @@ export default function AdminLogin() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const API = import.meta.env.VITE_API_BASE_URL || "https://moewr-backend.onrender.com";
+  const API =  "https://moewr-backend.onrender.com";
 
   const handleInsert = async (e) => {
     e.preventDefault();
     setError(null);
 
     try {
-      const res = await axios.post(`${API}/customerLogin/Admin`, {
-        Email: email,
-        Password: password,
+      const res = await axios.post(`${API}/customerLogin`, {
+        email: email,
+        password: password,
       });
 
       alert("Login successfully");

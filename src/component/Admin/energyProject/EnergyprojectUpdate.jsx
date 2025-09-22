@@ -10,7 +10,7 @@ export default function EnergyProjectUpdate() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
+  const API = import.meta.env.VITE_API_BASE_URL || "https://moewr-backend.onrender.com";
   const IMG_BASE = import.meta.env.VITE_IMG_BASE_URL || API;
 
   // ---------------- AUTH-AWARE AXIOS CLIENT (JWT in localStorage.admin.token) ----------------

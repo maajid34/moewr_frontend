@@ -56,7 +56,7 @@ export default function EnergyProjectFormUI() {
 
    const handleCreateProEnergy = (e) =>{
     e.preventDefault()
-    axios.post("http://localhost:3000/createProjectEnergy/EnergyProject",formData).then(() =>{
+    axios.post("https://moewr-backend.onrender.com/createProjectEnergy/EnergyProject",formData).then(() =>{
       alert("success")
       navigate("/EnergyProjectTable")
     })   
