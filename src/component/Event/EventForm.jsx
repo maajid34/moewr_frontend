@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function EventCreateForm() {
-  const API = import.meta.env.VITE_API_BASE_URL || "https://moewr-backend.onrender.com";
+  const API =  "https://moewr-backend.onrender.com";
   const navigate = useNavigate();
 
   // Text fields
