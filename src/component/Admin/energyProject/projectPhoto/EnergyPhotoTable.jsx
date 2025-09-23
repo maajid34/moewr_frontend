@@ -345,11 +345,11 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 export default function EnergyProjectPhotosTable() {
-  // ---- Hardcoded bases (no .env) ----
+  // Hardcoded bases (no .env)
   const API = "https://moewr-backend.onrender.com";
   const ASSET_BASE = "https://pub-4fea174e190a460d8db367c215cf12ad.r2.dev";
 
-  // ---- Axios client (adds token if present) ----
+  // axios client with optional token
   const http = useMemo(() => {
     const inst = axios.create({ baseURL: API });
     try {
@@ -362,11 +362,12 @@ export default function EnergyProjectPhotosTable() {
   const [projects, setProjects] = useState([]);
   const [selectedId, setSelectedId] = useState("");
   const [selectedProjectName, setSelectedProjectName] = useState("");
-  const [rows, setRows] = useState([]); // array of photo objects
+  const [rows, setRows] = useState([]); // raw photo objects from API
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState(null);
   const [msg, setMsg] = useState(null);
   const [uploading, setUploading] = useState(false);
+  const [showDebug, setShowDebug] = useState(false);
 
   const replaceFileRef = useRef(null);
   const replaceTargetIndexRef = useRef(null);
@@ -382,23 +383,66 @@ export default function EnergyProjectPhotosTable() {
     [API]
   );
 
-  // ⭐ FIX #1: keep folder path and strip only server prefixes
-  const normalizeName = (val) => {
+  // ---------- helpers ----------
+  // Pull a string path out of many possible shapes
+  const getImagePath = (photo) => {
+    if (!photo) return "";
+
+    // direct string
+    if (typeof photo === "string") return photo;
+
+    // common keys at top level
+    const direct =
+      photo.Image ??
+      photo.image ??
+      photo.url ??
+      photo.URL ??
+      photo.Location ??
+      photo.location ??
+      photo.path ??
+      photo.filename ??
+      photo.Key ??
+      photo.key ??
+      "";
+
+    if (typeof direct === "string" && direct) return direct;
+
+    // nested under Image
+    const img = photo.Image || photo.image || {};
+    if (img && typeof img === "object") {
+      const nested =
+        img.Location ||
+        img.location ||
+        img.url ||
+        img.URL ||
+        img.path ||
+        img.filename ||
+        img.Key ||
+        img.key ||
+        "";
+      if (typeof nested === "string" && nested) return nested;
+    }
+
+    return "";
+  };
+
+  // Build final public URL while keeping folder structure
+  const toPublicUrl = (val) => {
     if (!val) return "";
     const str = String(val);
-    if (/^https?:\/\//i.test(str)) return str; // already an absolute URL
+    if (/^https?:\/\//i.test(str)) return str; // already absolute
 
-    // clean up: backslashes -> slashes, drop leading slashes
+    // normalize slashes & remove leading slashes
     let s = str.replace(/\\/g, "/").replace(/^\/+/, "");
 
-    // remove server-side prefixes if present
+    // strip server prefixes if present
     s = s.replace(/^document\//i, "").replace(/^allimages\//i, "");
 
-    // If "document/" appears in the middle of an absolute path, keep from after it
+    // if "document/" hidden inside, keep after it
     const docIdx = s.toLowerCase().indexOf("document/");
     if (docIdx !== -1) s = s.slice(docIdx + "document/".length);
 
-    // Encode but preserve slashes
+    // encode but preserve folder structure
     return `${ASSET_BASE}/${encodeURI(s)}`;
   };
 
@@ -410,6 +454,7 @@ export default function EnergyProjectPhotosTable() {
     return [];
   };
 
+  // ---------- load projects ----------
   useEffect(() => {
     let mounted = true;
     (async () => {
@@ -426,6 +471,7 @@ export default function EnergyProjectPhotosTable() {
     return () => (mounted = false);
   }, [http, PATHS]);
 
+  // ---------- load photos for project ----------
   const loadPhotos = async (projectId) => {
     if (!projectId) return;
     setLoading(true);
@@ -439,10 +485,7 @@ export default function EnergyProjectPhotosTable() {
         ? res.data
         : [];
       setRows(arr);
-      // Quick debug if something looks off:
-      if (arr.length && typeof (arr[0]?.Image ?? arr[0]?.image ?? arr[0]?.url) !== "string") {
-        console.warn("Unexpected photo object shape:", arr[0]);
-      }
+      console.log("Photos raw from API:", arr);
     } catch (e) {
       console.error("Photos load error:", e);
       setErr(e?.response?.data?.message || e?.message || "Failed to load photos");
@@ -459,6 +502,7 @@ export default function EnergyProjectPhotosTable() {
     if (pid) loadPhotos(pid);
   };
 
+  // ---------- delete / replace / append ----------
   const handleDelete = async (index) => {
     if (!selectedId && selectedId !== "0") return;
     if (!window.confirm("Delete this photo?")) return;
@@ -538,6 +582,7 @@ export default function EnergyProjectPhotosTable() {
     }
   };
 
+  // ---------- UI ----------
   return (
     <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 absolute left-[300px] top-[100px]">
       <div className="flex flex-wrap items-center gap-3 mb-5">
@@ -570,6 +615,15 @@ export default function EnergyProjectPhotosTable() {
             </button>
           </Link>
         )}
+
+        <label className="ml-auto flex items-center gap-2 text-xs text-slate-600 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={showDebug}
+            onChange={(e) => setShowDebug(e.target.checked)}
+          />
+          Debug
+        </label>
       </div>
 
       {err && <div className="mb-3 text-sm text-rose-600">{err}</div>}
@@ -583,32 +637,37 @@ export default function EnergyProjectPhotosTable() {
               <th className="px-4 py-3 text-left text-sm font-semibold text-slate-700">Project</th>
               <th className="px-4 py-3 text-left text-sm font-semibold text-slate-700">Preview</th>
               <th className="px-4 py-3 text-left text-sm font-semibold text-slate-700">Image</th>
+              {showDebug && (
+                <>
+                  <th className="px-4 py-3 text-left text-sm font-semibold text-slate-700">raw</th>
+                  <th className="px-4 py-3 text-left text-sm font-semibold text-slate-700">src</th>
+                </>
+              )}
               <th className="px-4 py-3 text-left text-sm font-semibold text-slate-700">Action</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100 bg-white">
             {!selectedId ? (
               <tr>
-                <td colSpan={5} className="px-4 py-6 text-center text-slate-500">
+                <td colSpan={showDebug ? 7 : 5} className="px-4 py-6 text-center text-slate-500">
                   Select a project to view photos.
                 </td>
               </tr>
             ) : loading ? (
               <tr>
-                <td colSpan={5} className="px-4 py-6 text-center text-slate-500">Loading…</td>
+                <td colSpan={showDebug ? 7 : 5} className="px-4 py-6 text-center text-slate-500">Loading…</td>
               </tr>
             ) : rows.length === 0 ? (
               <tr>
-                <td colSpan={5} className="px-4 py-6 text-center text-slate-500">
+                <td colSpan={showDebug ? 7 : 5} className="px-4 py-6 text-center text-slate-500">
                   No photos uploaded yet.
                 </td>
               </tr>
             ) : (
               rows.map((photo, i) => {
-                // ⭐ FIX #2: accept Image | image | url | Location
-                const raw = photo?.Image ?? photo?.image ?? photo?.url ?? photo?.Location ?? "";
+                const raw = getImagePath(photo);
                 const name = raw ? String(raw).split(/[\\/]/).pop() : "—";
-                const src = normalizeName(raw);
+                const src = raw ? toPublicUrl(raw) : "";
 
                 return (
                   <tr key={`${name}-${i}`} className="hover:bg-slate-50">
@@ -617,7 +676,7 @@ export default function EnergyProjectPhotosTable() {
                       {selectedProjectName || selectedId}
                     </td>
                     <td className="px-4 py-3">
-                      {raw ? (
+                      {src ? (
                         <img
                           src={src}
                           alt={name}
@@ -629,6 +688,16 @@ export default function EnergyProjectPhotosTable() {
                       )}
                     </td>
                     <td className="px-4 py-3 text-slate-600 break-all">{name}</td>
+
+                    {showDebug && (
+                      <>
+                        <td className="px-4 py-3 text-xs text-slate-500 break-all">
+                          {typeof raw === "string" ? raw : JSON.stringify(raw)}
+                        </td>
+                        <td className="px-4 py-3 text-xs text-slate-500 break-all">{src}</td>
+                      </>
+                    )}
+
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2">
                         <button
