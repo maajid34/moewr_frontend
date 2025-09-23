@@ -143,7 +143,6 @@
 
 // latest online images 
 
-
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -158,8 +157,22 @@ export default function Eventproject() {
 
   // Hardcoded bases (no .env)
   const API_BASE = "https://moewr-backend.onrender.com";
-  const ASSET_BASE =
-    "https://pub-4fea174e190a460d8db367c215cf12ad.r2.dev";
+  const ASSET_BASE = "https://pub-4fea174e190a460d8db367c215cf12ad.r2.dev";
+
+  // Build a safe asset URL from whatever the backend saved
+  const toAssetUrl = (v) => {
+    if (!v) return "";
+    if (typeof v !== "string") v = String(v);
+
+    // already full URL (http/https) → use as is
+    if (/^https?:\/\//i.test(v)) return v;
+
+    // some records stored like "/r2/event/cover/xxx.jpg" → strip "/r2/" and any leading slashes
+    const cleaned = v.replace(/^\/?r2\//i, "").replace(/^\/+/, "");
+
+    const full = `${ASSET_BASE}/${cleaned}`;
+    return full;
+  };
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -168,9 +181,21 @@ export default function Eventproject() {
         const res = await axios.get(
           `${API_BASE}/readProjectEvent/Event?page=${page}&limit=${limit}`
         );
-        setData(Array.isArray(res.data?.items) ? res.data.items : []);
+        const items = Array.isArray(res.data?.items) ? res.data.items : [];
+        setData(items);
         setTotal(res.data?.total ?? 0);
         setLimit(res.data?.limit ?? 50);
+
+        // Debug: show what images we’ll try to load
+        items.forEach((it) => {
+          if (it?.coverImage) {
+            console.log("Event image:", {
+              id: it._id || it.id,
+              raw: it.coverImage,
+              url: toAssetUrl(it.coverImage),
+            });
+          }
+        });
       } catch (e) {
         console.error("Error fetching events:", e);
         setError("Failed to load events.");
@@ -190,13 +215,11 @@ export default function Eventproject() {
       <div className="bg-[#0d7cb0] w-full p-10">
         <h1 className="text-white text-4xl">Events</h1>
       </div>
+
       <section id="projects" className="bg-white/70 border-y">
         <div className="max-w-7xl mx-auto px-4 py-16 lg:py-20">
           <div className="flex items-end justify-between gap-4">
-            <h2
-              className="text-3xl font-bold tracking-tight"
-              data-aos="fade-up"
-            >
+            <h2 className="text-3xl font-bold tracking-tight" data-aos="fade-up">
               Event
             </h2>
             <span className="text-sm text-slate-500">
@@ -209,9 +232,7 @@ export default function Eventproject() {
               <p className="text-slate-500">No projects found.</p>
             ) : (
               data.map((item) => {
-                const imgSrc = item.coverImage?.startsWith("https")
-                  ? item.coverImage
-                  : `${ASSET_BASE}/${item.coverImage}`;
+                const imgSrc = toAssetUrl(item.coverImage);
 
                 return (
                   <article
@@ -226,6 +247,17 @@ export default function Eventproject() {
                         alt={item.title}
                         className="mb-4 h-40 w-full object-cover rounded-lg"
                         loading="lazy"
+                        onError={(e) => {
+                          console.error("Image failed to load", {
+                            id: item._id || item.id,
+                            raw: item.coverImage,
+                            tried: imgSrc,
+                          });
+                          // Optional: show a neutral placeholder if you have one
+                          // e.currentTarget.src = "/placeholder.jpg";
+                          // Or hide the broken image:
+                          e.currentTarget.style.display = "none";
+                        }}
                       />
                     )}
 
@@ -247,13 +279,12 @@ export default function Eventproject() {
                       </p>
                     )}
 
-                 <Link
+                   <Link
   to={`/SingalProjectsEvent/${item._id || item.id}`}
   className="mt-10 inline-block px-3 py-2 rounded-md text-white bg-[#2FA8E1] hover:bg-[#0A7FB8]"
 >
   Read for More
 </Link>
-
                   </article>
                 );
               })
