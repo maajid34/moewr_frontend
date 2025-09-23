@@ -3,6 +3,7 @@
 import axios from "axios";
 
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 // Brand: #2FA8E1 (brand) / #0A7FB8 (brand-dark) / #002B5C (ink)
 export default function WaterProjectFormUI() {
@@ -48,10 +49,13 @@ export default function WaterProjectFormUI() {
   formData.append("stakeHolder4",stakeHolder4)
   formData.append("achievements",achievements)
 
+  const navigate = useNavigate()
+
    const handleCreateProEnergy = (e) =>{
     e.preventDefault()
     axios.post("https://moewr-backend.onrender.com/createProjectWater/waterProject",formData).then(() =>{
-      alert("success")
+      alert("success saved")
+       navigate("/WaterProjectTable")
     })   
 
 
