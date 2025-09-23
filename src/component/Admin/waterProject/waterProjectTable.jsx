@@ -360,7 +360,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-export default function EnergyProjectTable() {
+export default function WaterProjectTable() {
   // Hardcoded bases (no .env needed)
   const API = "https://moewr-backend.onrender.com";
   const ASSET_BASE = "https://pub-4fea174e190a460d8db367c215cf12ad.r2.dev";
