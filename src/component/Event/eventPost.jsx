@@ -197,7 +197,7 @@ export default function Eventproject() {
               className="text-3xl font-bold tracking-tight"
               data-aos="fade-up"
             >
-              Ongoing / Pipeline Projects
+              Event
             </h2>
             <span className="text-sm text-slate-500">
               {data.length} of {total}
@@ -209,7 +209,7 @@ export default function Eventproject() {
               <p className="text-slate-500">No projects found.</p>
             ) : (
               data.map((item) => {
-                const imgSrc = item.coverImage?.startsWith("http")
+                const imgSrc = item.coverImage?.startsWith("https")
                   ? item.coverImage
                   : `${ASSET_BASE}/${item.coverImage}`;
 
