@@ -236,6 +236,7 @@ export default function EnergyProjectFormUI() {
 
               {/* photos project */}
                 <div className="rounded-2xl border bg-white shadow-sm p-5">
+                  <h3 className="font-semibold text-[var(--ink)]">project photos <span className="text-rose-600">*</span></h3>
                
 
                 <div className="mt-4 rounded-xl border border-dashed p-6 text-center">
