@@ -418,7 +418,7 @@ export default function WaterProjectTable() {
     return String(v);
   };
 
-  const handleDelete = async (row) => {                  c
+  const handleDelete = async (row) => {                  
 
     try {
       const id = row?._id ?? row?.id;
