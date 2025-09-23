@@ -27,7 +27,7 @@ export default function EnergyProjectFormUI() {
     const [stakeHolder2, setstakeHolder2] = useState("");
     const [stakeHolder3, setstakeHolder3] = useState(""); 
     const [stakeHolder4, setstakeHolder4] = useState(""); 
-    const [photos, setPhotos] = useState(""); 
+    const [Photos, setPhotos] = useState(""); 
  
 
  const formData = new FormData()
@@ -51,7 +51,7 @@ export default function EnergyProjectFormUI() {
   formData.append("stakeHolder4",stakeHolder4)
 
   formData.append("achievements",achievements)
-  formData.append("photos",photos)
+  formData.append("Photos",Photos)
 
 
   const navigate = useNavigate()
