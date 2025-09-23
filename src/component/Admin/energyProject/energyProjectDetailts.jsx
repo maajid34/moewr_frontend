@@ -1223,39 +1223,7 @@ export default function SingalProjectsEnergy() {
               )}
             </div>
           </section>
-
-          {/* STAKEHOLDERS */}
-          <section className="py-14 bg-white">
-            <h1 className="text-center font-bold mb-10 text-4xl text-black">StackHolders</h1>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-3 gap-10">
-              <img
-                src={toAssetUrl(stackeHolder1)}
-                alt="stackeholder1"
-                onError={onImgError("stakeholder1", stackeHolder1, toAssetUrl(stackeHolder1))}
-                className="w-[300px] h-[300px] object-cover rounded-2xl shadow-xl border border-slate-200"
-              />
-              <img
-                src={toAssetUrl(stakeHolder2)}
-                alt="stackeholder2"
-                onError={onImgError("stakeholder2", stakeHolder2, toAssetUrl(stakeHolder2))}
-                className="w-[300px] h-[300px] object-cover rounded-2xl shadow-xl border border-slate-200"
-              />
-              <img
-                src={toAssetUrl(stakeHolder3)}
-                alt="stackeholder3"
-                onError={onImgError("stakeholder3", stakeHolder3, toAssetUrl(stakeHolder3))}
-                className="w-[300px] h-[300px] object-cover rounded-2xl shadow-xl border border-slate-200"
-              />
-              <img
-                src={toAssetUrl(stakeHolder4)}
-                alt="stackeholder4"
-                onError={onImgError("stakeholder4", stakeHolder4, toAssetUrl(stakeHolder4))}
-                className="w-[400px] h-[300px] object-cover rounded-2xl shadow-xl border border-slate-200"
-              />
-            </div>
-          </section>
-
-          {/* PROJECT PHOTOS GALLERY */}
+             {/* PROJECT PHOTOS GALLERY */}
           <section className="py-14 bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <h2 className="text-4xl font-extrabold tracking-tight mb-8 text-[var(--ink)]">
@@ -1299,6 +1267,39 @@ export default function SingalProjectsEnergy() {
               )}
             </div>
           </section>
+
+          {/* STAKEHOLDERS */}
+          <section className="py-14 bg-white">
+            <h1 className="text-center font-bold mb-10 text-4xl text-black">StackHolders</h1>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-3 gap-10">
+              <img
+                src={toAssetUrl(stackeHolder1)}
+                alt="stackeholder1"
+                onError={onImgError("stakeholder1", stackeHolder1, toAssetUrl(stackeHolder1))}
+                className="w-[300px] h-[300px] object-cover rounded-2xl shadow-xl border border-slate-200"
+              />
+              <img
+                src={toAssetUrl(stakeHolder2)}
+                alt="stackeholder2"
+                onError={onImgError("stakeholder2", stakeHolder2, toAssetUrl(stakeHolder2))}
+                className="w-[300px] h-[300px] object-cover rounded-2xl shadow-xl border border-slate-200"
+              />
+              <img
+                src={toAssetUrl(stakeHolder3)}
+                alt="stackeholder3"
+                onError={onImgError("stakeholder3", stakeHolder3, toAssetUrl(stakeHolder3))}
+                className="w-[300px] h-[300px] object-cover rounded-2xl shadow-xl border border-slate-200"
+              />
+              <img
+                src={toAssetUrl(stakeHolder4)}
+                alt="stackeholder4"
+                onError={onImgError("stakeholder4", stakeHolder4, toAssetUrl(stakeHolder4))}
+                className="w-[400px] h-[300px] object-cover rounded-2xl shadow-xl border border-slate-200"
+              />
+            </div>
+          </section>
+
+       
         </div>
       </div>
     </>
