@@ -10,6 +10,8 @@ export default function Eventproject() {
   const [total, setTotal] = useState(0);
   const [limit, setLimit] = useState(50);
 
+  const ASSET_BASE = "https://pub-4fea174e190a460d8db367c215cf12ad.r2.dev";
+
   useEffect(() => {
     const fetchEvents = async () => {
       try {
@@ -67,13 +69,19 @@ export default function Eventproject() {
                   >
                     {/* Optional cover image if provided by backend */}
                     {item.coverImage && (
+                      // <img
+                      //   src={item.coverImage.startsWith("http")
+                      //     ? item.coverImage
+                      //     : `/${item.coverImage}`}
+                      //   alt={item.title}
+                      //   className="mb-4 h-40 w-full object-cover rounded-lg"
+                      // />
+
                       <img
-                        src={item.coverImage.startsWith("http")
-                          ? item.coverImage
-                          : `http://localhost:3000/allimages/${item.coverImage}`}
-                        alt={item.title}
-                        className="mb-4 h-40 w-full object-cover rounded-lg"
-                      />
+  src={`${ASSET_BASE}/${item.coverImage}`}
+  alt={item.title}
+  className="mb-4 h-40 w-full object-cover rounded-lg"
+/>
                     )}
 
                     <h3 className="font-semibold text-lg">{item.title}</h3>

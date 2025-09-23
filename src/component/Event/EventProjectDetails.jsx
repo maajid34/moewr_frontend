@@ -8,7 +8,7 @@ export default function SingalProjectsEvent() {
 
   // API bases
   const API =  "https://moewr-backend.onrender.com";
-  const IMG_BASE = import.meta.env.VITE_IMG_BASE_URL || API; // serves /allimages
+  const IMG_BASE =  "https://pub-4fea174e190a460d8db367c215cf12ad.r2.dev"; // serves /allimages
 
   // State aligned with your schema
   const [loading, setLoading] = useState(true);
@@ -24,7 +24,7 @@ export default function SingalProjectsEvent() {
     if (!val) return "";
     if (/^https?:\/\//i.test(val)) return val; // already full URL
     const fname = String(val).split(/[\\/]/).pop();
-    return `${IMG_BASE}/allimages/${encodeURIComponent(fname)}`;
+    return `${IMG_BASE}/${encodeURIComponent(fname)}`;
   };
   const onImgError = (e) => (e.currentTarget.src = "/placeholder.png");
 
