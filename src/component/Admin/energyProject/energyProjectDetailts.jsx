@@ -1082,10 +1082,7 @@ export default function SingalProjectsEnergy() {
               />
               <div>
                 <div className="inline-flex items-center gap-2 mb-3">
-                  <span className="inline-block w-2.5 h-2.5 rounded-full bg-[var(--brand)]" />
-                  <span className="uppercase tracking-wider text-xs font-semibold text-[var(--brand-dark)]">
-                    {geogrpahic}
-                  </span>
+                 
                 </div>
                 <h2 className="text-4xl font-extrabold leading-tight">
                   <span className="text-[var(--brand)]">Project Geography</span>
