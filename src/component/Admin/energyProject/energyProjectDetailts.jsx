@@ -1085,7 +1085,7 @@ export default function SingalProjectsEnergy() {
                  
                 </div>
                 <h2 className="text-4xl font-extrabold leading-tight">
-                  <span className="text-[var(--brand)]">Project Geography</span>
+                  <span className="text-[var(--brand)]">Project Geographic Coverage</span>
                 </h2>
                 <div className="mt-5 space-y-4 text-slate-700">
                   {loading ? (
