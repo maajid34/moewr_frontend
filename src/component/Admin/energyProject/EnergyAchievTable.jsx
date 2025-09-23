@@ -87,25 +87,40 @@ export default function EnergyAchievementsTable() {
     load();
   }, []);
 
+// const handleDelete = async (projectId, index) => {
+//   try {
+//     const ok = window.confirm("Delete this achievement?");
+//     if (!ok) return;
+
+//     // Call your backend exactly as defined:
+//     await axios.delete(`/DeleteEnergyAchiev/${projectId}/achievements/${index}`);
+
+//     // Remove from state
+//     setRows((prev) => prev.filter((r) => !(r.projectId === projectId && r.achIndex === index)));
+
+//     alert("Achievement deleted");
+//   } catch (e) {
+//     console.error("Delete failed:", e);
+//     alert(e?.response?.data?.message || e.message || "Delete failed");
+//   }
+// };
+
 const handleDelete = async (projectId, index) => {
   try {
     const ok = window.confirm("Delete this achievement?");
     if (!ok) return;
 
-    // Call your backend exactly as defined:
-    await axios.delete(`/DeleteEnergyAchiev/${projectId}/achievements/${index}`);
+    await axios.delete(
+      `https://moewr-backend.onrender.com/DeleteEnergyAchiev/${projectId}/achievements/${index}`
+    );
 
-    // Remove from state
-    setRows((prev) => prev.filter((r) => !(r.projectId === projectId && r.achIndex === index)));
-
+    setRows(prev => prev.filter(r => !(r.projectId === projectId && r.achIndex === index)));
     alert("Achievement deleted");
   } catch (e) {
     console.error("Delete failed:", e);
     alert(e?.response?.data?.message || e.message || "Delete failed");
   }
 };
-
-
 
 
   return (
