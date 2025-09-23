@@ -362,7 +362,7 @@ export default function EnergyProjectPhotosTable() {
   const [projects, setProjects] = useState([]);
   const [selectedId, setSelectedId] = useState("");
   const [selectedProjectName, setSelectedProjectName] = useState("");
-  const [rows, setRows] = useState([]); // raw photo objects from API
+  const [rows, setRows] = useState([]); // raw photo objects from API or doc
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState(null);
   const [msg, setMsg] = useState(null);
@@ -377,6 +377,7 @@ export default function EnergyProjectPhotosTable() {
     () => ({
       projects: `${API}/readProjectEnergy/EnergyProject`,
       readPhotos: (id) => `${API}/ReadEnergyProjectPhoto/${id}/photos`,
+      readProjectOne: (id) => `${API}/readProjectEnergySingal/EnergyProject/${id}`,
       postPhotos: (id) => `${API}/energyProject/${id}/photos`,
       deletePhoto: (id) => `${API}/energyProject/${id}/photos`,
     }),
@@ -400,6 +401,7 @@ export default function EnergyProjectPhotosTable() {
       photo.Location ??
       photo.location ??
       photo.path ??
+      photo.filepath ??
       photo.filename ??
       photo.Key ??
       photo.key ??
@@ -416,6 +418,7 @@ export default function EnergyProjectPhotosTable() {
         img.url ||
         img.URL ||
         img.path ||
+        img.filepath ||
         img.filename ||
         img.Key ||
         img.key ||
@@ -478,14 +481,39 @@ export default function EnergyProjectPhotosTable() {
     setErr(null);
     setMsg(null);
     try {
-      const res = await http.get(PATHS.readPhotos(projectId));
-      const arr = Array.isArray(res.data?.photos)
-        ? res.data.photos
-        : Array.isArray(res.data)
-        ? res.data
-        : [];
-      setRows(arr);
-      console.log("Photos raw from API:", arr);
+      // 1) try dedicated photos endpoint
+      let photos = [];
+      try {
+        const res = await http.get(PATHS.readPhotos(projectId));
+        photos = Array.isArray(res.data?.photos)
+          ? res.data.photos
+          : Array.isArray(res.data)
+          ? res.data
+          : [];
+      } catch {
+        // ignore and try fallback
+      }
+
+      // 2) fallback – read from the project doc (Photos / photos arrays)
+      if (!photos.length) {
+        const r2 = await http.get(PATHS.readProjectOne(projectId));
+        const doc = Array.isArray(r2.data) ? r2.data[0] : (r2.data?.data ?? r2.data);
+        const fromDoc =
+          (Array.isArray(doc?.Photos) && doc.Photos) ||
+          (Array.isArray(doc?.photos) && doc.photos) ||
+          [];
+        photos = fromDoc;
+      }
+
+      setRows(photos);
+      if (!photos.length) {
+        setMsg("No photos found for this project.");
+      }
+      if (photos.length) {
+        // useful console preview while you verify shapes
+        // eslint-disable-next-line no-console
+        console.log("Photos raw:", photos);
+      }
     } catch (e) {
       console.error("Photos load error:", e);
       setErr(e?.response?.data?.message || e?.message || "Failed to load photos");
