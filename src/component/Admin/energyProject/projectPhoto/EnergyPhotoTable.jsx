@@ -354,45 +354,52 @@ export default function EnergyProjectPhotosTable() {
     const inst = axios.create({ baseURL: API });
     try {
       const admin = JSON.parse(localStorage.getItem("admin") || "{}");
-      if (admin?.token) {
-        inst.defaults.headers.common.Authorization = `Bearer ${admin.token}`;
-      }
+      if (admin?.token) inst.defaults.headers.common.Authorization = `Bearer ${admin.token}`;
     } catch {}
     return inst;
   }, []);
 
-  // ---- UI state ----
   const [projects, setProjects] = useState([]);
   const [selectedId, setSelectedId] = useState("");
   const [selectedProjectName, setSelectedProjectName] = useState("");
-  const [rows, setRows] = useState([]); // [{ Image }]
+  const [rows, setRows] = useState([]); // array of photo objects
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState(null);
   const [msg, setMsg] = useState(null);
   const [uploading, setUploading] = useState(false);
 
-  // hidden inputs
   const replaceFileRef = useRef(null);
   const replaceTargetIndexRef = useRef(null);
   const appendFileRef = useRef(null);
 
-  // ---- Endpoints (absolute) ----
   const PATHS = useMemo(
     () => ({
       projects: `${API}/readProjectEnergy/EnergyProject`,
       readPhotos: (id) => `${API}/ReadEnergyProjectPhoto/${id}/photos`,
       postPhotos: (id) => `${API}/energyProject/${id}/photos`,
-      deletePhoto: (id) => `${API}/energyProject/${id}/photos`, // body: { index } or { imageName }
+      deletePhoto: (id) => `${API}/energyProject/${id}/photos`,
     }),
     [API]
   );
 
-  // ---- Helpers ----
+  // ⭐ FIX #1: keep folder path and strip only server prefixes
   const normalizeName = (val) => {
     if (!val) return "";
-    if (/^https?:\/\//i.test(val)) return val; // already absolute
-    const fname = String(val).split(/[\\/]/).pop();
-    return `${ASSET_BASE}/${encodeURIComponent(fname)}`;
+    const str = String(val);
+    if (/^https?:\/\//i.test(str)) return str; // already an absolute URL
+
+    // clean up: backslashes -> slashes, drop leading slashes
+    let s = str.replace(/\\/g, "/").replace(/^\/+/, "");
+
+    // remove server-side prefixes if present
+    s = s.replace(/^document\//i, "").replace(/^allimages\//i, "");
+
+    // If "document/" appears in the middle of an absolute path, keep from after it
+    const docIdx = s.toLowerCase().indexOf("document/");
+    if (docIdx !== -1) s = s.slice(docIdx + "document/".length);
+
+    // Encode but preserve slashes
+    return `${ASSET_BASE}/${encodeURI(s)}`;
   };
 
   const normalizeProjects = (data) => {
@@ -403,7 +410,6 @@ export default function EnergyProjectPhotosTable() {
     return [];
   };
 
-  // ---- Load projects ----
   useEffect(() => {
     let mounted = true;
     (async () => {
@@ -411,8 +417,7 @@ export default function EnergyProjectPhotosTable() {
       try {
         const res = await http.get(PATHS.projects);
         if (!mounted) return;
-        const docs = normalizeProjects(res.data);
-        setProjects(docs);
+        setProjects(normalizeProjects(res.data));
       } catch (e) {
         console.error("Projects load error:", e);
         setErr(e?.response?.data?.message || e?.message || "Failed to load projects");
@@ -421,7 +426,6 @@ export default function EnergyProjectPhotosTable() {
     return () => (mounted = false);
   }, [http, PATHS]);
 
-  // ---- Load photos for selected project ----
   const loadPhotos = async (projectId) => {
     if (!projectId) return;
     setLoading(true);
@@ -435,6 +439,10 @@ export default function EnergyProjectPhotosTable() {
         ? res.data
         : [];
       setRows(arr);
+      // Quick debug if something looks off:
+      if (arr.length && typeof (arr[0]?.Image ?? arr[0]?.image ?? arr[0]?.url) !== "string") {
+        console.warn("Unexpected photo object shape:", arr[0]);
+      }
     } catch (e) {
       console.error("Photos load error:", e);
       setErr(e?.response?.data?.message || e?.message || "Failed to load photos");
@@ -443,7 +451,6 @@ export default function EnergyProjectPhotosTable() {
     }
   };
 
-  // ---- Select project ----
   const handlePickProject = (e) => {
     const pid = e.target.value;
     setSelectedId(pid);
@@ -452,12 +459,9 @@ export default function EnergyProjectPhotosTable() {
     if (pid) loadPhotos(pid);
   };
 
-  // ---- Delete by index ----
   const handleDelete = async (index) => {
     if (!selectedId && selectedId !== "0") return;
-    const ok = window.confirm("Delete this photo?");
-    if (!ok) return;
-
+    if (!window.confirm("Delete this photo?")) return;
     setErr(null);
     setMsg(null);
     try {
@@ -470,7 +474,6 @@ export default function EnergyProjectPhotosTable() {
     }
   };
 
-  // ---- Replace flow ----
   const startReplace = (index) => {
     replaceTargetIndexRef.current = index;
     replaceFileRef.current?.click();
@@ -478,7 +481,7 @@ export default function EnergyProjectPhotosTable() {
 
   const onPickReplaceFile = async (e) => {
     const file = (e.target.files && e.target.files[0]) || null;
-    e.target.value = ""; // reset input
+    e.target.value = "";
     if (!file) return;
 
     const idx = replaceTargetIndexRef.current;
@@ -489,17 +492,14 @@ export default function EnergyProjectPhotosTable() {
     setMsg(null);
 
     try {
-      // 1) delete existing at index
       await http.delete(PATHS.deletePhoto(selectedId), { data: { index: idx } });
 
-      // 2) append the new one
       const form = new FormData();
       form.append("photos", file);
       await http.post(PATHS.postPhotos(selectedId), form, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      // reload
       await loadPhotos(selectedId);
       setMsg("Photo replaced ✅");
     } catch (e) {
@@ -510,7 +510,6 @@ export default function EnergyProjectPhotosTable() {
     }
   };
 
-  // ---- Quick-append multiple ----
   const startAppend = () => appendFileRef.current?.click();
 
   const onPickAppendFiles = async (e) => {
@@ -541,7 +540,6 @@ export default function EnergyProjectPhotosTable() {
 
   return (
     <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 absolute left-[300px] top-[100px]">
-      {/* Controls header */}
       <div className="flex flex-wrap items-center gap-3 mb-5">
         <select
           className="rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
@@ -574,11 +572,9 @@ export default function EnergyProjectPhotosTable() {
         )}
       </div>
 
-      {/* Alerts */}
       {err && <div className="mb-3 text-sm text-rose-600">{err}</div>}
       {msg && <div className="mb-3 text-sm text-emerald-600">{msg}</div>}
 
-      {/* Table */}
       <div className="rounded-xl border border-slate-200 shadow-sm overflow-x-auto">
         <table className="min-w-full divide-y divide-slate-200">
           <thead className="bg-slate-50">
@@ -608,8 +604,12 @@ export default function EnergyProjectPhotosTable() {
                 </td>
               </tr>
             ) : (
-              rows.map((p, i) => {
-                const name = p?.Image ? String(p.Image).split(/[\\/]/).pop() : "—";
+              rows.map((photo, i) => {
+                // ⭐ FIX #2: accept Image | image | url | Location
+                const raw = photo?.Image ?? photo?.image ?? photo?.url ?? photo?.Location ?? "";
+                const name = raw ? String(raw).split(/[\\/]/).pop() : "—";
+                const src = normalizeName(raw);
+
                 return (
                   <tr key={`${name}-${i}`} className="hover:bg-slate-50">
                     <td className="px-4 py-3 text-slate-700">{i}</td>
@@ -617,12 +617,16 @@ export default function EnergyProjectPhotosTable() {
                       {selectedProjectName || selectedId}
                     </td>
                     <td className="px-4 py-3">
-                      <img
-                        src={normalizeName(p?.Image)}
-                        alt={name}
-                        className="w-20 h-16 object-cover rounded-md border border-slate-200"
-                        onError={(e) => (e.currentTarget.src = "/placeholder.png")}
-                      />
+                      {raw ? (
+                        <img
+                          src={src}
+                          alt={name}
+                          className="w-20 h-16 object-cover rounded-md border border-slate-200"
+                          onError={(e) => (e.currentTarget.src = "/placeholder.png")}
+                        />
+                      ) : (
+                        "—"
+                      )}
                     </td>
                     <td className="px-4 py-3 text-slate-600 break-all">{name}</td>
                     <td className="px-4 py-3">
