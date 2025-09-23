@@ -592,7 +592,7 @@ export default function WaterProjectTable() {
       )}
 
       <section className="absolute top-10 left-[300px] w-[80%] mt-10 rounded-2xl border bg-white shadow-sm p-5 sm:p-6">
-        <Link to={"/energyProjectForm"}>
+        <Link to={"/WaterProjectForm"}>
           <button className="py-2 px-5 mb-[20px] rounded-xl bg-blue-900 text-white">
             New Project
           </button>
@@ -756,7 +756,7 @@ export default function WaterProjectTable() {
 
                       <td className="px-3 py-3">
                         <div className="flex items-center gap-2">
-                          <Link to={`/EnergyProjectUpdate/${r._id}`}>
+                          <Link to={`/WaterProjectUpdate/${r._id}`}>
                             <button className="inline-flex items-center rounded-lg border border-sky-600 text-sky-700 px-3 py-1.5 hover:bg-sky-50">
                               Update
                             </button>
