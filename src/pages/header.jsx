@@ -22,7 +22,7 @@ function Header() {
         <img src={logo} alt="" className='rounded-full w-[100px] h-[100px] ' />
     </div>
     <ul className='hidden sm:flex space-x-5 text-2xl text-white'>
-        <Link to={"/"}><li>Dashboard wa midka vercel</li></Link>
+        <Link to={"/"}><li>Dashboard</li></Link>
     <li className="relative group">
       <button className="flex items-center gap-1">
     About
