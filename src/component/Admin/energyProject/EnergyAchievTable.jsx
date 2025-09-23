@@ -93,7 +93,7 @@ const handleDelete = async (projectId, index) => {
     if (!ok) return;
 
     // Call your backend exactly as defined:
-    await axios.delete(`"https://moewr-backend.onrender.com/DeleteEnergyAchiev/${projectId}/achievements/${index}`);
+    await axios.delete(`/DeleteEnergyAchiev/${projectId}/achievements/${index}`);
 
     // Remove from state
     setRows((prev) => prev.filter((r) => !(r.projectId === projectId && r.achIndex === index)));
