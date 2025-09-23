@@ -50,7 +50,7 @@ export default function WaterProjectFormUI() {
 
    const handleCreateProEnergy = (e) =>{
     e.preventDefault()
-    axios.post("http://localhost:3000/createProjectWater/waterProject",formData).then(() =>{
+    axios.post("https://moewr-backend.onrender.com/createProjectWater/waterProject",formData).then(() =>{
       alert("success")
     })   
 
