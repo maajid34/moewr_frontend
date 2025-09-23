@@ -342,6 +342,8 @@
 // src/components/projects/EnergyProjectPhotosTable.jsx
 
 // src/components/projects/EnergyProjectPhotosTable.jsx
+
+// src/components/projects/EnergyProjectPhotosTable.jsx
 import { useEffect, useMemo, useRef, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -349,16 +351,14 @@ import { Link } from "react-router-dom";
 export default function EnergyProjectPhotosTable() {
   // Hardcoded bases (no .env)
   const API = "https://moewr-backend.onrender.com";
-  const ASSET_BASE =
-    "https://pub-4fea174e190a460d8db367c215cf12ad.r2.dev"; // your public R2 bucket
+  const ASSET_BASE = "https://pub-4fea174e190a460d8db367c215cf12ad.r2.dev";
 
   // axios client with optional token
   const http = useMemo(() => {
-    const inst = axios.create({ baseURL: API });
+    const inst = axios.create({ baseURL: API, withCredentials: false });
     try {
       const admin = JSON.parse(localStorage.getItem("admin") || "{}");
-      if (admin?.token)
-        inst.defaults.headers.common.Authorization = `Bearer ${admin.token}`;
+      if (admin?.token) inst.defaults.headers.common.Authorization = `Bearer ${admin.token}`;
     } catch {}
     return inst;
   }, []);
@@ -366,7 +366,7 @@ export default function EnergyProjectPhotosTable() {
   const [projects, setProjects] = useState([]);
   const [selectedId, setSelectedId] = useState("");
   const [selectedProjectName, setSelectedProjectName] = useState("");
-  const [rows, setRows] = useState([]); // raw photo objects from API or doc
+  const [rows, setRows] = useState([]); // photo objects/strings
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState(null);
   const [msg, setMsg] = useState(null);
@@ -381,23 +381,18 @@ export default function EnergyProjectPhotosTable() {
     () => ({
       projects: `${API}/readProjectEnergy/EnergyProject`,
       readPhotos: (id) => `${API}/ReadEnergyProjectPhoto/${id}/photos`,
-      readProjectOne: (id) =>
-        `${API}/readProjectEnergySingal/EnergyProject/${id}`,
+      readProjectOne: (id) => `${API}/readProjectEnergySingal/EnergyProject/${id}`,
       postPhotos: (id) => `${API}/energyProject/${id}/photos`,
       deletePhoto: (id) => `${API}/energyProject/${id}/photos`,
     }),
     [API]
   );
 
-  // ---- helpers --------------------------------------------------------------
-
-  // Pull a string path/URL out of many possible shapes
+  // ---------------- helpers ----------------
   const getImagePath = (photo) => {
     if (!photo) return "";
-
     if (typeof photo === "string") return photo;
 
-    // flat keys first
     const direct =
       photo.Image ??
       photo.image ??
@@ -414,7 +409,6 @@ export default function EnergyProjectPhotosTable() {
 
     if (typeof direct === "string" && direct) return direct;
 
-    // nested under Image/image
     const img = photo.Image || photo.image || {};
     if (img && typeof img === "object") {
       const nested =
@@ -430,34 +424,19 @@ export default function EnergyProjectPhotosTable() {
         "";
       if (typeof nested === "string" && nested) return nested;
     }
-
     return "";
   };
 
-  // Build a final public URL while keeping folder structure.
-  // Handles:
-  // - full https? URLs (returned as-is)
-  // - "document/..." | "allimages/..." prefixes (stripped)
-  // - "/r2/..." legacy prefix (stripped)
-  // - **bare filenames** (auto-prefix `energy/photos/`)
+  // Build public URL; add default folder when only a filename is stored
   const toPublicUrl = (val) => {
     if (!val) return "";
     let s = String(val).trim();
     if (!s) return "";
+    if (/^https?:\/\//i.test(s)) return s;
 
-    if (/^https?:\/\//i.test(s)) return s; // already absolute URL
-
-    s = s.replace(/\\/g, "/").replace(/^\/+/, ""); // normalize and drop leading slash
-
-    // strip known server/local prefixes
-    s = s.replace(/^document\//i, "").replace(/^allimages\//i, "");
-    s = s.replace(/^r2\//i, ""); // legacy "r2/energy/..." -> "energy/..."
-
-    // if it's *just a filename* (no folder), default it into your R2 folder
-    if (!s.includes("/")) {
-      s = `energy/photos/${s}`;
-    }
-
+    s = s.replace(/\\/g, "/").replace(/^\/+/, "");
+    s = s.replace(/^document\//i, "").replace(/^allimages\//i, "").replace(/^r2\//i, "");
+    if (!s.includes("/")) s = `energy/photos/${s}`;
     return `${ASSET_BASE}/${encodeURI(s)}`;
   };
 
@@ -469,7 +448,24 @@ export default function EnergyProjectPhotosTable() {
     return [];
   };
 
-  // ---- load projects --------------------------------------------------------
+  // upload helper: try "photos" then "Photos" (no manual Content-Type!)
+  const uploadFiles = async (projectId, files) => {
+    const attempt = async (field) => {
+      const fd = new FormData();
+      files.forEach((f) => fd.append(field, f, f.name));
+      // DO NOT set Content-Type; Axios will add the boundary.
+      return http.post(PATHS.postPhotos(projectId), fd);
+    };
+
+    try {
+      return await attempt("photos");
+    } catch (e) {
+      // if backend is wired to expect "Photos", retry once
+      return await attempt("Photos");
+    }
+  };
+
+  // ---------------- data loads ----------------
   useEffect(() => {
     let mounted = true;
     (async () => {
@@ -479,16 +475,14 @@ export default function EnergyProjectPhotosTable() {
         if (!mounted) return;
         setProjects(normalizeProjects(res.data));
       } catch (e) {
-        console.error("Projects load error:", e);
-        setErr(
-          e?.response?.data?.message || e?.message || "Failed to load projects"
-        );
+        setErr(e?.response?.data?.message || e?.message || "Failed to load projects");
       }
     })();
-    return () => (mounted = false);
+    return () => {
+      mounted = false;
+    };
   }, [http, PATHS]);
 
-  // ---- load photos for selected project ------------------------------------
   const loadPhotos = async (projectId) => {
     if (!projectId) return;
     setLoading(true);
@@ -496,25 +490,17 @@ export default function EnergyProjectPhotosTable() {
     setMsg(null);
 
     try {
-      // 1) dedicated photos endpoint
       let photos = [];
       try {
         const res = await http.get(PATHS.readPhotos(projectId));
-        photos = Array.isArray(res.data?.photos)
-          ? res.data.photos
-          : Array.isArray(res.data)
-          ? res.data
-          : [];
+        photos = Array.isArray(res.data?.photos) ? res.data.photos : Array.isArray(res.data) ? res.data : [];
       } catch {
-        // ignore (fall back to doc)
+        // fall back to reading the project doc
       }
 
-      // 2) fallback from project doc
       if (!photos.length) {
         const r2 = await http.get(PATHS.readProjectOne(projectId));
-        const doc = Array.isArray(r2.data)
-          ? r2.data[0]
-          : r2.data?.data ?? r2.data;
+        const doc = Array.isArray(r2.data) ? r2.data[0] : r2.data?.data ?? r2.data;
         photos =
           (Array.isArray(doc?.Photos) && doc.Photos) ||
           (Array.isArray(doc?.photos) && doc.photos) ||
@@ -524,10 +510,7 @@ export default function EnergyProjectPhotosTable() {
       setRows(photos);
       if (!photos.length) setMsg("No photos found for this project.");
     } catch (e) {
-      console.error("Photos load error:", e);
-      setErr(
-        e?.response?.data?.message || e?.message || "Failed to load photos"
-      );
+      setErr(e?.response?.data?.message || e?.message || "Failed to load photos");
     } finally {
       setLoading(false);
     }
@@ -541,7 +524,7 @@ export default function EnergyProjectPhotosTable() {
     if (pid) loadPhotos(pid);
   };
 
-  // ---- delete / replace / append -------------------------------------------
+  // ---------------- actions ----------------
   const handleDelete = async (index) => {
     if (!selectedId && selectedId !== "0") return;
     if (!window.confirm("Delete this photo?")) return;
@@ -552,7 +535,6 @@ export default function EnergyProjectPhotosTable() {
       setRows((prev) => prev.filter((_, i) => i !== index));
       setMsg("Photo deleted ✅");
     } catch (e) {
-      console.error("Delete error:", e);
       setErr(e?.response?.data?.message || e?.message || "Delete failed");
     }
   };
@@ -566,7 +548,6 @@ export default function EnergyProjectPhotosTable() {
     const file = (e.target.files && e.target.files[0]) || null;
     e.target.value = "";
     if (!file) return;
-
     const idx = replaceTargetIndexRef.current;
     if (idx == null) return;
 
@@ -575,20 +556,15 @@ export default function EnergyProjectPhotosTable() {
     setMsg(null);
 
     try {
-      // remove the old one, then append the new one
+      // delete first (server only supports append & delete)
       await http.delete(PATHS.deletePhoto(selectedId), { data: { index: idx } });
-
-      const form = new FormData();
-      form.append("photos", file);
-      await http.post(PATHS.postPhotos(selectedId), form, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-
+      // then append the new file (try both field names)
+      await uploadFiles(selectedId, [file]);
       await loadPhotos(selectedId);
       setMsg("Photo replaced ✅");
     } catch (e) {
-      console.error("Replace error:", e);
       setErr(e?.response?.data?.message || e?.message || "Replace failed");
+      await loadPhotos(selectedId); // reload to reflect actual state
     } finally {
       setUploading(false);
     }
@@ -597,32 +573,26 @@ export default function EnergyProjectPhotosTable() {
   const startAppend = () => appendFileRef.current?.click();
 
   const onPickAppendFiles = async (e) => {
-    const list = Array.from(e.target.files || []);
+    const files = Array.from(e.target.files || []);
     e.target.value = "";
-    if (!list.length) return;
+    if (!files.length) return;
 
     setUploading(true);
     setErr(null);
     setMsg(null);
 
     try {
-      const form = new FormData();
-      list.forEach((f) => form.append("photos", f));
-      await http.post(PATHS.postPhotos(selectedId), form, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-
+      await uploadFiles(selectedId, files); // tries 'photos' then 'Photos'
       await loadPhotos(selectedId);
       setMsg("Photos appended ✅");
     } catch (e) {
-      console.error("Upload error:", e);
       setErr(e?.response?.data?.message || e?.message || "Upload failed");
     } finally {
       setUploading(false);
     }
   };
 
-  // ---- UI -------------------------------------------------------------------
+  // ---------------- UI ----------------
   return (
     <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 absolute left-[300px] top-[100px]">
       <div className="flex flex-wrap items-center gap-3 mb-5">
@@ -631,9 +601,7 @@ export default function EnergyProjectPhotosTable() {
           value={selectedId}
           onChange={handlePickProject}
         >
-          <option value="">
-            {projects.length ? "Select a project…" : "Loading projects…"}
-          </option>
+          <option value="">{projects.length ? "Select a project…" : "Loading projects…"}</option>
           {projects.map((p) => (
             <option key={p._id} value={p._id}>
               {p.title || p.name || p._id}
@@ -659,11 +627,7 @@ export default function EnergyProjectPhotosTable() {
         )}
 
         <label className="ml-auto flex items-center gap-2 text-xs text-slate-600 cursor-pointer">
-          <input
-            type="checkbox"
-            checked={showDebug}
-            onChange={(e) => setShowDebug(e.target.checked)}
-          />
+          <input type="checkbox" checked={showDebug} onChange={(e) => setShowDebug(e.target.checked)} />
           Debug
         </label>
       </div>
@@ -675,58 +639,35 @@ export default function EnergyProjectPhotosTable() {
         <table className="min-w-full divide-y divide-slate-200">
           <thead className="bg-slate-50">
             <tr>
-              <th className="px-4 py-3 text-left text-sm font-semibold text-slate-700">
-                #
-              </th>
-              <th className="px-4 py-3 text-left text-sm font-semibold text-slate-700">
-                Project
-              </th>
-              <th className="px-4 py-3 text-left text-sm font-semibold text-slate-700">
-                Preview
-              </th>
-              <th className="px-4 py-3 text-left text-sm font-semibold text-slate-700">
-                Image
-              </th>
+              <th className="px-4 py-3 text-left text-sm font-semibold text-slate-700">#</th>
+              <th className="px-4 py-3 text-left text-sm font-semibold text-slate-700">Project</th>
+              <th className="px-4 py-3 text-left text-sm font-semibold text-slate-700">Preview</th>
+              <th className="px-4 py-3 text-left text-sm font-semibold text-slate-700">Image</th>
               {showDebug && (
                 <>
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-slate-700">
-                    raw
-                  </th>
-                  <th className="px-4 py-3 text-left text-sm font-semibold text-slate-700">
-                    src
-                  </th>
+                  <th className="px-4 py-3 text-left text-sm font-semibold text-slate-700">raw</th>
+                  <th className="px-4 py-3 text-left text-sm font-semibold text-slate-700">src</th>
                 </>
               )}
-              <th className="px-4 py-3 text-left text-sm font-semibold text-slate-700">
-                Action
-              </th>
+              <th className="px-4 py-3 text-left text-sm font-semibold text-slate-700">Action</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100 bg-white">
             {!selectedId ? (
               <tr>
-                <td
-                  colSpan={showDebug ? 7 : 5}
-                  className="px-4 py-6 text-center text-slate-500"
-                >
+                <td colSpan={showDebug ? 7 : 5} className="px-4 py-6 text-center text-slate-500">
                   Select a project to view photos.
                 </td>
               </tr>
             ) : loading ? (
               <tr>
-                <td
-                  colSpan={showDebug ? 7 : 5}
-                  className="px-4 py-6 text-center text-slate-500"
-                >
+                <td colSpan={showDebug ? 7 : 5} className="px-4 py-6 text-center text-slate-500">
                   Loading…
                 </td>
               </tr>
             ) : rows.length === 0 ? (
               <tr>
-                <td
-                  colSpan={showDebug ? 7 : 5}
-                  className="px-4 py-6 text-center text-slate-500"
-                >
+                <td colSpan={showDebug ? 7 : 5} className="px-4 py-6 text-center text-slate-500">
                   No photos uploaded yet.
                 </td>
               </tr>
@@ -739,44 +680,29 @@ export default function EnergyProjectPhotosTable() {
                 return (
                   <tr key={`${name}-${i}`} className="hover:bg-slate-50">
                     <td className="px-4 py-3 text-slate-700">{i}</td>
-                    <td className="px-4 py-3 text-slate-900 font-medium">
-                      {selectedProjectName || selectedId}
-                    </td>
+                    <td className="px-4 py-3 text-slate-900 font-medium">{selectedProjectName || selectedId}</td>
                     <td className="px-4 py-3">
                       {src ? (
-                        <a
-                          href={src}
-                          target="_blank"
-                          rel="noreferrer"
-                          title="Open full image"
-                        >
+                        <a href={src} target="_blank" rel="noreferrer" title="Open full image">
                           <img
                             src={src}
                             alt={name}
                             className="w-20 h-16 object-cover rounded-md border border-slate-200"
-                            onError={(e) =>
-                              (e.currentTarget.src = "/placeholder.png")
-                            }
+                            onError={(e) => (e.currentTarget.src = "/placeholder.png")}
                           />
                         </a>
                       ) : (
                         "—"
                       )}
                     </td>
-                    <td className="px-4 py-3 text-slate-600 break-all">
-                      {name}
-                    </td>
+                    <td className="px-4 py-3 text-slate-600 break-all">{name}</td>
 
                     {showDebug && (
                       <>
                         <td className="px-4 py-3 text-xs text-slate-500 break-all">
-                          {typeof raw === "string"
-                            ? raw
-                            : JSON.stringify(raw)}
+                          {typeof raw === "string" ? raw : JSON.stringify(raw)}
                         </td>
-                        <td className="px-4 py-3 text-xs text-slate-500 break-all">
-                          {src}
-                        </td>
+                        <td className="px-4 py-3 text-xs text-slate-500 break-all">{src}</td>
                       </>
                     )}
 
