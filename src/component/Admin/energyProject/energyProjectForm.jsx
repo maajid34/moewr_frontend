@@ -50,6 +50,7 @@ export default function EnergyProjectFormUI() {
   formData.append("stakeHolder4",stakeHolder4)
 
   formData.append("achievements",achievements)
+  formData.append("photos",setPhotos)
 
 
   const navigate = useNavigate()
@@ -231,6 +232,28 @@ export default function EnergyProjectFormUI() {
                   </label>
                 </div>
               </div>
+
+              {/* photos project */}
+                <div className="rounded-2xl border bg-white shadow-sm p-5">
+               
+
+                <div className="mt-4 rounded-xl border border-dashed p-6 text-center">
+                  <div className="mx-auto w-12 h-12 rounded-xl bg-[var(--brand)]/10 grid place-items-center">
+                    <svg viewBox="0 0 24 24" className="w-6 h-6 text-[var(--brand)]"><path fill="currentColor" d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm8 1.5V8h5.5L14 3.5Z"/></svg>
+                  </div>
+              
+
+                  <label className="mt-3 inline-block text-xs px-3 py-2 rounded-md border border-[var(--brand)] text-[var(--brand)] hover:bg-[var(--brand)]/10 cursor-pointer">
+                  
+                    <input  onChange={(t) => setPhotos(t.target.files[0])}
+                      type="file"
+                      name="setPhotos"
+                      id="objectiveImage"
+                      
+                    />
+                  </label>
+                </div>
+              </div>
             </section>
 
             {/* Objective */}
@@ -330,6 +353,9 @@ export default function EnergyProjectFormUI() {
               />
               <div className="mt-1 text-xs text-slate-500 text-right">0 / 800</div>
             </section>
+
+
+            
 
 
                     {/*stakeholders  */}

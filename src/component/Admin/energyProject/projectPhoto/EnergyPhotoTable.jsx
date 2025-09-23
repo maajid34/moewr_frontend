@@ -462,6 +462,7 @@ export default function EnergyProjectPhotosTable() {
     } catch (e) {
       // if backend is wired to expect "Photos", retry once
       return await attempt("Photos");
+      alert(Photos);
     }
   };
 
