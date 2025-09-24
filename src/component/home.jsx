@@ -61,7 +61,7 @@ const fullText = "Welcome to Ministry Energy and Resource of Jubaland";
 
 
   // images slide
-  const images = [min1, min2, min3,min4]; // all backgrounds
+  const images = [min1, , min3,min4,min2]; // all backgrounds
   const [fade, setFade] = useState(true);
  
 
@@ -208,7 +208,7 @@ The Ministry is responsible for the formulation, direction and coordination of t
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" data-aos="fade-up">
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-md shadow-slate-900" data-aos="fade-up">
               <div className="h-12 w-12 rounded-lg bg-[color:var(--brand)]/10 grid place-items-center">
                 <span className="text-[color:var(--brand)]">📜</span>
               </div>
@@ -216,7 +216,7 @@ The Ministry is responsible for the formulation, direction and coordination of t
               
             </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" data-aos="fade-up" data-aos-delay="100">
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-md shadow-slate-900" data-aos="fade-up" data-aos-delay="100">
               <div className="h-12 w-12 rounded-lg bg-[color:var(--brand)]/10 grid place-items-center">
                 <span className="text-[color:var(--brand)]">🧭</span>
               </div>
@@ -224,7 +224,7 @@ The Ministry is responsible for the formulation, direction and coordination of t
               
             </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" data-aos="fade-up" data-aos-delay="200">
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-md shadow-slate-900" data-aos="fade-up" data-aos-delay="200">
               <div className="h-12 w-12 rounded-lg bg-[color:var(--brand)]/10 grid place-items-center">
                 <span className="text-[color:var(--brand)]">📈</span>
               </div>
@@ -232,7 +232,7 @@ The Ministry is responsible for the formulation, direction and coordination of t
             
             </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" data-aos="fade-up">
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-md shadow-slate-900" data-aos="fade-up">
               <div className="h-12 w-12 rounded-lg bg-[color:var(--brand)]/10 grid place-items-center">
                 <span className="text-[color:var(--brand)]">🚰</span>
               </div>
@@ -240,7 +240,7 @@ The Ministry is responsible for the formulation, direction and coordination of t
               
             </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" data-aos="fade-up" data-aos-delay="100">
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-md shadow-slate-900 " data-aos="fade-up" data-aos-delay="100">
               <div className="h-12 w-12 rounded-lg bg-[color:var(--brand)]/10 grid place-items-center">
                 <span className="text-[color:var(--brand)]">⚙️</span>
               </div>
@@ -248,14 +248,16 @@ The Ministry is responsible for the formulation, direction and coordination of t
              
             </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" data-aos="fade-up" data-aos-delay="200">
-              <div className="h-12 w-12 rounded-lg bg-[color:var(--brand)]/10 grid place-items-center">
-                <span className="text-[color:var(--brand)]">💸</span>
-              </div>
-              <h4 className="mt-4 font-semibold text-[var(--ink)]">Enhance Resources Mobilization for Sectoral Funding</h4>
-         
-            </div>
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" data-aos="fade-up" data-aos-delay="200">
+            <div
+  className="rounded-2xl border border-slate-200 bg-white p-6 
+             shadow-md shadow-slate-900" 
+  data-aos="fade-up" 
+  data-aos-delay="200"
+>
+  <h2 className="text-xl font-bold text-slate-800">Enhance Resources Mobilization for Sectoral Funding</h2>
+  
+</div>
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-md shadow-slate-900 " data-aos="fade-up" data-aos-delay="200">
               <div className="h-12 w-12 rounded-lg bg-[color:var(--brand)]/10 grid place-items-center">
                 <span className="text-[color:var(--brand)]">💸</span>
               </div>
@@ -275,11 +277,11 @@ The Ministry is responsible for the formulation, direction and coordination of t
       <section id="outputs" className="py-10">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-8" data-aos="fade-up">
-            <span className="text-3xl font-bold text-[var(--ink)]">Key Outputs</span>
+            
             <h2 className="mt-2 text-2xl font-bold text-[var(--ink)]">Ministry Key Output Areas</h2>
           </div>
 
-          <div className="flex flex-wrap gap-3 justify-center" data-aos="zoom-in">
+          <div className="grid grid-cols-2 gap-3 justify-center" data-aos="zoom-in">
             <span className="rounded-xl bg-[color:var(--brand-dark)] text-white px-5 py-3">1. Resource Empowerment</span>
             <span className="rounded-xl bg-[color:var(--brand-dark)] text-white px-5 py-3">2. Resource Management</span>
             <span className="rounded-xl bg-[color:var(--brand-dark)] text-white px-5 py-3">3. Resource Development</span>
@@ -318,41 +320,74 @@ The Ministry is responsible for the formulation, direction and coordination of t
       <section id="departments" className="py-14 lg:py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-10" data-aos="fade-up">
-            <span className="text-3xl font-bold text-[var(--ink)]">Departments</span>
-            <h2 className="mt-2 text-3xl font-bold text-[var(--ink)]">Core Ministry Departments</h2>
+           
+            <h2 className="mt-2 text-3xl font-bold text-[var(--ink)]">Departments</h2>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" data-aos="fade-up">
+          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-md shadow-slate-900" data-aos="fade-up">
               <div className="text-5xl">👥</div>
-              <h4 className="mt-4 font-semibold text-[var(--ink)]">Admin, HR &amp; Finance</h4>
-              <p className="text-slate-600 mt-1">Governance, support &amp; financial management.</p>
+              <h4 className="mt-4 font-bold text-xl">Admin , HR & Finance Department</h4>
+              <p className="text-slate-600 mt-1">The Department of Admin/HR and Finance is the back born of the ministry and plays management role in the ministry and the core functions of the directorate of Finance & Administration under MoEWR include;
+Development and implement MoEWR key policies for the department
+Ensuring adequate provision of administrative and financial support to all departments of MoEWR
+</p>
               <div className="mt-4 inline-flex items-center gap-2 font-semibold text-[color:var(--brand)]">Read for More <span>→</span></div>
             </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" data-aos="fade-up" data-aos-delay="100">
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-md shadow-slate-900" data-aos="fade-up" data-aos-delay="100">
               <div className="text-5xl">🚰</div>
-              <h4 className="mt-4 font-semibold text-[var(--ink)]">Water Department</h4>
-              <p className="text-slate-600 mt-1">Sustainable water resources &amp; services.</p>
+              <h4 className="mt-4  font-bold text-xl">Water Department</h4>
+              <p className="text-slate-600 mt-1">Water Department is one of the pillars of the ministry departments and sector of the ministry sectors thus The Ministry of Energy & Water Resources of Jubaland state of Somalia categorized the water needs of Jubaland state districts in three (3) classes; 
+          • Towns that are situated along juba river and can be of beneficial to supply water from the river 
+          • Towns that are not closer to the river but have underground water potential, such towns will need exploration of deep aquifer boreholes that can serve them in a long time of period. 
+          • Town or localities that are situated along the coast or within the ocean; such localities are in dire need of water and can helped in constructing sand dams and promotion of modern rain water harvesting system to store water during the rainy season.
+</p>
               <div className="mt-4 inline-flex items-center gap-2 font-semibold text-[color:var(--brand)]">Read for More <span>→</span></div>
             </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" data-aos="fade-up" data-aos-delay="200">
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-md shadow-slate-900" data-aos="fade-up" data-aos-delay="200">
               <div className="text-5xl">💡</div>
-              <h4 className="mt-4 font-semibold text-[var(--ink)]">Energy Department</h4>
-              <p className="text-slate-600 mt-1">Affordable, reliable energy expansion.</p>
+              <h4 className="mt-4 font-bold text-xl">Energy Department</h4>
+              <p className="text-slate-600 mt-1">The Energy department is one of the five Ministry departments and the sector of the two sectors of the Ministry thus is responsible for the Energy of the state, the department has its strategy of developing the energy sector of the state
+                 to provide affordable and reliable Energy with low tariff rate for the community.</p>
               <div className="mt-4 inline-flex items-center gap-2 font-semibold text-[color:var(--brand)]">More info <span>→</span></div>
             </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" data-aos="fade-up" data-aos-delay="300">
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-md shadow-slate-900" data-aos="fade-up" data-aos-delay="300">
               <div className="text-5xl">📊</div>
-              <h4 className="mt-4 font-semibold text-[var(--ink)]">Planning &amp; Policy</h4>
-              <p className="text-slate-600 mt-1">Research, assessments, and policy.</p>
+              <h4 className="mt-4 font-bold text-xl">Planning &amp; Policy</h4>
+              <p className="text-slate-600 mt-1">The Department of Planning , Research and Policy is responsible for conducting and preparing key research outputs on water and Energy assessments across various topics and sectors for Jubaland State. The Department 
+                monitors, analyses, assess the development of the water and Energy of the state and </p>
               <div className="mt-4 inline-flex items-center gap-2 font-semibold text-[color:var(--brand)]">Read For More <span>→</span></div>
             </div>
           </div>
         </div>
       </section>
+
+
+      {/* other sector */}
+<h1 className='text-center text-3xl font-bold p-10'>Other Sectors</h1>
+       <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
+        
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-md shadow-slate-900" data-aos="fade-up">
+              <div className="text-5xl">👥</div>
+              <h4 className="mt-4 font-bold text-xl">Warehouse</h4>
+              <p className="text-slate-600 mt-1">The Jubaland Ministry of Energy and Water Resources Warehouse build with the support the International Organization for migration (IOM) as a vital component in meeting the ministry's comprehensive mandate for the state. As the central hub for the distribution and management of WASH (Water, Sanitation, and Hygiene) supplies, the warehouse plays a crucial role in ensuring the accessibility
+                 and equitable distribution of these essential resources to communities across Jubaland.
+</p>
+              <div className="mt-4 inline-flex items-center gap-2 font-semibold text-[color:var(--brand)]">Read for More <span>→</span></div>
+            </div>
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-md shadow-slate-900" data-aos="fade-up">
+              <div className="text-5xl">👥</div>
+              <h4 className="mt-4 font-bold text-xl">Water Laboratory</h4>
+              <p className="text-slate-600 mt-1">The Laboratory of the Ministry of Energy and Water Resources was established in November 2021 with the support from International Organization for Migration (IOM) . The laboratory was fully equiped in July 2022 through the support of Kismaayo urban
+                 water supply project which enabled it to fully run on its current operational capacity.
+</p>
+              <div className="mt-4 inline-flex items-center gap-2 font-semibold text-[color:var(--brand)]">Read for More <span>→</span></div>
+            </div>
+
+            </div>
 
       {/* ============================= NEW SECTIONS ============================= */}
 
@@ -360,46 +395,50 @@ The Ministry is responsible for the formulation, direction and coordination of t
       <section id="achievements" className="py-14 lg:py-20">
         <div className="max-w-6xl mx-auto px-4 text-black">
           <div className="text-center mb-10" data-aos="fade-up">
-            <span className="kicker text-3xl font-bold">Summary</span>
+           
             <h2 className="section-title mt-2 text-2xl font-bold">Ministry Achievements</h2>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="rounded-2xl p-6 bg-[#2FA8E1] text-white shadow-sm" data-aos="zoom-in">
               <div className="font-bold">2 MW</div>
-              <p className="mt-1">Renewable energy added.</p>
+              <p className="mt-1">Our projects have added over 2 MW of renewable energy to the grid.</p>
             </div>
             <div className="rounded-2xl p-6 bg-[#2FA8E1] text-white shadow-sm" data-aos="zoom-in" data-aos-delay="50">
-              <div className="font-bold">500k+</div>
-              <p className="mt-1">People with clean water access.</p>
+              <div className="font-bold">500,000 People</div>
+              <p className="mt-1">We have provided clean water access to over 500,000 people..</p>
             </div>
             <div className="rounded-2xl p-6 bg-[#2FA8E1] text-white shadow-sm" data-aos="zoom-in" data-aos-delay="100">
-              <div className="font-bold">20+</div>
-              <p className="mt-1">Projects completed.</p>
+              <div className="font-bold">20 Projects Completed</div>
+              <p className="mt-1">We have successfully completed over 20 energy and water projects whilst running more than 10 Projects</p>
             </div>
             <div className="rounded-2xl p-6 bg-[#2FA8E1] text-white shadow-sm" data-aos="zoom-in" data-aos-delay="150">
-              <div className="font-bold">2,000</div>
-              <p className="mt-1">Public streetlights.</p>
+              <div className="font-bold">2,000 - Public Streetlights</div>
+              <p className="mt-1">with support from partners we have installed 2,000 Solar Streetlights in 9 districts of Jubaland State Somalia</p>
             </div>
             <div className="rounded-2xl p-6 bg-[#2FA8E1] text-white shadow-sm" data-aos="zoom-in" data-aos-delay="200">
-              <div className="font-bold">43,277</div>
-              <p className="mt-1">Hygiene kits distributed.</p>
+              <div className="font-bold">43,277 People</div>
+              <p className="mt-1">Distributed Hygeine kits to Access essential health services to improve well-being and quality of life in our community.</p>
             </div>
             <div className="rounded-2xl p-6 bg-[#2FA8E1] text-white shadow-sm" data-aos="zoom-in" data-aos-delay="250">
-              <div className="font-bold">277</div>
-              <p className="mt-1">Shallow wells built/rehab.</p>
+              <div className="font-bold">277 Shallow Wells</div>
+              <p className="mt-1">We have Constructed over 277 Shallow wells and Maintain them with support from our Humanitarian Partners.</p>
             </div>
             <div className="rounded-2xl p-6 bg-[#2FA8E1] text-white shadow-sm" data-aos="zoom-in" data-aos-delay="300">
-              <div className="font-bold">92</div>
-              <p className="mt-1">Boreholes built/rehab.</p>
+              <div className="font-bold">92 Boreholes</div>
+              <p className="mt-1">We have Constructed/Rehabilitated over 92 Boreholes in two Regions of Jubaland (Lower Juba & Gedo) in 12 Districts..</p>
             </div>
             <div className="rounded-2xl p-6 bg-[#2FA8E1] text-white shadow-sm" data-aos="zoom-in" data-aos-delay="350">
-              <div className="font-bold">226</div>
-              <p className="mt-1">Water kiosks.</p>
+              <div className="font-bold">226 Water Kiosks</div>
+              <p className="mt-1">Constructed over 226 Water Kiosks in 12 Districts of Jubaland.</p>
             </div>
             <div className="rounded-2xl p-6 bg-[#2FA8E1] text-white shadow-sm" data-aos="zoom-in" data-aos-delay="400">
-              <div className="font-bold">790</div>
-              <p className="mt-1">Barkad constructed.</p>
+              <div className="font-bold">38 Water Pan</div>
+              <p className="mt-1">Constructed over 38 water Pan</p>
+            </div>
+            <div className="rounded-2xl p-6 bg-[#2FA8E1] text-white shadow-sm" data-aos="zoom-in" data-aos-delay="400">
+              <div className="font-bold">790 Barkad</div>
+              <p className="mt-1">Constructed over 790 Barkad</p>
             </div>
           </div>
         </div>
