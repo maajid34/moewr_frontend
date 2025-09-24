@@ -652,8 +652,7 @@ export default function WaterProjectFormUI() {
                       name="coverImage"
                       id="coverImage"
                       required
-                      accept="image/*"
-                      className="hidden"
+                  
                     />
                   </label>
                 </div>
@@ -673,7 +672,7 @@ export default function WaterProjectFormUI() {
                       name="objectiveImage"
                       id="objectiveImage"
                       accept="image/*"
-                      className="hidden"
+                  
                     />
                   </label>
                 </div>
@@ -697,7 +696,7 @@ export default function WaterProjectFormUI() {
                       id="GeographicImage"
                       required
                       accept="image/*"
-                      className="hidden"
+                  
                     />
                   </label>
                 </div>
@@ -820,7 +819,7 @@ export default function WaterProjectFormUI() {
                       id="stackeHolder1"
                       required
                       accept="image/*"
-                      className="hidden"
+                  
                     />
                   </label>
                 </div>
@@ -838,7 +837,7 @@ export default function WaterProjectFormUI() {
                       id="stakeHolder2"
                       required
                       accept="image/*"
-                      className="hidden"
+                 
                     />
                   </label>
                 </div>
@@ -856,7 +855,7 @@ export default function WaterProjectFormUI() {
                       id="stakeHolder3"
                       required
                       accept="image/*"
-                      className="hidden"
+                  
                     />
                   </label>
                 </div>
@@ -873,7 +872,7 @@ export default function WaterProjectFormUI() {
                       name="stakeHolder4"
                       id="stakeHolder4"
                       accept="image/*"
-                      className="hidden"
+                    
                     />
                   </label>
                 </div>
