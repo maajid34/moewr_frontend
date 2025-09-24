@@ -274,11 +274,11 @@ export default function EnergyProjectPhotosForm() {
     return () => { mounted = false; };
   }, [http]);
 
-  const isImageFile = (file) => {
-    if (file?.type && /^Image\//i.test(file.type)) return true;
-    const ext = (file?.name || "").split(".").pop()?.toLowerCase();
-    return new Set(["jpg","jpeg","png","gif","webp","bmp","tif","tiff","heic","heif","avif"]).has(ext);
-  };
+const isImageFile = (file) => {
+  if (file?.type && /^image\//i.test(file.type)) return true; // <-- fix here
+  const ext = (file?.name || "").split(".").pop()?.toLowerCase();
+  return new Set(["jpg","jpeg","png","gif","webp","bmp","tif","tiff","heic","heif","avif"]).has(ext);
+};
 
   const SIZE_LIMIT = 10 * 1024 * 1024;
 
@@ -311,32 +311,27 @@ export default function EnergyProjectPhotosForm() {
   const removeFile = (i) => setFiles(prev => prev.filter((_, idx) => idx !== i));
   const clearAll = () => { setFiles([]); setMsg(null); setErr(null); };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setMsg(null); setErr(null);
-    if (!selectedId) return setErr("Please select a project.");
-    if (files.length === 0) return setErr("Please choose at least one image.");
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setMsg(null); setErr(null);
 
-    const form = new FormData();
-    files.forEach((f) => form.append("Photos", f, f.name));  // <<—— SINGLE SOURCE OF TRUTH
+  if (!selectedId) return setErr("Please select a project.");
+  if (files.length === 0) return setErr("Please choose at least one image.");
 
-    setSubmitting(true);
-    try {
-      await http.post(`/energyProject/${selectedId}/photos`, form); // axios sets boundary
-      setMsg("Photos uploaded ✅");
-      setFiles([]);
-      // navigate(`/SingalProjectsEnergy/${selectedId}`);
-    } catch (e2) {
-      setErr(
-        e2?.response?.data?.message ||
-        e2?.response?.data?.error ||
-        e2?.message ||
-        "Failed to upload photos"
-      );
-    } finally {
-      setSubmitting(false);
-    }
-  };
+  const form = new FormData();
+  files.forEach((f) => form.append("Photos", f, f.name)); // <-- ONLY 'Photos'
+
+  setSubmitting(true);
+  try {
+    await api.post(`/energyProject/${selectedId}/photos`, form); // no headers override
+    setMsg("Photos uploaded ✅");
+    setFiles([]);
+  } catch (e2) {
+    setErr(e2?.response?.data?.message || e2?.response?.data?.error || e2?.message || "Failed to upload photos");
+  } finally {
+    setSubmitting(false);
+  }
+};
 
   return (
     <div className="max-w-2xl mx-auto absolute left-[400px] top-[100px] w-[100%] p-6 [--brand:#2FA8E1] [--brand-dark:#0A7FB8]">
