@@ -4,7 +4,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 export default function DashboardCards() {
-  const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
+  const API =  "https://moewr-backend.onrender.com";
 
   // --- axios client with token ---
   const http = useMemo(() => {
