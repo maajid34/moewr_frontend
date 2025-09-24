@@ -178,18 +178,19 @@ The Ministry is responsible for the formulation, direction and coordination of t
       <section id="vision-mission" className="relative">
         <div className="max-w-6xl mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-6">
-            <div className="rounded-2xl p-8 bg-gradient-to-br from-[color:var(--brand-dark)]/10 to-[color:var(--brand-dark)] text-white" data-aos="zoom-in">
+            <div className="rounded-2xl p-8 bg-gradient-to-bl from-color:[#2FA8E1] to-color:[#2FA8E1] border-[#2FA8E1] box-border border-spacing-2 border-2" data-aos="zoom-in">
               <h3 className="text-3xl font-bold">Our Vision</h3>
               <p className="mt-3">
-                To provide safe, affordable water and energy for all — driving socio-economic progress and climate-resilient livelihoods.
+                To provide adequate, safe and affordable water, hygiene and sanitation for all. An energy, industry that contributes to revenue streams and the socio-economic development of the state
               </p>
             </div>
 
-            <div className="rounded-2xl p-8 bg-gradient-to-bl from-[color:var(--brand-dark)]/10 to-[color:var(--brand-dark)]" data-aos="zoom-in" data-aos-delay="150">
+            <div className="rounded-2xl p-8 bg-gradient-to-bl from-[color:var(--brand-dark)]/10 to-[color:var(--brand-dark)] border-[#2FA8E1] box-border border-spacing-2 border-2" data-aos="zoom-in" data-aos-delay="150">
               <h3 className="text-3xl font-bold text-[var(--ink)]">Our Mission</h3>
               <p className="mt-3 text-slate-700">
-                To develop, manage, and equitably distribute water and energy resources through sustainable policies,
-                strong institutions, and inclusive partnerships.
+                To have a significant role in the socio-economic development of the people of Jubbaland State
+                 of Somalia through development and management of its water and energy and resources in a sustainable manner, through provision of quality and equitable supplies in the entire state and by 
+                contributing significantly to the food security and increased resilience to draught and natural disaster.
               </p>
             </div>
           </div>
@@ -202,7 +203,7 @@ The Ministry is responsible for the formulation, direction and coordination of t
       <section id="mandates" className="py-14 lg:py-20">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-10" data-aos="fade-up">
-            <span className="text-3xl font-bold text-[var(--ink)]">Mandates</span>
+           
             <h2 className="mt-2 text-2xl font-bold text-[var(--ink)]">Ministry Mandates</h2>
           </div>
 
@@ -211,49 +212,59 @@ The Ministry is responsible for the formulation, direction and coordination of t
               <div className="h-12 w-12 rounded-lg bg-[color:var(--brand)]/10 grid place-items-center">
                 <span className="text-[color:var(--brand)]">📜</span>
               </div>
-              <h4 className="mt-4 font-semibold text-[var(--ink)]">Regulate &amp; Set Policy</h4>
-              <p className="text-slate-600 mt-2">Energy &amp; Water Resources Sectors.</p>
+              <h4 className="mt-4 font-semibold text-[var(--ink)]">Regulate and Set policy for Energy & Water Resources Sectors</h4>
+              
             </div>
 
             <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" data-aos="fade-up" data-aos-delay="100">
               <div className="h-12 w-12 rounded-lg bg-[color:var(--brand)]/10 grid place-items-center">
                 <span className="text-[color:var(--brand)]">🧭</span>
               </div>
-              <h4 className="mt-4 font-semibold text-[var(--ink)]">Plan &amp; Implement</h4>
-              <p className="text-slate-600 mt-2">Development of Energy &amp; Water sectors.</p>
+              <h4 className="mt-4 font-semibold text-[var(--ink)]">Implement & Facilitate the Development of the Energy & Water Sectors</h4>
+              
             </div>
 
             <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" data-aos="fade-up" data-aos-delay="200">
               <div className="h-12 w-12 rounded-lg bg-[color:var(--brand)]/10 grid place-items-center">
                 <span className="text-[color:var(--brand)]">📈</span>
               </div>
-              <h4 className="mt-4 font-semibold text-[var(--ink)]">Monitor &amp; Evaluate</h4>
-              <p className="text-slate-600 mt-2">Sectoral activities and outcomes.</p>
+              <h4 className="mt-4 font-semibold text-[var(--ink)]">Provide Monitoring & Evalutation for Sectoral Activities </h4>
+            
             </div>
 
             <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" data-aos="fade-up">
               <div className="h-12 w-12 rounded-lg bg-[color:var(--brand)]/10 grid place-items-center">
                 <span className="text-[color:var(--brand)]">🚰</span>
               </div>
-              <h4 className="mt-4 font-semibold text-[var(--ink)]">Ensure Reliable Access</h4>
-              <p className="text-slate-600 mt-2">Clean energy, water, and sewerage.</p>
+              <h4 className="mt-4 font-semibold text-[var(--ink)]">Access to reliable clean Energy , Water Resources , and Sewerage for the benefit of the society </h4>
+              
             </div>
 
             <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" data-aos="fade-up" data-aos-delay="100">
               <div className="h-12 w-12 rounded-lg bg-[color:var(--brand)]/10 grid place-items-center">
                 <span className="text-[color:var(--brand)]">⚙️</span>
               </div>
-              <h4 className="mt-4 font-semibold text-[var(--ink)]">Promote Development</h4>
-              <p className="text-slate-600 mt-2">Water &amp; energy resources growth.</p>
+              <h4 className="mt-4 font-semibold text-[var(--ink)]">. Promote the Development of water & Energy resources </h4>
+             
             </div>
 
             <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" data-aos="fade-up" data-aos-delay="200">
               <div className="h-12 w-12 rounded-lg bg-[color:var(--brand)]/10 grid place-items-center">
                 <span className="text-[color:var(--brand)]">💸</span>
               </div>
-              <h4 className="mt-4 font-semibold text-[var(--ink)]">Mobilize Resources</h4>
-              <p className="text-slate-600 mt-2">Funding &amp; partnerships for sectors.</p>
+              <h4 className="mt-4 font-semibold text-[var(--ink)]">Enhance Resources Mobilization for Sectoral Funding</h4>
+         
             </div>
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" data-aos="fade-up" data-aos-delay="200">
+              <div className="h-12 w-12 rounded-lg bg-[color:var(--brand)]/10 grid place-items-center">
+                <span className="text-[color:var(--brand)]">💸</span>
+              </div>
+              <h4 className="mt-4 font-semibold text-[var(--ink)]">Promote the Development of water & Energy resources 
+6. Enhance Resources Mobilization for Sectoral Funding
+</h4>
+         
+            </div>
+          
           </div>
         </div>
       </section>
