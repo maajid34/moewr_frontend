@@ -645,7 +645,7 @@ export default function WaterProjectFormUI() {
                   </div>
 
                   <label className="mt-3 inline-block text-xs px-3 py-2 rounded-md bg-[var(--brand)] text-white hover:bg-[var(--brand-dark)] cursor-pointer">
-                    Upload Overview Image
+                  
                     <input
                       onChange={(t) => setCoverImage(t.target.files?.[0] || null)}
                       type="file"
