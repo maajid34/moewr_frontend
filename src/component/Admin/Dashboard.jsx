@@ -344,7 +344,7 @@ export default function AdminSidebar() {
               <span>Assessments</span>
             </Link>
 
-            <Link to="/EnergyProjectPhotosForm" className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium hover:bg-white/10">
+            <Link to="/EnergyProjectPhotosTable" className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium hover:bg-white/10">
               <i className="fa-solid fa-user text-base" />
               <span>EnergyProjectPhoto</span>
             </Link>
