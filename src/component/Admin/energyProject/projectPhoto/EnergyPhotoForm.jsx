@@ -214,12 +214,38 @@
 //   );
 // }
 
+
+
 // src/components/projects/EnergyProjectPhotosForm.jsx
-import { useEffect, useState } from "react";
-import api from "../../api"; // axios instance with baseURL = https://moewr-backend.onrender.com
+import { useEffect, useMemo, useState } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export default function EnergyProjectPhotosForm() {
+  // --- Local axios with token interceptor ---
+  const API = "https://moewr-backend.onrender.com";
+  const http = useMemo(() => {
+    const inst = axios.create({ baseURL: API, withCredentials: false });
+    inst.interceptors.request.use((config) => {
+      try {
+        const stored = JSON.parse(localStorage.getItem("admin") || "{}");
+        const token =
+          stored?.token ||
+          stored?.accessToken ||
+          stored?.jwt ||
+          stored?.data?.token;
+        if (token) {
+          config.headers = config.headers || {};
+          config.headers.Authorization = `Bearer ${token}`;
+        } else if (config.headers?.Authorization) {
+          delete config.headers.Authorization;
+        }
+      } catch {}
+      return config;
+    });
+    return inst;
+  }, []);
+
   const [projects, setProjects] = useState([]);
   const [selectedId, setSelectedId] = useState("");
   const [files, setFiles] = useState([]); // File[]
@@ -237,7 +263,7 @@ export default function EnergyProjectPhotosForm() {
       setLoading(true);
       setErr(null);
       try {
-        const res = await api.get("/readProjectEnergy/EnergyProject");
+        const res = await http.get("/readProjectEnergy/EnergyProject");
         const list =
           Array.isArray(res.data) ? res.data :
           Array.isArray(res.data?.data) ? res.data.data :
@@ -253,8 +279,9 @@ export default function EnergyProjectPhotosForm() {
       }
     })();
     return () => { mounted = false; };
-  }, []);
+  }, [http]);
 
+  // handle file input
   const onPickFiles = (e) => {
     setMsg(null);
     setErr(null);
@@ -264,7 +291,7 @@ export default function EnergyProjectPhotosForm() {
     const merged = [
       ...files,
       ...list.filter((f) => !existingKey.has(`${f.name}-${f.size}`)),
-    ].slice(0, 20); // hard-limit 20 (matches multer)
+    ].slice(0, 20);
     setFiles(merged);
   };
 
@@ -272,9 +299,9 @@ export default function EnergyProjectPhotosForm() {
 
   const clearAll = () => {
     setFiles([]);
-    // keep selectedId so user doesn’t have to reselect project
     setMsg(null);
     setErr(null);
+    // keep selectedId so user doesn’t have to reselect
   };
 
   const handleSubmit = async (e) => {
@@ -286,22 +313,19 @@ export default function EnergyProjectPhotosForm() {
     if (files.length === 0) return setErr("Please choose at least one image.");
 
     const form = new FormData();
-    // ✅ send ONLY 'photos' (your backend accepts 'photos' OR 'Photos')
+    // send ONLY 'photos' (backend also accepts 'Photos' but no need to duplicate)
     files.forEach((f) => form.append("photos", f, f.name));
 
     setSubmitting(true);
     try {
-      // ❌ don’t set Content-Type manually; Axios sets the boundary
-      const res = await api.post(`/energyProject/${selectedId}/photos`, form);
-
-      // Optional: if backend returns {photos:[...]} you can react to it here
+      await http.post(`/energyProject/${selectedId}/photos`, form);
       setMsg("Photos uploaded ✅");
       setFiles([]);
       // navigate(`/SingalProjectsEnergy/${selectedId}`);
-    } catch (e) {
+    } catch (e2) {
       setErr(
-        e?.response?.data?.message ||
-        e?.response?.data?.error ||
+        e2?.response?.data?.message ||
+        e2?.response?.data?.error ||
         "Failed to upload photos"
       );
     } finally {
@@ -316,6 +340,7 @@ export default function EnergyProjectPhotosForm() {
         <p className="text-sm text-slate-600 mt-1">Select a project and upload one or more images.</p>
 
         <form onSubmit={handleSubmit} className="mt-6 space-y-5">
+          {/* Project select */}
           <div>
             <label className="block text-sm font-medium text-slate-700">
               Project <span className="text-rose-600">*</span>
@@ -336,6 +361,7 @@ export default function EnergyProjectPhotosForm() {
             </select>
           </div>
 
+          {/* File input */}
           <div>
             <label className="block text-sm font-medium text-slate-700">
               Photos <span className="text-rose-600">*</span>
@@ -379,9 +405,11 @@ export default function EnergyProjectPhotosForm() {
             )}
           </div>
 
+          {/* Alerts */}
           {err && <div className="text-sm text-rose-600">{err}</div>}
           {msg && <div className="text-sm text-emerald-600">{msg}</div>}
 
+          {/* Actions */}
           <div className="pt-2 flex gap-3">
             <button
               type="submit"
@@ -410,4 +438,3 @@ export default function EnergyProjectPhotosForm() {
     </div>
   );
 }
-
