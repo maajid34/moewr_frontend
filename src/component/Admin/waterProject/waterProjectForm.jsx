@@ -571,7 +571,7 @@ export default function WaterProjectFormUI() {
                   </span>
                   <span className="text-xs text-slate-500">Fill all required fields (*)</span>
                 </div>
-                <h2 className="mt-3 text-2xl font-extrabold text-[var(--ink)]">Energy project Form</h2>
+                <h2 className="mt-3 text-2xl font-extrabold text-[var(--ink)]">Water project Form</h2>
 
                 <div className="mt-6 grid gap-5 md:grid-cols-2">
                   {/* Title */}
