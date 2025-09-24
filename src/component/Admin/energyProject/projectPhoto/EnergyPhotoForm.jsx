@@ -223,7 +223,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export default function EnergyProjectPhotosForm() {
-  // ---- HTTP client ----
   const API = "https://moewr-backend.onrender.com";
   const http = useMemo(() => {
     const inst = axios.create({ baseURL: API, withCredentials: true });
@@ -245,18 +244,15 @@ export default function EnergyProjectPhotosForm() {
     return inst;
   }, []);
 
-  // ---- state ----
   const [projects, setProjects] = useState([]);
   const [selectedId, setSelectedId] = useState("");
-  const [files, setFiles] = useState([]); // File[]
+  const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [msg, setMsg] = useState(null);
   const [err, setErr] = useState(null);
-
   const navigate = useNavigate();
 
-  // ---- load projects ----
   useEffect(() => {
     let mounted = true;
     (async () => {
@@ -267,13 +263,10 @@ export default function EnergyProjectPhotosForm() {
         const list =
           Array.isArray(res.data) ? res.data :
           Array.isArray(res.data?.data) ? res.data.data :
-          Array.isArray(res.data?.items) ? res.data.items :
-          [];
+          Array.isArray(res.data?.items) ? res.data.items : [];
         if (mounted) setProjects(list);
       } catch (e) {
-        if (mounted) {
-          setErr(e?.response?.data?.message || e?.message || "Failed to load projects");
-        }
+        if (mounted) setErr(e?.response?.data?.message || e?.message || "Failed to load projects");
       } finally {
         if (mounted) setLoading(false);
       }
@@ -281,52 +274,32 @@ export default function EnergyProjectPhotosForm() {
     return () => { mounted = false; };
   }, [http]);
 
-  // ---- helpers ----
   const isImageFile = (file) => {
     if (file?.type && /^image\//i.test(file.type)) return true;
-    const name = file?.name || "";
-    const ext = name.split(".").pop()?.toLowerCase();
-    const allowed = new Set(["jpg","jpeg","png","gif","webp","bmp","tif","tiff","heic","heif","avif"]);
-    return allowed.has(ext);
+    const ext = (file?.name || "").split(".").pop()?.toLowerCase();
+    return new Set(["jpg","jpeg","png","gif","webp","bmp","tif","tiff","heic","heif","avif"]).has(ext);
   };
 
-  const SIZE_LIMIT = 10 * 1024 * 1024; // 10MB per file
+  const SIZE_LIMIT = 10 * 1024 * 1024;
 
-  // ---- file picker (robust) ----
   const onPickFiles = (e) => {
-    setMsg(null);
-    setErr(null);
-
+    setMsg(null); setErr(null);
     const picked = Array.from(e.target.files || []);
     if (!picked.length) return;
 
-    const images = [];
-    const rejected = [];
-    for (const f of picked) {
-      (isImageFile(f) ? images : rejected).push(f);
-    }
+    const images = [], rejected = [];
+    for (const f of picked) (isImageFile(f) ? images : rejected).push(f);
 
-    // de-dupe by name-size-lastModified
-    const existingKeys = new Set(
-      (files || []).map((f) => `${f.name}-${f.size}-${f.lastModified ?? "x"}`)
-    );
+    const existing = new Set((files||[]).map(f => `${f.name}-${f.size}-${f.lastModified??"x"}`));
+    let fresh = images.filter(f => !existing.has(`${f.name}-${f.size}-${f.lastModified??"x"}`));
 
-    let fresh = images.filter(
-      (f) => !existingKeys.has(`${f.name}-${f.size}-${f.lastModified ?? "x"}`)
-    );
+    const oversize = fresh.filter(f => f.size > SIZE_LIMIT);
+    fresh = fresh.filter(f => f.size <= SIZE_LIMIT);
 
-    // enforce per-file size
-    const oversize = fresh.filter((f) => f.size > SIZE_LIMIT);
-    fresh = fresh.filter((f) => f.size <= SIZE_LIMIT);
-
-    // cap total 20
     const spaceLeft = Math.max(0, 20 - (files?.length || 0));
     const toAdd = fresh.slice(0, spaceLeft);
+    setFiles([...(files||[]), ...toAdd]);
 
-    const merged = [...(files || []), ...toAdd];
-    setFiles(merged);
-
-    // notices
     const notes = [];
     if (rejected.length) notes.push(`${rejected.length} non-image file(s) skipped.`);
     if (oversize.length) notes.push(`${oversize.length} file(s) over 10MB skipped.`);
@@ -335,44 +308,21 @@ export default function EnergyProjectPhotosForm() {
     else setMsg(`Added ${toAdd.length} image(s).`);
   };
 
-  const removeFile = (idx) => setFiles((prev) => prev.filter((_, i) => i !== idx));
+  const removeFile = (i) => setFiles(prev => prev.filter((_, idx) => idx !== i));
+  const clearAll = () => { setFiles([]); setMsg(null); setErr(null); };
 
-  const clearAll = () => {
-    setFiles([]);
-    setMsg(null);
-    setErr(null);
-  };
-
-  // ---- submit ----
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setMsg(null);
-    setErr(null);
-
+    setMsg(null); setErr(null);
     if (!selectedId) return setErr("Please select a project.");
     if (files.length === 0) return setErr("Please choose at least one image.");
 
     const form = new FormData();
-    for (const f of files) form.append("photos", f, f.name);
-
-    // debug
-    const debug = [];
-    for (const [k, v] of form.entries()) {
-      debug.push(`${k}: ${v instanceof File ? `${v.name} (${v.type || "?"}, ${v.size}B)` : String(v)}`);
-    }
-    console.log("POST /energyProject/:id/photos form entries →", debug);
-
-    if (!debug.some((line) => line.startsWith("photos: "))) {
-      return setErr("No files detected in the form-data. Please reselect your images.");
-    }
+    files.forEach((f) => form.append("Photos", f, f.name));  // <<—— SINGLE SOURCE OF TRUTH
 
     setSubmitting(true);
     try {
-      const res = await http.post(`/energyProject/${selectedId}/photos`, form);
-      const got = res?.data?.project?.Photos || res?.data?.photos || null;
-      if (Array.isArray(got) && got.some((p) => !p || (typeof p === "object" && !p.Image))) {
-        console.warn("Server returned empty photo objects – check schema and URL builder.");
-      }
+      await http.post(`/energyProject/${selectedId}/photos`, form); // axios sets boundary
       setMsg("Photos uploaded ✅");
       setFiles([]);
       // navigate(`/SingalProjectsEnergy/${selectedId}`);
@@ -395,7 +345,6 @@ export default function EnergyProjectPhotosForm() {
         <p className="text-sm text-slate-600 mt-1">Select a project and upload one or more images.</p>
 
         <form onSubmit={handleSubmit} className="mt-6 space-y-5" encType="multipart/form-data">
-          {/* Project select */}
           <div>
             <label className="block text-sm font-medium text-slate-700">
               Project <span className="text-rose-600">*</span>
@@ -409,14 +358,11 @@ export default function EnergyProjectPhotosForm() {
             >
               <option value="">{loading ? "Loading…" : "Select a project"}</option>
               {projects.map((p) => (
-                <option key={p._id} value={p._id}>
-                  {p.title || p.name || p._id}
-                </option>
+                <option key={p._id} value={p._id}>{p.title || p.name || p._id}</option>
               ))}
             </select>
           </div>
 
-          {/* File input */}
           <div>
             <label className="block text-sm font-medium text-slate-700">
               Photos <span className="text-rose-600">*</span>
@@ -428,7 +374,7 @@ export default function EnergyProjectPhotosForm() {
               onChange={onPickFiles}
               className="mt-2 block w-full text-sm text-slate-700 file:mr-3 file:rounded-lg file:border file:border-slate-200 file:bg-white file:px-4 file:py-2.5 file:text-sm file:font-medium hover:file:bg-slate-50 focus:outline-none"
             />
-            <p className="mt-1 text-xs text-slate-500">You can select up to 20 images (≤10MB each).</p>
+            <p className="mt-1 text-xs text-slate-500">Up to 20 images (≤10MB each).</p>
 
             {files.length > 0 && (
               <div className="mt-4 grid grid-cols-2 md:grid-cols-3 gap-3">
@@ -436,20 +382,12 @@ export default function EnergyProjectPhotosForm() {
                   const url = URL.createObjectURL(f);
                   return (
                     <div key={`${f.name}-${idx}`} className="relative overflow-hidden rounded-xl border border-slate-200">
-                      <img
-                        src={url}
-                        alt={f.name}
-                        className="w-full h-36 object-cover"
-                        onLoad={() => URL.revokeObjectURL(url)}
-                      />
-                      <div className="absolute inset-x-0 bottom-0 bg-black/50 text-white text-[11px] px-2 py-1 truncate">
-                        {f.name}
-                      </div>
+                      <img src={url} alt={f.name} className="w-full h-36 object-cover" onLoad={() => URL.revokeObjectURL(url)} />
+                      <div className="absolute inset-x-0 bottom-0 bg-black/50 text-white text-[11px] px-2 py-1 truncate">{f.name}</div>
                       <button
                         type="button"
                         onClick={() => removeFile(idx)}
                         className="absolute top-2 right-2 rounded-md bg-white/90 px-2 py-1 text-[11px] font-semibold text-rose-600 hover:bg-white"
-                        aria-label="Remove"
                       >
                         Remove
                       </button>
@@ -460,11 +398,9 @@ export default function EnergyProjectPhotosForm() {
             )}
           </div>
 
-          {/* Alerts */}
           {err && <div className="text-sm text-rose-600">{err}</div>}
           {msg && <div className="text-sm text-emerald-600">{msg}</div>}
 
-          {/* Actions */}
           <div className="pt-2 flex gap-3">
             <button
               type="submit"
@@ -473,11 +409,7 @@ export default function EnergyProjectPhotosForm() {
             >
               {submitting ? "Uploading…" : "Upload Photos"}
             </button>
-            <button
-              type="button"
-              onClick={clearAll}
-              className="rounded-xl border border-slate-200 px-5 py-2.5 text-slate-700 hover:bg-slate-50"
-            >
+            <button type="button" onClick={clearAll} className="rounded-xl border border-slate-200 px-5 py-2.5 text-slate-700 hover:bg-slate-50">
               Clear
             </button>
             <button
