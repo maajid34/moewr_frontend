@@ -13,6 +13,7 @@ import service3 from '../assets/home/service3.jpg'
 import min1 from '../assets/ministry/438127713_730651179278094_8456837217631644785_n.jpg'
 import min2 from '../assets/ministry/Deputy Minister2.jpg'
 import min3 from '../assets/ministry/Director General.jpg'
+import min4 from '../assets/salan.jpg'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
@@ -25,6 +26,63 @@ export default function MinistryLanding() {
   const [page, setPage] = useState(1);      // optional simple pagination (matches backend)
   const [total, setTotal] = useState(0);
   const [limit, setLimit] = useState(50);
+
+  // home qoraal
+const fullText = "Welcome to Ministry Energy and Resource of Jubaland";
+  // const [displayText, setDisplayText] = useState("");
+  const [index, setIndex] = useState(fullText.length - 1);
+  // const [deleting, setDeleting] = useState(false);
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     if (!deleting) {
+  //       // typing (RTL → prepend)
+  //       setDisplayText((prev) => fullText[index] + prev);
+  //       setIndex((i) => i - 1);
+  //       if (index < 0) {
+  //         setDeleting(true);
+  //         setIndex(0);
+  //       }
+  //     } else {
+  //       // deleting (LTR → remove from start)
+  //       setDisplayText((prev) => prev.slice(1));
+  //       if (displayText.length === 0) {
+  //         setDeleting(false);
+  //         setIndex(fullText.length - 1);
+  //       }
+  //     }
+  //   }, 100); // speed
+
+  //   return () => clearInterval(interval);
+  // }, [index, deleting, displayText]);
+
+
+  // end home
+
+
+  // images slide
+  const images = [min1, min2, min3,min4]; // all backgrounds
+  const [fade, setFade] = useState(true);
+ 
+
+  // change every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // marka sawir cusub iman doono: samee fade out marka hore
+      setFade(false);
+
+      // sug 1s (intii uu baxayo), kadib update index + fade in
+      setTimeout(() => {
+        setIndex((prev) => (prev + 1) % images.length);
+        setFade(true);
+      }, 1000);
+    }, 2000); // 5s mar is beddel
+
+    return () => clearInterval(interval);
+  }, [images.length]);
+
+  // end images slide
+
 
 useEffect(() => {
   const fetchEvents = async () => {
@@ -57,6 +115,24 @@ useEffect(() => {
   return (
     <>
     <div className="[--brand:#2FA8E1] pt-[117px] [--brand-dark:#0A7FB8] [--ink:#002B5C] text-slate-800 text-xl">
+<div
+  className={`relative 
+              h-[280px] sm:h-[360px] md:h-[480px] lg:h-[560px] 
+              w-full bg-cover bg-center transition-opacity duration-1000`}
+  style={{ backgroundImage: `url(${images[index]})` }}
+>
+  {/* gradient overlay (optional) */}
+  {/* <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div> */}
+
+  {/* Content over image */}
+  <div className="relative z-10 flex h-full items-center justify-center px-4 text-center">
+    <h1 className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold text-white drop-shadow-lg">
+      Welcome to Ministry Energy and <br /> Resource of Jubaland State
+    </h1>
+  </div>
+</div>
+
+     
       {/* ======================= */}
       {/* Section 1: About        */}
       {/* ======================= */}
@@ -69,13 +145,15 @@ useEffect(() => {
 
           <div data-aos="fade-left">
             <h2 className="mt-2 text-2xl font-bold text-[var(--ink)]">
-              Ministry of Energy &amp; Water Resources – Jubaland
+             Welcome to the Ministry of Energy & Water Resources of Jubaland.
             </h2>
             <p className="mt-4 text-slate-600 leading-relaxed">
-              Established in 2014, the Ministry leads the Energy and Water sectors — shaping policy, expanding access,
-              and stewarding resources for equitable development across Jubaland.
-            </p>
+             
+Ministry of Energy & Water Resources is one among the Jubaland state Ministries that was established in 2014 as the Ministry of Energy & Water Resources with overall responsibility of two sectors ; Water Resources, and Energy exploration, development and distribution on an equitable basis to the people of Jubaland.
+The Ministry is responsible for the formulation, direction and coordination of the state energy and water resources. It is tasked with the responsibility of creating institutions to manage water resources and provide energy and water services for the benefit of the people of Jubaland. 
 
+            </p>
+{/* 
             <ul className="mt-6 grid sm:grid-cols-2 gap-3 font-semibold">
               <li className="rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
                 Energy &amp; Water Policy
@@ -89,7 +167,7 @@ useEffect(() => {
               <li className="rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
                 Community Resilience
               </li>
-            </ul>
+            </ul> */}
           </div>
         </div>
       </section>
