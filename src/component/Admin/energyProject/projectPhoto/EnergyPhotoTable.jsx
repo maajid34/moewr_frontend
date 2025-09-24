@@ -621,14 +621,14 @@ const toPublicUrl = (val) => {
           ))}
         </select>
 
-        <button
+        {/* <button
           type="button"
           disabled={!selectedId || uploading}
           onClick={startAppend}
           className="rounded-xl bg-blue-900 px-5 py-2 text-white hover:brightness-110 disabled:opacity-60"
         >
           {uploading ? "Working…" : "Add Photos"}
-        </button>
+        </button> */}
 
         {selectedId && (
           <Link to={`/SingalProjectsEnergy/${selectedId}`}>
