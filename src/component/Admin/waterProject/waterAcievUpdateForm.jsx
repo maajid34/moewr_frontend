@@ -6,7 +6,7 @@ import axios from "axios";
 export default function WaterAchievementUpdate() {
   const { id, index } = useParams(); // route: /WaterAchievementUpdate/:id/:index
   const navigate = useNavigate();
-  const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
+  const API =  "https://moewr-backend.onrender.com";
 
   const [title, setTitle] = useState("");
   const [detail, setDetail] = useState("");
