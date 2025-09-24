@@ -117,7 +117,7 @@ export default function EnergyAchievementUpdate() {
     <div className="max-w-2xl mx-auto absolute left-[400px] top-[100px] w-full p-6 [--brand:#2FA8E1] [--brand-dark:#0A7FB8]">
       <div className="rounded-2xl border border-slate-200 bg-white shadow-sm p-6">
         <h2 className="text-2xl font-extrabold text-[var(--brand-dark)]">
-          Update Water Achievement
+          Update Energy Achievement
         </h2>
         <p className="text-sm text-slate-600 mt-1">
           Edit achievement details and save.
