@@ -217,35 +217,45 @@
 
 
 // src/components/projects/EnergyProjectPhotosForm.jsx
+// src/components/projects/EnergyProjectPhotosForm.jsx
 import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export default function EnergyProjectPhotosForm() {
-  // --- Local axios with token interceptor ---
+  // ---- HTTP client (works with token in localStorage OR HttpOnly cookie) ----
   const API = "https://moewr-backend.onrender.com";
   const http = useMemo(() => {
-    const inst = axios.create({ baseURL: API, withCredentials: false });
+    const inst = axios.create({
+      baseURL: API,
+      // if you use cookie auth, set true; if only bearer tokens, false is fine.
+      withCredentials: true,
+    });
     inst.interceptors.request.use((config) => {
       try {
-        const stored = JSON.parse(localStorage.getItem("admin") || "{}");
-        const token =
-          stored?.token ||
-          stored?.accessToken ||
-          stored?.jwt ||
-          stored?.data?.token;
-        if (token) {
-          config.headers = config.headers || {};
-          config.headers.Authorization = `Bearer ${token}`;
-        } else if (config.headers?.Authorization) {
-          delete config.headers.Authorization;
+        const raw = localStorage.getItem("admin");
+        if (raw) {
+          const obj = JSON.parse(raw);
+          const token =
+            obj?.token ||
+            obj?.accessToken ||
+            obj?.jwt ||
+            obj?.data?.token ||
+            null;
+          if (token) {
+            config.headers = config.headers || {};
+            config.headers.Authorization = `Bearer ${token}`;
+          }
         }
-      } catch {}
+      } catch {
+        // ignore
+      }
       return config;
     });
     return inst;
   }, []);
 
+  // ---- state ----
   const [projects, setProjects] = useState([]);
   const [selectedId, setSelectedId] = useState("");
   const [files, setFiles] = useState([]); // File[]
@@ -256,7 +266,7 @@ export default function EnergyProjectPhotosForm() {
 
   const navigate = useNavigate();
 
-  // load projects
+  // ---- load projects ----
   useEffect(() => {
     let mounted = true;
     (async () => {
@@ -281,16 +291,24 @@ export default function EnergyProjectPhotosForm() {
     return () => { mounted = false; };
   }, [http]);
 
-  // handle file input
+  // ---- file picker ----
   const onPickFiles = (e) => {
     setMsg(null);
     setErr(null);
     const list = Array.from(e.target.files || []);
     if (!list.length) return;
-    const existingKey = new Set(files.map((f) => `${f.name}-${f.size}`));
+
+    // Only keep images
+    const imgs = list.filter((f) => /^image\//i.test(f.type));
+    if (imgs.length !== list.length) {
+      setErr("Only image files are allowed.");
+    }
+
+    // De-dup by name+size
+    const existing = new Set(files.map((f) => `${f.name}-${f.size}`));
     const merged = [
       ...files,
-      ...list.filter((f) => !existingKey.has(`${f.name}-${f.size}`)),
+      ...imgs.filter((f) => !existing.has(`${f.name}-${f.size}`)),
     ].slice(0, 20);
     setFiles(merged);
   };
@@ -301,9 +319,10 @@ export default function EnergyProjectPhotosForm() {
     setFiles([]);
     setMsg(null);
     setErr(null);
-    // keep selectedId so user doesn’t have to reselect
+    // keep selectedId so user doesn’t need to reselect
   };
 
+  // ---- submit ----
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMsg(null);
@@ -313,12 +332,34 @@ export default function EnergyProjectPhotosForm() {
     if (files.length === 0) return setErr("Please choose at least one image.");
 
     const form = new FormData();
-    // send ONLY 'photos' (backend also accepts 'Photos' but no need to duplicate)
-    files.forEach((f) => form.append("photos", f, f.name));
+    // append ONLY 'photos' (multer fields() collects all with same name)
+    for (const f of files) form.append("photos", f, f.name);
+
+    // DEBUG: verify what we're sending
+    const debug = [];
+    for (const [k, v] of form.entries()) {
+      debug.push(`${k}: ${v instanceof File ? `${v.name} (${v.type}, ${v.size}B)` : String(v)}`);
+    }
+    // eslint-disable-next-line no-console
+    console.log("POST /energyProject/:id/photos form entries →", debug);
+
+    // Guard: if somehow no File objects made it in, stop here
+    if (!debug.some((line) => line.startsWith("photos: "))) {
+      return setErr("No files detected in the form-data. Please reselect your images.");
+    }
 
     setSubmitting(true);
     try {
-      await http.post(`/energyProject/${selectedId}/photos`, form);
+      // DO NOT set Content-Type; axios will add correct boundary
+      const res = await http.post(`/energyProject/${selectedId}/photos`, form);
+
+      // If backend returns photos, verify they’re strings (not empty objects)
+      const got = res?.data?.project?.Photos || res?.data?.photos || null;
+      if (Array.isArray(got) && got.some((p) => !p || (typeof p === "object" && !p.Image))) {
+        // eslint-disable-next-line no-console
+        console.warn("Server returned empty photo objects – check schema required:true and URL builder.");
+      }
+
       setMsg("Photos uploaded ✅");
       setFiles([]);
       // navigate(`/SingalProjectsEnergy/${selectedId}`);
@@ -326,6 +367,7 @@ export default function EnergyProjectPhotosForm() {
       setErr(
         e2?.response?.data?.message ||
         e2?.response?.data?.error ||
+        e2?.message ||
         "Failed to upload photos"
       );
     } finally {
@@ -339,7 +381,7 @@ export default function EnergyProjectPhotosForm() {
         <h2 className="text-2xl font-extrabold text-[var(--brand-dark)]">Add Project Photos</h2>
         <p className="text-sm text-slate-600 mt-1">Select a project and upload one or more images.</p>
 
-        <form onSubmit={handleSubmit} className="mt-6 space-y-5">
+        <form onSubmit={handleSubmit} className="mt-6 space-y-5" encType="multipart/form-data">
           {/* Project select */}
           <div>
             <label className="block text-sm font-medium text-slate-700">
@@ -438,3 +480,4 @@ export default function EnergyProjectPhotosForm() {
     </div>
   );
 }
+
