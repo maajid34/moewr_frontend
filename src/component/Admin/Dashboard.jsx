@@ -309,7 +309,7 @@ export default function AdminSidebar() {
               <span>Energy Projects</span>
             </Link>
 
-            <Link to="/ProjectAchievementForm" className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium hover:bg-white/10">
+            <Link to="/EnergyAchievementsTable" className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium hover:bg-white/10">
               <i className="fa-solid fa-award text-base" />
               <span>Energy Achievements</span>
             </Link>
