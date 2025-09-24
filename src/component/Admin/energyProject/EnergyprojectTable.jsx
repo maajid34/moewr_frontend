@@ -647,7 +647,7 @@ export default function EnergyProjectTable() {
                         <div className="font-semibold text-slate-900">
                           {r.title || "—"}
                         </div>
-                        <div className="text-xs text-slate-500">{r._id}</div>
+                        <div className="text-xs hidden text-slate-500">{r._id}</div>
                       </td>
 
                       <td className="px-3 py-3">

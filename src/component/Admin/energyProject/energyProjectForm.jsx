@@ -577,7 +577,7 @@ export default function EnergyProjectFormUI() {
                   </span>
                   <span className="text-xs text-slate-500">Fill all required fields (*)</span>
                 </div>
-                <h2 className="mt-3 text-2xl font-extrabold text-[var(--ink)]">Project Basics</h2>
+                <h2 className="mt-3 text-2xl font-extrabold text-[var(--ink)]">Energy project Form</h2>
 
                 <div className="mt-6 grid gap-5 md:grid-cols-2">
                   {/* Title */}
@@ -592,10 +592,10 @@ export default function EnergyProjectFormUI() {
                       name="title"
                       type="text"
                       required
-                      placeholder="e.g., Kobciye Mini-Grid Expansion"
+                      placeholder="Enter Project Title"
                       className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
                     />
-                    <p className="mt-1 text-xs text-slate-500">Unique, concise, and descriptive.</p>
+                   
                   </div>
 
                   {/* Component Title */}
@@ -616,7 +616,7 @@ export default function EnergyProjectFormUI() {
                   {/* Description */}
                   <div className="md:col-span-2">
                     <label htmlFor="desc" className="flex items-center gap-2 text-sm font-medium text-slate-700">
-                      Short Description <span className="text-rose-600">*</span>
+                     Description <span className="text-rose-600">*</span>
                     </label>
                     <textarea
                       value={desc}
@@ -625,7 +625,7 @@ export default function EnergyProjectFormUI() {
                       name="desc"
                       required
                       rows={3}
-                      placeholder="One-paragraph summary describing the project scope and significance."
+                      placeholder=""
                       className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
                     />
                     <div className="mt-1 flex items-center justify-between text-xs text-slate-500">
@@ -655,7 +655,7 @@ export default function EnergyProjectFormUI() {
               {/* Cover Image */}
               <div className="rounded-2xl border bg-white shadow-sm p-5">
                 <h3 className="font-semibold text-[var(--ink)]">Overview Image <span className="text-rose-600">*</span></h3>
-                <p className="text-xs text-slate-500">Main image displayed on cards and detail page.</p>
+        
 
                 <div className="mt-4 rounded-xl border border-dashed p-6 text-center">
                   <div className="mx-auto w-12 h-12 rounded-xl bg-[var(--brand)]/10 grid place-items-center">
