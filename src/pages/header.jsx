@@ -1,316 +1,198 @@
-import { Link } from 'react-router-dom'
-import logo from '../assets/tamarta.png'
-import { useState } from 'react'
+import { Link } from "react-router-dom";
+import logo from "../assets/tamarta.png";
+import { useState } from "react";
 
-function Header() {
+export default function Header() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState({
+    about: false,
+    departments: false,
+    projects: false,
+  });
 
-  const [isOpen,setisOpen] = useState(false)
-
-  const handleOpen = () =>{
-    setisOpen(true)
-  }
-
-  const handleClose = () =>{
-    setisOpen(false)
-  }
+  const toggle = (key) => setOpen((s) => ({ ...s, [key]: !s[key] }));
 
   return (
-    <>
-<div className="bg-[#2FA8E1] w-[100%]  fixed  z-50 ">
-  <div className='flex justify-between p-2 items-center'>
-    <div>
-        <img src={logo} alt="" className='rounded-full w-[100px] h-[100px] ' />
-    </div>
-    <ul className='hidden sm:flex space-x-5 text-2xl text-white'>
-        <Link to={"/"}><li>Dashboard</li></Link>
-    <li className="relative group">
-      <button className="flex items-center gap-1">
-    About
-    <svg
-      className="w-4 h-4 mt-0.5"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      viewBox="0 0 24 24"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M19 9l-7 7-7-7"
-      />
-    </svg>
-  </button>
+    <header className="fixed inset-x-0 top-0 z-50 bg-[#2FA8E1]">
+      {/* Top bar */}
+      <div className="mx-auto flex max-w-7xl items-center justify-between p-2">
+        {/* Logo + brand */}
+        <Link to="/" className="flex items-center gap-3">
+          <img
+            src={logo}
+            alt="MOEWR"
+            className="h-[64px] w-[64px] rounded-full object-cover sm:h-[80px] sm:w-[80px]"
+          />
+          <span className="hidden text-xl font-semibold text-white sm:block">
+            MOEWR – Jubaland
+          </span>
+        </Link>
 
-  {/* Dropdown Menu */}
-  <ul className="absolute left-0 top-5 mt-2 hidden w-60  rounded-md bg-white shadow-md group-hover:block">
- <li>
-         <Link to={"/Ministry"}><a href="#" className="block px-4 py-2 text-black hover:bg-gray-700">
-        Ministery
-      </a>
-       </Link>
-    </li>
-   
-    <li>
-     <Link to={"/minister"}> <a href="#" className="block px-4 py-2  text-black hover:bg-gray-700">
-        Leadership
-      </a>
-      </Link>
-    </li>
-    <li>
-      <a href="#" className="block px-4 py-2 text-black hover:bg-gray-700">
-        Ganeral Director
-      </a>
-    </li>
-  </ul>
-</li>
+        {/* Desktop nav */}
+        <nav className="hidden items-center gap-6 text-white sm:flex">
+          <Link to="/" className="text-lg hover:opacity-90">
+            Dashboard
+          </Link>
 
- <li className="relative group">
-      <button className="flex items-center gap-1">
-    Departments
-    <svg
-      className="w-4 h-4 mt-0.5"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      viewBox="0 0 24 24"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M19 9l-7 7-7-7"
-      />
-    </svg>
-  </button>
+          {/* About */}
+          <div className="relative group">
+            <button className="flex items-center gap-1 text-lg">
+              About
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div className="absolute left-0 top-full mt-2 hidden w-60 rounded-md bg-white py-2 text-sm text-black shadow-md group-hover:block">
+              <Link to="/Ministry" className="block px-4 py-2 hover:bg-gray-100">Ministry</Link>
+              <Link to="/minister" className="block px-4 py-2 hover:bg-gray-100">Leadership</Link>
+              <span className="block px-4 py-2 hover:bg-gray-100">General Director</span>
+            </div>
+          </div>
 
-  {/* Dropdown Menu */}
-  <ul className="absolute left-0 top-5 mt-2 hidden w-60 rounded-md bg-white shadow-md group-hover:block">
-    <li>
-      <Link to={"/water"}><a href="#" className="block px-4 py-2 text-black hover:bg-gray-700">
-        Water
-      </a>
-      </Link>
-    </li>
-    <li>
-     <Link to={"/Energy"}><a href="#" className="block px-4 py-2  text-black hover:bg-gray-700">
-        Energy
-      </a>
-      </Link> 
-    </li>
-    <li>
-     <Link to={"/PlanningPolicy"}> <a href="#" className="block px-4 py-2 text-black hover:bg-gray-700">
-        Policy and Planning
-      </a>
-      </Link>
-    </li>
-    
-    <li>
-     <Link  to={"/Admin&finace"}> <a href="#" className="block px-4 py-2 text-black hover:bg-gray-700">
-        Admin and Finance
-      </a>
-      </Link>
-    </li>
-  </ul>
-</li>
- <li className="relative group">
-      <button className="flex items-center gap-1">
-    Projects
-    <svg
-      className="w-4 h-4 mt-0.5"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      viewBox="0 0 24 24"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M19 9l-7 7-7-7"
-      />
-    </svg>
-  </button>
+          {/* Departments */}
+          <div className="relative group">
+            <button className="flex items-center gap-1 text-lg">
+              Departments
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div className="absolute left-0 top-full mt-2 hidden w-60 rounded-md bg-white py-2 text-sm text-black shadow-md group-hover:block">
+              <Link to="/water" className="block px-4 py-2 hover:bg-gray-100">Water</Link>
+              <Link to="/Energy" className="block px-4 py-2 hover:bg-gray-100">Energy</Link>
+              <Link to="/PlanningPolicy" className="block px-4 py-2 hover:bg-gray-100">Policy &amp; Planning</Link>
+              <Link to="/Admin&finace" className="block px-4 py-2 hover:bg-gray-100">Admin &amp; Finance</Link>
+            </div>
+          </div>
 
-  {/* Dropdown Menu */}
-  <ul className="absolute left-0 top-5 mt-2 hidden w-40 rounded-md bg-white shadow-md group-hover:block">
-    <li>
-     <Link to={"/EnergyProject"}> <a href="#" className="block px-4 py-2 text-black hover:bg-gray-700">
-        Energy
-      </a>
-      </Link>
-    </li>
-    <li>
-    <Link to={"/WaterProject"}> <a href="#" className="block px-4 py-2 text-black hover:bg-gray-700">
-        Water
-      </a>
-      </Link> 
-    </li>
-  
-  </ul>
-</li>
-        <Link to={"/AssessmentsPost"}><li>Assessment</li></Link>
-        <Link to={"/EventPost"}><li>Events</li></Link>
-    </ul>
+          {/* Projects */}
+          <div className="relative group">
+            <button className="flex items-center gap-1 text-lg">
+              Projects
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div className="absolute left-0 top-full mt-2 hidden w-48 rounded-md bg-white py-2 text-sm text-black shadow-md group-hover:block">
+              <Link to="/EnergyProject" className="block px-4 py-2 hover:bg-gray-100">Energy</Link>
+              <Link to="/WaterProject" className="block px-4 py-2 hover:bg-gray-100">Water</Link>
+            </div>
+          </div>
 
+          <Link to="/AssessmentsPost" className="text-lg hover:opacity-90">Assessment</Link>
+          <Link to="/EventPost" className="text-lg hover:opacity-90">Events</Link>
 
+          <Link
+            to="/contact"
+            className="rounded-lg bg-white px-4 py-2 text-[#2FA8E1] hover:opacity-90"
+          >
+            Contact us
+          </Link>
+        </nav>
 
-    {/* mobile responsive */}
+        {/* Mobile toggler */}
+        <button
+          onClick={() => setIsOpen((v) => !v)}
+          className="sm:hidden"
+          aria-label="Toggle menu"
+          aria-expanded={isOpen}
+        >
+          {/* Using inline SVGs so you don't rely on Font Awesome */}
+          {isOpen ? (
+            <svg className="h-8 w-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          ) : (
+            <svg className="h-8 w-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          )}
+        </button>
+      </div>
 
+      {/* Mobile menu */}
+      <div className={`${isOpen ? "block" : "hidden"} sm:hidden`}>
+        <nav className="space-y-4 bg-[#2FA8E1] px-5 pb-6 pt-3 text-white">
+          <Link to="/" onClick={() => setIsOpen(false)} className="block text-xl">
+            Dashboard
+          </Link>
 
-<ul style={{display: isOpen === true ? "block" : ""}} className='hidden absolute top-[115px] sm:hidden left-0  space-y-10 text-2xl bg-[#2FA8E1] w-full h-[60vh] p-5 text-white '>
-        <Link to={"/"}><li>Dashboard</li></Link>
+          {/* About (click) */}
+          <div>
+            <button
+              onClick={() => toggle("about")}
+              className="flex w-full items-center justify-between text-left text-xl"
+            >
+              <span>About</span>
+              <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d={open.about ? "M5 15l7-7 7 7" : "M19 9l-7 7-7-7"} />
+              </svg>
+            </button>
+            {open.about && (
+              <div className="mt-2 space-y-2 rounded-md bg-white p-2 text-black">
+                <Link to="/Ministry" onClick={() => setIsOpen(false)} className="block rounded px-2 py-1 hover:bg-gray-100">Ministry</Link>
+                <Link to="/minister" onClick={() => setIsOpen(false)} className="block rounded px-2 py-1 hover:bg-gray-100">Leadership</Link>
+                <span className="block rounded px-2 py-1 hover:bg-gray-100">General Director</span>
+              </div>
+            )}
+          </div>
 
-        <div className='flex space-x-5'>
-    <li className="relative group">
-      <button className="flex items-center gap-1">
-    About
-    <svg
-      className="w-4 h-4 mt-0.5"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      viewBox="0 0 24 24"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M19 9l-7 7-7-7"
-      />
-    </svg>
-  </button>
+          {/* Projects (click) */}
+          <div>
+            <button
+              onClick={() => toggle("projects")}
+              className="flex w-full items-center justify-between text-left text-xl"
+            >
+              <span>Projects</span>
+              <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d={open.projects ? "M5 15l7-7 7 7" : "M19 9l-7 7-7-7"} />
+              </svg>
+            </button>
+            {open.projects && (
+              <div className="mt-2 space-y-2 rounded-md bg-white p-2 text-black">
+                <Link to="/EnergyProject" onClick={() => setIsOpen(false)} className="block rounded px-2 py-1 hover:bg-gray-100">Energy</Link>
+                <Link to="/WaterProject" onClick={() => setIsOpen(false)} className="block rounded px-2 py-1 hover:bg-gray-100">Water</Link>
+              </div>
+            )}
+          </div>
 
-  {/* Dropdown Menu */}
-  <ul className="absolute left-0 top-5 mt-2 hidden w-60  rounded-md bg-white shadow-md group-hover:block">
- <li>
-         <Link to={"/Ministry"}><a href="#" className="block px-4 py-2 text-black hover:bg-gray-700">
-        Ministery
-      </a>
-       </Link>
-    </li>
-   
-    <li>
-     <Link to={"/minister"}> <a href="#" className="block px-4 py-2  text-black hover:bg-gray-700">
-        Leadership
-      </a>
-      </Link>
-    </li>
-    <li>
-      <a href="#" className="block px-4 py-2 text-black hover:bg-gray-700">
-        Ganeral Director
-      </a>
-    </li>
-  </ul>
-</li>
+          {/* Departments (click) */}
+          <div>
+            <button
+              onClick={() => toggle("departments")}
+              className="flex w-full items-center justify-between text-left text-xl"
+            >
+              <span>Departments</span>
+              <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d={open.departments ? "M5 15l7-7 7 7" : "M19 9l-7 7-7-7"} />
+              </svg>
+            </button>
+            {open.departments && (
+              <div className="mt-2 space-y-2 rounded-md bg-white p-2 text-black">
+                <Link to="/water" onClick={() => setIsOpen(false)} className="block rounded px-2 py-1 hover:bg-gray-100">Water</Link>
+                <Link to="/Energy" onClick={() => setIsOpen(false)} className="block rounded px-2 py-1 hover:bg-gray-100">Energy</Link>
+                <Link to="/PlanningPolicy" onClick={() => setIsOpen(false)} className="block rounded px-2 py-1 hover:bg-gray-100">Policy &amp; Planning</Link>
+                <Link to="/Admin&finace" onClick={() => setIsOpen(false)} className="block rounded px-2 py-1 hover:bg-gray-100">Admin &amp; Finance</Link>
+              </div>
+            )}
+          </div>
 
+          <Link to="/AssessmentsPost" onClick={() => setIsOpen(false)} className="block text-xl">
+            Assessment
+          </Link>
+          <Link to="/EventPost" onClick={() => setIsOpen(false)} className="block text-xl">
+            Events
+          </Link>
 
- <li className="relative group">
-      <button className="flex items-center gap-1">
-    Projects
-    <svg
-      className="w-4 h-4 mt-0.5"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      viewBox="0 0 24 24"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M19 9l-7 7-7-7"
-      />
-    </svg>
-  </button>
-
-  {/* Dropdown Menu */}
-  <ul className="absolute left-0 top-5 mt-2 hidden w-40 rounded-md bg-white shadow-md group-hover:block">
-    <li>
-     <Link to={"/EnergyProject"}> <a href="#" className="block px-4 py-2 text-black hover:bg-gray-700">
-        Energy
-      </a>
-      </Link>
-    </li>
-    <li>
-    <Link to={"/WaterProject"}> <a href="#" className="block px-4 py-2 text-black hover:bg-gray-700">
-        Water
-      </a>
-      </Link> 
-    </li>
-  
-  </ul>
-</li>
-</div>
-      <button> <Link to={"/AssessmentsPost"}><li>Assessment</li></Link></button> 
-       <div><Link to={"/EventPost"}><li>Events</li></Link></div> 
-         <li className="relative group">
-      <button className="flex items-center gap-1">
-    Departments
-    <svg
-      className="w-4 h-4 mt-0.5"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      viewBox="0 0 24 24"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M19 9l-7 7-7-7"
-      />
-    </svg>
-  </button>
-
-  {/* Dropdown Menu */}
-  <ul className="absolute left-0 top-5 mt-2 hidden w-60 rounded-md bg-white shadow-md group-hover:block">
-    <li>
-      <Link to={"/water"}><a href="#" className="block px-4 py-2 text-black hover:bg-gray-700">
-        Water
-      </a>
-      </Link>
-    </li>
-    <li>
-     <Link to={"/Energy"}><a href="#" className="block px-4 py-2  text-black hover:bg-gray-700">
-        Energy
-      </a>
-      </Link> 
-    </li>
-    <li>
-     <Link to={"/PlanningPolicy"}> <a href="#" className="block px-4 py-2 text-black hover:bg-gray-700">
-        Policy and Planning
-      </a>
-      </Link>
-    </li>
-    
-    <li>
-     <Link  to={"/Admin&finace"}> <a href="#" className="block px-4 py-2 text-black hover:bg-gray-700">
-        Admin and Finance
-      </a>
-      </Link>
-    </li>
-  </ul>
-</li>
-    </ul>
-
-    {/* close mobile responsive */}
-     <div>
-    <button className='hidden sm:flex bg-white w-[100px] p-2 rounded-lg'>
-        Contact us
-   </button>
-   {/* navigation */}
-   <div className='sm:hidden'>
-
-<i onClick={handleOpen} style={{display: isOpen === true ? "none" : "block"}} class="fa-solid fa-bars text-3xl text-white"></i>
-<i onClick={handleClose} style={{display: isOpen === true ? "block" : "none"}} class="fa-solid fa-x text-3xl text-white"></i>
-   </div>
-
-
-  
-  </div>
-
-   {/* mobile responsive */}
-
-  </div>
- 
-   </div>
-    </>
-  )
+          <Link
+            to="/contact"
+            onClick={() => setIsOpen(false)}
+            className="mt-2 inline-block rounded-lg bg-white px-4 py-2 text-[#2FA8E1]"
+          >
+            Contact us
+          </Link>
+        </nav>
+      </div>
+    </header>
+  );
 }
-
-export default Header
