@@ -314,10 +314,10 @@ export default function AdminSidebar() {
               <span>Energy Achievements</span>
             </Link>
 
-            <Link to="/WaterAchievementsTable" className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium hover:bg-white/10">
+            {/* <Link to="/" className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium hover:bg-white/10">
               <i className="fa-solid fa-award text-base" />
               <span>Water Achiev Table</span>
-            </Link>
+            </Link> */}
 
             {/* <Link to="/" className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium hover:bg-white/10">
               <i className="fa-solid fa-award text-base" />
@@ -329,7 +329,7 @@ export default function AdminSidebar() {
               <span>Water Projects</span>
             </Link>
 
-            <Link to="/WaterAchievementForm" className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium hover:bg-white/10">
+            <Link to="/WaterAchievementsTable" className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium hover:bg-white/10">
               <i className="fa-solid fa-trophy text-base" />
               <span>Water Achievements</span>
             </Link>
