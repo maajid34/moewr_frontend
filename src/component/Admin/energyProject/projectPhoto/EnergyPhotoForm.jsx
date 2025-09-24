@@ -223,33 +223,23 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export default function EnergyProjectPhotosForm() {
-  // ---- HTTP client (works with token in localStorage OR HttpOnly cookie) ----
+  // ---- HTTP client ----
   const API = "https://moewr-backend.onrender.com";
   const http = useMemo(() => {
-    const inst = axios.create({
-      baseURL: API,
-      // if you use cookie auth, set true; if only bearer tokens, false is fine.
-      withCredentials: true,
-    });
+    const inst = axios.create({ baseURL: API, withCredentials: true });
     inst.interceptors.request.use((config) => {
       try {
         const raw = localStorage.getItem("admin");
         if (raw) {
           const obj = JSON.parse(raw);
           const token =
-            obj?.token ||
-            obj?.accessToken ||
-            obj?.jwt ||
-            obj?.data?.token ||
-            null;
+            obj?.token || obj?.accessToken || obj?.jwt || obj?.data?.token || null;
           if (token) {
             config.headers = config.headers || {};
             config.headers.Authorization = `Bearer ${token}`;
           }
         }
-      } catch {
-        // ignore
-      }
+      } catch {}
       return config;
     });
     return inst;
@@ -291,26 +281,58 @@ export default function EnergyProjectPhotosForm() {
     return () => { mounted = false; };
   }, [http]);
 
-  // ---- file picker ----
+  // ---- helpers ----
+  const isImageFile = (file) => {
+    if (file?.type && /^image\//i.test(file.type)) return true;
+    const name = file?.name || "";
+    const ext = name.split(".").pop()?.toLowerCase();
+    const allowed = new Set(["jpg","jpeg","png","gif","webp","bmp","tif","tiff","heic","heif","avif"]);
+    return allowed.has(ext);
+  };
+
+  const SIZE_LIMIT = 10 * 1024 * 1024; // 10MB per file
+
+  // ---- file picker (robust) ----
   const onPickFiles = (e) => {
     setMsg(null);
     setErr(null);
-    const list = Array.from(e.target.files || []);
-    if (!list.length) return;
 
-    // Only keep images
-    const imgs = list.filter((f) => /^image\//i.test(f.type));
-    if (imgs.length !== list.length) {
-      setErr("Only image files are allowed.");
+    const picked = Array.from(e.target.files || []);
+    if (!picked.length) return;
+
+    const images = [];
+    const rejected = [];
+    for (const f of picked) {
+      (isImageFile(f) ? images : rejected).push(f);
     }
 
-    // De-dup by name+size
-    const existing = new Set(files.map((f) => `${f.name}-${f.size}`));
-    const merged = [
-      ...files,
-      ...imgs.filter((f) => !existing.has(`${f.name}-${f.size}`)),
-    ].slice(0, 20);
+    // de-dupe by name-size-lastModified
+    const existingKeys = new Set(
+      (files || []).map((f) => `${f.name}-${f.size}-${f.lastModified ?? "x"}`)
+    );
+
+    let fresh = images.filter(
+      (f) => !existingKeys.has(`${f.name}-${f.size}-${f.lastModified ?? "x"}`)
+    );
+
+    // enforce per-file size
+    const oversize = fresh.filter((f) => f.size > SIZE_LIMIT);
+    fresh = fresh.filter((f) => f.size <= SIZE_LIMIT);
+
+    // cap total 20
+    const spaceLeft = Math.max(0, 20 - (files?.length || 0));
+    const toAdd = fresh.slice(0, spaceLeft);
+
+    const merged = [...(files || []), ...toAdd];
     setFiles(merged);
+
+    // notices
+    const notes = [];
+    if (rejected.length) notes.push(`${rejected.length} non-image file(s) skipped.`);
+    if (oversize.length) notes.push(`${oversize.length} file(s) over 10MB skipped.`);
+    if (fresh.length > spaceLeft) notes.push(`Only ${spaceLeft} more file(s) allowed (max 20).`);
+    if (notes.length) setErr(notes.join(" "));
+    else setMsg(`Added ${toAdd.length} image(s).`);
   };
 
   const removeFile = (idx) => setFiles((prev) => prev.filter((_, i) => i !== idx));
@@ -319,7 +341,6 @@ export default function EnergyProjectPhotosForm() {
     setFiles([]);
     setMsg(null);
     setErr(null);
-    // keep selectedId so user doesn’t need to reselect
   };
 
   // ---- submit ----
@@ -332,34 +353,26 @@ export default function EnergyProjectPhotosForm() {
     if (files.length === 0) return setErr("Please choose at least one image.");
 
     const form = new FormData();
-    // append ONLY 'photos' (multer fields() collects all with same name)
     for (const f of files) form.append("photos", f, f.name);
 
-    // DEBUG: verify what we're sending
+    // debug
     const debug = [];
     for (const [k, v] of form.entries()) {
-      debug.push(`${k}: ${v instanceof File ? `${v.name} (${v.type}, ${v.size}B)` : String(v)}`);
+      debug.push(`${k}: ${v instanceof File ? `${v.name} (${v.type || "?"}, ${v.size}B)` : String(v)}`);
     }
-    // eslint-disable-next-line no-console
     console.log("POST /energyProject/:id/photos form entries →", debug);
 
-    // Guard: if somehow no File objects made it in, stop here
     if (!debug.some((line) => line.startsWith("photos: "))) {
       return setErr("No files detected in the form-data. Please reselect your images.");
     }
 
     setSubmitting(true);
     try {
-      // DO NOT set Content-Type; axios will add correct boundary
       const res = await http.post(`/energyProject/${selectedId}/photos`, form);
-
-      // If backend returns photos, verify they’re strings (not empty objects)
       const got = res?.data?.project?.Photos || res?.data?.photos || null;
       if (Array.isArray(got) && got.some((p) => !p || (typeof p === "object" && !p.Image))) {
-        // eslint-disable-next-line no-console
-        console.warn("Server returned empty photo objects – check schema required:true and URL builder.");
+        console.warn("Server returned empty photo objects – check schema and URL builder.");
       }
-
       setMsg("Photos uploaded ✅");
       setFiles([]);
       // navigate(`/SingalProjectsEnergy/${selectedId}`);
@@ -410,12 +423,12 @@ export default function EnergyProjectPhotosForm() {
             </label>
             <input
               type="file"
-              accept="image/*"
+              accept="image/*,.heic,.heif,.avif"
               multiple
               onChange={onPickFiles}
               className="mt-2 block w-full text-sm text-slate-700 file:mr-3 file:rounded-lg file:border file:border-slate-200 file:bg-white file:px-4 file:py-2.5 file:text-sm file:font-medium hover:file:bg-slate-50 focus:outline-none"
             />
-            <p className="mt-1 text-xs text-slate-500">You can select up to 20 images at once.</p>
+            <p className="mt-1 text-xs text-slate-500">You can select up to 20 images (≤10MB each).</p>
 
             {files.length > 0 && (
               <div className="mt-4 grid grid-cols-2 md:grid-cols-3 gap-3">
@@ -480,4 +493,5 @@ export default function EnergyProjectPhotosForm() {
     </div>
   );
 }
+
 
