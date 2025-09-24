@@ -577,10 +577,10 @@ export default function WaterProjectFormUI() {
                       name="title"
                       type="text"
                       required
-                      placeholder="e.g., Borehole Rehabilitation"
+                      placeholder="Enter ProjectTitle"
                       className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
                     />
-                    <p className="mt-1 text-xs text-slate-500">Unique, concise, and descriptive.</p>
+                  
                   </div>
 
                   <div>
@@ -612,8 +612,8 @@ export default function WaterProjectFormUI() {
                       className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
                     />
                     <div className="mt-1 flex items-center justify-between text-xs text-slate-500">
-                      <span>Use clear language for public readers.</span>
-                      <span>0 / 300</span>
+                     
+                      <span>0 / 900</span>
                     </div>
                   </div>
 
@@ -626,7 +626,7 @@ export default function WaterProjectFormUI() {
                       name="overview"
                       className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
                     />
-                    <p className="mt-1 text-xs text-slate-500">Optional. Appears on the project page below the description.</p>
+                 
                   </div>
                 </div>
               </div>
@@ -637,7 +637,7 @@ export default function WaterProjectFormUI() {
               {/* Cover Image */}
               <div className="rounded-2xl border bg-white shadow-sm p-5">
                 <h3 className="font-semibold text-[var(--ink)]">Overview Image <span className="text-rose-600">*</span></h3>
-                <p className="text-xs text-slate-500">Main image displayed on cards and detail page.</p>
+                
 
                 <div className="mt-4 rounded-xl border border-dashed p-6 text-center">
                   <div className="mx-auto w-12 h-12 rounded-xl bg-[var(--brand)]/10 grid place-items-center">
