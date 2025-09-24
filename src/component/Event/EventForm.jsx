@@ -73,8 +73,9 @@ export default function EventCreateForm() {
       }
 
       setMsg("Event created successfully ✅");
+      alert("Event created successfully");
       // Optional: navigate to a list/table page when done
-      // navigate("/EventsTable");
+      navigate("/EventsTable");
       resetForm();
     } catch (e) {
       setErr(e.message || "Failed to create event");
