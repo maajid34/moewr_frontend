@@ -419,21 +419,23 @@ const toPublicUrl = (val) => {
   let s = String(val).trim();
   if (!s) return "";
 
-  // Already a full URL → keep it
+  // Already a full URL
   if (/^https?:\/\//i.test(s)) return s;
 
-  // Normalize
+  // Normalize slashes and trim
   s = s.replace(/\\/g, "/").replace(/^\/+/, "");
 
-  // If server saved a full disk path → cut it down to /upload/...
-  const m = s.match(/(?:^|\/)(upload|allimages|document|uploads)\/(.+)$/i);
+  // If DB stored a full disk path, cut it down: .../uploads/foo.jpg -> uploads/foo.jpg
+  const m = s.match(/(?:^|\/)(upload|uploads|allimages|document)\/(.+)$/i);
   if (m) {
-    return `${API.replace(/\/+$/, "")}/upload/${m[2]}`;
+    // Always serve local files from your backend /upload/*
+    const filename = m[2];
+    return `${API.replace(/\/+$/, "")}/upload/${filename}`;
   }
 
-  // If only a filename → assume it’s in your R2 bucket
+  // Otherwise assume it's an R2 key or plain filename
   if (!s.includes("/")) s = `energy/photos/${s}`;
-  return `${ASSET_BASE}/${encodeURI(s)}`;
+  return `${ASSET_BASE.replace(/\/+$/, "")}/${encodeURI(s)}`;
 };
 
 
