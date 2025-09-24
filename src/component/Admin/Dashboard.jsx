@@ -141,7 +141,7 @@ export default function AdminSidebar() {
             </button>
             <button type="button" className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-sm font-medium hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/40 transition">
               <i className="fa-solid fa-user text-base" />
-              <Link to={"/EnergyProjectPhotosTable"}><span>EnergyProjectPhoto</span></Link>
+              <Link to={"/EnergyProjectPhotosForm"}><span>EnergyProjectPhoto</span></Link>
             </button>
             <button type="button" className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left text-sm font-medium hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/40 transition">
               <i className="fa-solid fa-user text-base" />
