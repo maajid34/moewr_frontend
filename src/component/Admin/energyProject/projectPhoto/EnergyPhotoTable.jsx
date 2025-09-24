@@ -349,11 +349,11 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 export default function EnergyProjectPhotosTable() {
-  // Hardcoded bases (no .env)
+  // ---- HARDCODED BASES ----
   const API = "https://moewr-backend.onrender.com";
   const ASSET_BASE = "https://pub-4fea174e190a460d8db367c215cf12ad.r2.dev";
 
-  // axios client with optional token
+  // ---- AXIOS (optional token) ----
   const http = useMemo(() => {
     const inst = axios.create({ baseURL: API, withCredentials: false });
     try {
@@ -363,10 +363,11 @@ export default function EnergyProjectPhotosTable() {
     return inst;
   }, []);
 
+  // ---- STATE ----
   const [projects, setProjects] = useState([]);
   const [selectedId, setSelectedId] = useState("");
   const [selectedProjectName, setSelectedProjectName] = useState("");
-  const [rows, setRows] = useState([]); // photo objects/strings
+  const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState(null);
   const [msg, setMsg] = useState(null);
@@ -377,68 +378,64 @@ export default function EnergyProjectPhotosTable() {
   const replaceTargetIndexRef = useRef(null);
   const appendFileRef = useRef(null);
 
+  // ---- ROUTES (exactly yours) ----
   const PATHS = useMemo(
     () => ({
-      projects: `${API}/readProjectEnergy/EnergyProject`,
-      readPhotos: (id) => `${API}/ReadEnergyProjectPhoto/${id}/photos`,
-      readProjectOne: (id) => `${API}/readProjectEnergySingal/EnergyProject/${id}`,
-      postPhotos: (id) => `${API}/energyProject/${id}/photos`,
-      deletePhoto: (id) => `${API}/energyProject/${id}/photos`,
+      projects: `/readProjectEnergy/EnergyProject`,
+      readPhotos: (id) => `/ReadEnergyProjectPhoto/${id}/photos`,
+      readProjectOne: (id) => `/readProjectEnergySingal/EnergyProject/${id}`,
+      postPhotos: (id) => `/energyProject/${id}/photos`,   // POST (append)
+      putPhotos:  (id) => `/energyProject/${id}/photos`,   // PUT (replace with index)
+      deletePhoto:(id) => `/energyProject/${id}/photos`,   // DELETE (index in body)
     }),
-    [API]
+    []
   );
 
-  // ---------------- helpers ----------------
+  // ---- HELPERS ----
   const getImagePath = (photo) => {
     if (!photo) return "";
     if (typeof photo === "string") return photo;
 
     const direct =
-      photo.Image ??
-      photo.image ??
-      photo.url ??
-      photo.URL ??
-      photo.Location ??
-      photo.location ??
-      photo.path ??
-      photo.filepath ??
-      photo.filename ??
-      photo.Key ??
-      photo.key ??
-      "";
+      photo.Image ?? photo.image ?? photo.url ?? photo.URL ??
+      photo.Location ?? photo.location ?? photo.path ?? photo.filepath ??
+      photo.filename ?? photo.Key ?? photo.key ?? "";
 
     if (typeof direct === "string" && direct) return direct;
 
     const img = photo.Image || photo.image || {};
     if (img && typeof img === "object") {
       const nested =
-        img.Location ||
-        img.location ||
-        img.url ||
-        img.URL ||
-        img.path ||
-        img.filepath ||
-        img.filename ||
-        img.Key ||
-        img.key ||
-        "";
+        img.Location || img.location || img.url || img.URL ||
+        img.path || img.filepath || img.filename || img.Key || img.key || "";
       if (typeof nested === "string" && nested) return nested;
     }
     return "";
   };
 
-  // Build public URL; add default folder when only a filename is stored
-  const toPublicUrl = (val) => {
-    if (!val) return "";
-    let s = String(val).trim();
-    if (!s) return "";
-    if (/^https?:\/\//i.test(s)) return s;
+  // Build public R2 URL; add default folder when only a filename exists
+const toPublicUrl = (val) => {
+  if (!val) return "";
+  let s = String(val).trim();
+  if (!s) return "";
 
-    s = s.replace(/\\/g, "/").replace(/^\/+/, "");
-    s = s.replace(/^document\//i, "").replace(/^allimages\//i, "").replace(/^r2\//i, "");
-    if (!s.includes("/")) s = `energy/photos/${s}`;
-    return `${ASSET_BASE}/${encodeURI(s)}`;
-  };
+  // Already a full URL → keep it
+  if (/^https?:\/\//i.test(s)) return s;
+
+  // Normalize
+  s = s.replace(/\\/g, "/").replace(/^\/+/, "");
+
+  // If server saved a full disk path → cut it down to /upload/...
+  const m = s.match(/(?:^|\/)(upload|allimages|document|uploads)\/(.+)$/i);
+  if (m) {
+    return `${API.replace(/\/+$/, "")}/upload/${m[2]}`;
+  }
+
+  // If only a filename → assume it’s in your R2 bucket
+  if (!s.includes("/")) s = `energy/photos/${s}`;
+  return `${ASSET_BASE}/${encodeURI(s)}`;
+};
+
 
   const normalizeProjects = (data) => {
     if (!data) return [];
@@ -448,25 +445,40 @@ export default function EnergyProjectPhotosTable() {
     return [];
   };
 
-  // upload helper: try "photos" then "Photos" (no manual Content-Type!)
-  const uploadFiles = async (projectId, files) => {
+  // ---- UPLOADS ----
+  // Append photos: POST /energyProject/:id/photos
+  const appendFiles = async (projectId, files) => {
+    // Try "photos", then "Photos"
     const attempt = async (field) => {
       const fd = new FormData();
       files.forEach((f) => fd.append(field, f, f.name));
-      // DO NOT set Content-Type; Axios will add the boundary.
+      // DO NOT set Content-Type manually; axios sets boundary.
       return http.post(PATHS.postPhotos(projectId), fd);
     };
-
     try {
       return await attempt("photos");
-    } catch (e) {
-      // if backend is wired to expect "Photos", retry once
+    } catch {
       return await attempt("Photos");
-      alert(Photos);
     }
   };
 
-  // ---------------- data loads ----------------
+  // Replace a single photo at index: PUT /energyProject/:id/photos  (with index)
+  const replaceFileAtIndex = async (projectId, index, file) => {
+    // Try with field "photos" then "Photos"; include index in FormData (multer puts it in req.body)
+    const attempt = async (field) => {
+      const fd = new FormData();
+      fd.append("index", String(index));
+      fd.append(field, file, file.name);
+      return http.put(PATHS.putPhotos(projectId), fd);
+    };
+    try {
+      return await attempt("photos");
+    } catch {
+      return await attempt("Photos");
+    }
+  };
+
+  // ---- LOAD DATA ----
   useEffect(() => {
     let mounted = true;
     (async () => {
@@ -479,9 +491,7 @@ export default function EnergyProjectPhotosTable() {
         setErr(e?.response?.data?.message || e?.message || "Failed to load projects");
       }
     })();
-    return () => {
-      mounted = false;
-    };
+    return () => { mounted = false; };
   }, [http, PATHS]);
 
   const loadPhotos = async (projectId) => {
@@ -494,9 +504,11 @@ export default function EnergyProjectPhotosTable() {
       let photos = [];
       try {
         const res = await http.get(PATHS.readPhotos(projectId));
-        photos = Array.isArray(res.data?.photos) ? res.data.photos : Array.isArray(res.data) ? res.data : [];
+        photos = Array.isArray(res.data?.photos) ? res.data.photos
+               : Array.isArray(res.data) ? res.data
+               : [];
       } catch {
-        // fall back to reading the project doc
+        // fallback: read whole project and pick Photos/photos
       }
 
       if (!photos.length) {
@@ -504,8 +516,7 @@ export default function EnergyProjectPhotosTable() {
         const doc = Array.isArray(r2.data) ? r2.data[0] : r2.data?.data ?? r2.data;
         photos =
           (Array.isArray(doc?.Photos) && doc.Photos) ||
-          (Array.isArray(doc?.photos) && doc.photos) ||
-          [];
+          (Array.isArray(doc?.photos) && doc.photos) || [];
       }
 
       setRows(photos);
@@ -517,6 +528,7 @@ export default function EnergyProjectPhotosTable() {
     }
   };
 
+  // ---- UI EVENTS ----
   const handlePickProject = (e) => {
     const pid = e.target.value;
     setSelectedId(pid);
@@ -525,7 +537,7 @@ export default function EnergyProjectPhotosTable() {
     if (pid) loadPhotos(pid);
   };
 
-  // ---------------- actions ----------------
+  // Delete with body { index }
   const handleDelete = async (index) => {
     if (!selectedId && selectedId !== "0") return;
     if (!window.confirm("Delete this photo?")) return;
@@ -545,6 +557,7 @@ export default function EnergyProjectPhotosTable() {
     replaceFileRef.current?.click();
   };
 
+  // PUT (replace) with index
   const onPickReplaceFile = async (e) => {
     const file = (e.target.files && e.target.files[0]) || null;
     e.target.value = "";
@@ -555,22 +568,19 @@ export default function EnergyProjectPhotosTable() {
     setUploading(true);
     setErr(null);
     setMsg(null);
-
     try {
-      // delete first (server only supports append & delete)
-      await http.delete(PATHS.deletePhoto(selectedId), { data: { index: idx } });
-      // then append the new file (try both field names)
-      await uploadFiles(selectedId, [file]);
+      await replaceFileAtIndex(selectedId, idx, file);
       await loadPhotos(selectedId);
       setMsg("Photo replaced ✅");
-    } catch (e) {
-      setErr(e?.response?.data?.message || e?.message || "Replace failed");
-      await loadPhotos(selectedId); // reload to reflect actual state
+    } catch (e2) {
+      setErr(e2?.response?.data?.message || e2?.message || "Replace failed");
+      await loadPhotos(selectedId);
     } finally {
       setUploading(false);
     }
   };
 
+  // POST (append)
   const startAppend = () => appendFileRef.current?.click();
 
   const onPickAppendFiles = async (e) => {
@@ -581,19 +591,18 @@ export default function EnergyProjectPhotosTable() {
     setUploading(true);
     setErr(null);
     setMsg(null);
-
     try {
-      await uploadFiles(selectedId, files); // tries 'photos' then 'Photos'
+      await appendFiles(selectedId, files);
       await loadPhotos(selectedId);
       setMsg("Photos appended ✅");
-    } catch (e) {
-      setErr(e?.response?.data?.message || e?.message || "Upload failed");
+    } catch (e2) {
+      setErr(e2?.response?.data?.message || e2?.message || "Upload failed");
     } finally {
       setUploading(false);
     }
   };
 
-  // ---------------- UI ----------------
+  // ---- RENDER ----
   return (
     <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 absolute left-[300px] top-[100px]">
       <div className="flex flex-wrap items-center gap-3 mb-5">
@@ -677,7 +686,6 @@ export default function EnergyProjectPhotosTable() {
                 const raw = getImagePath(photo);
                 const name = raw ? String(raw).split(/[\\/]/).pop() : "—";
                 const src = raw ? toPublicUrl(raw) : "";
-
                 return (
                   <tr key={`${name}-${i}`} className="hover:bg-slate-50">
                     <td className="px-4 py-3 text-slate-700">{i}</td>
@@ -692,9 +700,7 @@ export default function EnergyProjectPhotosTable() {
                             onError={(e) => (e.currentTarget.src = "/placeholder.png")}
                           />
                         </a>
-                      ) : (
-                        "—"
-                      )}
+                      ) : ("—")}
                     </td>
                     <td className="px-4 py-3 text-slate-600 break-all">{name}</td>
 
@@ -734,23 +740,11 @@ export default function EnergyProjectPhotosTable() {
       </div>
 
       {/* Hidden file pickers */}
-      <input
-        ref={replaceFileRef}
-        type="file"
-        accept="image/*"
-        className="hidden"
-        onChange={onPickReplaceFile}
-      />
-      <input
-        ref={appendFileRef}
-        type="file"
-        accept="image/*"
-        multiple
-        className="hidden"
-        onChange={onPickAppendFiles}
-      />
+      <input ref={replaceFileRef} type="file" accept="image/*" className="hidden" onChange={onPickReplaceFile} />
+      <input ref={appendFileRef}  type="file" accept="image/*" multiple className="hidden" onChange={onPickAppendFiles} />
     </div>
   );
 }
+
 
 
