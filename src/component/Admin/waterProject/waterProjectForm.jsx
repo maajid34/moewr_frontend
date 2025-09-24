@@ -704,36 +704,7 @@ export default function WaterProjectFormUI() {
               </div>
             </section>
 
-            {/* NEW: Project Photos (Gallery) */}
-            <section className="rounded-2xl border bg-white shadow-sm p-5">
-              <h3 className="font-semibold text-[var(--ink)]">Project Photos (Gallery)</h3>
-              <p className="text-xs text-slate-500">Upload multiple photos that showcase the project.</p>
-
-              <div className="mt-4 rounded-xl border border-dashed p-6 text-center">
-                <label className="inline-block text-xs px-3 py-2 rounded-md bg-[var(--brand)] text-white hover:bg-[var(--brand-dark)] cursor-pointer">
-                  Add Photos
-                  <input
-                    type="file"
-                    id="projectPhotos"
-                    name="projectPhotos"
-                    accept="image/*"
-                    multiple
-                    className="hidden"
-                    onChange={handlePhotosChange}
-                  />
-                </label>
-
-                {photoPreviews.length > 0 && (
-                  <div className="mt-4 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2">
-                    {photoPreviews.map((src, i) => (
-                      <div key={i} className="aspect-square overflow-hidden rounded-lg border">
-                        <img src={src} alt={`photo ${i + 1}`} className="w-full h-full object-cover" />
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </section>
+         
 
             {/* Objective */}
             <section className="rounded-2xl border bg-white shadow-sm p-5 sm:p-6">
@@ -802,6 +773,38 @@ export default function WaterProjectFormUI() {
               />
               <div className="mt-1 text-xs text-slate-500 text-right">0 / 800</div>
             </section>
+    
+   {/* NEW: Project Photos (Gallery) */}
+            <section className="rounded-2xl border bg-white shadow-sm p-5">
+              <h3 className="font-semibold text-[var(--ink)]">Project Photos (Gallery)</h3>
+              <p className="text-xs text-slate-500">Upload multiple photos that showcase the project.</p>
+
+              <div className="mt-4 rounded-xl border border-dashed p-6 text-center">
+                <label className="inline-block text-xs px-3 py-2 rounded-md bg-[var(--brand)] text-white hover:bg-[var(--brand-dark)] cursor-pointer">
+                  Add Photos
+                  <input
+                    type="file"
+                    id="projectPhotos"
+                    name="projectPhotos"
+                    accept="image/*"
+                    multiple
+                    className="hidden"
+                    onChange={handlePhotosChange}
+                  />
+                </label>
+
+                {photoPreviews.length > 0 && (
+                  <div className="mt-4 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2">
+                    {photoPreviews.map((src, i) => (
+                      <div key={i} className="aspect-square overflow-hidden rounded-lg border">
+                        <img src={src} alt={`photo ${i + 1}`} className="w-full h-full object-cover" />
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </section>
+
 
             {/* Stakeholders */}
             <section className="grid lg:grid-cols-2 gap-6">
