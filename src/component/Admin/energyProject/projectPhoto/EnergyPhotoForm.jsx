@@ -218,31 +218,12 @@
 
 // src/components/projects/EnergyProjectPhotosForm.jsx
 // src/components/projects/EnergyProjectPhotosForm.jsx
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export default function EnergyProjectPhotosForm() {
   const API = "https://moewr-backend.onrender.com";
-  const http = useMemo(() => {
-    const inst = axios.create({ baseURL: API, withCredentials: true });
-    inst.interceptors.request.use((config) => {
-      try {
-        const raw = localStorage.getItem("admin");
-        if (raw) {
-          const obj = JSON.parse(raw);
-          const token =
-            obj?.token || obj?.accessToken || obj?.jwt || obj?.data?.token || null;
-          if (token) {
-            config.headers = config.headers || {};
-            config.headers.Authorization = `Bearer ${token}`;
-          }
-        }
-      } catch {}
-      return config;
-    });
-    return inst;
-  }, []);
 
   const [projects, setProjects] = useState([]);
   const [selectedId, setSelectedId] = useState("");
@@ -251,26 +232,36 @@ export default function EnergyProjectPhotosForm() {
   const [submitting, setSubmitting] = useState(false);
   const [msg, setMsg] = useState(null);
   const [err, setErr] = useState(null);
+
   const navigate = useNavigate();
 
-  // ---- helper: image check ----
+  // -------- helper: image check ----------
   const isImageFile = (file) => {
-    if (file?.type && /^image\//i.test(file.type)) return true; // MIME is "image/..."
+    if (file?.type && /^image\//i.test(file.type)) return true; // MIME always 'image/...'
     const ext = (file?.name || "").split(".").pop()?.toLowerCase();
-    return new Set(["jpg","jpeg","png","gif","webp","bmp","tif","tiff","heic","heif","avif"]).has(ext);
+    return new Set([
+      "jpg","jpeg","png","gif","webp","bmp","tif","tiff","heic","heif","avif"
+    ]).has(ext);
   };
 
+  // -------- load projects ----------
   useEffect(() => {
     let mounted = true;
     (async () => {
-      setLoading(true);
-      setErr(null);
       try {
-        const res = await http.get("/readProjectEnergy/EnergyProject");
+        setLoading(true);
+        setErr(null);
+
+        const res = await axios.get(`${API}/readProjectEnergy/EnergyProject`, {
+          withCredentials: true,
+          headers: getAuthHeader(),
+        });
+
         const list =
           Array.isArray(res.data) ? res.data :
           Array.isArray(res.data?.data) ? res.data.data :
           Array.isArray(res.data?.items) ? res.data.items : [];
+
         if (mounted) setProjects(list);
       } catch (e) {
         if (mounted) setErr(e?.response?.data?.message || e?.message || "Failed to load projects");
@@ -279,8 +270,22 @@ export default function EnergyProjectPhotosForm() {
       }
     })();
     return () => { mounted = false; };
-  }, [http]);
+  }, []);
 
+  // pull token from localStorage and build header
+  function getAuthHeader() {
+    try {
+      const raw = localStorage.getItem("admin");
+      if (!raw) return {};
+      const obj = JSON.parse(raw);
+      const token = obj?.token || obj?.accessToken || obj?.jwt || obj?.data?.token;
+      return token ? { Authorization: `Bearer ${token}` } : {};
+    } catch {
+      return {};
+    }
+  }
+
+  // -------- pick files ----------
   const SIZE_LIMIT = 10 * 1024 * 1024;
 
   const onPickFiles = (e) => {
@@ -312,6 +317,7 @@ export default function EnergyProjectPhotosForm() {
   const removeFile = (i) => setFiles(prev => prev.filter((_, idx) => idx !== i));
   const clearAll = () => { setFiles([]); setMsg(null); setErr(null); };
 
+  // -------- submit ----------
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMsg(null); setErr(null);
@@ -320,15 +326,27 @@ export default function EnergyProjectPhotosForm() {
     if (files.length === 0) return setErr("Please choose at least one image.");
 
     const form = new FormData();
-    files.forEach((f) => form.append("Photos", f, f.name)); // ONLY 'Photos'
+    files.forEach((f) => form.append("Photos", f, f.name)); // MUST match multer name
 
     setSubmitting(true);
     try {
-      await http.post(`/energyProject/${selectedId}/photos`, form); // use http, not api
+      await axios.post(`${API}/energyProject/${selectedId}/photos`, form, {
+        withCredentials: true,
+        headers: {
+          ...getAuthHeader(),
+          // DO NOT set Content-Type manually; axios will add the boundary
+        },
+      });
+
       setMsg("Photos uploaded ✅");
       setFiles([]);
     } catch (e2) {
-      setErr(e2?.response?.data?.message || e2?.response?.data?.error || e2?.message || "Failed to upload photos");
+      setErr(
+        e2?.response?.data?.message ||
+        e2?.response?.data?.error ||
+        e2?.message ||
+        "Failed to upload photos"
+      );
     } finally {
       setSubmitting(false);
     }
@@ -341,6 +359,7 @@ export default function EnergyProjectPhotosForm() {
         <p className="text-sm text-slate-600 mt-1">Select a project and upload one or more images.</p>
 
         <form onSubmit={handleSubmit} className="mt-6 space-y-5" encType="multipart/form-data">
+          {/* Project select */}
           <div>
             <label className="block text-sm font-medium text-slate-700">
               Project <span className="text-rose-600">*</span>
@@ -354,11 +373,14 @@ export default function EnergyProjectPhotosForm() {
             >
               <option value="">{loading ? "Loading…" : "Select a project"}</option>
               {projects.map((p) => (
-                <option key={p._id} value={p._id}>{p.title || p.name || p._id}</option>
+                <option key={p._id} value={p._id}>
+                  {p.title || p.name || p._id}
+                </option>
               ))}
             </select>
           </div>
 
+          {/* File input */}
           <div>
             <label className="block text-sm font-medium text-slate-700">
               Photos <span className="text-rose-600">*</span>
@@ -378,8 +400,15 @@ export default function EnergyProjectPhotosForm() {
                   const url = URL.createObjectURL(f);
                   return (
                     <div key={`${f.name}-${idx}`} className="relative overflow-hidden rounded-xl border border-slate-200">
-                      <img src={url} alt={f.name} className="w-full h-36 object-cover" onLoad={() => URL.revokeObjectURL(url)} />
-                      <div className="absolute inset-x-0 bottom-0 bg-black/50 text-white text-[11px] px-2 py-1 truncate">{f.name}</div>
+                      <img
+                        src={url}
+                        alt={f.name}
+                        className="w-full h-36 object-cover"
+                        onLoad={() => URL.revokeObjectURL(url)}
+                      />
+                      <div className="absolute inset-x-0 bottom-0 bg-black/50 text-white text-[11px] px-2 py-1 truncate">
+                        {f.name}
+                      </div>
                       <button
                         type="button"
                         onClick={() => removeFile(idx)}
@@ -394,9 +423,11 @@ export default function EnergyProjectPhotosForm() {
             )}
           </div>
 
+          {/* Alerts */}
           {err && <div className="text-sm text-rose-600">{err}</div>}
           {msg && <div className="text-sm text-emerald-600">{msg}</div>}
 
+          {/* Actions */}
           <div className="pt-2 flex gap-3">
             <button
               type="submit"
@@ -405,7 +436,11 @@ export default function EnergyProjectPhotosForm() {
             >
               {submitting ? "Uploading…" : "Upload Photos"}
             </button>
-            <button type="button" onClick={clearAll} className="rounded-xl border border-slate-200 px-5 py-2.5 text-slate-700 hover:bg-slate-50">
+            <button
+              type="button"
+              onClick={clearAll}
+              className="rounded-xl border border-slate-200 px-5 py-2.5 text-slate-700 hover:bg-slate-50"
+            >
               Clear
             </button>
             <button
