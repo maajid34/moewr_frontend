@@ -48,13 +48,8 @@ export default function EnergyProject() {
            
          return  <article className="rounded-xl border bg-white p-6" data-aos="zoom-in" data-aos-delay="150">
               <h3 className="font-semibold text-lg">{item.title}</h3>
-                   <img
-                src={toAssetUrl(GeographicImage)}
-                alt="Energy project geography"
-                onError={onImgError("geographic", GeographicImage, toAssetUrl(GeographicImage))}
-                className="w-[600px] h-[400px] object-cover rounded-2xl shadow-xl border border-slate-200"
-              />
-              <div></div>
+                   
+              
               <p className="mt-2 text-sm text-slate-600">{item.desc}</p>
               <Link
   to={`/SingalProjectsEnergy/${item._id}`}
