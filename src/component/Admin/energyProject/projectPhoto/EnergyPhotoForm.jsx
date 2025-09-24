@@ -275,7 +275,7 @@ export default function EnergyProjectPhotosForm() {
   }, [http]);
 
   const isImageFile = (file) => {
-    if (file?.type && /^image\//i.test(file.type)) return true;
+    if (file?.type && /^Image\//i.test(file.type)) return true;
     const ext = (file?.name || "").split(".").pop()?.toLowerCase();
     return new Set(["jpg","jpeg","png","gif","webp","bmp","tif","tiff","heic","heif","avif"]).has(ext);
   };
