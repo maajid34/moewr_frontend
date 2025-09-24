@@ -323,7 +323,7 @@ const handleSubmit = async (e) => {
 
   setSubmitting(true);
   try {
-    await api.post(`/energyProject/${selectedId}/photos`, form); // no headers override
+    await API.post(`/energyProject/${selectedId}/photos`, form); // no headers override
     setMsg("Photos uploaded ✅");
     setFiles([]);
   } catch (e2) {
