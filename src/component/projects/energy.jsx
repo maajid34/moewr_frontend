@@ -7,12 +7,7 @@ import { Link } from "react-router-dom";
 
 export default function EnergyProject() {
    const [Data, setData] = useState([])
-     const [coverImage, setCoverImage] = useState("");
-
-
-        if (data.coverImage) {
-          console.log("Energy cover (raw → url):", data.coverImage, "→", toAssetUrl(data.coverImage));
-        }
+   
    const handleReadData = () =>{
 
      axios.get("https://moewr-backend.onrender.com/readProjectEnergy/EnergyProject").then((res) =>{
@@ -54,9 +49,9 @@ export default function EnergyProject() {
          return  <article className="rounded-xl border bg-white p-6" data-aos="zoom-in" data-aos-delay="150">
               <h3 className="font-semibold text-lg">{item.title}</h3>
                    <img
-                src={toAssetUrl(setCoverImage)}
+                src={toAssetUrl(GeographicImage)}
                 alt="Energy project geography"
-                onError={onImgError("setCoverImage", setCoverImage, toAssetUrl(setCoverImage))}
+                onError={onImgError("geographic", GeographicImage, toAssetUrl(GeographicImage))}
                 className="w-[600px] h-[400px] object-cover rounded-2xl shadow-xl border border-slate-200"
               />
               <div></div>
