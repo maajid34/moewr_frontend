@@ -141,6 +141,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import MoewrFooter from "../../pages/footer";
 
 export default function SingalProjectsEvent() {
   const { id } = useParams();
@@ -320,6 +321,7 @@ export default function SingalProjectsEvent() {
           </section>
         </div>
       </div>
+      <MoewrFooter />
     </>
   );
 }
