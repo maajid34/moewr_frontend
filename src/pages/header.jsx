@@ -73,7 +73,7 @@ export default function Header() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
-            <div className="absolute left-0 top-full mt-2 hidden w-48 rounded-md bg-white py-2 text-sm text-black shadow-md group-hover:block">
+            <div className="absolute left-0 top-[15px] mt-2 hidden w-48 rounded-md bg-white py-2 text-sm text-black shadow-md group-hover:block">
               <Link to="/EnergyProject" className="block px-4 py-2 hover:bg-gray-100">Energy</Link>
               <Link to="/WaterProject" className="block px-4 py-2 hover:bg-gray-100">Water</Link>
             </div>
