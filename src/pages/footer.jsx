@@ -1,6 +1,6 @@
 export default function MoewrFooter() {
   return (
-    <footer className="bg-[#2FA8E1] text-slate-900 w-full mt-auto">
+    <footer className="bg-[#2FA8E1] text-slate-900 w-full  mt-10">
       {/* Top mini-nav */}
       <div className="border-b border-[#0A1A3F]/20">
         <div className="max-w-7xl mx-auto flex flex-col gap-3 sm:flex-row items-center justify-between px-4 py-3 text-sm">

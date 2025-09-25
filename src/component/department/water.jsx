@@ -7,7 +7,21 @@ export default function Water() {
 
     <>
     
-    <div className="[--brand:#2FA8E1]  top-[150px] [--brand-dark:#0A7FB8] [--ink:#002B5C]">
+    <div className="[--brand:#2FA8E1]  [--brand-dark:#0A7FB8] [--ink:#002B5C]">
+      <div
+        className="relative p-10 bg-cover bg-center h-52 mb-10 mt-[80px]"
+        style={{ backgroundImage: `url(${img1})` }}
+      >
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#2FA8E1] to-[#0A7FB8] opacity-80"></div>
+      
+        {/* Content */}
+        <div className="relative flex items-center justify-center h-full">
+          <h1 className="text-white text-3xl text-center font-bold">
+            ABOUT WATER DEPARTMENT
+          </h1>
+        </div>
+      </div>
       {/* ========== 1) WATER DEPARTMENT – HERO SPLIT ========== */}
       <section className="relative overflow-hidden bg-white">
         <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[var(--brand)] via-[var(--brand-dark)] to-[var(--brand)]"></div>
@@ -170,7 +184,7 @@ export default function Water() {
         </div>
       </section>
     </div>
-
+<MoewrFooter />
     
     </>
   );

@@ -1,4 +1,4 @@
-// import img1 from '../../assets/Energy/bg.jpg'
+import img1 from '../../assets/Energy/bg.jpg'
 import MoewrFooter from '../../pages/footer';
 import Header from '../../pages/header';
 export default function Energy() {
@@ -6,6 +6,20 @@ export default function Energy() {
     <>
    
     <div className="[--brand:#2FA8E1] top-[100px] [--brand-dark:#0A7FB8] [--ink:#002B5C]">
+        <div
+              className="relative p-10 bg-cover bg-center h-52 mb-10 mt-[80px]"
+              style={{ backgroundImage: `url(${img1})` }}
+            >
+              {/* Gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#2FA8E1] to-[#0A7FB8] opacity-80"></div>
+            
+              {/* Content */}
+              <div className="relative flex items-center justify-center h-full">
+                <h1 className="text-white text-3xl text-center font-bold">
+                   ENERGY DEPARTMENT
+                </h1>
+              </div>
+            </div>
       <div id="top" className="sr-only">Top</div>
 
       {/* ===== 1) BACKGROUND SECTION ===== */}
@@ -304,7 +318,7 @@ export default function Energy() {
       </section>
 
       {/* ===== 10) ACTIVITIES GALLERY ===== */}
-      <section id="gallery" className="max-w-7xl mx-auto px-4 py-16 lg:py-20">
+      {/* <section id="gallery" className="max-w-7xl mx-auto px-4 py-16 lg:py-20">
         <div className="flex items-center justify-between">
           <h2 className="text-3xl font-bold tracking-tight" data-aos="fade-up">Activities Photos</h2>
           <a href="#top" className="hidden md:inline-flex px-3 py-2 rounded-md text-white bg-[var(--brand-dark)]" data-aos="fade-up">
@@ -331,7 +345,7 @@ export default function Energy() {
             />
           ))}
         </div>
-      </section>
+      </section> */}
     </div>
      </>
   );

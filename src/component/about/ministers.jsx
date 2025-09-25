@@ -1,6 +1,8 @@
 import img1 from '../../assets/ministry/438127713_730651179278094_8456837217631644785_n.jpg'
 import img2 from '../../assets/ministry/Deputy Minister2.jpg'
 import img3 from '../../assets/ministry/Director General.jpg'
+import img4 from '../../assets/ministry/bgleadership.jpg'
+import MoewrFooter from '../../pages/footer';
 import Header from '../../pages/header';
 
 
@@ -9,6 +11,20 @@ export default function Minister() {
     <>
     
     <div className="[--navy:#002B5C] pt-[117px] [--blue:#007BFF] [--gold:#FFD43B]">
+      <div
+        className="relative p-10 bg-cover bg-center h-52"
+        style={{ backgroundImage: `url(${img4})` }}
+      >
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#2FA8E1] to-[#0A7FB8] opacity-80"></div>
+      
+        {/* Content */}
+        <div className="relative flex items-center justify-center h-full">
+          <h1 className="text-white text-3xl text-center font-bold">
+            ABOUT LEADERSHIP
+          </h1>
+        </div>
+      </div>
       {/* ================= MINISTER PROFILE ================= */}
       <section
         id="minister"
@@ -341,6 +357,8 @@ export default function Minister() {
 </section>
 
     </div>
+
+    <MoewrFooter />
   
     
 </>

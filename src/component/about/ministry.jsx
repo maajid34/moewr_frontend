@@ -13,6 +13,7 @@ import service3 from '../../assets/home/service3.jpg'
 import min1 from '../../assets/ministry/438127713_730651179278094_8456837217631644785_n.jpg'
 import min2 from '../../assets/ministry/Deputy Minister2.jpg'
 import min3 from '../../assets/ministry/Director General.jpg'
+import MoewrFooter from '../../pages/footer'
 
 
 export default function Ministry() {
@@ -21,7 +22,7 @@ export default function Ministry() {
     <>
       <main className="[--brand:#2FA8E1] pt-[117px] [--brand-dark:#0A7FB8] top-[100px] bg-white text-slate-900 ">
 <div
-  className="relative p-10 bg-cover bg-center h-96"
+  className="relative p-10 bg-cover bg-center h-52"
   style={{ backgroundImage: `url(${img1})` }}
 >
   {/* Gradient overlay */}
@@ -456,6 +457,7 @@ export default function Ministry() {
         </div>
       </section>
     </main>
+    <MoewrFooter />
       </>
   );
 }
