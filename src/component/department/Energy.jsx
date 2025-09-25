@@ -1,4 +1,5 @@
 import img1 from '../../assets/Energy/bg.jpg'
+import img2 from '../../assets/Energy/energy.jpg'
 import MoewrFooter from '../../pages/footer';
 import Header from '../../pages/header';
 export default function Energy() {
@@ -73,140 +74,25 @@ export default function Energy() {
           </div>
         </div>
       </section>
-
-      {/* ===== 2) SERVICES / STATS ===== */}
-      <section id="services" className="max-w-7xl mx-auto px-4 py-16 lg:py-20">
-        <h2 className="text-3xl font-bold tracking-tight" data-aos="fade-up">Services</h2>
-        <p className="mt-2 text-slate-600 max-w-3xl" data-aos="fade-up" data-aos-delay="50">
-          Key interventions the Ministry delivers with partners for communities and institutions.
-        </p>
-
-        <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          {/* card */}
-          <div className="rounded-xl bg-white p-6 shadow-sm border" data-aos="zoom-in">
-            <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-[var(--brand)] to-[var(--brand-dark)] text-white grid place-items-center text-2xl font-bold">🧰</div>
-            <h3 className="mt-4 text-xl font-semibold">25,000 People</h3>
-            <p className="mt-1 text-slate-600 text-sm">Hygiene kits distributed to enhance well-being and quality of life.</p>
-          </div>
-          <div className="rounded-xl bg-white p-6 shadow-sm border" data-aos="zoom-in" data-aos-delay="50">
-            <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-[var(--brand)] to-[var(--brand-dark)] text-white grid place-items-center text-2xl font-bold">🕳️</div>
-            <h3 className="mt-4 text-xl font-semibold">92 Boreholes</h3>
-            <p className="mt-1 text-slate-600 text-sm">Constructed/rehabilitated in Lower Juba &amp; Gedo.</p>
-          </div>
-          <div className="rounded-xl bg-white p-6 shadow-sm border" data-aos="zoom-in" data-aos-delay="100">
-            <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-[var(--brand)] to-[var(--brand-dark)] text-white grid place-items-center text-2xl font-bold">🪜</div>
-            <h3 className="mt-4 text-xl font-semibold">251 Shallow Wells</h3>
-            <p className="mt-1 text-slate-600 text-sm">Improving household access to reliable water.</p>
-          </div>
-          <div className="rounded-xl bg-white p-6 shadow-sm border" data-aos="zoom-in" data-aos-delay="150">
-            <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-[var(--brand)] to-[var(--brand-dark)] text-white grid place-items-center text-2xl font-bold">🚰</div>
-            <h3 className="mt-4 text-xl font-semibold">226 Water Kiosks</h3>
-            <p className="mt-1 text-slate-600 text-sm">Installed for IDPs and vulnerable settlements.</p>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== 3) ENERGY DEPARTMENT INTRO ===== */}
-      <section id="energy" className="bg-white/70 border-y">
-        <div className="max-w-7xl mx-auto px-4 py-16 lg:py-20 grid gap-10 lg:grid-cols-2">
-          <div data-aos="fade-right">
-            <h2 className="text-3xl font-bold tracking-tight">Energy Department</h2>
-            <p className="mt-4 text-slate-700">
-              Ensuring sustainable energy for communities—driving growth, reliability and resilience through
-              renewable energy adoption and effective sector governance.
-            </p>
-            <ul className="mt-6 space-y-2 text-slate-700">
-              <li>• Renewable energy &amp; energy efficiency promotion</li>
-              <li>• Private sector engagement and regulations</li>
-              <li>• Rural electrification &amp; infrastructure development</li>
-            </ul>
-          </div>
-          <div className="relative" data-aos="fade-left">
-            <img
-              className="w-full h-72 lg:h-[22rem] object-cover rounded-xl ring-1 ring-slate-200"
-              src="https://images.unsplash.com/photo-1509395176047-4a66953fd231?q=80&w=1600&auto=format&fit=crop"
-              alt="Solar installation"
-            />
-            <div className="absolute -bottom-4 -right-4 w-24 h-24 rounded-xl bg-gradient-to-br from-[var(--brand)] to-[var(--brand-dark)] shadow-lg hidden md:block" />
-          </div>
-        </div>
-      </section>
-
-      {/* ===== 4) VALUES ===== */}
-      <section id="values" className="max-w-7xl mx-auto px-4 py-16 lg:py-20">
-        <h2 className="text-3xl font-bold tracking-tight" data-aos="fade-up">Our values</h2>
-        <div className="mt-8 grid gap-8 md:grid-cols-2 lg:grid-cols-5">
-          <div className="bg-white border rounded-xl p-6" data-aos="fade-up">
-            <h3 className="font-semibold text-lg">Sustainability</h3>
-            <p className="mt-2 text-sm text-slate-600">We prioritize long-term resource availability through responsible practices.</p>
-          </div>
-          <div className="bg-white border rounded-xl p-6" data-aos="fade-up" data-aos-delay="50">
-            <h3 className="font-semibold text-lg">Community Engagement</h3>
-            <p className="mt-2 text-sm text-slate-600">We co-design solutions with communities for real impact.</p>
-          </div>
-          <div className="bg-white border rounded-xl p-6" data-aos="fade-up" data-aos-delay="100">
-            <h3 className="font-semibold text-lg">Innovation</h3>
-            <p className="mt-2 text-sm text-slate-600">We adopt new ideas and technologies to meet future needs.</p>
-          </div>
-          <div className="bg-white border rounded-xl p-6" data-aos="fade-up" data-aos-delay="150">
-            <h3 className="font-semibold text-lg">Transparency</h3>
-            <p className="mt-2 text-sm text-slate-600">We maintain open communication and accountability.</p>
-          </div>
-          <div className="bg-white border rounded-xl p-6" data-aos="fade-up" data-aos-delay="200">
-            <h3 className="font-semibold text-lg">Collaboration</h3>
-            <p className="mt-2 text-sm text-slate-600">We partner with stakeholders to achieve common goals.</p>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== 5) ONGOING / PIPELINE PROJECTS ===== */}
-      <section id="projects" className="bg-white/70 border-y">
-        <div className="max-w-7xl mx-auto px-4 py-16 lg:py-20">
-          <h2 className="text-3xl font-bold tracking-tight" data-aos="fade-up">Ongoing / pipeline Projects</h2>
-          <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-            {/* Project card */}
-            <article className="rounded-xl border bg-white p-6" data-aos="zoom-in">
-              <h3 className="font-semibold text-lg">Kismaayo Urban WSS Project</h3>
-              <p className="mt-2 text-sm text-slate-600">Urban supply &amp; sanitation upgrade.</p>
-              <a className="mt-4 inline-block px-3 py-2 rounded-md text-white bg-[var(--brand-dark)]" href="#">Read for More</a>
-            </article>
-            <article className="rounded-xl border bg-white p-6" data-aos="zoom-in" data-aos-delay="50">
-              <h3 className="font-semibold text-lg">HoA GW4R</h3>
-              <p className="mt-2 text-sm text-slate-600">Groundwater &amp; resilience works.</p>
-              <a className="mt-4 inline-block px-3 py-2 rounded-md text-white bg-[var(--brand-dark)]" href="#">Read for More</a>
-            </article>
-            <article className="rounded-xl border bg-white p-6" data-aos="zoom-in" data-aos-delay="100">
-              <h3 className="font-semibold text-lg">Barwaaqo</h3>
-              <p className="mt-2 text-sm text-slate-600">WASH infrastructure expansion.</p>
-              <a className="mt-4 inline-block px-3 py-2 rounded-md text-white bg-[var(--brand-dark)]" href="#">Read for More</a>
-            </article>
-            <article className="rounded-xl border bg-white p-6" data-aos="zoom-in" data-aos-delay="150">
-              <h3 className="font-semibold text-lg">Kobciye</h3>
-              <p className="mt-2 text-sm text-slate-600">Solar, storage &amp; mini-grids.</p>
-              <a className="mt-4 inline-block px-3 py-2 rounded-md text-white bg-[var(--brand-dark)]" href="#">Read for More</a>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== 6) VISION / MISSION / OBJECTIVES ===== */}
+      
+  {/* ===== 6) VISION / MISSION / OBJECTIVES ===== */}
       <section id="vmo" className="max-w-7xl mx-auto px-4 py-16 lg:py-20">
-        <div className="grid gap-10 lg:grid-cols-3">
-          <div className="bg-white border rounded-2xl p-8" data-aos="fade-right">
+        <div className="grid gap-10 lg:grid-cols-2 m-10">
+          <div className="bg-white border rounded-2xl p-8  shadow-md box-shadow-slate-800 border-[var(--brand-dark)]" data-aos="fade-right">
             <div className="text-5xl">👁️</div>
             <h3 className="mt-3 text-2xl font-bold">Vision</h3>
             <p className="mt-2 text-slate-700 text-sm">
               To be a leading institution driving sustainable and inclusive energy &amp; water transformation in Jubaland State.
             </p>
           </div>
-          <div className="bg-white border rounded-2xl p-8" data-aos="fade-up">
+          <div className="bg-white border rounded-2xl p-8  shadow-md box-shadow-slate-800 border-[var(--brand-dark)]" data-aos="fade-up">
             <div className="text-5xl">🎯</div>
             <h3 className="mt-3 text-2xl font-bold">Mission</h3>
             <p className="mt-2 text-slate-700 text-sm">
               Ensure reliable, affordable, sustainable access to energy &amp; water through policy, infrastructure and innovation.
             </p>
           </div>
-          <div className="bg-white border rounded-2xl p-8" data-aos="fade-left">
+          <div className="bg-white border rounded-2xl p-8  shadow-md box-shadow-slate-800 border-[var(--brand-dark)]" data-aos="fade-left">
             <div className="text-5xl">📈</div>
             <h3 className="mt-3 text-2xl font-bold">Objectives</h3>
             <p className="mt-2 text-slate-700 text-sm">
@@ -215,6 +101,95 @@ export default function Energy() {
           </div>
         </div>
       </section>
+      {/* ===== 2) SERVICES / STATS ===== */}
+      <section id="services" className="max-w-7xl mx-auto px-4 py-16 lg:py-20">
+        <h2 className="text-3xl font-bold tracking-tight text-center m-5" data-aos="fade-up">Services</h2>
+      
+        <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3 m-10">
+          {/* card */}
+          <div className="rounded-xl bg-white p-6 border  shadow-md box-shadow-slate-800 border-[var(--brand-dark)]" data-aos="zoom-in">
+            <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-[var(--brand)] to-[var(--brand-dark)] text-white grid place-items-center text-2xl font-bold">🧰</div>
+            <h3 className="mt-4 text-xl font-semibold">25,000 People</h3>
+            <p className="mt-1 text-slate-600 text-sm">Hygiene kits distributed to enhance well-being and quality of life.</p>
+          </div>
+          <div className="rounded-xl bg-white p-6  shadow-md box-shadow-slate-800 border-[var(--brand-dark)] border" data-aos="zoom-in" data-aos-delay="50">
+            <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-[var(--brand)] to-[var(--brand-dark)] text-white grid place-items-center text-2xl font-bold">🕳️</div>
+            <h3 className="mt-4 text-xl font-semibold">92 Boreholes</h3>
+            <p className="mt-1 text-slate-600 text-sm">Constructed/rehabilitated in Lower Juba &amp; Gedo.</p>
+          </div>
+          <div className="rounded-xl bg-white p-6  shadow-md box-shadow-slate-800 border-[var(--brand-dark)] border" data-aos="zoom-in" data-aos-delay="100">
+            <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-[var(--brand)] to-[var(--brand-dark)] text-white grid place-items-center text-2xl font-bold">🪜</div>
+            <h3 className="mt-4 text-xl font-semibold">251 Shallow Wells</h3>
+            <p className="mt-1 text-slate-600 text-sm">Improving household access to reliable water.</p>
+          </div>
+          <div className="rounded-xl bg-white p-6  shadow-md box-shadow-slate-800 border-[var(--brand-dark)] border" data-aos="zoom-in" data-aos-delay="150">
+            <div className="w-14 h-14 rounded-lg bg-gradient-to-br from-[var(--brand)] to-[var(--brand-dark)] text-white grid place-items-center text-2xl font-bold">🚰</div>
+            <h3 className="mt-4 text-xl font-semibold">226 Water Kiosks</h3>
+            <p className="mt-1 text-slate-600 text-sm">Installed for IDPs and vulnerable settlements.</p>
+          </div>
+        </div>
+      </section>
+
+    
+
+      {/* ===== 4) VALUES ===== */}
+      <section id="values" className="max-w-7xl mx-auto px-4 py-16 lg:py-20">
+        <h2 className="text-3xl text-center font-bold tracking-tight" data-aos="fade-up">Our values</h2>
+        <div className="mt-8 grid gap-8 md:grid-cols-2 lg:grid-cols-2 m-10">
+          <div className="bg-white border rounded-xl p-6 shadow-md box-shadow-slate-800 border-black " data-aos="fade-up">
+            <h3 className="font-semibold text-lg">Sustainability</h3>
+            <p className="mt-2 text-sm text-slate-600 shadow-md box-shadow-slate-800 border-black ">We prioritize long-term resource availability through responsible practices.</p>
+          </div>
+          <div className="bg-white border rounded-xl p-6 shadow-md box-shadow-slate-800 border-black " data-aos="fade-up" data-aos-delay="50">
+            <h3 className="font-semibold text-lg">Community Engagement</h3>
+            <p className="mt-2 text-sm text-slate-600 shadow-md box-shadow-slate-800 border-black ">We co-design solutions with communities for real impact.</p>
+          </div>
+          <div className="bg-white border rounded-xl p-6 shadow-md box-shadow-slate-800 border-black " data-aos="fade-up" data-aos-delay="100">
+            <h3 className="font-semibold text-lg">Innovation</h3>
+            <p className="mt-2 text-sm text-slate-600 shadow-md box-shadow-slate-800 border-black ">We adopt new ideas and technologies to meet future needs.</p>
+          </div>
+          <div className="bg-white border rounded-xl p-6" data-aos="fade-up" data-aos-delay="150">
+            <h3 className="font-semibold text-lg">Transparency</h3>
+            <p className="mt-2 text-sm text-slate-600 shadow-md box-shadow-slate-800 border-black ">We maintain open communication and accountability.</p>
+          </div>
+          <div className="bg-white border rounded-xl p-6" data-aos="fade-up" data-aos-delay="200">
+            <h3 className="font-semibold text-lg">Collaboration</h3>
+            <p className="mt-2 text-sm text-slate-600 shadow-md box-shadow-slate-800 border-black ">We partner with stakeholders to achieve common goals.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== 5) ONGOING / PIPELINE PROJECTS ===== */}
+      <section id="projects" className="bg-white/70 border-y">
+        <div className="max-w-7xl mx-auto px-4 py-16 lg:py-20">
+          <h2 className="text-3xl font-bold tracking-tight text-center m-5" data-aos="fade-up">Our Projects Projects</h2>
+          <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3 m-10">
+            {/* Project card */}
+            <article className="rounded-xl border bg-white p-6 shadow-md box-shadow-slate-800 border-[var(--brand-dark)]" data-aos="zoom-in">
+              <h3 className="font-semibold text-lg">Kismaayo Urban WSS Project</h3>
+              <p className="mt-2 text-sm text-slate-600">Urban supply &amp; sanitation upgrade.</p>
+              <a className="mt-4 inline-block px-3 py-2 rounded-md text-white bg-[var(--brand-dark)]" href="#">Read for More</a>
+            </article>
+            <article className="rounded-xl border bg-white p-6  shadow-md box-shadow-slate-800 border-[var(--brand-dark)]" data-aos="zoom-in" data-aos-delay="50">
+              <h3 className="font-semibold text-lg">HoA GW4R</h3>
+              <p className="mt-2 text-sm text-slate-600">Groundwater &amp; resilience works.</p>
+              <a className="mt-4 inline-block px-3 py-2 rounded-md text-white bg-[var(--brand-dark)]" href="#">Read for More</a>
+            </article>
+            <article className="rounded-xl border bg-white p-6  shadow-md box-shadow-slate-800 border-[var(--brand-dark)]" data-aos="zoom-in" data-aos-delay="100">
+              <h3 className="font-semibold text-lg">Barwaaqo</h3>
+              <p className="mt-2 text-sm text-slate-600">WASH infrastructure expansion.</p>
+              <a className="mt-4 inline-block px-3 py-2 rounded-md text-white bg-[var(--brand-dark)]" href="#">Read for More</a>
+            </article>
+            <article className="rounded-xl border bg-white p-6  shadow-md box-shadow-slate-800 border-[var(--brand-dark)]" data-aos="zoom-in" data-aos-delay="150">
+              <h3 className="font-semibold text-lg">Kobciye</h3>
+              <p className="mt-2 text-sm text-slate-600">Solar, storage &amp; mini-grids.</p>
+              <a className="mt-4 inline-block px-3 py-2 rounded-md text-white bg-[var(--brand-dark)]" href="#">Read for More</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+    
 
       {/* ===== 7) DEPARTMENT MANDATES ===== */}
       <section id="mandates" className="bg-white/70 border-y">
