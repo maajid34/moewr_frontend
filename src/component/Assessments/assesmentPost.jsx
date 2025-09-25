@@ -117,6 +117,8 @@
 import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import img1 from '../../assets/Energy/bg.jpg'
+import MoewrFooter from "../../pages/footer";
 
 // ----- Config -----
 const API_BASE = "https://moewr-backend.onrender.com";
@@ -209,6 +211,23 @@ export default function AssessmentsPost() {
   if (error) return <p className="p-6 text-red-600">{error}</p>;
 
   return (
+
+    <>
+    <div
+              className="relative p-10 bg-cover bg-center h-52 mb-10 mt-[80px]"
+              style={{ backgroundImage: `url(${img1})` }}
+            >
+              {/* Gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#2FA8E1] to-[#0A7FB8] opacity-80"></div>
+            
+              {/* Content */}
+              <div className="relative flex items-center justify-center h-full">
+                <h1 className="text-white text-3xl text-center font-bold">
+                  ASSESSMENTS DOCUMENTS
+                </h1>
+              </div>
+ </div>
+   
     <div className="max-w-7xl mx-auto p-6 space-y-12">
       <header className="flex items-center justify-between">
         <h1 className="text-3xl font-bold">Documents Repository</h1>
@@ -221,6 +240,8 @@ export default function AssessmentsPost() {
         <CategorySection title="📁 Other Reports" items={categories.other} />
       )}
     </div>
+<MoewrFooter />
+     </>
   );
 }
 
@@ -257,6 +278,8 @@ function DocCard({ doc }) {
   };
 
   return (
+    <>
+
     <div className="border rounded-lg p-4 bg-white shadow-sm flex flex-col">
       <div className="flex items-start justify-between gap-3">
         <h3 className="font-semibold leading-tight">{title}</h3>
@@ -319,5 +342,10 @@ function DocCard({ doc }) {
         </Link>
       </div>
     </div>
+
+
+
+      </>
+      
   );
 }

@@ -1,4 +1,5 @@
 import MoewrFooter from "../../pages/footer";
+import img2 from '../../assets/Energy/energy.jpg'
 
 
 export default function AdminFinace() {
@@ -7,8 +8,9 @@ export default function AdminFinace() {
     <>
 
     <div className="[--brand:#2FA8E1] left-[100px] top-[120px] [--brand-dark:#0A7FB8] [--ink:#002B5C]">
+ 
       {/* ===== Header / Intro ===== */}
-      <header id="intro" className="relative overflow-hidden">
+      <header id="intro" className="relative overflow-hidden ">
         <div className="absolute inset-0 -z-10 bg-gradient-to-br from-[var(--ink)] via-[var(--ink)] to-[var(--brand-dark)]" />
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-16 md:py-24 grid md:grid-cols-2 gap-10 items-center">
           <div className="text-white">
@@ -101,8 +103,8 @@ export default function AdminFinace() {
       {/* ===== Section 3: Mandates ===== */}
       <section id="mandates" className="bg-slate-50/60">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-16">
-          <h3 className="text-2xl md:text-3xl font-bold">Department Mandates</h3>
-          <p className="mt-2 text-slate-700">Core responsibilities that guide our day-to-day work.</p>
+          <h3 className="text-2xl md:text-3xl font-bold text-center">Department Mandates</h3>
+          
 
           <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
@@ -112,8 +114,8 @@ export default function AdminFinace() {
               ["04", "Policy & Procedures", "Develop and implement policies for efficient service."],
               ["05", "Governance & Audit Readiness", "Ensure adherence to national regulations & audits."]
             ].map(([num, title, desc]) => (
-              <div key={num} className="p-6 bg-white rounded-xl border border-slate-200 hover:shadow-md transition">
-                <div className="w-9 h-9 rounded-md bg-[var(--brand)]/10 flex items-center justify-center">
+              <div key={num} className="p-6 bg-white rounded-xl border border-slate-800 hover:shadow-md transition  shadow-md box-shadow-slate-800 border-[var(--brand-dark)] ">
+                <div className="w-9 h-9 rounded-md bg-[var(--brand)]/10 flex items-center justify-center ">
                   <span className="text-[var(--brand)] font-bold">{num}</span>
                 </div>
                 <h4 className="mt-4 font-semibold">{title}</h4>
@@ -126,8 +128,8 @@ export default function AdminFinace() {
 
       {/* ===== Section 4: Main Tasks ===== */}
       <section id="tasks" className="max-w-7xl mx-auto px-4 md:px-6 py-16">
-        <h3 className="text-2xl md:text-3xl font-bold">Departmental Main Tasks</h3>
-        <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+        <h3 className="text-2xl md:text-3xl font-bold text-center">Departmental Main Tasks</h3>
+        <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 m-10">
           {[
             ["Administration", "Logistics, facility management & records."],
             ["HR Management", "Recruitment, performance & training."],
@@ -135,7 +137,7 @@ export default function AdminFinace() {
             ["Policy Development", "Guidelines & SOPs for all units."],
             ["Compliance & Risk", "Controls, audits & risk mitigation."]
           ].map(([title, desc]) => (
-            <div key={title} className="p-5 border rounded-xl bg-white hover:shadow-md transition">
+            <div key={title} className="p-5 border rounded-xl bg-white hover:shadow-md transition  shadow-md box-shadow-slate-800 border-[var(--brand-dark)]">
               <h4 className="font-semibold">{title}</h4>
               <p className="mt-2 text-sm text-slate-700">{desc}</p>
             </div>
@@ -146,8 +148,8 @@ export default function AdminFinace() {
       {/* ===== Section 5: Our Values ===== */}
       <section id="values" className="bg-slate-50/60">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-16">
-          <h3 className="text-2xl md:text-3xl font-bold">Our Values</h3>
-          <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <h3 className="text-2xl md:text-3xl font-bold text-center">Our Values</h3>
+          <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 m-10 gap-6">
             {[
               ["Sustainability", "Environmentally and financially sound practices."],
               ["Integrity", "Honesty & ethics in all operations."],
@@ -158,7 +160,7 @@ export default function AdminFinace() {
               ["Accountability", "Responsible stewardship of resources."],
               ["Equity", "Fair, inclusive workplace for all."]
             ].map(([title, desc]) => (
-              <div key={title} className="p-5 bg-white border rounded-xl">
+              <div key={title} className="p-5 bg-white border rounded-xl  shadow-md box-shadow-slate-800 border-[var(--brand-dark)]">
                 <h4 className="font-semibold">{title}</h4>
                 <p className="mt-2 text-sm text-slate-700">{desc}</p>
               </div>
@@ -194,45 +196,10 @@ export default function AdminFinace() {
       </section>
 
       {/* ===== Section 7: Other Sectors We Support ===== */}
-      <section id="support" className="bg-slate-50/60">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-16">
-          <h3 className="text-2xl md:text-3xl font-bold">Other Sectors We Support</h3>
-          <div className="mt-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              ["Ministry Laboratory", "Procurement & staffing support."],
-              ["Warehouse", "Inventory & asset coordination."],
-              ["Integration & Coordination", "Cross-departmental planning."],
-              ["Assets & Control", "Audit-ready tracking & custody."],
-              ["Field Security Clearance", "Mission & site access support."],
-              ["Field Work Support", "Logistics & allowances."],
-              ["Office Stationaries", "Efficient, timely provision."],
-              ["Training & Workshops", "Capacity building for teams."]
-            ].map(([title, desc]) => (
-              <div key={title} className="p-6 bg-white border rounded-xl">
-                <h4 className="font-semibold">{title}</h4>
-                <p className="mt-2 text-sm text-slate-700">{desc}</p>
-              </div>
-            ))}
-
-            {/* Contact CTA */}
-            <div id="contact" className="md:col-span-2 lg:col-span-4 mt-4 p-6 md:p-8 rounded-2xl bg-gradient-to-r from-[var(--brand)] to-[var(--brand-dark)] text-white">
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                <div>
-                  <h4 className="text-xl font-bold">Need something from Admin/HR/Finance?</h4>
-                  <p className="text-white/85">We’re here to help. Reach out for requests, clarifications or support.</p>
-                </div>
-                <a
-                  href="mailto:info@moewr.gov.so"
-                  className="px-5 py-3 rounded-lg bg-white text-[var(--ink)] font-semibold hover:opacity-90 transition"
-                >
-                  info@moewr.gov.so
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      
     </div>
+
+    <MoewrFooter />
        </>
   );
 }

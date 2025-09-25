@@ -146,6 +146,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import MoewrFooter from "../../pages/footer";
+import img1 from '../../assets/Energy/bg.jpg'
 
 export default function Eventproject() {
   const [data, setData] = useState([]);
@@ -211,10 +213,26 @@ export default function Eventproject() {
   if (error) return <p className="p-6 text-red-600">{error}</p>;
 
   return (
+
+    <>
+  
     <div className="w-full">
-      <div className="bg-[#0d7cb0] w-full p-10">
-        <h1 className="text-white text-4xl">Events</h1>
-      </div>
+
+      <div
+                    className="relative p-10 bg-cover bg-center h-52 mb-10 mt-[80px]"
+                    style={{ backgroundImage: `url(${img1})` }}
+                  >
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#2FA8E1] to-[#0A7FB8] opacity-80"></div>
+                  
+                    {/* Content */}
+                    <div className="relative flex items-center justify-center h-full">
+                      <h1 className="text-white text-3xl text-center font-bold">
+                        EVENT/NEWS
+                      </h1>
+                    </div>
+       </div>
+    
 
       <section id="projects" className="bg-white/70 border-y">
         <div className="max-w-7xl mx-auto px-4 py-16 lg:py-20">
@@ -316,5 +334,8 @@ export default function Eventproject() {
         </div>
       </section>
     </div>
+
+<MoewrFooter />
+      </>
   );
 }

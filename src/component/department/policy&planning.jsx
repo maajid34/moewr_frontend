@@ -6,6 +6,20 @@ export default function PlanningPolicy() {
     <>
 
     <div className="[--brand:#2FA8E1]  top-[120px] [--brand-dark:#0A7FB8]">
+       <div
+                    className="relative p-10 bg-cover bg-center h-52 mb-10 mt-[80px]"
+                    style={{ backgroundImage: `url(${img1})` }}
+                  >
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#2FA8E1] to-[#0A7FB8] opacity-80"></div>
+                  
+                    {/* Content */}
+                    <div className="relative flex items-center justify-center h-full">
+                      <h1 className="text-white text-3xl text-center font-bold">
+                         PLANNING AND POLICY
+                      </h1>
+                    </div>
+                  </div>
       {/* ========== 1) INTRO ========== */}
       <section id="intro" className="relative">
         <div className="mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2">
@@ -323,6 +337,7 @@ export default function PlanningPolicy() {
         </div>
       </section>
     </div>
+    <MoewrFooter />
         </>
   );
 }

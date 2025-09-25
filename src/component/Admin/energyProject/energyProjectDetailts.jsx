@@ -833,6 +833,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import MoewrFooter from "../../../pages/footer";
 
 export default function SingalProjectsEnergy() {
   const { id } = useParams();
@@ -1312,6 +1313,7 @@ export default function SingalProjectsEnergy() {
        
         </div>
       </div>
+      <MoewrFooter />
     </>
   );
 }

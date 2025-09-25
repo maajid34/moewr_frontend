@@ -194,25 +194,25 @@ export default function Energy() {
       {/* ===== 7) DEPARTMENT MANDATES ===== */}
       <section id="mandates" className="bg-white/70 border-y">
         <div className="max-w-7xl mx-auto px-4 py-16 lg:py-20">
-          <h2 className="text-3xl font-bold tracking-tight" data-aos="fade-up">Department Mandates</h2>
-          <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            <div className="rounded-xl border bg-white p-6" data-aos="zoom-in">
+          <h2 className="text-3xl font-bold tracking-tight text-center m-5" data-aos="fade-up">Department Mandates</h2>
+          <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-3 m-10">
+            <div className="rounded-xl border bg-white p-6  shadow-md box-shadow-slate-800 border-[var(--brand-dark)]" data-aos="zoom-in">
               <h3 className="font-semibold">Policy &amp; Strategy</h3>
               <p className="text-sm mt-2 text-slate-600">Energy &amp; water security, sustainability.</p>
             </div>
-            <div className="rounded-xl border bg-white p-6" data-aos="zoom-in" data-aos-delay="50">
+            <div className="rounded-xl border bg-white p-6 shadow-md box-shadow-slate-800 border-[var(--brand-dark)]" data-aos="zoom-in" data-aos-delay="50">
               <h3 className="font-semibold">Regulation &amp; Oversight</h3>
               <p className="text-sm mt-2 text-slate-600">Production, transmission, distribution.</p>
             </div>
-            <div className="rounded-xl border bg-white p-6" data-aos="zoom-in" data-aos-delay="100">
+            <div className="rounded-xl border bg-white p-6 shadow-md box-shadow-slate-800 border-[var(--brand-dark)]" data-aos="zoom-in" data-aos-delay="100">
               <h3 className="font-semibold">Renewables &amp; Efficiency</h3>
               <p className="text-sm mt-2 text-slate-600">Promotion of clean technologies.</p>
             </div>
-            <div className="rounded-xl border bg-white p-6" data-aos="zoom-in" data-aos-delay="150">
+            <div className="rounded-xl border bg-white p-6 shadow-md box-shadow-slate-800 border-[var(--brand-dark)]" data-aos="zoom-in" data-aos-delay="150">
               <h3 className="font-semibold">Investment Facilitation</h3>
               <p className="text-sm mt-2 text-slate-600">PPP and private sector mobilization.</p>
             </div>
-            <div className="rounded-xl border bg-white p-6" data-aos="zoom-in" data-aos-delay="200">
+            <div className="rounded-xl border bg-white p-6 shadow-md box-shadow-slate-800 border-[var(--brand-dark)]" data-aos="zoom-in" data-aos-delay="200">
               <h3 className="font-semibold">Cooperation</h3>
               <p className="text-sm mt-2 text-slate-600">Regional &amp; international coordination.</p>
             </div>
@@ -322,6 +322,8 @@ export default function Energy() {
         </div>
       </section> */}
     </div>
+
+    <MoewrFooter />
      </>
   );
 }
