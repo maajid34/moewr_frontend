@@ -1145,7 +1145,7 @@ export default function SingalProjectsEnergy() {
             <div className="absolute inset-0 -z-10 bg-[var(--brand)]/10" />
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <h2 className="text-4xl font-extrabold tracking-tight mb-8">
-                {componentTitle || "Project"}
+                {componentTitle}
               </h2>
 
               <div className="grid md:grid-cols-2 gap-8">
