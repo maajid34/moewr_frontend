@@ -1304,26 +1304,42 @@ export default function readProjectWaterSingal() {
 
 
               <section className="py-14 bg-white">
-            <h1 className="text-center font-bold mb-10 text-4xl text-black">StackHolders</h1>
+            <h1 className="text-center font-bold mb-10 text-4xl text-black">Project Stakeholders</h1>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-3 gap-10">
-              <img
+
+              <div>
+ <img
                 src={toAssetUrl(stackeHolder1)}
                 alt="stackeholder1"
                 onError={onImgError("stakeholder1", stackeHolder1, toAssetUrl(stackeHolder1))}
                 className="w-[300px] h-[300px] object-cover rounded-2xl shadow-xl border border-slate-200"
               />
+               <p className="p-5">Funded By</p>
+              </div>
+              
+              <div>
+
+           
               <img
                 src={toAssetUrl(stakeHolder2)}
                 alt="stackeholder2"
                 onError={onImgError("stakeholder2", stakeHolder2, toAssetUrl(stakeHolder2))}
                 className="w-[300px] h-[300px] object-cover rounded-2xl shadow-xl border border-slate-200"
               />
+  <p className="p-5">Implemented By</p>
+                 </div>
+
+                 <div>
+
+               
               <img
                 src={toAssetUrl(stakeHolder3)}
                 alt="stackeholder3"
                 onError={onImgError("stakeholder3", stakeHolder3, toAssetUrl(stakeHolder3))}
                 className="w-[300px] h-[300px] object-cover rounded-2xl shadow-xl border border-slate-200"
               />
+ <p className="p-5">Facilated By </p>
+                </div>
               {/* <img
                 src={toAssetUrl(stakeHolder4)}
                 alt="stackeholder4"
