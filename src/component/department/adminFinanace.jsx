@@ -1,5 +1,5 @@
 import MoewrFooter from "../../pages/footer";
-import img2 from '../../assets/Energy/energy.jpg'
+// import img2 from '../../assets/Energy/energy.jpg'
 
 
 export default function AdminFinace() {

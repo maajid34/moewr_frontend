@@ -1,5 +1,5 @@
 import img1 from '../../assets/Energy/bg.jpg'
-import img2 from '../../assets/Energy/energy.jpg'
+// import img2 from '../../assets/Energy/energy.jpg'
 import MoewrFooter from '../../pages/footer';
 import Header from '../../pages/header';
 export default function Energy() {
