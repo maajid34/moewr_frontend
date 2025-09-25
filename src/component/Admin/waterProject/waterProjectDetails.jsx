@@ -1276,13 +1276,13 @@ export default function readProjectWaterSingal() {
                 onError={onImgError("stakeholder3", stakeHolder3, toAssetUrl(stakeHolder3))}
                 className="w-[300px] h-[300px] object-cover rounded-2xl shadow-xl border border-slate-200"
               />
-              <img
+              {/* <img
                 src={toAssetUrl(stakeHolder4)}
                 alt="stackeholder4"
                 onError={onImgError("stakeholder4", stakeHolder4, toAssetUrl(stakeHolder4))}
                 className="w-[400px] h-[300px] object-cover rounded-2xl shadow-xl border border-slate-200"
               />
-            </div>
+            </div> */}
           </section>
 
           {/* PROJECT PHOTOS GALLERY */}
