@@ -43,7 +43,8 @@ export default function MoewrFooter() {
           <div>
             <h3 className="text-lg font-semibold tracking-wide">MoEWR</h3>
             <p className="mt-3 text-sm leading-relaxed text-slate-900/80">
-              <span className="font-medium">Address:</span> Kismaayo District, Jubaland, Somalia.
+              <span className="font-medium">Address:</span>HQ , PORT ROAD OPPOSITE MADINA HOTEL KISMAYO
+
             </p>
             <ul className="mt-4 space-y-3 text-sm">
               <li className="flex items-start gap-3">
@@ -56,7 +57,16 @@ export default function MoewrFooter() {
                 <svg viewBox="0 0 24 24" className="w-5 h-5 mt-0.5 text-[#0A1A3F]">
                   <path fill="currentColor" d="M6.6 10.8a15.6 15.6 0 0 0 6.6 6.6l2.2-2.2c.3-.3.8-.4 1.2-.2 1 .4 2 .6 3.1.6.7 0 1.3.6 1.3 1.3V20c0 .7-.6 1.3-1.3 1.3C9.8 21.3 2.7 14.2 2.7 5.3 2.7 4.6 3.3 4 4 4h3.1c.7 0 1.3.6 1.3 1.3 0 1.1.2 2.1.6 3.1.1.4 0 .9-.3 1.2l-2.1 2.2Z"/>
                 </svg>
-                <span>Phone: +252 00 000000</span>
+                <span>Phone: 252 619993378
+</span>
+              </li>
+              <li className="flex items-start gap-3">
+                <svg viewBox="0 0 24 24" className="w-5 h-5 mt-0.5 text-[#0A1A3F]">
+                  <path fill="currentColor" d="M6.6 10.8a15.6 15.6 0 0 0 6.6 6.6l2.2-2.2c.3-.3.8-.4 1.2-.2 1 .4 2 .6 3.1.6.7 0 1.3.6 1.3 1.3V20c0 .7-.6 1.3-1.3 1.3C9.8 21.3 2.7 14.2 2.7 5.3 2.7 4.6 3.3 4 4 4h3.1c.7 0 1.3.6 1.3 1.3 0 1.1.2 2.1.6 3.1.1.4 0 .9-.3 1.2l-2.1 2.2Z"/>
+                </svg>
+                <span>LandLine:03496941
+
+</span>
               </li>
               <li className="flex items-start gap-3">
                 <svg viewBox="0 0 24 24" className="w-5 h-5 mt-0.5 text-[#0A1A3F]">
@@ -64,8 +74,8 @@ export default function MoewrFooter() {
                 </svg>
                 <span>
                   Email:{" "}
-                  <a href="mailto:moewr2023@gmail.com" className="hover:text-[#0A1A3F] underline decoration-[#0A1A3F]/40">
-                    moewr2023@gmail.com
+                  <a href="mailto:Info@moewr-jubalandstate.so " className="hover:text-[#0A1A3F] underline decoration-[#0A1A3F]/40">
+                   Info@moewr-jubalandstate.so 
                   </a>
                 </span>
               </li>
