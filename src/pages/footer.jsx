@@ -84,17 +84,8 @@ export default function MoewrFooter() {
             </ul>
           </div> */}
 
-          {/* Column 3 */}
-          <div>
-            <h3 className="text-lg font-semibold tracking-wide">Useful Links</h3>
-            <ul className="mt-4 space-y-2 text-sm">
-              <li><a href="#" className="flex items-start gap-2 hover:text-[#0A1A3F]"><span className="text-[#0A1A3F]">›</span><span>Office of the President</span></a></li>
-              <li><a href="#" className="flex items-start gap-2 hover:text-[#0A1A3F]"><span className="text-[#0A1A3F]">›</span><span>OPM</span></a></li>
-              <li><a href="#" className="flex items-start gap-2 hover:text-[#0A1A3F]"><span className="text-[#0A1A3F]">›</span><span>Ministry of Planning</span></a></li>
-              <li><a href="#" className="flex items-start gap-2 hover:text-[#0A1A3F]"><span className="text-[#0A1A3F]">›</span><span>Environment &amp; Climate Change</span></a></li>
-              <li><a href="#" className="flex items-start gap-2 hover:text-[#0A1A3F]"><span className="text-[#0A1A3F]">›</span><span>Ministry of Petroleum &amp; Mineral</span></a></li>
-            </ul>
-          </div>
+      
+      
         </div>
       </div>
 
