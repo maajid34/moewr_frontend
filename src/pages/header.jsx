@@ -79,7 +79,7 @@ export default function Header() {
             </div>
           </div>
 
-          <Link to="/AssessmentsPost" className="text-lg hover:opacity-90">Assessment</Link>
+          <Link to="/AssessmentsPost" className="text-lg hover:opacity-90">Publications</Link>
           <Link to="/EventPost" className="text-lg hover:opacity-90">Events</Link>
 
           <Link

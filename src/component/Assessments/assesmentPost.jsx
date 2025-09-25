@@ -224,14 +224,14 @@ export default function AssessmentsPost() {
               {/* Content */}
               <div className="relative flex items-center justify-center h-full">
                 <h1 className="text-white text-3xl text-center font-bold">
-                  ASSESSMENTS DOCUMENTS
+                   Publications
                 </h1>
               </div>
  </div>
    
     <div className="max-w-7xl mx-auto p-6 space-y-12">
       <header className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold">Documents Repository</h1>
+        <h1 className="text-3xl font-bold">Publications</h1>
         <small className="text-slate-500">{docs.length} total</small>
       </header>
 
