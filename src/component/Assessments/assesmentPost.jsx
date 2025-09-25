@@ -117,7 +117,8 @@
 import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import img1 from '../../assets/Energy/bg.jpg'
+// import img1 from '../../assets/Energy/bg.jpg'
+import img1 from '../../assets/home-g.jpg'
 import MoewrFooter from "../../pages/footer";
 
 // ----- Config -----
