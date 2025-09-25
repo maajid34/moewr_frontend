@@ -595,7 +595,7 @@ export default function WaterProjectFormUI() {
                   {/* Component Title */}
                   <div>
                     <label htmlFor="componentTitle" className="flex items-center gap-2 text-sm font-medium text-slate-700">
-                      Component Title <span className="text-rose-600">*</span>
+                      Component Title <span className="text-rose-600"></span>
                     </label>
                     <input
                       value={componentTitle}
