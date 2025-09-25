@@ -8,7 +8,6 @@ export default function MoewrFooter() {
             <a href="#" className="hover:text-[#0A1A3F] transition">About</a>
             <a href="#" className="hover:text-[#0A1A3F] transition">Departments</a>
             <a href="#" className="hover:text-[#0A1A3F] transition">Events</a>
-            <a href="#" className="hover:text-[#0A1A3F] transition">News</a>
             <a href="#" className="hover:text-[#0A1A3F] transition">Contact</a>
           </nav>
 
@@ -44,7 +43,7 @@ export default function MoewrFooter() {
           <div>
             <h3 className="text-lg font-semibold tracking-wide">MoEWR</h3>
             <p className="mt-3 text-sm leading-relaxed text-slate-900/80">
-              <span className="font-medium">Address:</span> Bondhere District, Mogadishu, Somalia.
+              <span className="font-medium">Address:</span> Kismaayo District, Jubaland, Somalia.
             </p>
             <ul className="mt-4 space-y-3 text-sm">
               <li className="flex items-start gap-3">
@@ -65,8 +64,8 @@ export default function MoewrFooter() {
                 </svg>
                 <span>
                   Email:{" "}
-                  <a href="mailto:info@moewr.gov.so" className="hover:text-[#0A1A3F] underline decoration-[#0A1A3F]/40">
-                    info@moewr.gov.so
+                  <a href="mailto:moewr2023@gmail.com" className="hover:text-[#0A1A3F] underline decoration-[#0A1A3F]/40">
+                    moewr2023@gmail.com
                   </a>
                 </span>
               </li>
@@ -74,16 +73,16 @@ export default function MoewrFooter() {
           </div>
 
           {/* Column 2 */}
-          <div>
+          {/* <div>
             <h3 className="text-lg font-semibold tracking-wide">MoEWR FMS</h3>
             <ul className="mt-4 space-y-2 text-sm">
               <li><a href="#" className="group flex items-start gap-2 hover:text-[#0A1A3F]"><span className="text-[#0A1A3F]">›</span><span>MoEWR Puntland</span></a></li>
               <li><a href="#" className="group flex items-start gap-2 hover:text-[#0A1A3F]"><span className="text-[#0A1A3F]">›</span><span>MOEM – Somaliland</span></a></li>
               <li><a href="#" className="group flex items-start gap-2 hover:text-[#0A1A3F]"><span className="text-[#0A1A3F]">›</span><span>MOEWR – Southwest State of Somalia</span></a></li>
               <li><a href="#" className="group flex items-start gap-2 hover:text-[#0A1A3F]"><span className="text-[#0A1A3F]">›</span><span>MOEWR – Galmudug</span></a></li>
-              <li><a href="#" className="group flex items-start gap-2 hover:text-[#0A1A3F]"><span className="text-[#0A1A3F]">›</span><span>MOEWR – Jubaland State</span></a></li>
+
             </ul>
-          </div>
+          </div> */}
 
           {/* Column 3 */}
           <div>
@@ -102,7 +101,7 @@ export default function MoewrFooter() {
       {/* Bottom bar */}
       <div className="border-t border-[#0A1A3F]/20">
         <div className="max-w-7xl mx-auto px-4 py-4 text-center text-xs text-slate-900/70">
-          Ministry of Energy &amp; Water Resources © 2023. All Rights Reserved
+          Ministry of Energy &amp; Water Resources Of Jubaland © 2025. All Rights Reserved
         </div>
       </div>
     </footer>

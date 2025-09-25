@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+@keyframes marquee-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); } /* move width of one strip */
+}
+@keyframes marquee-right {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.animate-marquee-l { animation: marquee-left 28s linear infinite; will-change: transform; }
+.animate-marquee-r { animation: marquee-right 30s linear infinite; will-change: transform; }
+
