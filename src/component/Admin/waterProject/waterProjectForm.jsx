@@ -1035,15 +1035,12 @@
 //     </>
 //   );
 // }
-
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function WaterProjectFormUI() {
   const navigate = useNavigate();
-
-  // Only keep state where you need UI feedback (e.g., previews)
   const [photoPreviews, setPhotoPreviews] = useState([]);
 
   const handlePhotosChange = (e) => {
@@ -1054,21 +1051,20 @@ export default function WaterProjectFormUI() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Build FormData from the actual form node: captures ALL inputs with a name=
+    // Build FormData from form node — captures ALL inputs with a name=
     const fd = new FormData(e.currentTarget);
 
-    // OPTIONAL: if your backend expects achievements as JSON array (it can also parse string)
-    const achievementsText = fd.get("achievements");
-    if (typeof achievementsText === "string") {
-      // Convert line breaks to an array; tweak as you like
-      const arr = achievementsText
+    // If your backend expects achievements as array, convert lines -> JSON array
+    const achievementsRaw = fd.get("achievements");
+    if (typeof achievementsRaw === "string") {
+      const arr = achievementsRaw
         .split("\n")
         .map((s) => s.trim())
         .filter(Boolean);
       fd.set("achievements", JSON.stringify(arr));
     }
 
-    // Debug: verify what’s being sent
+    // Debug: see exactly what we’re sending
     for (const [k, v] of fd.entries()) {
       console.log(k, v instanceof File ? `File(${v.name})` : v);
     }
@@ -1076,8 +1072,7 @@ export default function WaterProjectFormUI() {
     try {
       await axios.post(
         "https://moewr-backend.onrender.com/createProjectWater/waterProject",
-        fd,
-        { headers: { "Content-Type": "multipart/form-data" } }
+        fd // DON'T set Content-Type manually; axios will set the proper boundary
       );
       alert("success");
       navigate("/WaterProjectTable");
@@ -1098,41 +1093,22 @@ export default function WaterProjectFormUI() {
             <div className="grid gap-5 md:grid-cols-2 mt-4">
               <div>
                 <label className="text-sm font-medium">Title *</label>
-                <input
-                  name="title"
-                  type="text"
-                  required
-                  placeholder="Enter Project Title"
-                  className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm"
-                />
+                <input name="title" type="text" required className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm" />
               </div>
 
               <div>
                 <label className="text-sm font-medium">Component Title</label>
-                <input
-                  name="componentTitle"
-                  type="text"
-                  className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm"
-                />
+                <input name="componentTitle" type="text" className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm" />
               </div>
 
               <div className="md:col-span-2">
                 <label className="text-sm font-medium">Description *</label>
-                <textarea
-                  name="desc"
-                  rows={3}
-                  required
-                  className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm"
-                />
+                <textarea name="desc" rows={3} required className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm" />
               </div>
 
               <div className="md:col-span-2">
                 <label className="text-sm font-medium">Overview</label>
-                <textarea
-                  name="overview"
-                  rows={3}
-                  className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm"
-                />
+                <textarea name="overview" rows={3} className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm" />
               </div>
             </div>
           </section>
@@ -1146,7 +1122,7 @@ export default function WaterProjectFormUI() {
 
             <div className="rounded-2xl border bg-white shadow-sm p-5">
               <h3 className="font-semibold">Geographic Image *</h3>
-              {/* NOTE: key must match backend exactly */}
+              {/* must match backend key exactly */}
               <input name="GeographicImage" type="file" accept="image/*" required className="mt-3" />
             </div>
 
@@ -1186,7 +1162,7 @@ export default function WaterProjectFormUI() {
 
           <section className="rounded-2xl border bg-white shadow-sm p-5">
             <h3 className="font-semibold">Geographic *</h3>
-            {/* Keep the backend’s misspelling */}
+            {/* keep backend’s misspelling */}
             <textarea name="geogrpahic" rows={4} required className="mt-3 w-full rounded-lg border px-3 py-2.5 text-sm" />
           </section>
 
@@ -1205,7 +1181,7 @@ export default function WaterProjectFormUI() {
             <textarea
               name="achievements"
               rows={5}
-              placeholder="One per line (we’ll convert to array)"
+              placeholder="One per line"
               required
               className="mt-3 w-full rounded-lg border px-3 py-2.5 text-sm"
             />
@@ -1260,3 +1236,5 @@ export default function WaterProjectFormUI() {
     </div>
   );
 }
+
+
