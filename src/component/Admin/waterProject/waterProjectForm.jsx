@@ -530,16 +530,17 @@ export default function WaterProjectFormUI() {
     formData.append("componentFour", componentFour);
 
     // Stakeholders
-    if (StackeholderDesc) formData.append("StackeholderDesc", StackeholderDesc);
+  
+     formData.append("StackeholderDesc", StackeholderDesc);
     if (stackeHolder1) formData.append("stackeHolder1", stackeHolder1);
-    if (stack1Title) formData.append("stack1Title", stack1Title);
-    if (stack1desc) formData.append("stack1desc", stack1desc);
+    formData.append("stack1Title", stack1Title);
+    formData.append("stack1desc", stack1desc);
     if (stakeHolder2) formData.append("stakeHolder2", stakeHolder2);
-    if (stack2Title) formData.append("stack2Title", stack2Title);
-    if (stack1desc) formData.append("stack2desc", stack2desc);
+     formData.append("stack2Title", stack2Title);
+    formData.append("stack2desc", stack2desc);
     if (stakeHolder3) formData.append("stakeHolder3", stakeHolder3);
-    if (stack3Title) formData.append("stack3Title", stack3Title);
-    if (stack1desc) formData.append("stack3desc", stack3desc);
+     formData.append("stack3Title", stack3Title);
+    formData.append("stack3desc", stack3desc);
     if (stakeHolder4) formData.append("stakeHolder4", stakeHolder4);
 
     formData.append("achievements", achievements);
