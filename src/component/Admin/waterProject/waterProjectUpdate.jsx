@@ -888,7 +888,7 @@ export default function WaterProjectUpdate() {
               <div>
                 <label className="text-sm font-medium text-slate-700">stack1Title *</label>
                 <input
-                  type="text" required
+                  type="text" 
                   value={stack1Title}
                   onChange={(e) => setstack1Title(e.target.value)}
                   className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
@@ -897,7 +897,7 @@ export default function WaterProjectUpdate() {
               <div>
                 <label className="text-sm font-medium text-slate-700">stack1desc *</label>
                 <input
-                  type="text" required
+                  type="text" 
                   value={stack1desc}
                   onChange={(e) => setstack1desc(e.target.value)}
                   className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
@@ -908,7 +908,7 @@ export default function WaterProjectUpdate() {
               <div>
                 <label className="text-sm font-medium text-slate-700">stack2Title *</label>
                 <input
-                  type="text" required
+                  type="text" 
                   value={stack2Title}
                   onChange={(e) => setstack2Title(e.target.value)}
                   className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
@@ -917,7 +917,7 @@ export default function WaterProjectUpdate() {
               <div>
                 <label className="text-sm font-medium text-slate-700">stack2desc *</label>
                 <input
-                  type="text" required
+                  type="text" 
                   value={stack2desc}
                   onChange={(e) => setstack2desc(e.target.value)}
                   className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
@@ -928,7 +928,7 @@ export default function WaterProjectUpdate() {
               <div>
                 <label className="text-sm font-medium text-slate-700">stack3Title *</label>
                 <input
-                  type="text" required
+                  type="text" 
                   value={stack3Title}
                   onChange={(e) => setstack3Title(e.target.value)}
                   className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
