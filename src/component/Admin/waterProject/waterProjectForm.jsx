@@ -481,13 +481,13 @@ export default function WaterProjectFormUI() {
   const [componentTwo, setComponentTwo] = useState("");
   const [componentThree, setComponentThree] = useState("");
   const [componentFour, setComponentFour] = useState("");
-  const [StackeholderDesc, setStackeholderDesc] = useState("");
-  const [stack1Title, setstack1Title] = useState("");
-  const [stack1desc, setstack1desc] = useState("");
-   const [stack2Title, setstack2Title] = useState("");
-  const [stack2desc, setstack2desc] = useState("");
-   const [stack3Title, setstack3Title] = useState("");
-  const [stack3desc, setstack3desc] = useState("");
+  const [StackeholderDescc, setStackeholderDesc] = useState("");
+  const [stack1Titlec, setstack1Title] = useState("");
+  const [stack1descc, setstack1desc] = useState("");
+   const [stack2Titlec, setstack2Title] = useState("");
+  const [stack2descc, setstack2desc] = useState("");
+   const [stack3Titlec, setstack3Title] = useState("");
+  const [stack3descc, setstack3desc] = useState("");
   const [achievements, setAchievements] = useState("");
 
 
@@ -534,13 +534,13 @@ export default function WaterProjectFormUI() {
 
     // Stakeholders
   
-     formData.append("StackeholderDesc", StackeholderDesc);
-     formData.append("stack1Title", stack1Title);
-    formData.append("stack1desc", stack1desc);
-    formData.append("stack2Title", stack2Title);
-    formData.append("stack2desc", stack2desc);
-    formData.append("stack3Title", stack3Title);
-    formData.append("stack3desc", stack3desc);
+     formData.append("StackeholderDesc", StackeholderDescc);
+     formData.append("stack1Title", stack1Titlec);
+    formData.append("stack1desc", stack1descc);
+    formData.append("stack2Title", stack2Titlec);
+    formData.append("stack2desc", stack2descc);
+    formData.append("stack3Title", stack3Titlec);
+    formData.append("stack3desc", stack3descc);
     if (stackeHolder1) formData.append("stackeHolder1", stackeHolder1);
     if (stakeHolder2) formData.append("stakeHolder2", stakeHolder2); 
     if (stakeHolder3) formData.append("stakeHolder3", stakeHolder3);
@@ -883,10 +883,10 @@ export default function WaterProjectFormUI() {
                     {/* title */}
                     
                     <input
-                  value={stack1Title}
+                  value={stack1Titlec}
                   onChange={(t) => setstack1Title(t.target.value)}
                   type="text"
-                  name="stack1Title"
+                  name="stack1Titlec"
                   required
                    placeholder="Enter  Title"
                   className="w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
@@ -894,7 +894,7 @@ export default function WaterProjectFormUI() {
 
                 {/* description */}
                 <input
-                  value={stack1desc}
+                  value={stack1descc}
                   onChange={(t) => setstack1desc(t.target.value)}
                   type="text"
                   name="stack1desc"
@@ -927,7 +927,7 @@ export default function WaterProjectFormUI() {
                   </label>
                   {/* title */}
                     <input
-                  value={stack2Title}
+                  value={stack2Titlec}
                   onChange={(t) => setstack2Title(t.target.value)}
                   type="text"
                   name="stack2Title"
@@ -938,7 +938,7 @@ export default function WaterProjectFormUI() {
 
                 {/* description */}
                 <input
-                  value={stack2desc}
+                  value={stack2descc}
                   onChange={(t) => setstack2desc(t.target.value)}
                   type="text"
                   name="stack2desc"
@@ -969,7 +969,7 @@ export default function WaterProjectFormUI() {
                   </label>
                   {/* title */}
                     <input
-                  value={stack3Title}
+                  value={stack3Titlec}
                   onChange={(t) => setstack3Title(t.target.value)}
                   type="text"
                   name="stack3Title"
@@ -980,7 +980,7 @@ export default function WaterProjectFormUI() {
 
                 {/* description */}
                 <input
-                  value={stack3desc}
+                  value={stack3descc}
                   onChange={(t) => setstack3desc(t.target.value)}
                   type="text"
                   name="stack3desc"
