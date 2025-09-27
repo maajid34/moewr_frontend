@@ -884,6 +884,7 @@ export default function WaterProjectFormUI() {
                   value={stack1Title}
                   onChange={(t) => setstack1Title(t.target.value)}
                   type="text"
+                  required
                    placeholder="Enter  Title"
                   className="w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
                 />
@@ -893,6 +894,7 @@ export default function WaterProjectFormUI() {
                   value={stack1desc}
                   onChange={(t) => setstack1desc(t.target.value)}
                   type="text"
+                   required
                   placeholder="Enter  description"
                   className="w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
                 />
@@ -924,6 +926,7 @@ export default function WaterProjectFormUI() {
                   value={stack2Title}
                   onChange={(t) => setstack2Title(t.target.value)}
                   type="text"
+                   required
                   placeholder="Enter  Title"
                   className="w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
                 />
@@ -933,6 +936,7 @@ export default function WaterProjectFormUI() {
                   value={stack2desc}
                   onChange={(t) => setstack2desc(t.target.value)}
                   type="text"
+                   required
                   placeholder="Enter  Description"
                   className="w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
                 />
@@ -962,6 +966,7 @@ export default function WaterProjectFormUI() {
                   value={stack3Title}
                   onChange={(t) => setstack3Title(t.target.value)}
                   type="text"
+                   required
                   placeholder="Enter  Title"
                   className="w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
                 />
@@ -971,6 +976,7 @@ export default function WaterProjectFormUI() {
                   value={stack3desc}
                   onChange={(t) => setstack3desc(t.target.value)}
                   type="text"
+                   required
                   placeholder="Enter Description"
                   className="w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
                 />
