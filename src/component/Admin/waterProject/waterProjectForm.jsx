@@ -536,10 +536,10 @@ export default function WaterProjectFormUI() {
     if (stack1desc) formData.append("stack1desc", stack1desc);
     if (stakeHolder2) formData.append("stakeHolder2", stakeHolder2);
     if (stack2Title) formData.append("stack2Title", stack2Title);
-    if (stack1desc) formData.append("stack1desc", stack1desc);
+    if (stack1desc) formData.append("stack2desc", stack2desc);
     if (stakeHolder3) formData.append("stakeHolder3", stakeHolder3);
     if (stack3Title) formData.append("stack3Title", stack3Title);
-    if (stack1desc) formData.append("stack1desc", stack1desc);
+    if (stack1desc) formData.append("stack3desc", stack3desc);
     if (stakeHolder4) formData.append("stakeHolder4", stakeHolder4);
 
     formData.append("achievements", achievements);
@@ -880,6 +880,7 @@ export default function WaterProjectFormUI() {
                   value={stack1Title}
                   onChange={(t) => setstack1Title(t.target.value)}
                   type="text"
+                   placeholder="Enter  Title"
                   className="w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
                 />
 
@@ -888,6 +889,7 @@ export default function WaterProjectFormUI() {
                   value={stack1desc}
                   onChange={(t) => setstack1desc(t.target.value)}
                   type="text"
+                  placeholder="Enter  description"
                   className="w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
                 />
 
@@ -918,6 +920,7 @@ export default function WaterProjectFormUI() {
                   value={stack2Title}
                   onChange={(t) => setstack2Title(t.target.value)}
                   type="text"
+                  placeholder="Enter  Title"
                   className="w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
                 />
 
@@ -926,6 +929,7 @@ export default function WaterProjectFormUI() {
                   value={stack2desc}
                   onChange={(t) => setstack2desc(t.target.value)}
                   type="text"
+                  placeholder="Enter  Description"
                   className="w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
                 />
 
@@ -954,6 +958,7 @@ export default function WaterProjectFormUI() {
                   value={stack3Title}
                   onChange={(t) => setstack3Title(t.target.value)}
                   type="text"
+                  placeholder="Enter  Title"
                   className="w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
                 />
 
@@ -962,6 +967,7 @@ export default function WaterProjectFormUI() {
                   value={stack3desc}
                   onChange={(t) => setstack3desc(t.target.value)}
                   type="text"
+                  placeholder="Enter Description"
                   className="w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
                 />
 
