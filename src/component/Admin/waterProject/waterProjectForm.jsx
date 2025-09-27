@@ -481,19 +481,22 @@ export default function WaterProjectFormUI() {
   const [componentTwo, setComponentTwo] = useState("");
   const [componentThree, setComponentThree] = useState("");
   const [componentFour, setComponentFour] = useState("");
-
-  const [achievements, setAchievements] = useState("");
-
   const [StackeholderDesc, setStackeholderDesc] = useState("");
-  const [stackeHolder1, setstackeHolder1] = useState(null);
   const [stack1Title, setstack1Title] = useState("");
   const [stack1desc, setstack1desc] = useState("");
-  const [stakeHolder2, setstakeHolder2] = useState(null);
    const [stack2Title, setstack2Title] = useState("");
   const [stack2desc, setstack2desc] = useState("");
-  const [stakeHolder3, setstakeHolder3] = useState(null);
    const [stack3Title, setstack3Title] = useState("");
   const [stack3desc, setstack3desc] = useState("");
+  const [achievements, setAchievements] = useState("");
+
+
+  const [stackeHolder1, setstackeHolder1] = useState(null);
+
+  const [stakeHolder2, setstakeHolder2] = useState(null);
+  
+  const [stakeHolder3, setstakeHolder3] = useState(null);
+  
   const [stakeHolder4, setstakeHolder4] = useState(null);
 
   // NEW: multiple gallery photos
@@ -532,15 +535,15 @@ export default function WaterProjectFormUI() {
     // Stakeholders
   
      formData.append("StackeholderDesc", StackeholderDesc);
-    if (stackeHolder1) formData.append("stackeHolder1", stackeHolder1);
-    formData.append("stack1Title", stack1Title);
+     formData.append("stack1Title", stack1Title);
     formData.append("stack1desc", stack1desc);
-    if (stakeHolder2) formData.append("stakeHolder2", stakeHolder2);
-     formData.append("stack2Title", stack2Title);
+    formData.append("stack2Title", stack2Title);
     formData.append("stack2desc", stack2desc);
-    if (stakeHolder3) formData.append("stakeHolder3", stakeHolder3);
-     formData.append("stack3Title", stack3Title);
+    formData.append("stack3Title", stack3Title);
     formData.append("stack3desc", stack3desc);
+    if (stackeHolder1) formData.append("stackeHolder1", stackeHolder1);
+    if (stakeHolder2) formData.append("stakeHolder2", stakeHolder2); 
+    if (stakeHolder3) formData.append("stakeHolder3", stakeHolder3);
     if (stakeHolder4) formData.append("stakeHolder4", stakeHolder4);
 
     formData.append("achievements", achievements);
