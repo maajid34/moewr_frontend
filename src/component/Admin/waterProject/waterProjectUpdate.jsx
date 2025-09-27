@@ -37,6 +37,13 @@ export default function WaterProjectUpdate() {
   const [componentTwo, setComponentTwo] = useState("");
   const [componentThree, setComponentThree] = useState("");
   const [componentFour, setComponentFour] = useState("");
+    const [StackeholderDesc, setStackeholderDesc] = useState("");
+  const [stack1Title, setstack1Title] = useState("");
+  const [stack1desc, setstack1desc] = useState("");
+   const [stack2Title, setstack2Title] = useState("");
+  const [stack2desc, setstack2desc] = useState("");
+   const [stack3Title, setstack3Title] = useState("");
+  const [stack3desc, setstack3desc] = useState("");
 
   // existing filenames/URLs from backend
   const [coverImage, setCoverImage] = useState("");
@@ -105,7 +112,13 @@ export default function WaterProjectUpdate() {
         setComponentTwo(data.componentTwo ?? "");
         setComponentThree(data.componentThree ?? "");
         setComponentFour(data.componentFour ?? "");
-
+     formData.append("StackeholderDesc", StackeholderDesc);
+     formData.append("stack1Title", stack1Title);
+    formData.append("stack1desc", stack1desc);
+    formData.append("stack2Title", stack2Title);
+    formData.append("stack2desc", stack2desc);
+    formData.append("stack3Title", stack3Title);
+    formData.append("stack3desc", stack3desc);
         setCoverImage(data.coverImage ?? "");
         setObjectiveImage(data.objectiveImage ?? "");
          setGeographicImage(data.GeographicImage ?? "");
@@ -386,7 +399,7 @@ export default function WaterProjectUpdate() {
           </section>
 
           {/* Stakeholders */}
-          <section className="grid lg:grid-cols-2 gap-6">
+          {/* <section className="grid lg:grid-cols-2 gap-6">
             {[
               { label: "Stakeholder 1", current: stackeHolder1, setFile: setStake1File },
               { label: "Stakeholder 2", current: stakeHolder2, setFile: setStake2File },
@@ -412,8 +425,172 @@ export default function WaterProjectUpdate() {
                 </div>
               </div>
             ))}
-          </section>
+          </section> */}
+    {/* Stakeholders */}
+            <input
+                  value={StackeholderDesc}
+                  onChange={(t) => setStackeholderDesc(t.target.value)}
+                  type="text"
+                  name="StackeholderDesc"
+                  className="w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
+                />
+            <section className="grid lg:grid-cols-2 gap-6">
+              
+              {/* stackeholder one */}
+              <div className="rounded-2xl border bg-white shadow-sm p-5">
+                <h3 className="font-semibold text-[var(--ink)]">Stakeholder 1 <span className="text-rose-600">*</span></h3>
+                <div className="mt-4 rounded-xl border border-dashed p-6 text-center">
+                  <div className="mx-auto w-12 h-12 rounded-xl bg-[var(--brand)]/10 grid place-items-center">
+                    <svg viewBox="0 0 24 24" className="w-6 h-6 text-[var(--brand)]"><path fill="currentColor" d="M11 2h2v9h3l-4 4-4-4h3V2Zm-6 9v9h14v-9h2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-9h2Z"/></svg>
+                  </div>
+                  <label className="mt-3 inline-block text-xs px-3 py-2 rounded-md bg-[var(--brand)] text-white hover:bg-[var(--brand-dark)] cursor-pointer">
+                    <input
+                      onChange={(t) => setstackeHolder1(t.target.files?.[0] || null)}
+                      type="file"
+                      name="stackeHolder1"
+                      id="stackeHolder1"
+                      accept="image/*"
+                      required
+                    />
+                      </label>
+ <div className="mt-10">
+                    {/* title */}
+                    
+                 <input
+                  value={stack1Title}
+                  onChange={(t) => setstack1Title(t.target.value)}
+                  type="text"
+                  name="stack1Title"
+                  required
+                   placeholder="Enter  Title"
+                  className="w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
+                />
 
+                {/* description */}
+                <input
+                  value={stack1desc}
+                  onChange={(t) => setstack1desc(t.target.value)}
+                  type="text"
+                  name="stack1desc"
+                   required
+                  placeholder="Enter  description"
+                  className="w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
+                />
+</div>
+
+                
+                </div>
+              </div>
+
+              {/* stakeholder2 */}
+              <div className="rounded-2xl border bg-white shadow-sm p-5">
+                <h3 className="font-semibold text-[var(--ink)]">Stakeholder 2 <span className="text-rose-600">*</span></h3>
+                <div className="mt-4 rounded-xl border border-dashed p-6 text-center">
+                  <div className="mx-auto w-12 h-12 rounded-xl bg-[var(--brand)]/10 grid place-items-center">
+                    <svg viewBox="0 0 24 24" className="w-6 h-6 text-[var(--brand)]"><path fill="currentColor" d="M11 2h2v9h3l-4 4-4-4h3V2Zm-6 9v9h14v-9h2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-9h2Z"/></svg>
+                  </div>
+                  <label className="mt-3 inline-block text-xs px-3 py-2 rounded-md bg-[var(--brand)] text-white hover:bg-[var(--brand-dark)] cursor-pointer">
+                    <input
+                      onChange={(t) => setstakeHolder2(t.target.files?.[0] || null)}
+                      type="file"
+                      name="stakeHolder2"
+                      id="stakeHolder2"
+                      accept="image/*"
+                      required
+                    />
+                  </label>
+
+                  <div className="mt-10">
+    {/* title */}
+                    <input
+                  value={stack2Title}
+                  onChange={(t) => setstack2Title(t.target.value)}
+                  type="text"
+                  name="stack2Title"
+                   required
+                  placeholder="Enter  Title"
+                  className="w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
+                />
+
+                {/* description */}
+                <input
+                  value={stack2desc}
+                  onChange={(t) => setstack2desc(t.target.value)}
+                  type="text"
+                  name="stack2desc"
+                   
+                  placeholder="Enter  Description"
+                  className="w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
+                />
+                  </div>
+              
+
+                </div>
+              </div>
+
+              {/* stakeholder3 */}
+              <div className="rounded-2xl border bg-white shadow-sm p-5">
+                <h3 className="font-semibold text-[var(--ink)]">Stakeholder 3 <span className="text-rose-600">*</span></h3>
+                <div className="mt-4 rounded-xl border border-dashed p-6 text-center">
+                  <div className="mx-auto w-12 h-12 rounded-xl bg-[var(--brand)]/10 grid place-items-center">
+                    <svg viewBox="0 0 24 24" className="w-6 h-6 text-[var(--brand)]"><path fill="currentColor" d="M11 2h2v9h3l-4 4-4-4h3V2Zm-6 9v9h14v-9h2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-9h2Z"/></svg>
+                  </div>
+                  <label className="mt-3 inline-block text-xs px-3 py-2 rounded-md bg-[var(--brand)] text-white hover:bg-[var(--brand-dark)] cursor-pointer">
+                    <input
+                      onChange={(t) => setstakeHolder3(t.target.files?.[0] || null)}
+                      type="file"
+                      name="stakeHolder3"
+                      id="stakeHolder3"
+                      accept="image/*"
+                    
+                    />
+                  </label>
+                   <div className="mt-10">
+                  {/* title */}
+                    <input
+                  value={stack3Title}
+                  onChange={(t) => setstack3Title(t.target.value)}
+                  type="text"
+                  name="stack3Title"
+                 
+                  placeholder="Enter  Title"
+                  className="w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
+                />
+
+                {/* description */}
+                <input
+                  value={stack3desc}
+                  onChange={(t) => setstack3desc(t.target.value)}
+                  type="text"
+                  name="stack3desc"
+                   required
+                  placeholder="Enter Description"
+                  className="w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
+                />
+                </div>
+
+                </div>
+              </div>
+
+              {/* stakeholder 4*/}
+              <div className="rounded-2xl border bg-white shadow-sm p-5">
+                <h3 className="font-semibold text-[var(--ink)]">Stakeholder 4</h3>
+                <div className="mt-4 rounded-xl border border-dashed p-6 text-center">
+                  <div className="mx-auto w-12 h-12 rounded-xl bg-[var(--brand)]/10 grid place-items-center">
+                    <svg viewBox="0 0 24 24" className="w-6 h-6 text-[var(--brand)]"><path fill="currentColor" d="M11 2h2v9h3l-4 4-4-4h3V2Zm-6 9v9h14v-9h2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-9h2Z"/></svg>
+                  </div>
+                  <label className="mt-3 inline-block text-xs px-3 py-2 rounded-md bg-[var(--brand)] text-white hover:bg-[var(--brand-dark)] cursor-pointer">
+                    <input
+                      onChange={(t) => setstakeHolder4(t.target.files?.[0] || null)}
+                      type="file"
+                      name="stakeHolder4"
+                      id="stakeHolder4"
+                      accept="image/*"
+                    />
+                  </label>
+                </div>
+              </div>
+            </section>
           {/* Actions */}
           <div className="h-2" />
           <div className="flex items-center justify-end gap-3 pt-2">
