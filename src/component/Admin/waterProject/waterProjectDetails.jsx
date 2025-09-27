@@ -1315,7 +1315,7 @@ export default function readProjectWaterSingal() {
                 className="w-[300px] h-[300px] object-cover rounded-2xl shadow-xl border border-slate-200"
               />
                <p className="p-5 font-bold">Funded By</p>
-               <p className="p-5">This project is funded by USAID</p>
+               {/* <p className="p-5">This project is funded by USAID</p> */}
               </div>
               
               <div>
@@ -1328,7 +1328,7 @@ export default function readProjectWaterSingal() {
                 className="w-[300px] h-[300px] object-cover rounded-2xl shadow-xl border border-slate-200"
               />
   <p className="p-5 font-bold">Supported By</p>
-  <p className="p-5">This Project is Supported By UNICEF</p>
+  {/* <p className="p-5">This Project is Supported By UNICEF</p> */}
                  </div>
 
                  <div>
@@ -1341,7 +1341,7 @@ export default function readProjectWaterSingal() {
                 className="w-[300px] h-[300px] object-cover rounded-2xl shadow-xl border border-slate-200"
               />
          <p className="p-5 font-bold">Implemented By </p>
-          <p className="p-5">This Project Is Implemented By Ministry Off Energy and Water Resource Of Jubaland </p>
+          {/* <p className="p-5">This Project Is Implemented By Ministry Off Energy and Water Resource Of Jubaland </p> */}
                 </div>
               {/* <img
                 src={toAssetUrl(stakeHolder4)}
