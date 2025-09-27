@@ -484,9 +484,16 @@ export default function WaterProjectFormUI() {
 
   const [achievements, setAchievements] = useState("");
 
+  const [StackeholderDesc, setStackeholderDesc] = useState(null);
   const [stackeHolder1, setstackeHolder1] = useState(null);
+  const [stack1Title, setstack1Title] = useState(null);
+  const [stack1desc, setstack1desc] = useState(null);
   const [stakeHolder2, setstakeHolder2] = useState(null);
+   const [stack2Title, setstack2Title] = useState(null);
+  const [stack2desc, setstack2desc] = useState(null);
   const [stakeHolder3, setstakeHolder3] = useState(null);
+   const [stack3Title, setstack3Title] = useState(null);
+  const [stack3desc, setstack3desc] = useState(null);
   const [stakeHolder4, setstakeHolder4] = useState(null);
 
   // NEW: multiple gallery photos
@@ -523,9 +530,16 @@ export default function WaterProjectFormUI() {
     formData.append("componentFour", componentFour);
 
     // Stakeholders
+    if (StackeholderDesc) formData.append("StackeholderDesc", StackeholderDesc);
     if (stackeHolder1) formData.append("stackeHolder1", stackeHolder1);
+    if (stack1Title) formData.append("stack1Title", stack1Title);
+    if (stack1desc) formData.append("stack1desc", stack1desc);
     if (stakeHolder2) formData.append("stakeHolder2", stakeHolder2);
+    if (stack2Title) formData.append("stack2Title", stack2Title);
+    if (stack1desc) formData.append("stack1desc", stack1desc);
     if (stakeHolder3) formData.append("stakeHolder3", stakeHolder3);
+    if (stack3Title) formData.append("stack3Title", stack3Title);
+    if (stack1desc) formData.append("stack1desc", stack1desc);
     if (stakeHolder4) formData.append("stakeHolder4", stakeHolder4);
 
     formData.append("achievements", achievements);
@@ -835,7 +849,14 @@ export default function WaterProjectFormUI() {
             </section>
 
             {/* Stakeholders */}
+            <input
+                  value={StackeholderDesc}
+                  onChange={(t) => setStackeholderDesc(t.target.value)}
+                  type="text"
+                  className="w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
+                />
             <section className="grid lg:grid-cols-2 gap-6">
+              
               {/* stackeholder one */}
               <div className="rounded-2xl border bg-white shadow-sm p-5">
                 <h3 className="font-semibold text-[var(--ink)]">Stakeholder 1 <span className="text-rose-600">*</span></h3>
@@ -852,7 +873,26 @@ export default function WaterProjectFormUI() {
                       accept="image/*"
                       required
                     />
-                  </label>
+                      </label>
+
+                    {/* title */}
+                    <input
+                  value={stack1Title}
+                  onChange={(t) => setstack1Title(t.target.value)}
+                  type="text"
+                  className="w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
+                />
+
+                {/* description */}
+                <input
+                  value={stack1desc}
+                  onChange={(t) => setstack1desc(t.target.value)}
+                  type="text"
+                  className="w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
+                />
+
+
+                
                 </div>
               </div>
 
@@ -873,6 +913,22 @@ export default function WaterProjectFormUI() {
                       required
                     />
                   </label>
+                  {/* title */}
+                    <input
+                  value={stack2Title}
+                  onChange={(t) => setstack2Title(t.target.value)}
+                  type="text"
+                  className="w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
+                />
+
+                {/* description */}
+                <input
+                  value={stack2desc}
+                  onChange={(t) => setstack2desc(t.target.value)}
+                  type="text"
+                  className="w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
+                />
+
                 </div>
               </div>
 
@@ -893,6 +949,22 @@ export default function WaterProjectFormUI() {
                       required
                     />
                   </label>
+                  {/* title */}
+                    <input
+                  value={stack3Title}
+                  onChange={(t) => setstack3Title(t.target.value)}
+                  type="text"
+                  className="w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
+                />
+
+                {/* description */}
+                <input
+                  value={stack3desc}
+                  onChange={(t) => setstack3desc(t.target.value)}
+                  type="text"
+                  className="w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
+                />
+
                 </div>
               </div>
 
