@@ -484,16 +484,16 @@ export default function WaterProjectFormUI() {
 
   const [achievements, setAchievements] = useState("");
 
-  const [StackeholderDesc, setStackeholderDesc] = useState(null);
+  const [StackeholderDesc, setStackeholderDesc] = useState("");
   const [stackeHolder1, setstackeHolder1] = useState(null);
-  const [stack1Title, setstack1Title] = useState(null);
-  const [stack1desc, setstack1desc] = useState(null);
+  const [stack1Title, setstack1Title] = useState("");
+  const [stack1desc, setstack1desc] = useState("");
   const [stakeHolder2, setstakeHolder2] = useState(null);
-   const [stack2Title, setstack2Title] = useState(null);
-  const [stack2desc, setstack2desc] = useState(null);
+   const [stack2Title, setstack2Title] = useState("");
+  const [stack2desc, setstack2desc] = useState("");
   const [stakeHolder3, setstakeHolder3] = useState(null);
-   const [stack3Title, setstack3Title] = useState(null);
-  const [stack3desc, setstack3desc] = useState(null);
+   const [stack3Title, setstack3Title] = useState("");
+  const [stack3desc, setstack3desc] = useState("");
   const [stakeHolder4, setstakeHolder4] = useState(null);
 
   // NEW: multiple gallery photos
