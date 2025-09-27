@@ -857,6 +857,7 @@ export default function WaterProjectFormUI() {
                   value={StackeholderDesc}
                   onChange={(t) => setStackeholderDesc(t.target.value)}
                   type="text"
+                  name="StackeholderDesc"
                   className="w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
                 />
             <section className="grid lg:grid-cols-2 gap-6">
