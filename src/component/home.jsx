@@ -164,12 +164,12 @@ const fullText = "Welcome to Ministry Energy and Resource of Jubaland";
   // end here event waxa u dhaxeeya event ayaa is kaleh
 
 
-  // start here project code
-
+  // start here Energyproject code
+ const [Data, setdata] = useState([])
    const handleReadData = () =>{
 
      axios.get("https://moewr-backend.onrender.com/readProjectEnergy/EnergyProject").then((res) =>{
-      setData(res.data)
+      setdata(res.data)
       
       
              
@@ -183,8 +183,13 @@ const fullText = "Welcome to Ministry Energy and Resource of Jubaland";
     handleReadData()
   },[])
 
-
   // end her projects code
+
+
+  // water projec start here
+
+
+  // End here
 
 
   return (
@@ -676,6 +681,7 @@ The Ministry and WFP are committed to addressing the challenges faced by pastora
           </div>
         </div>
       </section> */}
+
       <section id="projects" className="bg-white/70 border-y ">
               <div className="max-w-7xl mx-auto px-4 py-16 lg:py-20">
                 <h2 className="text-3xl font-bold tracking-tight" data-aos="fade-up">ENERGY PROJECTS</h2>
