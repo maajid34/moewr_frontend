@@ -110,6 +110,28 @@ const fullText = "Welcome to Ministry Energy and Resource of Jubaland";
   const API_BASE = "https://moewr-backend.onrender.com";
   const ASSET_BASE = "https://pub-4fea174e190a460d8db367c215cf12ad.r2.dev";
 
+  
+  // start here Energyproject code
+ const [Data, setdata] = useState([])
+   const handleReadData = () =>{
+
+     axios.get("https://moewr-backend.onrender.com/readProjectEnergy/EnergyProject").then((res) =>{
+      setdata(res.data)
+      
+      
+             
+    }).catch((err) => {
+    console.error("Error fetching medicine data:", err);
+  });
+
+}
+
+   useEffect(() =>{
+    handleReadData()
+  },[])
+
+  // end her projects code
+
   // Build a safe asset URL from whatever the backend saved
   const toAssetUrl = (v) => {
     if (!v) return "";
@@ -164,26 +186,6 @@ const fullText = "Welcome to Ministry Energy and Resource of Jubaland";
   // end here event waxa u dhaxeeya event ayaa is kaleh
 
 
-  // start here Energyproject code
- const [Data, setdata] = useState([])
-   const handleReadData = () =>{
-
-     axios.get("https://moewr-backend.onrender.com/readProjectEnergy/EnergyProject").then((res) =>{
-      setdata(res.data)
-      
-      
-             
-    }).catch((err) => {
-    console.error("Error fetching medicine data:", err);
-  });
-
-}
-
-  //  useEffect(() =>{
-  //   handleReadData()
-  // },[])
-
-  // end her projects code
 
 
   // water projec start here
