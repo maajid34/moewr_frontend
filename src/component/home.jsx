@@ -890,7 +890,7 @@ The Ministry and WFP are committed to addressing the challenges faced by pastora
     >
       <img
         className="h-48 w-full object-cover"
-        src={`http://localhost:3000/allimages/${item?.coverImage ?? ''}`}
+        src={`https://moewr-backend.onrender.com/allimages/${item?.coverImage ?? ''}`}
         alt=""
       />
       <div className="p-6 space-y-3">
