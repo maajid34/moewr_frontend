@@ -921,6 +921,13 @@ export default function EnergyProjectUpdate() {
   const [componentTwo, setComponentTwo] = useState("");
   const [componentThree, setComponentThree] = useState("");
   const [componentFour, setComponentFour] = useState("");
+   const [StackeholderDesc, setStackeholderDesc] = useState("");
+    const [stack1Title, setstack1Title] = useState("");
+    const [stack1desc, setstack1desc] = useState("");
+    const [stack2Title, setstack2Title] = useState("");
+    const [stack2desc, setstack2desc] = useState("");
+    const [stack3Title, setstack3Title] = useState("");
+    const [stack3desc, setstack3desc] = useState("");
 
   // Existing image strings from backend
   const [coverImage, setCoverImage] = useState("");
@@ -1001,6 +1008,14 @@ export default function EnergyProjectUpdate() {
         setComponentTwo(data.componentTwo ?? "");
         setComponentThree(data.componentThree ?? "");
         setComponentFour(data.componentFour ?? "");
+
+        setStackeholderDesc(data.StackeholderDesc ?? "");
+        setstack1Title(data.stack1Title ?? "");
+        setstack1desc(data.stack1desc ?? "");
+        setstack2Title(data.stack2Title ?? "");
+        setstack2desc(data.stack2desc ?? "");
+        setstack3Title(data.stack3Title ?? "");
+        setstack3desc(data.stack3desc ?? "");
 
         setCoverImage(data.coverImage ?? "");
         setObjectiveImage(data.objectiveImage ?? "");
@@ -1335,29 +1350,110 @@ export default function EnergyProjectUpdate() {
           </section>
 
           {/* Stakeholders */}
+           {/* Stakeholders TEXT (required by backend) */}
+          <section className="rounded-2xl border bg-white shadow-sm p-5 sm:p-6">
+            <h3 className="font-semibold">Stakeholders (Text)</h3>
+            <div className="mt-4 grid md:grid-cols-2 gap-5">
+              <div className="md:col-span-2">
+                <label className="text-sm font-medium text-slate-700">StackeholderDesc</label>
+                <input
+                  type="text"
+                  value={StackeholderDesc}
+                  onChange={(e) => setStackeholderDesc(e.target.value)}
+                  className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
+                />
+              </div>
+
+              {/* Stakeholder 1 */}
+              <div>
+                <label className="text-sm font-medium text-slate-700">stack1Title *</label>
+                <input
+                  type="text" 
+                  value={stack1Title}
+                  onChange={(e) => setstack1Title(e.target.value)}
+                  className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
+                />
+              </div>
+              <div>
+                <label className="text-sm font-medium text-slate-700">stack1desc *</label>
+                <input
+                  type="text" 
+                  value={stack1desc}
+                  onChange={(e) => setstack1desc(e.target.value)}
+                  className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
+                />
+              </div>
+
+              {/* Stakeholder 2 */}
+              <div>
+                <label className="text-sm font-medium text-slate-700">stack2Title *</label>
+                <input
+                  type="text" 
+                  value={stack2Title}
+                  onChange={(e) => setstack2Title(e.target.value)}
+                  className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
+                />
+              </div>
+              <div>
+                <label className="text-sm font-medium text-slate-700">stack2desc *</label>
+                <input
+                  type="text" 
+                  value={stack2desc}
+                  onChange={(e) => setstack2desc(e.target.value)}
+                  className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
+                />
+              </div>
+
+              {/* Stakeholder 3 */}
+              <div>
+                <label className="text-sm font-medium text-slate-700">stack3Title *</label>
+                <input
+                  type="text" 
+                  value={stack3Title}
+                  onChange={(e) => setstack3Title(e.target.value)}
+                  className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
+                />
+              </div>
+              <div>
+                <label className="text-sm font-medium text-slate-700">stack3desc *</label>
+                <input
+                  type="text" required
+                  value={stack3desc}
+                  onChange={(e) => setstack3desc(e.target.value)}
+                  className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
+                />
+              </div>
+            </div>
+          </section>
+
+          {/* Stakeholder IMAGES (optional to change) */}
           <section className="grid lg:grid-cols-2 gap-6">
             {[
-              { label: "Stakeholder 1", current: stackeHolder1, setFile: setStake1File },
-              { label: "Stakeholder 2", current: stakeHolder2, setFile: setStake2File },
-              { label: "Stakeholder 3", current: stakeHolder3, setFile: setStake3File },
-              { label: "Stakeholder 4", current: stakeHolder4, setFile: setStake4File },
+              { label: "Stakeholder 1 Image", current: stackeHolder1, setFile: setStake1File },
+              { label: "Stakeholder 2 Image", current: stakeHolder2, setFile: setStake2File },
+              { label: "Stakeholder 3 Image", current: stakeHolder3, setFile: setStake3File },
+              { label: "Stakeholder 4 Image", current: stakeHolder4, setFile: setStake4File },
             ].map(({ label, current, setFile }) => (
               <div key={label} className="rounded-2xl border bg-white shadow-sm p-5">
                 <h3 className="font-semibold">{label}</h3>
                 {current && (
-                  <img src={toImgUrl(current)} alt={label} onError={onImgError} className="mt-3 w-64 h-40 object-cover rounded border" />
+                  <img
+                    src={toImgUrl(current)} alt={label} onError={onImgError}
+                    className="mt-3 w-64 h-40 object-cover rounded border"
+                  />
                 )}
                 <div className="mt-4 rounded-xl border border-dashed p-6 text-center">
                   <label className="inline-block text-xs px-3 py-2 rounded-md bg-sky-600 text-white hover:bg-sky-700 cursor-pointer">
                     Choose new file
-                    <input type="file" className="hidden" accept="image/*" onChange={(e) => setFile(e.target.files?.[0] || null)} />
+                    <input type="file" className="hidden" onChange={(e) => setFile(e.target.files?.[0] || null)} />
                   </label>
-                  <div className="mt-2 text-xs text-slate-500">Current: {current ? current.split(/[\\/]/).pop() : "—"}</div>
+                  <div className="mt-2 text-xs text-slate-500">
+                    Current: {current ? current.split(/[\\/]/).pop() : "—"}
+                  </div>
                 </div>
               </div>
             ))}
           </section>
-
           {/* Actions */}
           <div className="h-2" />
           <div className="flex items-center justify-end gap-3 pt-2">
