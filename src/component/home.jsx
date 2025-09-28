@@ -130,7 +130,29 @@ const fullText = "Welcome to Ministry Energy and Resource of Jubaland";
     handleReadData()
   },[])
 
-  // end her projects code
+  // end her Energyprojects code
+
+
+  // waterProject starts here
+
+   const handlWatereeReadData = () =>{
+
+     axios.get("https://moewr-backend.onrender.com/readProjectWater/waterProject").then((res) =>{
+      setdata(res.data)
+    
+      
+      
+             
+    }).catch((err) => {
+    console.error("Error fetching medicine data:", err);
+  });
+
+}
+   useEffect(() =>{
+    handlWatereeReadData()
+  },[])
+  // end here waterProject
+
 
   // Build a safe asset URL from whatever the backend saved
   const toAssetUrl = (v) => {
@@ -588,101 +610,8 @@ Ensuring adequate provision of administrative and financial support to all depar
         </div>
       </section>
 
-      {/* Current Interventions */}
-      {/* <section id="interventions" className="py-16 bg-white">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="mb-10" data-aos="fade-up">
-            
-            <h2 className="mt-2 text-4xl font-extrabold">Our Current Interventions</h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
-            <article className="rounded-2xl p-6 bg-[#2FA8E1] text-white shadow-lg ring-1 ring-black/5 transition hover:shadow-xl" data-aos="fade-up">
-              <h4 className="font-bold">Kismaayo Urban Water Supply</h4>
-              <p className="mt-2 text-white/90">The Ministry of Energy & Wate Resources of Jubaland & International Organization for Migration are jointly Implementing Kismaayo Urban Water Supply & Sanitation Project in Kismaayo Funded by Federal Government of Somalia which received funding from the African
-               Development Fund & African Development Bank to finance Kismayo Urban Water Supply and Sanitation Project. </p>
-              <a className="mt-4 inline-flex items-center gap-2 font-semibold underline underline-offset-4" href="#">Read for More →</a>
-            </article>
-
-            <article className="rounded-2xl p-6 bg-[#2FA8E1] text-white shadow-lg ring-1 ring-black/5 transition hover:shadow-xl" data-aos="fade-up" data-aos-delay="50">
-              <h4 className="font-bold">SESRP Project</h4>
-              <p className="mt-2 text-white/90">The Ministry of Energy and Water Resources is part of the Somali Electricity Sector Recovery Project (SESRP) which the Federal Government of Somalia and the Ministry of Energy and Water Resources is implementing . The project Development objective is to increase access to lower-cost and cleaner 
-              electricity supply in the project areas and to Re-establish the electricity supply industry.</p>
-              <a className="mt-4 inline-flex items-center gap-2 font-semibold underline underline-offset-4" href="#">Read for More →</a>
-            </article>
-
-            <article className="rounded-2xl p-6 bg-[#2FA8E1] text-white shadow-lg ring-1 ring-black/5 transition hover:shadow-xl" data-aos="fade-up" data-aos-delay="100">
-              <h4 className="font-bold">HoA GW4R Project</h4>
-              <p className="mt-2 text-white/90">Ministry of Energy & Water Resources of Jubaland is Implementing The Groundwater for Resilience project (GW4R)  whihc is a component of the World Bank financed Horn of Africa
-(HoA) initiative. The project is intended to increase sustainable access and management of groundwater
-as a key contributing factor to enhanced climate resilience of targeted communities.
-</p>
-              <a className="mt-4 inline-flex items-center gap-2 font-semibold underline underline-offset-4" href="#">Read for More →</a>
-            </article>
-
-            <article className="rounded-2xl p-6 bg-[#2FA8E1] text-white shadow-lg ring-1 ring-black/5 transition hover:shadow-xl" data-aos="fade-up">
-              <h4 className="font-bold">BARWAAQO Project</h4>
-              <p className="mt-2 text-white/90">Ministry of Energy & Water Resources of Jubaland is implementing The Rural Water Resilience Project, commonly referred to as the Barwaaqo Project, which is a vital initiative aimed at significantly improving water infrastructure and resilience in Somalia's rural areas. The project is designed to address critical water needs, enhance the 
-              quality and availability of water resources, and build resilience against climate variability. </p>
-              <a className="mt-4 inline-flex items-center gap-2 font-semibold underline underline-offset-4" href="#">Read for More →</a>
-            </article>
-
-            <article className="rounded-2xl p-6 bg-[#2FA8E1] text-white shadow-lg ring-1 ring-black/5 transition hover:shadow-xl" data-aos="fade-up" data-aos-delay="50">
-              <h4 className="font-bold">HAREACT Project</h4>
-              <p className="mt-2 text-white/90">The Ministry of Energy and Water Resources of 
-              Jubaland with support from the Ministry of Energy & Water Resources of Federal Government of Somalia is implementing Households Access to Renewable Energy and advancing cooking 
-              technologies project with a grant funding from African Development Bank.</p>
-              <a className="mt-4 inline-flex items-center gap-2 font-semibold underline underline-offset-4" href="#">Read for More →</a>
-            </article>
-
-            <article className="rounded-2xl p-6 bg-[#2FA8E1] text-white shadow-lg ring-1 ring-black/5 transition hover:shadow-xl" data-aos="fade-up" data-aos-delay="100">
-              <h4 className="font-bold">SCRP Project</h4>
-              <p className="mt-2 text-white/90">Ministry of Energy & Water Resources of Jubaland is implementing Somali Crisis Recovery Project (SCRP C6b) with fund support from Food and Agriculture Organization (FAO) International In the Jubaland State,
-               the project is targeting 14 water points identified as top priorities for rehabilitation.</p>
-              <a className="mt-4 inline-flex items-center gap-2 font-semibold underline underline-offset-4" href="#">Read for More →</a>
-            </article>
-
-            <article className="rounded-2xl p-6 bg-[#2FA8E1] text-white shadow-lg ring-1 ring-black/5 transition hover:shadow-xl" data-aos="fade-up">
-              <h4 className="font-bold">KOBCIYE Project</h4>
-              <p className="mt-2 text-white/90">The Ministry of Energy and Water Resources of Jubaland is Implementing Kobciye Project Funded by the World Food Programme (WFP).
-The Ministry and WFP are committed to addressing the challenges faced by pastoralists and farmers residing in the State of Jubaland in Somalia.
-</p>
-              <a className="mt-4 inline-flex items-center gap-2 font-semibold underline underline-offset-4" href="#">Read for More →</a>
-            </article>
-            <article className="rounded-2xl p-6 bg-[#2FA8E1] text-white shadow-lg ring-1 ring-black/5 transition hover:shadow-xl" data-aos="fade-up">
-              <h4 className="font-bold">LUGLOW PROJECT</h4>
-              <p className="mt-2 text-white/90">Jubaland Ministry of Energy and Water Resources, in partnership with UNICEF through funds from ECHO, is enhancing the Luglow water scheme to meet the present and future water demands of the service area. The ongoing efforts will attempt to address the water 
-              demand of the new settlement under the durable solution, exisitng IDP settlements and host communities.</p>
-              <a className="mt-4 inline-flex items-center gap-2 font-semibold underline underline-offset-4" href="#">Read for More →</a>
-            </article>
-            <article className="rounded-2xl p-6 bg-[#2FA8E1] text-white shadow-lg ring-1 ring-black/5 transition hover:shadow-xl" data-aos="fade-up">
-              <h4 className="font-bold">Emergency Response - Luuq</h4>
-              <p className="mt-2 text-white/90">The Jubaland Ministry of Energy and Water Resources, in collaboration with UNICEF, is implementing an emergency water system in the Luuq district to assist populations affected by inter-clan conflicts. These 
-              ongoing efforts aim to meet the urgent water needs of those impacted by the recent clashes in the area.</p>
-              <a className="mt-4 inline-flex items-center gap-2 font-semibold underline underline-offset-4" href="#">Read for More →</a>
-            </article>
-
-            <article className="rounded-2xl p-6 bg-[#2FA8E1] text-white shadow-lg ring-1 ring-black/5 transition hover:shadow-xl" data-aos="fade-up" data-aos-delay="50">
-              <h4 className="font-bold">Monitoring Of Strategy Of Water Source</h4>
-              <p className="mt-2 text-white/90">The Ministry of Energy & Water Resources of Jubaland with support from the Somali Water and Land Information Management (SWALIM) project, supported by the Food and Agriculture Organization of the United Nations (FAO), focuses on 
-              empowering Somali institutions to efficiently manage and utilize water and land resources.</p>
-              <a className="mt-4 inline-flex items-center gap-2 font-semibold underline underline-offset-4" href="#">Read for More →</a>
-            </article>
-            <article className="rounded-2xl p-6 bg-[#2FA8E1] text-white shadow-lg ring-1 ring-black/5 transition hover:shadow-xl" data-aos="fade-up" data-aos-delay="50">
-              <h4 className="font-bold">TAA PROJECT</h4>
-              <p className="mt-2 text-white/90">The Ministry of Energy & Water Resources of Jubaland has implemented Technical Assistant & Capacity Building Project supported by the Ministry of Energy & Water
-               Resources of Federal Government of Somalia , and funded by the African Development Bank. </p>
-              <a className="mt-4 inline-flex items-center gap-2 font-semibold underline underline-offset-4" href="#">Read for More →</a>
-            </article>
-            <article className="rounded-2xl p-6 bg-[#2FA8E1] text-white shadow-lg ring-1 ring-black/5 transition hover:shadow-xl" data-aos="fade-up" data-aos-delay="50">
-              <h4 className="font-bold">BULA-HAJI EMERGENCY INTERVENTION</h4>
-              <p className="mt-2 text-white/90">After the successful military operation by Jubaland state's forces, supported by Somali government soldiers, that Bulla-Haji town was reclaimed.  In response, the Ministry of Energy and Water Resources of Jubaland dispatched technical engineers to assess the WASH needs and ensure access to
-               clean and affordable water for the community and currently implementing Emergency WASH Project.</p>
-              <a className="mt-4 inline-flex items-center gap-2 font-semibold underline underline-offset-4" href="#">Read for More →</a>
-            </article>
-          </div>
-        </div>
-      </section> */}
+      {/* Current Interventions energy project */}
+     
 
       <section id="projects" className="bg-white/70 border-y ">
               <div className="max-w-7xl mx-auto px-4 py-16 lg:py-20">
@@ -718,6 +647,42 @@ The Ministry and WFP are committed to addressing the challenges faced by pastora
            </div>
               </div>
             </section>
+
+
+            {/* watere project */}
+            
+<section id="projects" className="bg-white/70 border-y ">
+        <div className="max-w-7xl mx-auto px-4 py-16 lg:py-20">
+          <h2 className="text-3xl font-bold tracking-tight" data-aos="fade-up">WATER PROJECTS</h2>
+          <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-2">
+            {/* Project card */}
+          
+{
+    Data.map((item)=>{ 
+    
+           
+         return  <article className="rounded-xl border bg-white p-6 shadow-md box-shadow-slate-800 border-[var(--brand-dark)]" data-aos="zoom-in" data-aos-delay="150">
+              <h3 className="font-semibold text-lg">{item.title}</h3>
+              <p className="mt-2 text-sm text-slate-600">{item.desc}</p>
+
+              <div className="flex justify-between ">
+              <Link
+  to={`/SingalProjectsWater/${item._id}`}
+  className="mt-4 inline-block px-3 py-2 rounded-md text-white bg-[#2FA8E1] hover:bg-[#0A7FB8]"
+>
+  Read for More
+</Link>
+<button className="mt-4 inline-block px-3 py-2 rounded-md text-black border border-black bg-white hover:bg-[#0A7FB8">{item.projectSatge}</button>
+              </div>
+
+            </article>
+            
+    })
+
+  }
+     </div>
+        </div>
+      </section>
 
       {/* Ministry Officials */}
      <section className="py-16">
