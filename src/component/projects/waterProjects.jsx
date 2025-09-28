@@ -64,12 +64,17 @@ export default function WaterProject() {
          return  <article className="rounded-xl border bg-white p-6 shadow-md box-shadow-slate-800 border-[var(--brand-dark)]" data-aos="zoom-in" data-aos-delay="150">
               <h3 className="font-semibold text-lg">{item.title}</h3>
               <p className="mt-2 text-sm text-slate-600">{item.desc}</p>
+
+              <div className="flex justify-between ">
               <Link
   to={`/SingalProjectsWater/${item._id}`}
   className="mt-4 inline-block px-3 py-2 rounded-md text-white bg-[#2FA8E1] hover:bg-[#0A7FB8]"
 >
   Read for More
 </Link>
+<button className="mt-4 inline-block px-3 py-2 rounded-md text-black border border-black bg-white hover:bg-[#0A7FB8">{item.projectSatge}</button>
+              </div>
+
             </article>
             
     })

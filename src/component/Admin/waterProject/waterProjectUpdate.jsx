@@ -573,6 +573,7 @@ export default function WaterProjectUpdate() {
         setstack2desc(data.stack2desc ?? "");
         setstack3Title(data.stack3Title ?? "");
         setstack3desc(data.stack3desc ?? "");
+        setprojectSatge(data.projectSatge ?? "");
 
         // images
         setCoverImage(data.coverImage ?? "");
@@ -652,6 +653,7 @@ export default function WaterProjectUpdate() {
       fd.append("stack2desc", stack2desc);
       fd.append("stack3Title", stack3Title);
       fd.append("stack3desc", stack3desc);
+        fd.append("projectSatge", projectSatge);
       fd.append("achievements", achievements);
 
       // files: only append if user picked a new one
@@ -974,7 +976,13 @@ export default function WaterProjectUpdate() {
               </div>
             ))}
           </section>
-
+ <label className="text-sm font-medium text-slate-700">Project Stage</label>
+                <input
+                  type="text"
+                  value={projectSatge}
+                  onChange={(e) => setprojectSatge(e.target.value)}
+                  className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
+                />
           {/* Actions */}
           <div className="h-2" />
           <div className="flex items-center justify-end gap-3 pt-2">
