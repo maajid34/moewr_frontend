@@ -1270,7 +1270,7 @@ export default function readProjectWaterSingal() {
             </div>
           </section>
 
-          {/* STAKEHOLDERS */}
+      
       
 
           {/* PROJECT PHOTOS GALLERY */}
@@ -1318,9 +1318,11 @@ export default function readProjectWaterSingal() {
             </div>
           </section>
           
-        
+            {/* STAKEHOLDERS */}
+
           <section className="py-14 bg-white">
             <h1 className="text-center font-bold mb-10 text-4xl text-black">Project Stakeholders</h1>
+            <p className="text-center m-2">{StackeholderDesc}</p>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-3 gap-10">
 
               <div>

@@ -862,7 +862,13 @@ export default function SingalProjectsEnergy() {
   const [stakeHolder2, setstakeHolder2] = useState("");
   const [stakeHolder3, setstakeHolder3] = useState("");
   const [stakeHolder4, setstakeHolder4] = useState("");
-
+    const [StackeholderDesc, setStackeholderDesc] = useState("");
+    const [stack1Title, setstack1Title] = useState("");
+    const [stack1desc, setstack1desc] = useState("");
+     const [stack2Title, setstack2Title] = useState("");
+    const [stack2desc, setstack2desc] = useState("");
+     const [stack3Title, setstack3Title] = useState("");
+    const [stack3desc, setstack3desc] = useState("");
   const [achievements, setAchievements] = useState([]);
 
   // NEW: Photos state
@@ -947,6 +953,13 @@ export default function SingalProjectsEnergy() {
         setstakeHolder2(data.stakeHolder2 || "");
         setstakeHolder3(data.stakeHolder3 || "");
         setstakeHolder4(data.stakeHolder4 || "");
+         setStackeholderDesc(data.StackeholderDesc || "");
+        setstack1Title(data.stack1Title || "");
+        setstack1desc(data.stack1desc || "");
+        setstack2Title(data.stack2Title || "");
+        setstack2desc(data.stack2desc || "");
+        setstack3Title(data.stack3Title || "");
+        setstack3desc(data.stack3desc || "");
 
         // Achievements from project document
         const arr = Array.isArray(data.achievements) ? data.achievements : [];
@@ -1266,41 +1279,50 @@ export default function SingalProjectsEnergy() {
             </div>
           </section>
 
-          {/* STAKEHOLDERS */}
+        
+           {/* STAKEHOLDERS */}
+
           <section className="py-14 bg-white">
             <h1 className="text-center font-bold mb-10 text-4xl text-black">Project Stakeholders</h1>
+            <p className="text-center m-2">{StackeholderDesc}</p>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-3 gap-10">
-            <div>
-                <img
+
+              <div>
+ <img
                 src={toAssetUrl(stackeHolder1)}
                 alt="stackeholder1"
                 onError={onImgError("stakeholder1", stackeHolder1, toAssetUrl(stackeHolder1))}
-                className="w-[200px] h-[200px] object-cover rounded-2xl shadow-xl border border-slate-200"
+                className="w-[300px] h-[300px] object-cover rounded-2xl shadow-xl border border-slate-200"
               />
-              <p className="p-5">Funded By</p>
-            </div>
+               <p className="p-5 font-bold">{stack1Title}</p>
+               <p className="p-5">{stack1desc}</p>
+              </div>
+              
+              <div>
 
-            <div>
-<img
+           
+              <img
                 src={toAssetUrl(stakeHolder2)}
                 alt="stackeholder2"
                 onError={onImgError("stakeholder2", stakeHolder2, toAssetUrl(stakeHolder2))}
-                className="w-[200px] h-[200px] object-cover rounded-2xl shadow-xl border border-slate-200"
+                className="w-[300px] h-[300px] object-cover rounded-2xl shadow-xl border border-slate-200"
               />
-              <p className="p-5">Implemented By</p>
-        
-            </div>
-              
-              <div>
-<img
+  <p className="p-5 font-bold">{stack2Title}</p>
+  <p className="p-5">{stack2desc}</p>
+                 </div>
+
+                 <div>
+
+               
+              <img
                 src={toAssetUrl(stakeHolder3)}
                 alt="stackeholder3"
                 onError={onImgError("stakeholder3", stakeHolder3, toAssetUrl(stakeHolder3))}
-                className="w-[200px] h-[200px] object-cover rounded-2xl shadow-xl border border-slate-200"
+                className="w-[300px] h-[300px] object-cover rounded-2xl shadow-xl border border-slate-200"
               />
-               <p className="p-5">Facilated By</p>
-              </div>
-              
+         <p className="p-5 font-bold">{stack3Title}</p>
+          <p className="p-5">{stack3desc}</p>
+                </div>
               {/* <img
                 src={toAssetUrl(stakeHolder4)}
                 alt="stackeholder4"
