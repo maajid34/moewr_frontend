@@ -1019,11 +1019,11 @@ export default function WaterProjectFormUI() {
                 </div>
               </div>
             </section>
-<input
+                 <input
                   value={projectSatge}
                   onChange={(t) => setprojectSatge(t.target.value)}
                   type="text"
-                  name="StackeholderDesc"
+                  name="projectSatge"
                   placeholder="Enter Project stage(complete etc)"
                   className="w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
                 />

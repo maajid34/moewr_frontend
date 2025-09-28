@@ -628,6 +628,7 @@ export default function WaterProjectUpdate() {
     if (!stack2desc.trim()) missing.push("stack2desc");
     if (!stack3Title.trim()) missing.push("stack3Title");
     if (!stack3desc.trim()) missing.push("stack3desc");
+    if (!projectSatge.trim()) missing.push("projectSatge");
     if (missing.length) {
       setSaving(false);
       setError(`Please fill required fields: ${missing.join(", ")}`);
