@@ -495,6 +495,7 @@ export default function WaterProjectUpdate() {
   const [stack2desc, setstack2desc] = useState("");
   const [stack3Title, setstack3Title] = useState("");
   const [stack3desc, setstack3desc] = useState("");
+  const [projectSatge, setprojectSatge] = useState("");
 
   // existing image filenames/URLs from backend
   const [coverImage, setCoverImage] = useState("");
