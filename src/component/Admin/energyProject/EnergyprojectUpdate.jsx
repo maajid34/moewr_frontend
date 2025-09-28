@@ -1093,6 +1093,7 @@ export default function EnergyProjectUpdate() {
       fd.append("componentTwo", componentTwo);
       fd.append("componentThree", componentThree);
       fd.append("componentFour", componentFour);
+      fd.append("projectSatge", projectSatge);
       fd.append("achievements", achievements);
 
       // files (singletons): only if changed
