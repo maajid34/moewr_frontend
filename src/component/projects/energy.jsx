@@ -72,7 +72,7 @@ export default function EnergyProject() {
 >
   Read for More
 </Link>
-<button className="mt-4 inline-block px-3 py-2 rounded-md text-black border border-black bg-white hover:bg-[#0A7FB8">Completed phase</button>
+<button className="mt-4 inline-block px-3 py-2 rounded-md text-black border border-black bg-white hover:bg-[#0A7FB8">{item.projectSatge}</button>
 </div>
   
 
