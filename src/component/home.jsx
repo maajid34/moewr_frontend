@@ -22,13 +22,7 @@ import MoewrFooter from '../pages/footer'
 
 
 export default function MinistryLanding() {
-  const [Data, setData] = useState([]);     // will hold the array from res.data.items
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
-  const [page, setPage] = useState(1);      // optional simple pagination (matches backend)
-  const [total, setTotal] = useState(0);
-  const [limit, setLimit] = useState(50);
-
+  
   // home qoraal
 const fullText = "Welcome to Ministry Energy and Resource of Jubaland";
   // const [displayText, setDisplayText] = useState("");
@@ -68,41 +62,102 @@ const fullText = "Welcome to Ministry Energy and Resource of Jubaland";
  
 
   // change every 3 seconds
-useEffect(() => {
-  const t = setInterval(() => {
-    setIndex((p) => (p + 1) % images.length);
-  }, 3000);
-  return () => clearInterval(t);
-}, [images.length]);
+// useEffect(() => {
+//   const t = setInterval(() => {
+//     setIndex((p) => (p + 1) % images.length);
+//   }, 3000);
+//   return () => clearInterval(t);
+// }, [images.length]);
 
-  // end images slide
+//   // end images slide
 
 
-useEffect(() => {
-  const fetchEvents = async () => {
-    try {
-      setLoading(true);
-      const res = await axios.get(
-        `http://localhost:3000/readProjectEvent/Event?page=${page}&limit=${limit}`
-      );
+// useEffect(() => {
+//   const fetchEvents = async () => {
+//     try {
+//       setLoading(true);
+//       const res = await axios.get(
+//         `http://localhost:3000/readProjectEvent/Event?page=${page}&limit=${limit}`
+//       );
 
-      // ✅ get only the last 3 posts (events)
-      const items = Array.isArray(res.data?.items) ? res.data.items : [];
-      const lastThree = items.slice(-3);
+//       // ✅ get only the last 3 posts (events)
+//       const items = Array.isArray(res.data?.items) ? res.data.items : [];
+//       const lastThree = items.slice(-3);
 
-      setData(lastThree);
-      setTotal(res.data?.total ?? 0);
-      setLimit(res.data?.limit ?? 50);
-    } catch (e) {
-      console.error("Error fetching events:", e);
-      setError("Failed to load events.");
-    } finally {
-      setLoading(false);
-    }
+//       setData(lastThree);
+//       setTotal(res.data?.total ?? 0);
+//       setLimit(res.data?.limit ?? 50);
+//     } catch (e) {
+//       console.error("Error fetching events:", e);
+//       setError("Failed to load events.");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   fetchEvents();
+// }, [page, limit]);
+ const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(0);
+  const [limit, setLimit] = useState(50);
+
+  // Hardcoded bases (no .env)
+  const API_BASE = "https://moewr-backend.onrender.com";
+  const ASSET_BASE = "https://pub-4fea174e190a460d8db367c215cf12ad.r2.dev";
+
+  // Build a safe asset URL from whatever the backend saved
+  const toAssetUrl = (v) => {
+    if (!v) return "";
+    if (typeof v !== "string") v = String(v);
+
+    // already full URL (http/https) → use as is
+    if (/^https?:\/\//i.test(v)) return v;
+
+    // some records stored like "/r2/event/cover/xxx.jpg" → strip "/r2/" and any leading slashes
+    const cleaned = v.replace(/^\/?r2\//i, "").replace(/^\/+/, "");
+
+    const full = `${ASSET_BASE}/${cleaned}`;
+    return full;
   };
 
-  fetchEvents();
-}, [page, limit]);
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        setLoading(true);
+        const res = await axios.get(
+          `${API_BASE}/readProjectEvent/Event?page=${page}&limit=${limit}`
+        );
+        const items = Array.isArray(res.data?.items) ? res.data.items : [];
+        setData(items);
+        setTotal(res.data?.total ?? 0);
+        setLimit(res.data?.limit ?? 50);
+
+        // Debug: show what images we’ll try to load
+        items.forEach((it) => {
+          if (it?.coverImage) {
+            console.log("Event image:", {
+              id: it._id || it.id,
+              raw: it.coverImage,
+              url: toAssetUrl(it.coverImage),
+            });
+          }
+        });
+      } catch (e) {
+        console.error("Error fetching events:", e);
+        setError("Failed to load events.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, [page, limit]);
+
+  if (loading) return <p className="p-6 text-slate-500">Loading…</p>;
+  if (error) return <p className="p-6 text-red-600">{error}</p>;
 
 
 
@@ -875,7 +930,8 @@ The Ministry and WFP are committed to addressing the challenges faced by pastora
       </section>
 
       {/* Recent Blog Posts */}
-      <section className="py-16 bg-[color:var(--brand)]/5">
+
+      {/* <section className="py-16 bg-[color:var(--brand)]/5">
         <div className="max-w-6xl mx-auto px-4">
           <header className="mb-8 flex items-end justify-between">
             <h2 className="text-3xl font-bold">Recent blog posts</h2>
@@ -902,7 +958,110 @@ The Ministry and WFP are committed to addressing the challenges faced by pastora
 </div>
 
         </div>
-      </section>
+      </section> */}
+       <section id="projects" className="bg-white/70 border-y">
+              <div className="max-w-7xl mx-auto px-4 py-16 lg:py-20">
+                <div className="flex items-end justify-between gap-4">
+                  <h2 className="text-3xl font-bold tracking-tight" data-aos="fade-up">
+                    Event
+                  </h2>
+                  <span className="text-sm text-slate-500">
+                    {data.length} of {total}
+                  </span>
+                </div>
+      
+                <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+                  {data.length === 0 ? (
+                    <p className="text-slate-500">No projects found.</p>
+                  ) : (
+                    data.map((item) => {
+                      const imgSrc = toAssetUrl(item.coverImage);
+      
+                      return (
+                        <article
+                          key={item._id || item.id}
+                          className="rounded-xl border bg-white p-6"
+                          data-aos="zoom-in"
+                          data-aos-delay="150"
+                        >
+                          {item.coverImage && (
+                            <img
+                              src={imgSrc}
+                              alt={item.title}
+                              className="mb-4 h-40 w-full object-cover rounded-lg"
+                              loading="lazy"
+                              onError={(e) => {
+                                console.error("Image failed to load", {
+                                  id: item._id || item.id,
+                                  raw: item.coverImage,
+                                  tried: imgSrc,
+                                });
+                                // Optional: show a neutral placeholder if you have one
+                                // e.currentTarget.src = "/placeholder.jpg";
+                                // Or hide the broken image:
+                                e.currentTarget.style.display = "none";
+                              }}
+                            />
+                          )}
+      
+                          <h3 className="font-semibold text-lg">{item.title}</h3>
+      
+                          {item.description && (
+                            <p
+                              className="mt-2 text-sm text-slate-600 break-words overflow-hidden"
+                              style={{
+                                display: "-webkit-box",
+                                WebkitLineClamp: 3,
+                                WebkitBoxOrient: "vertical",
+                                overflow: "hidden",
+                                overflowWrap: "anywhere",
+                                wordBreak: "break-word",
+                              }}
+                            >
+                              {item.description}
+                            </p>
+                          )}
+      
+                         <Link
+        to={`/SingalProjectsEvent/${item._id || item.id}`}
+        className="mt-10 inline-block px-3 py-2 rounded-md text-white bg-[#2FA8E1] hover:bg-[#0A7FB8]"
+      >
+        Read for More
+      </Link>
+                        </article>
+                      );
+                    })
+                  )}
+                </div>
+      
+                {total > limit && (
+                  <div className="mt-8 flex items-center gap-3">
+                    <button
+                      onClick={() => setPage((p) => Math.max(1, p - 1))}
+                      disabled={page === 1}
+                      className="px-3 py-2 rounded border disabled:opacity-50"
+                    >
+                      Prev
+                    </button>
+                    <span className="text-sm text-slate-600">Page {page}</span>
+                    <button
+                      onClick={() => {
+                        const maxPage = Math.max(1, Math.ceil(total / limit));
+                        setPage((p) => Math.min(maxPage, p + 1));
+                      }}
+                      disabled={page * limit >= total}
+                      className="px-3 py-2 rounded border disabled:opacity-50"
+                    >
+                      Next
+                    </button>
+                  </div>
+                )}
+              </div>
+            </section>
+
+
+
+      {/*  */}
 
       {/* Location & Working Hours */}
       {/* <section className="py-16">
