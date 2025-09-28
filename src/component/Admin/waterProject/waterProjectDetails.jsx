@@ -890,6 +890,13 @@ export default function readProjectWaterSingal() {
   const [stackeHolder1, setstackeHolder1] = useState("");
   const [stakeHolder2, setstakeHolder2] = useState("");
   const [stakeHolder3, setstakeHolder3] = useState("");
+    const [StackeholderDesc, setStackeholderDesc] = useState("");
+    const [stack1Title, setstack1Title] = useState("");
+    const [stack1desc, setstack1desc] = useState("");
+     const [stack2Title, setstack2Title] = useState("");
+    const [stack2desc, setstack2desc] = useState("");
+     const [stack3Title, setstack3Title] = useState("");
+    const [stack3desc, setstack3desc] = useState("");
   const [stakeHolder4, setstakeHolder4] = useState("");
 
   const [achievements, setAchievements] = useState([]);
@@ -976,6 +983,15 @@ export default function readProjectWaterSingal() {
         setstakeHolder2(data.stakeHolder2 || "");
         setstakeHolder3(data.stakeHolder3 || "");
         setstakeHolder4(data.stakeHolder4 || "");
+        setStackeholderDesc(data.StackeholderDesc || "");
+        setstack1Title(data.stack1Title || "");
+        setstack1desc(data.stack1desc || "");
+        setstack2Title(data.stack2Title || "");
+        setstack2desc(data.stack2desc || "");
+        setstack3Title(data.stack3Title || "");
+        setstack3desc(data.stack3desc || "");
+        
+
 
         // Achievements from project document
         const arr = Array.isArray(data.achievements) ? data.achievements : [];
@@ -1314,8 +1330,8 @@ export default function readProjectWaterSingal() {
                 onError={onImgError("stakeholder1", stackeHolder1, toAssetUrl(stackeHolder1))}
                 className="w-[300px] h-[300px] object-cover rounded-2xl shadow-xl border border-slate-200"
               />
-               <p className="p-5 font-bold">Funded By</p>
-               {/* <p className="p-5">This project is funded by USAID</p> */}
+               <p className="p-5 font-bold">{stack1Title}</p>
+               <p className="p-5">{stack1desc}</p>
               </div>
               
               <div>
@@ -1327,8 +1343,8 @@ export default function readProjectWaterSingal() {
                 onError={onImgError("stakeholder2", stakeHolder2, toAssetUrl(stakeHolder2))}
                 className="w-[300px] h-[300px] object-cover rounded-2xl shadow-xl border border-slate-200"
               />
-  <p className="p-5 font-bold">Supported By</p>
-  {/* <p className="p-5">This Project is Supported By UNICEF</p> */}
+  <p className="p-5 font-bold">{stack2Title}</p>
+  <p className="p-5">{stack2desc}</p>
                  </div>
 
                  <div>
@@ -1340,8 +1356,8 @@ export default function readProjectWaterSingal() {
                 onError={onImgError("stakeholder3", stakeHolder3, toAssetUrl(stakeHolder3))}
                 className="w-[300px] h-[300px] object-cover rounded-2xl shadow-xl border border-slate-200"
               />
-         <p className="p-5 font-bold">Implemented By </p>
-          {/* <p className="p-5">This Project Is Implemented By Ministry Off Energy and Water Resource Of Jubaland </p> */}
+         <p className="p-5 font-bold">{stack3Title}</p>
+          <p className="p-5">{stack3desc}</p>
                 </div>
               {/* <img
                 src={toAssetUrl(stakeHolder4)}
