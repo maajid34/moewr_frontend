@@ -65,12 +65,17 @@ export default function EnergyProject() {
                    
               
               <p className="mt-2 text-sm text-slate-600">{item.desc}</p>
-              <Link
-  to={`/SingalProjectsEnergy/${item._id}`}
+
+<div className="flex justify-between p-5">
+            <Link to={`/SingalProjectsEnergy/${item._id}`}
   className="mt-4 inline-block px-3 py-2 rounded-md text-white bg-[#2FA8E1] hover:bg-[#0A7FB8]"
 >
   Read for More
 </Link>
+<button className="mt-4 inline-block px-3 py-2 rounded-md text-black border border-black bg-white hover:bg-[#0A7FB8">Completed phase</button>
+</div>
+  
+
             </article>
             
     })

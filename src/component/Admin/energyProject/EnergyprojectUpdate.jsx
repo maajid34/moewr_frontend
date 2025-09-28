@@ -928,6 +928,7 @@ export default function EnergyProjectUpdate() {
     const [stack2desc, setstack2desc] = useState("");
     const [stack3Title, setstack3Title] = useState("");
     const [stack3desc, setstack3desc] = useState("");
+    const [projectSatge, setprojectSatge] = useState("");
 
   // Existing image strings from backend
   const [coverImage, setCoverImage] = useState("");
@@ -1016,6 +1017,7 @@ export default function EnergyProjectUpdate() {
         setstack2desc(data.stack2desc ?? "");
         setstack3Title(data.stack3Title ?? "");
         setstack3desc(data.stack3desc ?? "");
+        setprojectSatge(data.projectSatge ?? "");
 
         setCoverImage(data.coverImage ?? "");
         setObjectiveImage(data.objectiveImage ?? "");
@@ -1454,6 +1456,14 @@ export default function EnergyProjectUpdate() {
               </div>
             ))}
           </section>
+            <label className="text-sm font-medium text-slate-700">Project Stage</label>
+                <input
+                  type="text"
+                  value={projectSatge}
+                  onChange={(e) => setprojectSatge(e.target.value)}
+                  className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
+                />
+            
           {/* Actions */}
           <div className="h-2" />
           <div className="flex items-center justify-end gap-3 pt-2">

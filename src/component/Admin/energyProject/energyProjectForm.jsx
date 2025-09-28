@@ -492,6 +492,7 @@ export default function EnergyProjectFormUI() {
   const [stack2desc, setstack2desc] = useState("");
    const [stack3Title, setstack3Title] = useState("");
   const [stack3desc, setstack3desc] = useState("");
+  const [projectSatge, setprojectSatge] = useState("");
   const [achievements, setAchievements] = useState("");
 
   const [stackeHolder1, setstackeHolder1] = useState(null);
@@ -540,6 +541,7 @@ export default function EnergyProjectFormUI() {
     formData.append("stack2desc", stack2desc);
     formData.append("stack3Title", stack3Title);
     formData.append("stack3desc", stack3desc);
+    formData.append("projectSatge", projectSatge);
     if (stackeHolder1) formData.append("stackeHolder1", stackeHolder1);
     if (stakeHolder2) formData.append("stakeHolder2", stakeHolder2);
     if (stakeHolder3) formData.append("stakeHolder3", stakeHolder3);
@@ -938,6 +940,7 @@ export default function EnergyProjectFormUI() {
                   onChange={(t) => setStackeholderDesc(t.target.value)}
                   type="text"
                   name="StackeholderDesc"
+                  placeholder="Enter stackholder Desription"
                   className="w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
                 />
             <section className="grid lg:grid-cols-2 gap-6">
@@ -1097,6 +1100,14 @@ export default function EnergyProjectFormUI() {
                 </div>
               </div>
             </section>
+             <input
+                  value={projectSatge}
+                  onChange={(t) => setprojectSatge(t.target.value)}
+                  type="text"
+                  name="StackeholderDesc"
+                  placeholder="Enter Project stage(complete etc)"
+                  className="w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
+                />
 
             {/* Sticky spacer + actions */}
             <div className="h-2" />
