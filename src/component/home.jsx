@@ -179,9 +179,9 @@ const fullText = "Welcome to Ministry Energy and Resource of Jubaland";
 
 }
 
-   useEffect(() =>{
-    handleReadData()
-  },[])
+  //  useEffect(() =>{
+  //   handleReadData()
+  // },[])
 
   // end her projects code
 
