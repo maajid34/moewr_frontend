@@ -113,6 +113,7 @@ const fullText = "Welcome to Ministry Energy and Resource of Jubaland";
   
   // start here Energyproject code
  const [Data, setdata] = useState([])
+ const [wData, wsetdata] = useState([])
    const handleReadData = () =>{
 
      axios.get("https://moewr-backend.onrender.com/readProjectEnergy/EnergyProject").then((res) =>{
@@ -138,7 +139,7 @@ const fullText = "Welcome to Ministry Energy and Resource of Jubaland";
    const handlWatereeReadData = () =>{
 
      axios.get("https://moewr-backend.onrender.com/readProjectWater/waterProject").then((res) =>{
-      setdata(res.data)
+      wsetdata(res.data)
     
       
       
@@ -658,7 +659,7 @@ Ensuring adequate provision of administrative and financial support to all depar
             {/* Project card */}
           
 {
-    Data.map((item)=>{ 
+    wData.map((item)=>{ 
     
            
          return  <article className="rounded-xl border bg-white p-6 shadow-md box-shadow-slate-800 border-[var(--brand-dark)]" data-aos="zoom-in" data-aos-delay="150">
