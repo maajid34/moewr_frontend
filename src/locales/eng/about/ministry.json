@@ -1,0 +1,137 @@
+{
+  "hero": {
+    "title": "ABOUT MINISTRY",
+    "hq_alt": "MOEWR Jubaland Headquarters"
+  },
+
+  "about": {
+    "heading": "About Us",
+    "lead": "Welcome to the Ministry of Energy & Water Resources of Jubaland.",
+    "p1": "Ministry of Energy & Water Resources is one among the Jubaland State Ministries established in 2014 with responsibility for two core sectors: <b>Water Resources</b> and <b>Energy</b>. The ministry ensures equitable development, exploration, and distribution of energy and water to the people of Jubaland.",
+    "p2": "The Ministry is responsible for the formulation, direction, and coordination of state energy and water resources. It is tasked with creating institutions that manage water resources and deliver energy and water services for the benefit of Jubaland communities."
+  },
+
+  "vision": {
+    "badge": "Our Vision",
+    "title": "Our Vision",
+    "text": "To provide adequate, safe and affordable water, hygiene and sanitation for all. An energy industry that contributes to revenue streams and the socio-economic development of the state."
+  },
+
+  "mission": {
+    "badge": "Our Mission",
+    "title": "Our Mission",
+    "text": "To have a significant role in the socio-economic development of the people of Jubbaland State of Somalia through development and management of its water and energy resources in a sustainable manner; through provision of quality and equitable supplies in the entire state and by contributing significantly to food security and increased resilience to drought and natural disaster."
+  },
+
+  "mandates": {
+    "title": "Ministry Mandates",
+    "items": [
+      "Regulate & Set policy for Energy & Water Resources sectors",
+      "Implement & Facilitate development of the Energy & Water sectors",
+      "Provide Monitoring & Evaluation for sectoral activities",
+      "Ensure access to reliable clean energy, water resources & sewerage for society",
+      "Promote development of water & energy resources",
+      "Enhance resources mobilization for sectoral funding"
+    ]
+  },
+
+  "departments": {
+    "title": "Departments",
+    "cards": [
+      {
+        "title": "Admin, HR & Finance",
+        "text": "Provides administration and financial support, drives internal policy and governance for all directorates.",
+        "cta": "Read more"
+      },
+      {
+        "title": "Water Department",
+        "text": "Plans and delivers equitable water supply: boreholes, sand dams, storage and rural water systems across districts.",
+        "cta": "Read more"
+      },
+      {
+        "title": "Energy Department",
+        "text": "Develops the energy sector and improves access to reliable, affordable electricity for communities.",
+        "cta": "More info"
+      },
+      {
+        "title": "Planning & Policy",
+        "text": "Leads research, monitoring & evaluation, policy and regulatory frameworks for energy and water sectors.",
+        "cta": "Read more"
+      }
+    ]
+  },
+
+  "achievements": {
+    "title": "Ministry Achievements",
+    "stats": [
+      { "value": "2 MW", "text": "Our projects have added over 2 MW of renewable energy to the grid." },
+      { "value": "500,000 People", "text": "We have provided clean water access to over 500,000 people." },
+      { "value": "20 Projects Completed", "text": "We have successfully completed over 20 energy and water projects whilst running more than 10 Projects" },
+      { "value": "2,000 - Public Streetlights", "text": "With support from partners we have installed 2,000 Solar Streetlights in 9 districts of Jubaland State Somalia" },
+      { "value": "43,277 People", "text": "Distributed Hygiene kits to access essential health services and improve well-being in our community." },
+      { "value": "277 Shallow Wells", "text": "We have constructed over 277 shallow wells and maintain them with support from our Humanitarian Partners." },
+      { "value": "92 Boreholes", "text": "We have constructed/rehabilitated over 92 boreholes in two regions of Jubaland (Lower Juba & Gedo) in 12 districts." },
+      { "value": "226 Water Kiosks", "text": "Constructed over 226 water kiosks in 12 districts of Jubaland." },
+      { "value": "38 Water Pan", "text": "Constructed over 38 water pans." },
+      { "value": "790 Barkad", "text": "Constructed over 790 Barkad." }
+    ]
+  },
+
+  "services": {
+    "title": "Our services",
+    "cards": [
+      {
+        "title": "Energy Policy Planning",
+        "text": "We help governments create forward-thinking energy policies that ensure sustainable development"
+      },
+      {
+        "title": "Resource Management",
+        "text": "Our team provides strategies for effective management of natural resources to promote environmental balance"
+      },
+      {
+        "title": "Water Supply Solutions",
+        "text": "We deliver comprehensive solutions for ensuring clean and consistent water supply to communities."
+      },
+      {
+        "title": "Renewable Energy Projects",
+        "text": "Join us in promoting renewable energy by developing wind, solar, and hydroelectric projects."
+      },
+      {
+        "title": "Infrastructure Development",
+        "text": "Our experts oversee the design and implementation of efficient energy and water infrastructure."
+      },
+      {
+        "title": "Community Training",
+        "text": "We offer training programs to educate communities on sustainable energy practices and resource conservation."
+      }
+    ]
+  },
+
+  "officials": {
+    "title": "Ministry Officials",
+    "minister": {
+      "name": "H.E. Ahmed H. Baraki",
+      "title": "Minister of Energy & Water Resources – Jubaland",
+      "email_label": "Email:",
+      "email": "minister.moewr@jubalandstate.so",
+      "cta": "Facebook",
+      "alt": "Minister portrait"
+    },
+    "deputy": {
+      "name": "H.E. Mustafe Haji Mohamed",
+      "title": "Deputy Minister, MOEWR – Jubaland",
+      "email_label": "Email:",
+      "email": "deputyminister-moemw@jubalandstate.so",
+      "cta": "Facebook",
+      "alt": "Deputy Minister portrait"
+    },
+    "director": {
+      "name": "Ahmed Osman Siyah",
+      "title": "Director General – MOEWR, Jubaland",
+      "email_label": "Email:",
+      "email": "dg-moewr@jubalandstate.so",
+      "cta": "Facebook",
+      "alt": "Director General portrait"
+    }
+  }
+}

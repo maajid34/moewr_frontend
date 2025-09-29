@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import logo from "../assets/tamarta.png";
 import { useState } from "react";
+import LanguageSwitcher from "../component/LanguageSwitcher";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -88,6 +89,9 @@ export default function Header() {
           >
             Contact us
           </Link>
+          <div>
+            <LanguageSwitcher/>
+          </div>
         </nav>
 
         {/* Mobile toggler */}

@@ -5,6 +5,7 @@ import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import Header from './pages/header.jsx'
 import MoewrFooter from './pages/footer.jsx'
+import './i18n.js'
 
 
 

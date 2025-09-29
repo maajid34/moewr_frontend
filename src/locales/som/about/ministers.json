@@ -1,0 +1,64 @@
+{
+  "common": {
+    "hero_title": "HOGAANKA WASAARADDA",
+    "label_email": "E-boosto:",
+    "label_phone": "Telefoon:",
+    "social_twitter": "Twitter",
+    "social_facebook": "Facebook"
+  },
+
+  "minister": {
+    "img_alt": "Mudane Axmed Xuseen Baraaki, Wasiirka Tamarta & Kheyraadka Biyaha – Jubbaland",
+    "name": "Mudane Axmed Xuseen Baraaki",
+    "title": "Wasiirka Tamarta & Kheyraadka Biyaha – Dowlad Goboleedka Jubbaland, Soomaaliya",
+
+    "bio_heading": "Taariikh-nololeed",
+    "bio_p1": "Mudane Axmed Xuseen Barake, Wasiirka Tamarta & Kheyraadka Biyaha ee Jubbaland – Soomaaliya, waxa uu ku dhashay Kismaayo 1977 kuna barbaaray Degmada Jilib. Intii uu socday dagaalkii sokeeye waxa uu u guuray Kenya kadibna Maraykanka, halkaas oo uu ka qaatay shahaado Maamulka Ganacsiga jaamacadda Metro State University ee St. Paul, MN.",
+    "bio_p2": "Kadib 22 sano oo uu ka shaqaynayay Minneapolis dhinacyada maamulka iyo ganacsiga, waxa uu ku soo laabtay Kismaayo 2018 wuxuuna noqday Wasiir 2021. Wasaaraddu waxay hoggaamisaa barnaamijyo muhiim ah oo dhanka tamarta iyo biyaha ah, sida biyo bixinta & fayadhowrka magaalooyinka, qodista ceelasha, aasaasidda JUWA, sheybaar casri ah, iyo mashruuca dib u habeynta korontada Soomaaliya.",
+
+    "msg_heading": "Farriinta Wasiirka",
+    "msg_p1": "Shacab weynaha Jubbaland, bah-wadaagta iyo dhammaan daneeyayaasha Tamarta & Biyaha,",
+    "msg_p2": "Waa sharaf iyo masuuliyad in aan idinla hadlo anigoo ah Wasiirka Tamarta & Kheyraadka Biyaha. Dalkeenna guud ahaan iyo gaar ahaan Jubbaland waxa uu marayaa marxalad ay muhiim tahay horumar waara iyo isticmaal hufan oo kheyraadkeenna ah.",
+    "msg_p3": "Wasaaraddu waxay xoogga saari doontaa mashaariic muhiim ah: helitaanka tamar lagu kalsoonaan karo, maareynta waarta ee biyaha, iyo horumarinta tamarta la cusboonaysiin karo—si aan u xaqiijino aayaha carruurteena.",
+    "msg_p4": "Waxaan si dhow ula shaqayn doonnaa bulshada, ganacsiyada iyo bah-wadaagta caalamiga ah si aan u gaadhno himiladeena. Ujeeddadeennu waa in qoys kasta oo Jubbaland ah yeesho biyo nadiif ah iyo tamar lagu kalsoonaan karo.",
+    "msg_p5": "Waxaan ugu baaqayaa dhammaan shacabka iyo daneeyayaasha inay taageeraan mashaariicda, ilaaliyaan kheyraadka, isla markaana ka qayb qaataan horumarinta waarta ee gobolka.",
+
+    "sign_1": "Ixtiraam badan,",
+    "sign_2": "Mudane Axmed H. Baraaki",
+    "sign_3": "Wasiirka Tamarta & Kheyraadka Biyaha",
+    "sign_4": "Dowlad Goboleedka Jubbaland, Soomaaliya"
+  },
+
+  "deputy": {
+    "img_alt": "Mudane Mustafe Xaaji Maxamed",
+    "name": "Mudane Mustafe Xaaji Maxamed",
+    "title": "Wasiir Ku-xigeenka Tamarta & Kheyraadka Biyaha – Jubbaland",
+
+    "label_expertise": "Khibrad:",
+    "label_experience": "Waayo-aragnimo:",
+    "label_email": "E-boosto:",
+    "label_tel": "Tel:",
+
+    "expertise_text": "Maamulka Shabakadaha & Maaraynta Xogta (8 sano); Maamulka Ganacsiga & Xisaabaadka.",
+    "experience_years": "20 Sano",
+
+    "p1": "Wasiir Ku-xigeenka Tamarta iyo Kheyraadka Biyaha waxa lagu magacaabay Digreeto Madaxweyne si uu uga taageero wasaaradda hoggaaminta, qorshaynta istiraatiijiga ah, iyo adeegyada bulshada.",
+    "p2": "Mudane Mustafe Xaaji Maxamed Axmed waa ganacsade leh khibrad qoto dheer oo ku saabsan maamulka ganacsiga, shabakadaha, iyo maaraynta xogta."
+  },
+
+  "director": {
+    "img_alt": "Axmed Cusmaan Siyaah",
+    "name": "Axmed Cusmaan Siyaah",
+    "title": "Agaasimaha Guud – Wasaaradda Tamarta & Kheyraadka Biyaha, Jubbaland",
+
+    "label_expertise": "Khibrad:",
+    "label_email": "E-boosto:",
+    "label_phone": "Telefoon:",
+
+    "expertise_text": "Waxbarasho, isbeddelka cimilada, iyo deegaan waara; 10+ sano waayo-aragnimo ah qaybaha Waxbarashada, Tamarta & Biyaha.",
+    "email": "dg-moewr@jubalandstate.so",
+
+    "p1": "Agaasimaha Guud wuxuu hoggaamiyaa hawlaha MEWR, horeyna uga soo shaqeeyay Wasaaradda Waxbarashada ee Jubbaland. Wuxuu leeyahay khibrad hoggaamineed oo ballaaran iyo adeeg bulsho oo qoto dheer.",
+    "p2": "Waxa uu hayaa shahaado Master-ka ee Waxbarashada, Isbeddelka Cimilada iyo Deegaanka Waara, isaga oo ka go’an xoojinta adeegyada dadweynaha ee adkaysiga leh."
+  }
+}

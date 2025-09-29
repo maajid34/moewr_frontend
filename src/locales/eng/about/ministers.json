@@ -1,0 +1,64 @@
+{
+  "common": {
+    "hero_title": "ABOUT LEADERSHIP",
+    "label_email": "Email:",
+    "label_phone": "Phone:",
+    "social_twitter": "Twitter",
+    "social_facebook": "Facebook"
+  },
+
+  "minister": {
+    "img_alt": "H.E. Ahmed Hussein Baraki, Minister of Energy & Water Resources – Jubaland",
+    "name": "H.E. Ahmed Hussein Baraki",
+    "title": "Minister of Energy & Water Resources – Jubaland State, Somalia",
+
+    "bio_heading": "Biography",
+    "bio_p1": "H.E. Ahmed Hussein Barake, the Minister of Energy & Water Resources of Jubaland State – Somalia, was born in Kismayo in 1977 and raised in Jilib District. During the civil war he migrated to Kenya and later to the USA, where he graduated from Metro State University in St. Paul, MN with a degree in Business Management.",
+    "bio_p2": "After 22 years in Minneapolis in management and business administration, he returned to Kismayo in 2018 and was appointed Minister in 2021. The Ministry leads programs across energy and water sectors for the benefit of Jubaland citizens, including urban water supply & sanitation, borehole drilling, the formation of the Jubaland Water Agency (JUWA), a state-of-the-art water laboratory, and the Somali Electricity Sector Recovery Project.",
+
+    "msg_heading": "Minister Message",
+    "msg_p1": "Dear Citizens of Jubaland, Partners and all Stakeholders of Water & Energy,",
+    "msg_p2": "It is with great honor and responsibility that I address you today as the Minister of Energy & Water Resources. Our country—Somalia at large, and Jubaland State in particular—stands at a critical juncture where sustainable development and the efficient use of our resources are more important than ever.",
+    "msg_p3": "Our Ministry will focus on implementing key initiatives aimed at improving access to clean and reliable energy, ensuring sustainable water management, and supporting the development of renewable energy sources. These efforts are not just about meeting the needs of today, but also about securing a better future for our children.",
+    "msg_p4": "We are committed to working closely with local communities, businesses, and international partners to achieve these goals. Our aim is to ensure that every household in Jubaland has access to clean water and reliable energy—fundamental rights for all.",
+    "msg_p5": "I call upon all citizens and stakeholders to support our initiatives, to be mindful of our precious resources, and to participate in the sustainable development of our region. Together, we can build a brighter and more prosperous future for Jubaland.",
+
+    "sign_1": "With best regards,",
+    "sign_2": "H.E. Ahmed H. Baraki",
+    "sign_3": "Minister of Energy & Water Resources",
+    "sign_4": "Jubaland State of Somalia"
+  },
+
+  "deputy": {
+    "img_alt": "H.E. Mustafe Haji Mohamed",
+    "name": "H.E. Mustafe Haji Mohamed",
+    "title": "Deputy Minister of Energy & Water Resources – Jubaland State, Somalia",
+
+    "label_expertise": "Expertise:",
+    "label_experience": "Experience:",
+    "label_email": "Email:",
+    "label_tel": "Tel:",
+
+    "expertise_text": "Network Administration & Data Management (8 years); Business Administration & Accounting.",
+    "experience_years": "20 Years",
+
+    "p1": "The Deputy Minister of Energy and Water Resources was appointed by Presidential Decree to support the ministry in leadership, strategic planning, and community-focused delivery.",
+    "p2": "H.E. Mustafe Haji Mohamed Ahmed is a business entrepreneur with deep experience across business administration, networking, and data management."
+  },
+
+  "director": {
+    "img_alt": "Ahmed Osman Siyah",
+    "name": "Ahmed Osman Siyah",
+    "title": "Director General – Ministry of Energy & Water Resources, Jubaland",
+
+    "label_expertise": "Expertise:",
+    "label_email": "Email:",
+    "label_phone": "Phone:",
+
+    "expertise_text": "Education, climate change, environmental sustainability; 10+ years across Education, Energy & Water sectors.",
+    "email": "dg-moewr@jubalandstate.so",
+
+    "p1": "The Director General leads MEWR operations and formerly served with the Ministry of Education of Jubaland. He brings extensive leadership experience and a strong record of service to the Jubaland community, both in humanitarian principles and government operations.",
+    "p2": "He holds a graduate master’s in Education, Climate Change, and Environmental Sustainability and is committed to strengthening resilient public services for all citizens."
+  }
+}

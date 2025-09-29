@@ -1,0 +1,119 @@
+{
+  "hero": {
+    "title": "KU SAABSAN WASAARADDA",
+    "hq_alt": "Xarunta Wasaaradda Tamarta & Kheyraadka Biyaha ee Jubbaland"
+  },
+
+  "about": {
+    "heading": "Nagu saabsan",
+    "lead": "Ku soo dhawoow Wasaaradda Tamarta & Kheyraadka Biyaha ee Jubbaland.",
+    "p1": "Wasaaraddu waxa la aas-aasay 2014, waxayna mas’uul ka tahay laba waaxood oo asaasi ah: <b>Kheyraadka Biyaha</b> iyo <b>Tamarta</b>. Wasaaraddu waxay hubisaa horumar cadaalad ah, sahamin iyo qaybin tamar iyo biyo oo ku wajahan shacabka Jubbaland.",
+    "p2": "Wasaaraddu waxay qaabilsan tahay dejinta, hagista iyo isku-duwidda siyaasadaha iyo qorshayaasha kheyraadka tamarta iyo biyaha ee dowlad-goboleedka, iyo dhisidda hay’ado maamula biyaha isla markaana gaarsiiya adeegyada tamar iyo biyo bulshada Jubbaland."
+  },
+
+  "vision": {
+    "badge": "Himilo",
+    "title": "Himiladeenna",
+    "text": "In la helo biyo nadiif ah, ammaan ah oo la awoodi karo, nadaafad iyo fayadhowr qof walba; warshad tamar ah oo ka qayb qaadata dakhli abuurka iyo koboca dhaqaale ee dowlad-goboleedka."
+  },
+
+  "mission": {
+    "badge": "Ujeeddo",
+    "title": "Ujeeddadeenna",
+    "text": "Inaan door muuqda ka qaadanno horumarka bulshada Jubbaland annagoo si waara u horumarinna iyo u maamuleyna kheyraadka biyaha iyo tamarta; annagoo bixinayna adeegyo tayo leh oo caddaalad ah guud ahaan gobolka, isla markaana si weyn uga qayb qaadanna sugnaanta cuntada iyo adkeysiga abaarta iyo masiibooyinka dabiiciga ah."
+  },
+
+  "mandates": {
+    "title": "Waajibaadka Wasaaradda",
+    "items": [
+      "Dejinta & Hagidda siyaasadaha qaybaha Tamarta & Biyaha",
+      "Hirgelinta & Dhiirrigelinta horumarinta qaybaha Tamarta & Biyaha",
+      "Kormeer & Qiimayn hawlaha qaybaha",
+      "Hubinta helitaanka tamar lagu kalsoonaan karo, biyo iyo bulaacadaha bulshada",
+      "Kobcinta horumarinta kheyraadka biyaha & tamarta",
+      "Xoojinta ururinta dhaqaalaha (funding) ee qaybaha"
+    ]
+  },
+
+  "departments": {
+    "title": "Waaxyaha",
+    "cards": [
+      {
+        "title": "Maamulka, HR & Maaliyadda",
+        "text": "Waxay bixisaa taageero maamul iyo maaliyad, waxayna hormuud u tahay siyaasadaha gudaha iyo maamul wanaagga dhammaan waaxyaha.",
+        "cta": "Akhri dheeraad"
+      },
+      {
+        "title": "Waaxda Biyaha",
+        "text": "Waxay qorshaysaa oo fulisaa biyo-siin cadaalad ah: ceelal, barkado ciid ah, kaydin iyo nidaamyada biyaha miyiga ee degmooyinka.",
+        "cta": "Akhri dheeraad"
+      },
+      {
+        "title": "Waaxda Tamarta",
+        "text": "Waxay horumarisaa qaybta tamarta, iyadoo yareynaysa qiimaha lana kordhinayo helitaanka koronto lagu kalsoonaan karo.",
+        "cta": "Faahfaahin"
+      },
+      {
+        "title": "Qorshaynta & Siyaasadda",
+        "text": "Waxay hoggaamisaa cilmi-baarista, kormeerka & qiimaynta, iyo dejinta siyaasadaha iyo xeerarka qaybaha tamarta iyo biyaha.",
+        "cta": "Akhri dheeraad"
+      }
+    ]
+  },
+
+  "achievements": {
+    "title": "Guulaha Wasaaradda",
+    "stats": [
+      { "value": "2 MW", "text": "Mashaariicdayadu waxay shabakadda ku dareen in ka badan 2 MW oo tamar la cusboonaysiin karo." },
+      { "value": "500,000 Qof", "text": "Waxaan biyo nadiif ah gaarsiinnay in ka badan 500,000 qof." },
+      { "value": "20 Mashruuc La Dhammeeyay", "text": "Waxaan si guul leh u dhammeeynay in ka badan 20 mashruuc oo tamar iyo biyo ah, annagoo weli wadaan in ka badan 10 mashruuc." },
+      { "value": "2,000 Nalal Waddo", "text": "Annagoo kaashanayna la-hawlgalayaal waxaan rakibnay 2,000 nalal qorraxdu shaqayso 9 degmo ee Jubbaland." },
+      { "value": "43,277 Qof", "text": "Waxaan qaybinay agabka nadaafadda si loo helo adeegyo caafimaad oo asaasi ah loona wanaajiyo nolosha bulshada." },
+      { "value": "277 Ceelal Gadaal Yar", "text": "Waxaan dhisnay in ka badan 277 ceelal gadaal yar oo aan dayactirno annagoo kaashanayna hay’ado bani’aadamnimo." },
+      { "value": "92 Ceelal Qodxo", "text": "Waxaan dhisnay/dib u dhisnay in ka badan 92 ceelal qodxo (boreholes) laba gobol ee Jubbaland (Jubbada Hoose & Gedo) 12 degmo." },
+      { "value": "226 Kiyoos Biyo", "text": "Waxaan ka dhisnay 226 kiyoos biyo 12 degmo ee Jubbaland." },
+      { "value": "38 Balliyo Biyo", "text": "Waxaan dhisnay in ka badan 38 balli biyo." },
+      { "value": "790 Barkado", "text": "Waxaan dhisnay in ka badan 790 barkado." }
+    ]
+  },
+
+  "services": {
+    "title": "Adeegyadeenna",
+    "cards": [
+      { "title": "Qorshaynta Siyaasadda Tamarta", "text": "Waxaan ka caawinaynaa dowladaha inay sameeyaan siyaasad tamar oo horumarineed oo waarta." },
+      { "title": "Maareynta Kheyraadka", "text": "Kooxdayadu waxay diyaariyaan istaraatiijiyado maareynta kheyraadka si deegaanka loo ilaaliyo." },
+      { "title": "Xalka Biyo-siinta", "text": "Waxaan bixinnaa xalal dhamaystiran si bulshooyinka ay u helaan biyo nadiif ah oo joogto ah." },
+      { "title": "Mashaariic Tamarta La Cusboonaysiin Karo", "text": "Ku soo biir horumarinta tamarta dabaysha, cadceedda iyo biyaha." },
+      { "title": "Horumarinta Kaabayaasha", "text": "Khabiirradeennu waxay kormeeraan naqshadeynta iyo hirgelinta kaabayaasha tamarta iyo biyaha." },
+      { "title": "Tababbarka Bulshada", "text": "Waxaan bixinaa tababarro ku saabsan isticmaalka tamar-waarta iyo keydinta kheyraadka." }
+    ]
+  },
+
+  "officials": {
+    "title": "Mas’uuliyiinta Wasaaradda",
+    "minister": {
+      "name": "Mudane Axmed H. Baraaki",
+      "title": "Wasiirka Tamarta & Kheyraadka Biyaha – Jubbaland",
+      "email_label": "E-boosto:",
+      "email": "minister.moewr@jubalandstate.so",
+      "cta": "Facebook",
+      "alt": "Sawirka Wasiirka"
+    },
+    "deputy": {
+      "name": "Mudane Mustafe Xaaji Maxamed",
+      "title": "Wasiir Ku-xigeen, MOEWR – Jubbaland",
+      "email_label": "E-boosto:",
+      "email": "deputyminister-moemw@jubalandstate.so",
+      "cta": "Facebook",
+      "alt": "Sawirka Wasiir Ku-xigeenka"
+    },
+    "director": {
+      "name": "Axmed Cusmaan Siyaah",
+      "title": "Agaasimaha Guud – MOEWR, Jubbaland",
+      "email_label": "E-boosto:",
+      "email": "dg-moewr@jubalandstate.so",
+      "cta": "Facebook",
+      "alt": "Sawirka Agaasimaha Guud"
+    }
+  }
+}
