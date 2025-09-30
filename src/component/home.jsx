@@ -61,13 +61,13 @@ const fullText = "Welcome to Ministry Energy and Resource of Jubaland";
   const [fade, setFade] = useState(true);
  
 
-  // change every 3 seconds
-// useEffect(() => {
-//   const t = setInterval(() => {
-//     setIndex((p) => (p + 1) % images.length);
-//   }, 3000);
-//   return () => clearInterval(t);
-// }, [images.length]);
+  change every 3 seconds
+useEffect(() => {
+  const t = setInterval(() => {
+    setIndex((p) => (p + 1) % images.length);
+  }, 3000);
+  return () => clearInterval(t);
+}, [images.length]);
 
 //   // end images slide
 
