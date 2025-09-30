@@ -1,0 +1,125 @@
+{
+  "hero": { "title": "WAAXDA TAMARTA", "top": "Kore" },
+  "background": {
+    "alt": "Goob yar oo tamar qorrax ah",
+    "title": "Asal / Xog Kooban",
+    "p1": "Waaxda tamarta ee Jubaland waxay ku tiirsan tahay isku dhaf dhaqan iyo casri ah, iyadoo diiradda sii kordhaysa lagu saarayo tamarta la cusboonaysiin karo. Qoysas badan weli waxay isticmaalaan matooro naafto iyo dhuxul/caag si koronto iyo karinta, balse waxaa socda dadaal lagu ballaarinayo xalal nadiif ah oo waara. Caqabadaha waxaa ka mid ah kaabayaal tabar yar, qiime koronto oo qaali ah, iyo isku xirka shabakadda oo xaddidan. Si kastaba, qorrax iyo dabab badan ayaa keenaya fursad weyn. Dowladda ayaa ka shaqaynaysa soo jiidashada maal-gelinta, kordhinta heerka koronto-gelinta, iyo hufnaanta tamarta. Waaxda Tamarta ee Wasaaradda Tamarta iyo Biyaha ayaa dejisa siyaasadaha, maamusha nidaamka, kormeerta mashaariicda kaabayaal, isla markaana xaqiijisa sahay koronto oo la isku hallayn karo oo waarta iyadoo ay ka shaqeeyaan injineerro iyo khubaro kala duwan."
+  },
+  "vmo": {
+    "vision": { "title": "Aragti", "text": "Inay noqoto hay’ad hormuud u ah isbeddelka qaybta tamarta, korna u qaadda kobaca dhaqaale iyo horumarka bulsho iyada oo la adeegsanayo xalal tamareed oo waara, hal-abuur leh oo ka-midho-dhala Jubaland." },
+    "mission": { "title": "Hadaf", "text": "In la hubiyo in dhammaan muwaadiniintu helaan tamar la isku halleyn karo, jaban oo waarta; iyadoo la dhisayo kaabayaal adkaysi leh, la dhiirrigelinayo maal-gelinta tamarta la cusboonaysiin karo, lana fulinayo siyaasado taageera kobaca iyo deegaan-nabadgelyada." },
+    "objectives": { "title": "Ujeeddooyin", "text": "In la ballaariyo helitaanka, la xaqiijiyo waaraanshaha, lana dardargeliyo qaadashada tamarta la cusboonaysiin karo iyada oo loo marayo siyaasado, nidaamyo iyo maal-gelin istaraatiiji ah." }
+  },
+  "services": {
+    "title": "Adeegyada",
+    "cards": {
+      "people": { "title": "25,000 Qof", "text": "Qalab nadaafadeed ayaa la qaybiyey si loo kordhiyo caafimaadka iyo nolol-wanaagga." },
+      "boreholes": { "title": "92 Ceel Qod ah", "text": "Waxaa laga dhisay/laga dayactiray Jubbada Hoose & Gedo." },
+      "shallowWells": { "title": "251 Ceelal Gaagaaban", "text": "Waxay hagaajiyeen helitaanka biyo lagu kalsoonaan karo ee qoysaska." },
+      "kiosks": { "title": "226 Kiosk-biyo", "text": "Laguu rakibay xeryaha barakacayaasha iyo deegaannada nugul." }
+    }
+  },
+  "mandates": {
+    "title": "Waajibaadka Waaxda",
+    "items": {
+      "policy": { "title": "Siyaasad & Istaraatiijiyad", "text": "Dejinta iyo hirgelinta siyaasado/istaraatiijiyado si loo hubiyo amniga tamarta iyo waaraanshaha." },
+      "regulation": { "title": "Xeer-dejis & Kormeer", "text": "Kormeerka soosaarka, gudbinta, qaybinta iyo isticmaalka." },
+      "renewables": { "title": "Tamarta La Cusboonaysiin Karo & Hufnaan", "text": "Dhiirrigelinta tamarta cagaaran iyo hufnaanta isticmaalka." },
+      "investment": { "title": "Dhiirrigelinta Maal-gelinta", "text": "Sahlidda maal-gelinta kaabayaal iyo mashaariic tamareed." },
+      "cooperation": { "title": "Iskaashi", "text": "La shaqaynta hay’ado gobolka iyo caalamka." }
+    }
+  },
+  "demand": {
+    "title": "Baahida iyo Bixinta Tamarta",
+    "p1": "Baahidu way koraysaa sababo la xiriira kororka dadweynaha, magaaloobidda iyo dhaqaalaha. Bixintu weli waa xaddidan oo qaali ah, iyadoo qiimaha sare uu ka yimaado ku tiirsanaanta naaftada.",
+    "sectorsTitle": "Qaybaha Muhiimka ee Baahida",
+    "sectors": {
+      "households": "Guryaha — inta badan waxay ku tiirsan yihiin naafto iyo shidaal guri/kharash.",
+      "commercial": "Ganacsi & Warshado — waxay u baahan yihiin koronto xasilloon balse waxay wajahaan qiime sare iyo jaranjarrooyin goos-goos ah.",
+      "public": "Adeegyada Dadweynaha — caafimaad, waxbarasho iyo hay’adaha dowladeed oo ay saameyso koronto la’aanta."
+    },
+    "p2": "Awoodda la rakibay ma filna, fidinta shabakadduna waa gaabis. Si kastaba, nidaamyada qorraxda ee guryaha iyo mini-grids ayaa kordhaya."
+  },
+  "power": {
+    "title": "Baahida Korontada ee Jubaland",
+    "table": { "sn": "L/R", "desc": "Sharaxaad", "qty": "Tiro", "load": "Culays (kW)", "total": "Wadar (kW)", "sum": "Wadarta" },
+    "rows": {
+      "residential": "Guryaha Deggenaanshaha",
+      "kismayoAirport": "Garoonka Kismaayo",
+      "otherAirports": "Garoomo Kale oo Maxalli ah",
+      "seaPort": "Dekedda Kismaayo",
+      "schools": "Dugsiyada",
+      "kismayoHospital": "Isbitaalka Kismaayo",
+      "otherHospitals": "Isbitaallo Degmooyin Kale",
+      "medicalCenters": "Xarumaha Caafimaadka",
+      "industry": "Warshadaha",
+      "agriculture": "Beeraha",
+      "ministries": "Wasaaradaha",
+      "treatment": "Warshadda Sifaynta Biyaha",
+      "hotels": "Hoteellada"
+    },
+    "rationale": {
+      "title": "Sababta Dib-u-habaynta Qaybta Tamarta",
+      "items": {
+        "0": "In la ballaariyo helitaan jaban oo lagu kalsoonaan karo iyada oo la maal-gelinayo cagaar iyo shabakad.",
+        "1": "In la dhimo ku tiirsanaanta naaftada iyadoo la kobcinayo qorrax, dab iyo xalal isku-dhar ah.",
+        "2": "In la xoojiyo nidaamka iyo siyaasadaha si loo soo jiito maal-gelinta gaar-looga.",
+        "3": "In la tababaro khubarada iyo farsamayaqaannada tamarta/green.",
+        "4": "In la xoojiyo iskaashiga PPP si loo helo khayraad iyo maal-gelin waaweyn.",
+        "5": "In koronto-gelinta miyiga lagu hormariyo off-grid solar iyo mini-grids.",
+        "6": "In la kordhiyo hufnaanta iyo ilaalinta deegaanka, oo ay ku jiraan karinta nadiifta ah."
+      }
+    }
+  },
+  "framework": {
+    "title": "Hannaanka Adkaynta Hay’adaha",
+    "current": {
+      "title": "Hannaanka Hadda",
+      "note": "Doorkii ay hadda ku dhaqmaan Wasaaradda iyo shirkadaha korontada (ESPs).",
+      "ministry": {
+        "title": "Doorka Wasaaradda Tamarta & Biyaha – Jubaland",
+        "items": ["Xeerarka, qiimaha & tilmaamaha", "Dejinta siyaasadda", "Maxkamadda tamarta", "Ururinta/maal-gelinta khayraadka", "Kormeer & isku-duwid", "Horumarinta istaraatiijiga", "Hirgelinta kaabayaal", "Maamulka hantida", "Kormeer tayo tamareed", "Ruqsado & oggolaansho", "Kormeerka heshiisyada ruqsadaha"]
+      },
+      "esps": {
+        "title": "Doorka Shirkadaha Korontada (ESPs)",
+        "items": ["Soo-saarista korontada", "Bixinta adeega – qaybinta guryaha", "Horumarin & maarayn shabakad qaybinta", "Isku xirka marinka dambe", "Mitirrada korontada", "Bixinta/canshuur celinta macaamiisha"]
+      }
+    },
+    "future": {
+      "title": "Hannaanka La Qorsheeyey",
+      "note": "Qaab dhismeed cad oo u dhexeeya Wasaaradda, JEDA, iyo ESPs.",
+      "ministry": {
+        "title": "Doorka Wasaaradda Tamarta & Biyaha – Jubaland",
+        "items": ["Xeerar, qiime & tilmaamo", "Dejinta siyaasadda", "Maxkamad tamareed", "Ururin/maal-gelin", "Kormeer & isku-duwid", "Horumarinta istaraatiijiyadda"]
+      },
+      "jeda": {
+        "title": "Doorka Hay’adda Horumarinta Tamarta Jubaland (JEDA)",
+        "items": ["Hirgelinta kaabayaal", "Maamulka hantida", "Kormeer tayo tamareed", "Soo-saarista korontada", "Ruqsad & oggolaansho", "Kormeerka heshiisyada ruqsadaha"]
+      },
+      "esps": {
+        "title": "Doorka Shirkadaha Korontada (ESPs)",
+        "items": ["Bixinta adeegga – qaybinta koronto", "Horumarinta/maareynta qaybinta", "Isku xirka marinka dambe", "Mitir koronto", "Bixin-xisaabeed macaamiil"]
+      }
+    }
+  },
+  "achievements": {
+    "title": "Guulaha Kooban",
+    "items": {
+      "streetlights": { "title": "2,000 Laambado Waddo", "text": "Waxaa laga rakibay 9 degmo iyadoo lala kaashanayo la-hawlgalayaal." },
+      "pv": { "title": "12MW Qorrax & 13MW Kaydin", "text": "12MW solar iyo 13.4MW baytari ayaa lagu kordhiyey nidaamka." },
+      "districts": { "title": "11 Degmo", "text": "Kaabayaal tamareed ayaa la xoojiyey Jubbada Hoose & Gedo." },
+      "institutions": { "title": "79 Hay’ado Dadweyne", "text": "Koronto ayaa loo geliyey dugsiyo, xarumo caafimaad iyo hay’ado kale." }
+    }
+  },
+  "projects": { "title": "MASHRUUUCYADA TAMARTA" },
+  "regs": {
+    "title": "Xeerar iyo Siyaasado",
+    "cards": {
+      "act": "Sharciga Tamarta Qaranka",
+      "licensing": "Xeerka Ruqsadaha Korontada — 2023",
+      "tariffs": "Xeerka Qiimaha Korontada — 2023"
+    }
+  },
+  "common": { "readMore": "Akhri Faahfaahin" },
+  "dynamic": {}
+}

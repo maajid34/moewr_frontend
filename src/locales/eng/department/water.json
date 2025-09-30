@@ -48,16 +48,8 @@
     "collaboration": { "title": "Collaboration", "text": "We partner with various stakeholders to achieve common goals and enhance service delivery." }
   },
   "projects": {
-    "title": "Ongoing / Pipeline Projects",
-    "cta": "Read for More",
-    "kismaayo": "Kismaayo Urban Water Supply & Sanitation",
-    "hoa": "HoA GW4R Project",
-    "barwaaqo": "Barwaaqo Project",
-    "kobciye": "KOBCIYE Project",
-    "scrp": "SCRP Project",
-    "luglow": "Luglow Water Supply Project",
-    "emergency": "Emergency Response - Luuq",
-    "monitoring": "Water Sources Strategic Monitoring"
+    "waterProjects": "WATER PROJECTS",
+    "cta": "Read for More"
   },
   "officials": { "email": "Email:" }
 }

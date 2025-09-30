@@ -13,6 +13,9 @@ import minsitry_so from "./locales/som/about/ministry.json";
 import water_en from "./locales/eng/department/water.json";
 import water_so from "./locales/som/department/water.json";
 
+import energy_en from "./locales/eng/department/energy.json";
+import energy_so from "./locales/som/department/energy.json";
+
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
@@ -24,13 +27,17 @@ i18n
 
         //department /
         water: water_en,
+        energy:energy_en,
         
 
        },
       so: {
          minister: minister_so,
          ministry: minsitry_so,
-         water: water_so
+
+        //  depart
+         water: water_so,
+         energy:energy_so
 
        }
 

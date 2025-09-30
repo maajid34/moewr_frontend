@@ -45,6 +45,8 @@ import AssessmentUpdateForm from "./component/Assessments/assessmentUpdate";
 import EnergyProjectPhotosForm from "./component/Admin/energyProject/projectPhoto/EnergyPhotoForm";
 import EnergyProjectPhotosTable from "./component/Admin/energyProject/projectPhoto/EnergyPhotoTable";
 import WaterProjectPhotosTable from "./component/Admin/waterProject/waterprojectPhotos/WaterPhotoTable";
+import Warehosue from "./component/department/warehouse";
+import WaterLabaratory from "./component/department/waterLabaratory";
 
 
 
@@ -112,6 +114,8 @@ function App() {
         <Route path="/EventTable" element={<DashboardLayout><EventTable /></DashboardLayout>}/>
         <Route path="/EventUpdateForm/:id" element={<DashboardLayout><EventUpdateForm /></DashboardLayout>}/>
         <Route path="/AssessmentsPost" element={<MainLayout><AssessmentsPost /></MainLayout>}/>
+        <Route path="/Warehouse" element={<MainLayout><Warehosue /></MainLayout>}/>
+        <Route path="/WaterLabaratory" element={<MainLayout><WaterLabaratory /></MainLayout>}/>
         <Route path="/DocumentManagerForm" element={<DashboardLayout><DocumentManagerForm /></DashboardLayout>}/>
         <Route path="/AssessmentDashsPost" element={<DashboardLayout><AssessmentDashsPost /></DashboardLayout>}/>
         <Route path="/AssessmentUpdateForm/:id" element={<DashboardLayout><AssessmentUpdateForm /></DashboardLayout>}/>

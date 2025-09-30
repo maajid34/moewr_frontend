@@ -1,0 +1,125 @@
+{
+  "hero": { "title": "ENERGY DEPARTMENT", "top": "Top" },
+  "background": {
+    "alt": "Solar mini-plant site",
+    "title": "Background",
+    "p1": "Jubaland's energy sector mixes traditional and modern sources, with a growing focus on renewables. Many households rely on diesel generators and biomass, while efforts are underway to expand clean, sustainable energy. Challenges include weak infrastructure, high tariffs, and limited grid connectivity. Abundant solar and wind give strong potential, and the government is working to attract investment, raise electrification, and improve efficiency. The Energy Department within the Ministry develops policies, regulates the sector, oversees infrastructure, and ensures a sustainable, reliable supply with teams spanning engineers, specialists and technicians."
+  },
+  "vmo": {
+    "vision": { "title": "Vision", "text": "To become a leading institution in energy sector transformation, driving growth and social development through sustainable, innovative, and inclusive energy solutions in Jubaland State." },
+    "mission": { "title": "Mission", "text": "Ensure reliable, affordable, and sustainable energy access for all by building resilient infrastructure, promoting renewable investment, and implementing policies that support growth and environmental sustainability." },
+    "objectives": { "title": "Objectives", "text": "Expand access, ensure sustainability, and promote renewable adoption through policy, regulation, and strategic investments that modernize the sector and support private engagement." }
+  },
+  "services": {
+    "title": "Services",
+    "cards": {
+      "people": { "title": "25,000 People", "text": "Hygiene kits distributed to enhance well-being and quality of life." },
+      "boreholes": { "title": "92 Boreholes", "text": "Constructed/rehabilitated in Lower Juba & Gedo." },
+      "shallowWells": { "title": "251 Shallow Wells", "text": "Improving household access to reliable water." },
+      "kiosks": { "title": "226 Water Kiosks", "text": "Installed for IDPs and vulnerable settlements." }
+    }
+  },
+  "mandates": {
+    "title": "Department Mandates",
+    "items": {
+      "policy": { "title": "Policy & Strategy", "text": "Develop and implement policies and strategies to ensure energy security and sustainability." },
+      "regulation": { "title": "Regulation & Oversight", "text": "Regulate and oversee production, transmission, distribution and consumption." },
+      "renewables": { "title": "Renewables & Efficiency", "text": "Promote renewable energy and efficiency." },
+      "investment": { "title": "Investment Facilitation", "text": "Facilitate investment in energy infrastructure and projects." },
+      "cooperation": { "title": "Cooperation", "text": "Collaborate with regional and international bodies." }
+    }
+  },
+  "demand": {
+    "title": "Energy Demand and Supply",
+    "p1": "Demand is rising due to population growth, urbanization, and economic activity. Supply remains insufficient and expensive with high tariffs tied to diesel.",
+    "sectorsTitle": "Key Energy Demand Sectors",
+    "sectors": {
+      "households": "Households — rely on biomass and diesel generators for lighting and cooking.",
+      "commercial": "Commercial & Industrial — need stable supply but face high costs and outages.",
+      "public": "Public Services — health, schools, and government face unreliability limiting service delivery."
+    },
+    "p2": "Installed capacity is inadequate and grid extension is slow. Solar home systems and mini-grids are growing."
+  },
+  "power": {
+    "title": "Jubaland Power Demand",
+    "table": { "sn": "S/N", "desc": "Description", "qty": "Quantity", "load": "Load (kW)", "total": "Total Load (kW)", "sum": "Total" },
+    "rows": {
+      "residential": "Residential Housing",
+      "kismayoAirport": "Kismaayo Airport",
+      "otherAirports": "Other Local Airports",
+      "seaPort": "Kismaayo Sea Port",
+      "schools": "Schools",
+      "kismayoHospital": "Kismaayo Hospital",
+      "otherHospitals": "Other District Hospitals",
+      "medicalCenters": "Medical Centers",
+      "industry": "Industry",
+      "agriculture": "Agriculture",
+      "ministries": "Ministries",
+      "treatment": "Water Treatment Plant",
+      "hotels": "Hotels"
+    },
+    "rationale": {
+      "title": "Rationale for the Reform of Energy Sector",
+      "items": {
+        "0": "Expand affordable, reliable energy via renewables and grid development.",
+        "1": "Reduce diesel dependence with solar, wind and hybrid solutions.",
+        "2": "Strengthen regulation and policy to attract private investment.",
+        "3": "Develop human capital with training in energy and renewables.",
+        "4": "Build PPPs to leverage resources for large projects.",
+        "5": "Improve rural electrification with off-grid solar and mini-grids.",
+        "6": "Increase efficiency and sustainability including clean cooking."
+      }
+    }
+  },
+  "framework": {
+    "title": "Institutional Strengthening Framework",
+    "current": {
+      "title": "Current Institutional Strengthening Framework",
+      "note": "Roles as presently practiced by the Ministry and ESPs.",
+      "ministry": {
+        "title": "Role of the Ministry of Energy & Water Resources – Jubaland",
+        "items": ["Regulation, tariffs & guidelines", "Policy formulation", "Energy tribunal", "Resource mobilization / financing", "Oversight and coordination", "Strategic development", "Infrastructure development and implementation", "Asset holding and management", "Energy quality monitoring", "Permit and licensing", "Monitoring of concession agreements"]
+      },
+      "esps": {
+        "title": "Role of the Electricity Service Providers (ESPs)",
+        "items": ["Electricity generation", "Service delivery – distribution to households", "Development & management of distribution systems", "Last-mile connections", "Electricity meters", "Customer billing"]
+      }
+    },
+    "future": {
+      "title": "Future Planned Institutional Strengthening Framework",
+      "note": "Target structure with clearly defined roles for the Ministry, JEDA, and ESPs.",
+      "ministry": {
+        "title": "Role of the Ministry of Energy & Water Resources – Jubaland",
+        "items": ["Regulation, tariffs & guidelines", "Policy formulation", "Energy tribunal", "Resource mobilization / financing", "Oversight and coordination", "Strategic development"]
+      },
+      "jeda": {
+        "title": "Role of the Jubaland Energy Development Agency (JEDA)",
+        "items": ["Infrastructure development and implementation", "Asset holding and management", "Energy quality monitoring", "Electricity generation", "Permit and licensing", "Monitor concession agreements"]
+      },
+      "esps": {
+        "title": "Role of the Electricity Service Providers (ESPs)",
+        "items": ["Service delivery – distribution to households", "Develop & manage distribution systems", "Last-mile connections", "Electricity meters", "Customer billing"]
+      }
+    }
+  },
+  "achievements": {
+    "title": "Achievements Summary",
+    "items": {
+      "streetlights": { "title": "2,000 Public Streetlights", "text": "Installed across 9 districts with partner support." },
+      "pv": { "title": "12MW of PV & 13MW Storage", "text": "Added 12MW solar and 13.4MW battery storage to the system." },
+      "districts": { "title": "11 Districts", "text": "Infrastructure enhanced across Lower Juba & Gedo." },
+      "institutions": { "title": "79 Public Institutions", "text": "Electrified education, health and other public facilities." }
+    }
+  },
+  "projects": { "title": "ENERGY PROJECTS" },
+  "regs": {
+    "title": "Regulations and Policies",
+    "cards": {
+      "act": "National Energy Act",
+      "licensing": "Electricity Licensing Regulation — 2023",
+      "tariffs": "Electricity Tariffs Regulation — 2023"
+    }
+  },
+  "common": { "readMore": "Read for More" },
+  "dynamic": {}
+}
