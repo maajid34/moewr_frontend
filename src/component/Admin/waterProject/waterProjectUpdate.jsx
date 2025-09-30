@@ -941,7 +941,7 @@ export default function WaterProjectUpdate() {
               <div>
                 <label className="text-sm font-medium text-slate-700">stack3desc *</label>
                 <input
-                  type="text" required
+                  type="text" 
                   value={stack3desc}
                   onChange={(e) => setstack3desc(e.target.value)}
                   className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
