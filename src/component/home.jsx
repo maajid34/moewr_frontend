@@ -221,12 +221,12 @@ const fullText = "Welcome to Ministry Energy and Resource of Jubaland";
     <>
     <div className="[--brand:#2FA8E1] pt-[117px] [--brand-dark:#0A7FB8] [--ink:#002B5C] text-slate-800 text-xl">
 
-       <div className="relative h-[280px] sm:h-[360px] md:h-[480px] lg:h-[560px] w-full overflow-hidden">
+ <div className="relative h-[280px] sm:h-[360px] md:h-[480px] lg:h-[560px] w-full overflow-hidden">
     {images.map((src, i) => (
       <div
         key={i}
         className={`absolute inset-0 bg-cover bg-center transition-opacity duration-700 ${
-          i === index ? "opacity-100" : "opacity-0"
+          i === index ? "opacity-100" : "opacity-100"
         }`}
         style={{ backgroundImage: `url(${src})` }}
       />
