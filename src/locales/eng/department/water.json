@@ -1,0 +1,63 @@
+{
+  "hero": {
+    "title": "ABOUT WATER DEPARTMENT",
+    "alt": "Water Department field team",
+    "heading": "Water Department",
+    "overview": "Overview",
+    "p1": "The Water Department, under the Ministry of Energy and Water Resources of Jubaland State - Somalia, is responsible for the formulation and implementation of policies, programs, and regulations related to water resources. The Water Department plays a vital role in managing the region's water resources, ensuring sustainable use, and providing access to clean water. Projects aligned with their objectives help to advance their mission of fostering a healthy, sustainable, and resilient environment in Jubaland."
+  },
+  "vision": {
+    "title": "Our Vision",
+    "text": "Our mission is to ensure sustainable energy for all by promoting efficient use, fostering innovation, and empowering communities in Jubaland and beyond."
+  },
+  "services": {
+    "title": "Services",
+    "cards": {
+      "people": {
+        "title": "25,000 People",
+        "text": "Distributed Hygiene kits to access essential health services and improve well-being & quality of life."
+      },
+      "boreholes": {
+        "title": "92 Boreholes",
+        "text": "Constructed/Rehabilitated across Lower Juba & Gedo in 12 Districts."
+      },
+      "shallowWells": {
+        "title": "251 Shallow Wells",
+        "text": "Constructed/Rehabilitated over 251 Shallow Wells in Jubaland."
+      },
+      "kiosks": {
+        "title": "226 Water Kiosks",
+        "text": "Constructed over 226 Water Kiosks serving IDPs in Jubaland."
+      },
+      "waterBan": {
+        "title": "38 Water Ban",
+        "text": "Constructed over 38 Water Bans to improve water distribution."
+      },
+      "barkad": {
+        "title": "790 Barkad",
+        "text": "Constructed over 790 Barkad to enhance water storage across Jubaland."
+      }
+    }
+  },
+  "values": {
+    "title": "Our Values",
+    "sustainability": { "title": "Sustainability", "text": "We prioritize sustainable practices to ensure the long-term availability of energy & water resources for Jubaland." },
+    "community": { "title": "Community Engagement", "text": "We work closely with local communities to understand their needs and provide effective solutions." },
+    "innovation": { "title": "Innovation", "text": "We encourage new ideas and technologies to improve our services and meet future challenges." },
+    "transparency": { "title": "Transparency", "text": "We maintain open communication and accountability in all our operations." },
+    "collaboration": { "title": "Collaboration", "text": "We partner with various stakeholders to achieve common goals and enhance service delivery." }
+  },
+  "projects": {
+    "title": "Ongoing / Pipeline Projects",
+    "cta": "Read for More",
+    "kismaayo": "Kismaayo Urban Water Supply & Sanitation",
+    "hoa": "HoA GW4R Project",
+    "barwaaqo": "Barwaaqo Project",
+    "kobciye": "KOBCIYE Project",
+    "scrp": "SCRP Project",
+    "luglow": "Luglow Water Supply Project",
+    "emergency": "Emergency Response - Luuq",
+    "monitoring": "Water Sources Strategic Monitoring"
+  },
+  "officials": { "email": "Email:" }
+}

@@ -1,0 +1,80 @@
+{
+  "hero": {
+    "title": "KU SAABSAN WAAXDA BIYAHA",
+    "alt": "Kooxda shaqada ee Waaxda Biyaha",
+    "heading": "Waaxda Biyaha",
+    "overview": "Guudmar",
+    "p1": "Waaxda Biyaha, oo hoos timaada Wasaaradda Tamarta iyo Khayraadka Biyaha ee Dawlad-goboleedka Jubaland – Soomaaliya, waxay mas’uul ka tahay dejinta iyo hirgelinta siyaasadaha, barnaamijyada iyo xeerarka la xiriira khayraadka biyaha. Waaxdani waxay door muhiim ah ka ciyaartaa maareynta khayraadka biyaha ee gobolka, hubinta isticmaalka waara iyo bixinta helitaan biyo nadiif ah. Mashaariicda la jaanqaada yoolalka waaxdu waxay ka caawiyaan horumarinta himiladeeda ah in la kobciyo deegaan caafimaad qaba, waara oo adkaysi leh gudaha Jubaland."
+  },
+  "vision": {
+    "title": "Aragtideena",
+    "text": "Hadafkeennu waa in aan xaqiijino tamar waarta oo qof walba gaarta annagoo dhiirrigelinayna isticmaal hufan, hal-abuurnimo, iyo awoodsiinta bulshooyinka Jubaland iyo meelaha ka baxsan."
+  },
+  "services": {
+    "title": "Adeegyada",
+    "cards": {
+      "people": {
+        "title": "25,000 Qof",
+        "text": "Waxaan qaybinay agab nadaafadeed (Hygiene kits) si loo helo adeegyo caafimaad oo aasaasi ah loona hormariyo wanaagsanida iyo tayada nolosha."
+      },
+      "boreholes": {
+        "title": "92 Ceelal Riig",
+        "text": "Waxaa la dhisay/ama la dayactiray guud ahaan Jubbada Hoose iyo Gedo, 12 degmo."
+      },
+      "shallowWells": {
+        "title": "251 Ceelal Shallow",
+        "text": "Waxaan dhisnay/ama dayactirnay in ka badan 251 ceelal shallow ah gudaha Jubaland."
+      },
+      "kiosks": {
+        "title": "226 Kioskyo Biyo",
+        "text": "Waxaa la dhisay in ka badan 226 kioskyo biyo oo u adeega barakacayaasha (IDPs) ee Jubaland."
+      },
+      "waterBan": {
+        "title": "38 Water Pan",
+        "text": "Waxaa la dhisay in ka badan 38 balliyo (water pans) si loo hagaajiyo qaybinta biyaha."
+      },
+      "barkad": {
+        "title": "790 Barkado",
+        "text": "Waxaa la dhisay in ka badan 790 barkado si loo kordhiyo kaydinta biyaha gudaha Jubaland."
+      }
+    }
+  },
+  "values": {
+    "title": "Qiyamaheena",
+    "sustainability": {
+      "title": "Waaraansho",
+      "text": "Waxaan mudnaanta siinnaa hab-maamul waara si loo hubiyo helitaanka dheer-waaqiga ee tamarta iyo biyaha Jubaland."
+    },
+    "community": {
+      "title": "Ka-qaybgal Bulsho",
+      "text": "Waxaan si dhow ula shaqaynaa bulshooyinka deegaanka si aan u fahanno baahidooda una bixino xalal wax ku ool ah."
+    },
+    "innovation": {
+      "title": "Hal-abuurnimo",
+      "text": "Waxaan dhiirrigelinnaa fikrado iyo tignoolajiyo cusub si aan u horumarino adeegyada una wajahno caqabadaha mustaqbalka."
+    },
+    "transparency": {
+      "title": "Hufnaan",
+      "text": "Waxaan ilaalinaa isgaarsiin furan iyo isla xisaabtan dhammaan howlaha aan qabanno."
+    },
+    "collaboration": {
+      "title": "Iskaashi",
+      "text": "Waxaan la shaqaynaa daneeyayaasha kala duwan si aan u gaarno himilooyin wadaag ah una xoojino bixinta adeegyada."
+    }
+  },
+  "projects": {
+    "title": "Mashaariicda Socota / Qorsheysan",
+    "cta": "Akhri Faahfaahin",
+    "kismaayo": "Kismaayo Urban Water Supply & Sanitation",
+    "hoa": "HoA GW4R Project",
+    "barwaaqo": "Barwaaqo Project",
+    "kobciye": "KOBCIYE Project",
+    "scrp": "SCRP Project",
+    "luglow": "Luglow Water Supply Project",
+    "emergency": "Emergency Response - Luuq",
+    "monitoring": "Kormeer Istaraatiiji ah ee Isha Biyaha"
+  },
+  "officials": {
+    "email": "Imeel:"
+  }
+}

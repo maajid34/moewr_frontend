@@ -7,6 +7,12 @@ import minister_so from "./locales/som/about/ministers.json";
 import minsitry_en from "./locales/eng/about/ministry.json";
 import minsitry_so from "./locales/som/about/ministry.json";
 
+
+// department
+
+import water_en from "./locales/eng/department/water.json";
+import water_so from "./locales/som/department/water.json";
+
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
@@ -14,12 +20,17 @@ i18n
     resources: {
       en: {
          minister: minister_en,
-         ministry: minsitry_en
+         ministry: minsitry_en,
+
+        //department /
+        water: water_en,
+        
 
        },
       so: {
          minister: minister_so,
-         ministry: minsitry_so
+         ministry: minsitry_so,
+         water: water_so
 
        }
 
