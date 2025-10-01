@@ -495,7 +495,7 @@ export default function WaterProjectUpdate() {
   const [stack2desc, setstack2desc] = useState("");
   const [stack3Title, setstack3Title] = useState("");
   const [stack3desc, setstack3desc] = useState("");
-  const [projectSatge, setprojectSatge] = useState("");
+  const [projectStage, setprojectSatge] = useState("");
 
   // existing image filenames/URLs from backend
   const [coverImage, setCoverImage] = useState("");
@@ -574,7 +574,7 @@ export default function WaterProjectUpdate() {
         setstack2desc(data.stack2desc ?? "");
         setstack3Title(data.stack3Title ?? "");
         setstack3desc(data.stack3desc ?? "");
-        setprojectSatge(data.projectSatge ?? "");
+        setprojectSatge(data.projectStage ?? "");
 
         // images
         setCoverImage(data.coverImage ?? "");
@@ -648,7 +648,7 @@ export default function WaterProjectUpdate() {
       fd.append("componentTwo", componentTwo);
       fd.append("componentThree", componentThree);
       fd.append("componentFour", componentFour);
-        fd.append("projectSatge", projectSatge);
+        fd.append("projectStage", projectStage);
       fd.append("StackeholderDesc", StackeholderDesc);
       fd.append("stack1Title", stack1Title);
       fd.append("stack1desc", stack1desc);
@@ -982,7 +982,8 @@ export default function WaterProjectUpdate() {
  <label className="text-sm font-medium text-slate-700">Project Stage</label>
                 <input
                   type="text"
-                  value={projectSatge}
+                  value={projectStage}
+                  
                   onChange={(e) => setprojectSatge(e.target.value)}
                   className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
                 />
