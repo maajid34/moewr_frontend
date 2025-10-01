@@ -617,23 +617,23 @@ export default function WaterProjectUpdate() {
     setError(null);
 
     // quick required validation matching your schema
-    const missing = [];
-    if (!title.trim()) missing.push("title");
-    if (!desc.trim()) missing.push("desc");
-    if (!objective.trim()) missing.push("objective");
-    if (!geogrpahic.trim()) missing.push("geogrpahic");
-    if (!stack1Title.trim()) missing.push("stack1Title");
-    if (!stack1desc.trim()) missing.push("stack1desc");
-    if (!stack2Title.trim()) missing.push("stack2Title");
-    if (!stack2desc.trim()) missing.push("stack2desc");
-    if (!stack3Title.trim()) missing.push("stack3Title");
-    if (!stack3desc.trim()) missing.push("stack3desc");
-    if (!projectSatge.trim()) missing.push("projectSatge");
-    if (missing.length) {
-      setSaving(false);
-      setError(`Please fill required fields: ${missing.join(", ")}`);
-      return;
-    }
+//  const missing = [];
+//     if (!title.trim()) missing.push("title");
+//     if (!desc.trim()) missing.push("desc");
+//     if (!objective.trim()) missing.push("objective");
+//     if (!geogrpahic.trim()) missing.push("geogrpahic");
+//     if (!stack1Title.trim()) missing.push("stack1Title");
+//     if (!stack1desc.trim()) missing.push("stack1desc");
+//     if (!stack2Title.trim()) missing.push("stack2Title");
+//     if (!stack2desc.trim()) missing.push("stack2desc");
+//     if (!stack3Title.trim()) missing.push("stack3Title");
+//     if (!stack3desc.trim()) missing.push("stack3desc");
+//     if (!projectSatge.trim()) missing.push("projectSatge");
+//     if (missing.length) {
+//       setSaving(false);
+//       setError(`Please fill required fields: ${missing.join(", ")}`);
+//       return;
+//     }
 
     try {
       const fd = new FormData();
@@ -648,6 +648,7 @@ export default function WaterProjectUpdate() {
       fd.append("componentTwo", componentTwo);
       fd.append("componentThree", componentThree);
       fd.append("componentFour", componentFour);
+        fd.append("projectSatge", projectSatge);
       fd.append("StackeholderDesc", StackeholderDesc);
       fd.append("stack1Title", stack1Title);
       fd.append("stack1desc", stack1desc);
@@ -655,7 +656,7 @@ export default function WaterProjectUpdate() {
       fd.append("stack2desc", stack2desc);
       fd.append("stack3Title", stack3Title);
       fd.append("stack3desc", stack3desc);
-        fd.append("projectSatge", projectSatge);
+      
       fd.append("achievements", achievements);
 
       // files: only append if user picked a new one
