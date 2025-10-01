@@ -488,7 +488,7 @@ export default function WaterProjectFormUI() {
   const [stack2desc, setstack2desc] = useState("");
    const [stack3Title, setstack3Title] = useState("");
   const [stack3desc, setstack3desc] = useState("");
-    const [projectSatge, setprojectSatge] = useState("");
+    const [projectStage, setprojectSatge] = useState("");
   const [achievements, setAchievements] = useState("");
 
 
@@ -542,7 +542,7 @@ export default function WaterProjectFormUI() {
     formData.append("stack2desc", stack2desc);
     formData.append("stack3Title", stack3Title);
     formData.append("stack3desc", stack3desc);
-     formData.append("projectSatge", projectSatge);
+     formData.append("projectStage", projectStage);
     if (stackeHolder1) formData.append("stackeHolder1", stackeHolder1);
     if (stakeHolder2) formData.append("stakeHolder2", stakeHolder2); 
     if (stakeHolder3) formData.append("stakeHolder3", stakeHolder3);
@@ -1020,7 +1020,7 @@ export default function WaterProjectFormUI() {
               </div>
             </section>
                  <input
-                  value={projectSatge}
+                  value={projectStage}
                   onChange={(t) => setprojectSatge(t.target.value)}
                   type="text"
                   name="projectSatge"
