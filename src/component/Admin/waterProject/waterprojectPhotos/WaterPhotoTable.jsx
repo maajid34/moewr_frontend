@@ -448,7 +448,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 export default function WaterProjectPhotosTable() {
-  // ---- HARDCODED BASES ----
+  // ---- BASES ----
   const API = "https://moewr-backend.onrender.com";
   const ASSET_BASE = "https://pub-4fea174e190a460d8db367c215cf12ad.r2.dev";
 
@@ -477,15 +477,15 @@ export default function WaterProjectPhotosTable() {
   const replaceTargetIndexRef = useRef(null);
   const appendFileRef = useRef(null);
 
-  // ---- ROUTES (exactly yours) ----
+  // ---- ROUTES (match backend exactly; note the capital W in WaterProject) ----
   const PATHS = useMemo(
     () => ({
       projects: `/readProjectWater/waterProject`,
       readPhotos: (id) => `/ReadWaterProjectPhoto/${id}/photos`,
       readProjectOne: (id) => `/readProjectWaterSingal/waterProject/${id}`,
-      postPhotos: (id) => `/waterProject/${id}/photos`,   // POST (append)
-      putPhotos:  (id) => `/waterProject/${id}/photos`,   // PUT (replace with index)
-      deletePhoto:(id) => `/DeleteWaterProject/${id}/photos`,   // DELETE (index in body)
+      postPhotos: (id) => `/WaterProject/${id}/photos`,   // POST (append)
+      putPhotos:  (id) => `/WaterProject/${id}/photos`,   // PUT (replace with index)
+      deletePhoto:(id) => `/DeleteWaterProject/${id}/photos`, // DELETE (index or imageName)
     }),
     []
   );
@@ -513,30 +513,28 @@ export default function WaterProjectPhotosTable() {
   };
 
   // Build public R2 URL; add default folder when only a filename exists
-const toPublicUrl = (val) => {
-  if (!val) return "";
-  let s = String(val).trim();
-  if (!s) return "";
+  const toPublicUrl = (val) => {
+    if (!val) return "";
+    let s = String(val).trim();
+    if (!s) return "";
 
-  // Already a full URL
-  if (/^https?:\/\//i.test(s)) return s;
+    // Already a full URL
+    if (/^https?:\/\//i.test(s)) return s;
 
-  // Normalize slashes and trim
-  s = s.replace(/\\/g, "/").replace(/^\/+/, "");
+    // Normalize slashes and trim
+    s = s.replace(/\\/g, "/").replace(/^\/+/, "");
 
-  // If DB stored a full disk path, cut it down: .../uploads/foo.jpg -> uploads/foo.jpg
-  const m = s.match(/(?:^|\/)(upload|uploads|allimages|document)\/(.+)$/i);
-  if (m) {
-    // Always serve local files from your backend /upload/*
-    const filename = m[2];
-    return `${API.replace(/\/+$/, "")}/upload/${filename}`;
-  }
+    // If DB stored a full disk path, cut it down
+    const m = s.match(/(?:^|\/)(upload|uploads|allimages|document)\/(.+)$/i);
+    if (m) {
+      const filename = m[2];
+      return `${API.replace(/\/+$/, "")}/upload/${filename}`;
+    }
 
-  // Otherwise assume it's an R2 key or plain filename
-  if (!s.includes("/")) s = `water/photos/${s}`;
-  return `${ASSET_BASE.replace(/\/+$/, "")}/${encodeURI(s)}`;
-};
-
+    // Otherwise assume it's an R2 key or plain filename
+    if (!s.includes("/")) s = `water/photos/${s}`;
+    return `${ASSET_BASE.replace(/\/+$/, "")}/${encodeURI(s)}`;
+  };
 
   const normalizeProjects = (data) => {
     if (!data) return [];
@@ -547,9 +545,8 @@ const toPublicUrl = (val) => {
   };
 
   // ---- UPLOADS ----
-  // Append photos: POST /energyProject/:id/photos
+  // Append photos: POST /WaterProject/:id/photos
   const appendFiles = async (projectId, files) => {
-    // Try "photos", then "Photos"
     const attempt = async (field) => {
       const fd = new FormData();
       files.forEach((f) => fd.append(field, f, f.name));
@@ -563,9 +560,8 @@ const toPublicUrl = (val) => {
     }
   };
 
-  // Replace a single photo at index: PUT /energyProject/:id/photos  (with index)
+  // Replace a single photo at index: PUT /WaterProject/:id/photos  (with index)
   const replaceFileAtIndex = async (projectId, index, file) => {
-    // Try with field "photos" then "Photos"; include index in FormData (multer puts it in req.body)
     const attempt = async (field) => {
       const fd = new FormData();
       fd.append("index", String(index));
@@ -592,7 +588,9 @@ const toPublicUrl = (val) => {
         setErr(e?.response?.data?.message || e?.message || "Failed to load projects");
       }
     })();
-    return () => { mounted = false; };
+    return () => {
+      mounted = false;
+    };
   }, [http, PATHS]);
 
   const loadPhotos = async (projectId) => {
@@ -605,9 +603,9 @@ const toPublicUrl = (val) => {
       let photos = [];
       try {
         const res = await http.get(PATHS.readPhotos(projectId));
-        photos = Array.isArray(res.data?.photos) ? res.data.photos
-               : Array.isArray(res.data) ? res.data
-               : [];
+        photos =
+          Array.isArray(res.data?.photos) ? res.data.photos :
+          Array.isArray(res.data) ? res.data : [];
       } catch {
         // fallback: read whole project and pick Photos/photos
       }
@@ -638,14 +636,23 @@ const toPublicUrl = (val) => {
     if (pid) loadPhotos(pid);
   };
 
-  // Delete with body { index }
+  // Delete with index (body) and fallback to query param if body is not parsed
   const handleDelete = async (index) => {
     if (!selectedId && selectedId !== "0") return;
     if (!window.confirm("Delete this photo?")) return;
     setErr(null);
     setMsg(null);
     try {
-      await http.delete(PATHS.deletePhoto(selectedId), { data: { index } });
+      try {
+        await http.delete(PATHS.deletePhoto(selectedId), {
+          data: { index },
+          headers: { "Content-Type": "application/json" },
+        });
+      } catch {
+        // fallback using query param in case DELETE body isn't parsed on server
+        await http.delete(`${PATHS.deletePhoto(selectedId)}?index=${encodeURIComponent(index)}`);
+      }
+
       setRows((prev) => prev.filter((_, i) => i !== index));
       setMsg("Photo deleted ✅");
     } catch (e) {
@@ -738,7 +745,11 @@ const toPublicUrl = (val) => {
         )}
 
         <label className="ml-auto flex items-center gap-2 text-xs text-slate-600 cursor-pointer">
-          <input type="checkbox" checked={showDebug} onChange={(e) => setShowDebug(e.target.checked)} />
+          <input
+            type="checkbox"
+            checked={showDebug}
+            onChange={(e) => setShowDebug(e.target.checked)}
+          />
           Debug
         </label>
       </div>
@@ -790,7 +801,9 @@ const toPublicUrl = (val) => {
                 return (
                   <tr key={`${name}-${i}`} className="hover:bg-slate-50">
                     <td className="px-4 py-3 text-slate-700">{i}</td>
-                    <td className="px-4 py-3 text-slate-900 font-medium">{selectedProjectName || selectedId}</td>
+                    <td className="px-4 py-3 text-slate-900 font-medium">
+                      {selectedProjectName || selectedId}
+                    </td>
                     <td className="px-4 py-3">
                       {src ? (
                         <a href={src} target="_blank" rel="noreferrer" title="Open full image">
@@ -801,7 +814,9 @@ const toPublicUrl = (val) => {
                             onError={(e) => (e.currentTarget.src = "/placeholder.png")}
                           />
                         </a>
-                      ) : ("—")}
+                      ) : (
+                        "—"
+                      )}
                     </td>
                     <td className="px-4 py-3 text-slate-600 break-all">{name}</td>
 
@@ -841,9 +856,23 @@ const toPublicUrl = (val) => {
       </div>
 
       {/* Hidden file pickers */}
-      <input ref={replaceFileRef} type="file" accept="image/*" className="hidden" onChange={onPickReplaceFile} />
-      <input ref={appendFileRef}  type="file" accept="image/*" multiple className="hidden" onChange={onPickAppendFiles} />
+      <input
+        ref={replaceFileRef}
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={onPickReplaceFile}
+      />
+      <input
+        ref={appendFileRef}
+        type="file"
+        accept="image/*"
+        multiple
+        className="hidden"
+        onChange={onPickAppendFiles}
+      />
     </div>
   );
 }
+
 
