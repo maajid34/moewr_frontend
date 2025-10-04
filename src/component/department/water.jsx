@@ -585,9 +585,9 @@ export default function Water() {
                   {t("water:projects.cta")}
                 </Link>
                 <button className="mt-4 inline-block px-3 py-2 rounded-md text-black border border-black bg-white hover:bg-[#0A7FB8]">
-                  {item.projectSatge}
+                  {item.projectStage}
                 </button>
-              </div>
+              </div>o
             </article>
           );
         })
