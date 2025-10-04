@@ -930,7 +930,7 @@ Ensuring adequate provision of administrative and financial support to all depar
     
 
       {/* Recent Blog Posts */}
-<div className='w-full p-2' />
+<div className='w-full h-10' />
       {/* <section className="py-16 bg-[color:var(--brand)]/5">
         <div className="max-w-6xl mx-auto px-4">
           <header className="mb-8 flex items-end justify-between">
