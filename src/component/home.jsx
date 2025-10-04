@@ -927,41 +927,7 @@ Ensuring adequate provision of administrative and financial support to all depar
         </div>
       </section>
 
-      {/* Other Tools */}
-      <section className="py-16">
-        <div className="max-w-6xl mx-auto px-4">
-          <header className="mb-8">
-            <h2 className="text-3xl font-bold">Other Tools</h2>
-          </header>
-
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <a href="#" className="group bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition">
-              <div className="text-4xl">📍</div>
-              <p className="mt-3 font-semibold group-hover:text-[color:var(--brand)]">Travel Request Form</p>
-            </a>
-            <a href="#" className="group bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition">
-              <div className="text-4xl">📊</div>
-              <p className="mt-3 font-semibold group-hover:text-[color:var(--brand)]">Ministry Reporting Template</p>
-            </a>
-            <a href="#" className="group bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition">
-              <div className="text-4xl">✉️</div>
-              <p className="mt-3 font-semibold group-hover:text-[color:var(--brand)]">Partner Registration Form</p>
-            </a>
-            <a href="#" className="group bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition">
-              <div className="text-4xl">👤</div>
-              <p className="mt-3 font-semibold group-hover:text-[color:var(--brand)]">Vendor Registration Form</p>
-            </a>
-            <a href="#" className="group bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition">
-              <div className="text-4xl">📝</div>
-              <p className="mt-3 font-semibold group-hover:text-[color:var(--brand)]">WASH Assessment Tool</p>
-            </a>
-            <a href="#" className="group bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition">
-              <div className="text-4xl">⚡</div>
-              <p className="mt-3 font-semibold group-hover:text-[color:var(--brand)]">Energy Assessment Tool</p>
-            </a>
-          </div>
-        </div>
-      </section>
+    
 
       {/* Recent Blog Posts */}
 
