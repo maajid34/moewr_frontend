@@ -522,6 +522,11 @@ export default function WaterProjectUpdate() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(null);
 
+  // Gallery: existing + new
+  const [existingPhotos, setExistingPhotos] = useState([]); // strings/URLs from DB
+  const [newPhotos, setNewPhotos] = useState([]);           // File[]
+  const [newPhotoPreviews, setNewPhotoPreviews] = useState([]); // blob URLs
+
   // ---------------- ENDPOINTS ----------------
   const READ_ONE_URL = `/readProjectWaterSingal/waterProject/${id}`;
   const UPDATE_URL = `/UpdateWaterProject/waterProject/${id}`;
@@ -585,6 +590,16 @@ export default function WaterProjectUpdate() {
         setstakeHolder3(data.stakeHolder3 ?? "");
         setstakeHolder4(data.stakeHolder4 ?? "");
 
+        // FIX: normalize gallery photos to plain strings
+        const photosRaw = Array.isArray(data.photos) ? data.photos : [];
+        const photos = photosRaw
+          .map((p) => {
+            if (typeof p === "string") return p; // already filename/URL
+            return p?.Image || p?.image || p?.url || p?.filename || "";
+          })
+          .filter(Boolean);
+        setExistingPhotos(photos);
+
         // achievements
         if (Array.isArray(data.achievements)) {
           const txt = data.achievements
@@ -610,30 +625,26 @@ export default function WaterProjectUpdate() {
     };
   }, [READ_ONE_URL, http, navigate]);
 
+  // FIX: cleanup blob URLs on unmount to avoid leaks
+  useEffect(() => {
+    return () => {
+      newPhotoPreviews.forEach((u) => URL.revokeObjectURL(u));
+    };
+  }, [newPhotoPreviews]);
+
   // ---------------- SUBMIT UPDATE ----------------
+  // handle multiple new photos
+  const handlePhotosChange = (e) => {
+    const files = Array.from(e.target.files || []);
+    newPhotoPreviews.forEach((u) => URL.revokeObjectURL(u));
+    setNewPhotos(files);
+    setNewPhotoPreviews(files.map((f) => URL.createObjectURL(f)));
+  };
+
   const handleUpdate = async (e) => {
     e.preventDefault();
     setSaving(true);
     setError(null);
-
-    // quick required validation matching your schema
-//  const missing = [];
-//     if (!title.trim()) missing.push("title");
-//     if (!desc.trim()) missing.push("desc");
-//     if (!objective.trim()) missing.push("objective");
-//     if (!geogrpahic.trim()) missing.push("geogrpahic");
-//     if (!stack1Title.trim()) missing.push("stack1Title");
-//     if (!stack1desc.trim()) missing.push("stack1desc");
-//     if (!stack2Title.trim()) missing.push("stack2Title");
-//     if (!stack2desc.trim()) missing.push("stack2desc");
-//     if (!stack3Title.trim()) missing.push("stack3Title");
-//     if (!stack3desc.trim()) missing.push("stack3desc");
-//     if (!projectSatge.trim()) missing.push("projectSatge");
-//     if (missing.length) {
-//       setSaving(false);
-//       setError(`Please fill required fields: ${missing.join(", ")}`);
-//       return;
-//     }
 
     try {
       const fd = new FormData();
@@ -648,7 +659,7 @@ export default function WaterProjectUpdate() {
       fd.append("componentTwo", componentTwo);
       fd.append("componentThree", componentThree);
       fd.append("componentFour", componentFour);
-        fd.append("projectStage", projectStage);
+      fd.append("projectStage", projectStage);
       fd.append("StackeholderDesc", StackeholderDesc);
       fd.append("stack1Title", stack1Title);
       fd.append("stack1desc", stack1desc);
@@ -656,7 +667,8 @@ export default function WaterProjectUpdate() {
       fd.append("stack2desc", stack2desc);
       fd.append("stack3Title", stack3Title);
       fd.append("stack3desc", stack3desc);
-      
+
+      // If backend expects string; if it expects array, switch to JSON stringified array.
       fd.append("achievements", achievements);
 
       // files: only append if user picked a new one
@@ -672,6 +684,9 @@ export default function WaterProjectUpdate() {
       const preview = {};
       fd.forEach((v, k) => (preview[k] = v instanceof File ? `File(${v.name})` : v));
       console.table(preview);
+
+      // gallery files
+      for (const f of newPhotos) fd.append("photos", f); // backend must use upload.array("photos")
 
       await http.patch(UPDATE_URL, fd, {
         headers: { "Content-Type": "multipart/form-data" },
@@ -838,6 +853,64 @@ export default function WaterProjectUpdate() {
             </div>
           </section>
 
+          {/* Project Photos (Gallery) */}
+          <section className="rounded-2xl border bg-white shadow-sm p-5">
+            <div className="flex items-center justify-between">
+              <h3 className="font-semibold">Project Photos (Gallery)</h3>
+              <span className="text-xs text-slate-500">
+                You can select multiple files; new ones will be added.
+              </span>
+            </div>
+
+            {/* Existing thumbnails */}
+            {existingPhotos?.length > 0 && (
+              <div className="mt-4">
+                <div className="text-xs text-slate-500 mb-2">Existing photos</div>
+                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2">
+                  {existingPhotos.map((p, i) => {
+                    // FIX: guard empty src after normalization
+                    const src = toImgUrl(p);
+                    if (!src) return null;
+                    return (
+                      <img
+                        key={`${p}-${i}`}
+                        src={src}
+                        alt={`existing-${i + 1}`}
+                        onError={onImgError}
+                        className="aspect-square w-full object-cover rounded-lg border"
+                        loading="lazy"
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* Picker + new previews */}
+            <div className="mt-4 rounded-xl border border-dashed p-6 text-center">
+              <label className="inline-block text-xs px-3 py-2 rounded-md bg-sky-600 text-white hover:bg-sky-700 cursor-pointer">
+                Add Photos
+                <input
+                  type="file"
+                  className="hidden"
+                  accept="image/*"
+                  multiple
+                  onChange={handlePhotosChange}
+                />
+              </label>
+              {newPhotoPreviews.length > 0 && (
+                <>
+                  <div className="mt-2 text-xs text-slate-500">{newPhotoPreviews.length} new photo(s) selected</div>
+                  <div className="mt-3 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2">
+                    {newPhotoPreviews.map((src, i) => (
+                      <img key={i} src={src} className="aspect-square w-full object-cover rounded-lg border" alt={`new-${i + 1}`} />
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+          </section>
+
           {/* Objective */}
           <section className="rounded-2xl border bg-white shadow-sm p-5 sm:p-6">
             <div className="flex items-center justify-between">
@@ -875,7 +948,7 @@ export default function WaterProjectUpdate() {
             />
           </section>
 
-          {/* Stakeholders TEXT (required by backend) */}
+          {/* Stakeholders TEXT */}
           <section className="rounded-2xl border bg-white shadow-sm p-5 sm:p-6">
             <h3 className="font-semibold">Stakeholders (Text)</h3>
             <div className="mt-4 grid md:grid-cols-2 gap-5">
@@ -893,7 +966,7 @@ export default function WaterProjectUpdate() {
               <div>
                 <label className="text-sm font-medium text-slate-700">stack1Title *</label>
                 <input
-                  type="text" 
+                  type="text"
                   value={stack1Title}
                   onChange={(e) => setstack1Title(e.target.value)}
                   className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
@@ -902,7 +975,7 @@ export default function WaterProjectUpdate() {
               <div>
                 <label className="text-sm font-medium text-slate-700">stack1desc *</label>
                 <input
-                  type="text" 
+                  type="text"
                   value={stack1desc}
                   onChange={(e) => setstack1desc(e.target.value)}
                   className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
@@ -913,7 +986,7 @@ export default function WaterProjectUpdate() {
               <div>
                 <label className="text-sm font-medium text-slate-700">stack2Title *</label>
                 <input
-                  type="text" 
+                  type="text"
                   value={stack2Title}
                   onChange={(e) => setstack2Title(e.target.value)}
                   className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
@@ -922,7 +995,7 @@ export default function WaterProjectUpdate() {
               <div>
                 <label className="text-sm font-medium text-slate-700">stack2desc *</label>
                 <input
-                  type="text" 
+                  type="text"
                   value={stack2desc}
                   onChange={(e) => setstack2desc(e.target.value)}
                   className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
@@ -933,7 +1006,7 @@ export default function WaterProjectUpdate() {
               <div>
                 <label className="text-sm font-medium text-slate-700">stack3Title *</label>
                 <input
-                  type="text" 
+                  type="text"
                   value={stack3Title}
                   onChange={(e) => setstack3Title(e.target.value)}
                   className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
@@ -942,7 +1015,7 @@ export default function WaterProjectUpdate() {
               <div>
                 <label className="text-sm font-medium text-slate-700">stack3desc *</label>
                 <input
-                  type="text" 
+                  type="text"
                   value={stack3desc}
                   onChange={(e) => setstack3desc(e.target.value)}
                   className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
@@ -979,14 +1052,15 @@ export default function WaterProjectUpdate() {
               </div>
             ))}
           </section>
- <label className="text-sm font-medium text-slate-700">Project Stage</label>
-                <input
-                  type="text"
-                  value={projectStage}
-                  
-                  onChange={(e) => setprojectSatge(e.target.value)}
-                  className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
-                />
+
+          <label className="text-sm font-medium text-slate-700">Project Stage</label>
+          <input
+            type="text"
+            value={projectStage}
+            onChange={(e) => setprojectSatge(e.target.value)}
+            className="mt-2 w-full rounded-lg border px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400"
+          />
+
           {/* Actions */}
           <div className="h-2" />
           <div className="flex items-center justify-end gap-3 pt-2">
@@ -1010,3 +1084,4 @@ export default function WaterProjectUpdate() {
     </div>
   );
 }
+
