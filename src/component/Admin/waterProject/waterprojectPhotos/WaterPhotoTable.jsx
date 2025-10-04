@@ -8,7 +8,7 @@ export default function WaterProjectPhotosTable() {
   const [projects, setProjects] = useState([]);
   const [selectedId, setSelectedId] = useState("");
   const [selectedProjectName, setSelectedProjectName] = useState("");
-  const [rows, setRows] = useState([]); // [{ Image }]
+  const [rows, setRows] = useState([]); // [{ Image }] or strings
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState(null);
   const [msg, setMsg] = useState(null);
@@ -24,21 +24,42 @@ export default function WaterProjectPhotosTable() {
   const PATHS = useMemo(
     () => ({
       projects: ["/readProjectWater/waterProject", "/api/readProjectWater/waterProject"],
-      readPhotos: (id) => [`/ReadWaterProjectPhoto/${id}/photos`, `/api/ReadWaterProjectPhoto/${id}/photos`],
+      readPhotos: (id) => [
+        `/ReadWaterProjectPhoto/${id}/photos`,
+        `/api/ReadWaterProjectPhoto/${id}/photos`,
+      ],
       postPhotos: (id) => [`/WaterProject/${id}/photos`, `/api/WaterProject/${id}/photos`],
-      deletePhoto: (id) => [`/DeleteWaterProject/${id}/photos`, `/api/DeleteWaterProject/${id}/photos`], // body: {index} or {imageName}
+      deletePhoto: (id) => [
+        `/DeleteWaterProject/${id}/photos`,
+        `/api/DeleteWaterProject/${id}/photos`,
+      ],
+
+      // FIX: delete via query param first (safer for servers that don't parse DELETE bodies)
+      deletePhotoQuery: (id, index) => [
+        `/DeleteWaterProject/${id}/photos?index=${encodeURIComponent(String(index))}`,
+        `/api/DeleteWaterProject/${id}/photos?index=${encodeURIComponent(String(index))}`,
+      ],
     }),
     []
   );
 
   // util: normalize display src (same as in your detail page)
-  const IMG_BASE = import.meta.env.VITE_IMG_BASE_URL || import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
+  const IMG_BASE =
+    import.meta.env.VITE_IMG_BASE_URL ||
+    import.meta.env.VITE_API_BASE_URL ||
+    "http://localhost:3000";
+
   const normalizeName = (val) => {
     if (!val) return "";
     if (/^https?:\/\//i.test(val)) return val;
     const fname = String(val).split(/[\\/]/).pop();
-    return `${IMG_BASE}/allimages/${encodeURIComponent(fname)}`;
+    return `${IMG_BASE.replace(/\/+$/, "")}/allimages/${encodeURIComponent(fname)}`;
   };
+
+  // FIX: helper to safely build absolute URLs with VITE_API_BASE_URL
+  const getApiBase = () =>
+    (import.meta.env.VITE_API_BASE_URL || "http://localhost:3000").replace(/\/+$/, "");
+  const abs = (path) => `${getApiBase()}${path.startsWith("/") ? path : `/${path}`}`;
 
   // load projects for select
   useEffect(() => {
@@ -53,7 +74,7 @@ export default function WaterProjectPhotosTable() {
           res = await api.get(PATHS.projects[1]);
         }
         if (!mounted) return;
-        const docs = Array.isArray(res.data) ? res.data : [];
+        const docs = Array.isArray(res.data) ? res.data : Array.isArray(res.data?.data) ? res.data.data : [];
         setProjects(docs);
       } catch (e) {
         setErr(e?.response?.data?.message || e?.message || "Failed to load projects");
@@ -92,37 +113,96 @@ export default function WaterProjectPhotosTable() {
   const handlePickProject = (e) => {
     const pid = e.target.value;
     setSelectedId(pid);
-    setSelectedProjectName(
-      projects.find((p) => p._id === pid)?.title || projects.find((p) => p._id === pid)?.name || pid
-    );
+    const found = projects.find((p) => p._id === pid);
+    setSelectedProjectName(found?.title || found?.name || pid);
     if (pid) loadPhotos(pid);
   };
 
-  // delete by index
+  // Extract file name from a row (supports {Image} or string)
+  const getRowFilename = (row) => {
+    const raw = typeof row === "string" ? row : row?.Image || row?.image || row?.url || "";
+    if (!raw) return "";
+    return String(raw).split(/[\\/]/).pop();
+  };
+
+  // delete by index (robust)
   const handleDelete = async (index) => {
-    if (!selectedId && selectedId !== "0") return;
+    if (!selectedId) return;
+    if (!Number.isInteger(index) || index < 0 || index >= rows.length) return;
+
     const ok = window.confirm("Delete this photo?");
     if (!ok) return;
+
     setErr(null);
     setMsg(null);
-    try {
-      // Use raw axios with absolute URL to avoid any interceptor edge cases
-      const base = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
-      // Your controller accepts JSON body { index } or { imageName }
-      await axios.delete(`${base}${PATHS.deletePhoto(selectedId)[0]}`, {
-        data: { index },
-      }).catch(async () => {
-        // fallback to /api prefix if needed
-        await axios.delete(`${base}${PATHS.deletePhoto(selectedId)[1]}`, {
-          data: { index },
-        });
-      });
 
-      // remove locally
+    // We'll try in this order:
+    // 1) DELETE with query param (?index=N)
+    // 2) DELETE with JSON body { index }
+    // 3) DELETE with JSON body { imageName }
+    const row = rows[index];
+    const imageName = getRowFilename(row);
+
+    try {
+      // 1) query param attempt
+      try {
+        await axios.delete(abs(PATHS.deletePhotoQuery(selectedId, index)[0]));
+      } catch {
+        await axios.delete(abs(PATHS.deletePhotoQuery(selectedId, index)[1]));
+      }
+
+      // local update
       setRows((prev) => prev.filter((_, i) => i !== index));
       setMsg("Photo deleted ✅");
-    } catch (e) {
-      setErr(e?.response?.data?.message || e?.message || "Delete failed");
+      return;
+    } catch (e1) {
+      // continue to fallback attempts
+    }
+
+    try {
+      // 2) body with { index }
+      try {
+        await axios.delete(abs(PATHS.deletePhoto(selectedId)[0]), {
+          data: { index },
+          headers: { "Content-Type": "application/json" },
+        });
+      } catch {
+        await axios.delete(abs(PATHS.deletePhoto(selectedId)[1]), {
+          data: { index },
+          headers: { "Content-Type": "application/json" },
+        });
+      }
+
+      setRows((prev) => prev.filter((_, i) => i !== index));
+      setMsg("Photo deleted ✅");
+      return;
+    } catch (e2) {
+      // continue to filename fallback
+    }
+
+    try {
+      // 3) body with { imageName }
+      if (!imageName) throw new Error("Missing imageName for fallback delete.");
+      try {
+        await axios.delete(abs(PATHS.deletePhoto(selectedId)[0]), {
+          data: { imageName },
+          headers: { "Content-Type": "application/json" },
+        });
+      } catch {
+        await axios.delete(abs(PATHS.deletePhoto(selectedId)[1]), {
+          data: { imageName },
+          headers: { "Content-Type": "application/json" },
+        });
+      }
+
+      setRows((prev) => prev.filter((_, i) => i !== index));
+      setMsg("Photo deleted ✅");
+    } catch (e3) {
+      setErr(
+        e3?.response?.data?.message ||
+          e3?.message ||
+          "Delete failed (tried query index, body index, and body imageName)."
+      );
     }
   };
 
@@ -146,13 +226,28 @@ export default function WaterProjectPhotosTable() {
     setMsg(null);
 
     try {
-      // 1) delete existing at index
-      const base = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
-      await axios
-        .delete(`${base}${PATHS.deletePhoto(selectedId)[0]}`, { data: { index: idx } })
-        .catch(async () => {
-          await axios.delete(`${base}${PATHS.deletePhoto(selectedId)[1]}`, { data: { index: idx } });
-        });
+      // 1) delete existing at index (same robust sequence)
+      await (async () => {
+        try {
+          try {
+            await axios.delete(abs(PATHS.deletePhotoQuery(selectedId, idx)[0]));
+          } catch {
+            await axios.delete(abs(PATHS.deletePhotoQuery(selectedId, idx)[1]));
+          }
+        } catch {
+          try {
+            await axios.delete(abs(PATHS.deletePhoto(selectedId)[0]), {
+              data: { index: idx },
+              headers: { "Content-Type": "application/json" },
+            });
+          } catch {
+            await axios.delete(abs(PATHS.deletePhoto(selectedId)[1]), {
+              data: { index: idx },
+              headers: { "Content-Type": "application/json" },
+            });
+          }
+        }
+      })();
 
       // 2) append the new one
       const form = new FormData();
@@ -168,8 +263,8 @@ export default function WaterProjectPhotosTable() {
       // reload list to reflect new order/state
       await loadPhotos(selectedId);
       setMsg("Photo replaced ✅");
-    } catch (e) {
-      setErr(e?.response?.data?.message || e?.message || "Replace failed");
+    } catch (e4) {
+      setErr(e4?.response?.data?.message || e4?.message || "Replace failed");
     } finally {
       setUploading(false);
     }
@@ -199,8 +294,8 @@ export default function WaterProjectPhotosTable() {
 
       await loadPhotos(selectedId);
       setMsg("Photos appended ✅");
-    } catch (e) {
-      setErr(e?.response?.data?.message || e?.message || "Upload failed");
+    } catch (e5) {
+      setErr(e5?.response?.data?.message || e5?.message || "Upload failed");
     } finally {
       setUploading(false);
     }
@@ -276,7 +371,8 @@ export default function WaterProjectPhotosTable() {
               </tr>
             ) : (
               rows.map((p, i) => {
-                const name = p?.Image ? String(p.Image).split(/[\\/]/).pop() : "—";
+                const raw = typeof p === "string" ? p : p?.Image || p?.image || p?.url || "";
+                const name = raw ? String(raw).split(/[\\/]/).pop() : "—";
                 return (
                   <tr key={`${name}-${i}`} className="hover:bg-slate-50">
                     <td className="px-4 py-3 text-slate-700">{i}</td>
@@ -285,7 +381,7 @@ export default function WaterProjectPhotosTable() {
                     </td>
                     <td className="px-4 py-3">
                       <img
-                        src={normalizeName(p?.Image)}
+                        src={normalizeName(raw)}
                         alt={name}
                         className="w-20 h-16 object-cover rounded-md border border-slate-200"
                         onError={(e) => (e.currentTarget.src = "/placeholder.png")}
@@ -337,3 +433,4 @@ export default function WaterProjectPhotosTable() {
     </div>
   );
 }
+
