@@ -897,8 +897,8 @@ Ensuring adequate provision of administrative and financial support to all depar
       <section className="py-16 bg-[color:var(--brand)]/5">
         <div className="max-w-6xl mx-auto px-4">
           <header className="mb-8 flex items-end justify-between gap-4">
-            <h2 className="text-3xl font-bold">Complaint Response Mechanisms</h2>
-            <span className="rounded-full bg-white px-4 py-2 font-bold shadow">CRM</span>
+            <h2 className="text-3xl font-bold">Complaint Response Mechanisms(CRM)</h2>
+         
           </header>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
