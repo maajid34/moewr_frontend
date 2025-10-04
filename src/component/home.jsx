@@ -450,7 +450,7 @@ Ensuring adequate provision of administrative and financial support to all depar
           • Towns that are not closer to the river but have underground water potential, such towns will need exploration of deep aquifer boreholes that can serve them in a long time of period. 
           • Town or localities that are situated along the coast or within the ocean; such localities are in dire need of water and can helped in constructing sand dams and promotion of modern rain water harvesting system to store water during the rainy season.
 </p>
-              <div className="mt-4 inline-flex items-center gap-2 font-semibold text-[color:var(--brand)]">Read for More <span>→</span></div>
+              <div className="mt-4 inline-flex items-center gap-2 font-semibold text-[color:var(--brand)]"><Link to={"/water"}>Read for More </Link><span>→</span></div>
             </div>
 
             <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-md shadow-slate-900" data-aos="fade-up" data-aos-delay="200">
@@ -458,12 +458,12 @@ Ensuring adequate provision of administrative and financial support to all depar
               <h4 className="mt-4 font-bold text-xl">Energy Department</h4>
               <p className="text-slate-600 mt-1">The Energy department is one of the five Ministry departments and the sector of the two sectors of the Ministry thus is responsible for the Energy of the state, the department has its strategy of developing the energy sector of the state
                  to provide affordable and reliable Energy with low tariff rate for the community.</p>
-              <div className="mt-4 inline-flex items-center gap-2 font-semibold text-[color:var(--brand)]">More info <span>→</span></div>
+              <div className="mt-4 inline-flex items-center gap-2 font-semibold text-[color:var(--brand)]"><Link to={"/Energy"}>More info</Link> <span>→</span></div>
             </div>
 
             <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-md shadow-slate-900" data-aos="fade-up" data-aos-delay="300">
               <div className="text-5xl">📊</div>
-              <h4 className="mt-4 font-bold text-xl">Planning &amp; Policy</h4>
+              <h4 className="mt-4 font-bold text-xl"><Link to={"/PlanningPolicy"}>Planning &amp; Policy</Link></h4>
               <p className="text-slate-600 mt-1">The Department of Planning , Research and Policy is responsible for conducting and preparing key research outputs on water and Energy assessments across various topics and sectors for Jubaland State. The Department 
                 monitors, analyses, assess the development of the water and Energy of the state and </p>
               <div className="mt-4 inline-flex items-center gap-2 font-semibold text-[color:var(--brand)]">Read For More <span>→</span></div>
@@ -483,7 +483,7 @@ Ensuring adequate provision of administrative and financial support to all depar
               <p className="text-slate-600 mt-1">The Jubaland Ministry of Energy and Water Resources Warehouse build with the support the International Organization for migration (IOM) as a vital component in meeting the ministry's comprehensive mandate for the state. As the central hub for the distribution and management of WASH (Water, Sanitation, and Hygiene) supplies, the warehouse plays a crucial role in ensuring the accessibility
                  and equitable distribution of these essential resources to communities across Jubaland.
 </p>
-              <div className="mt-4 inline-flex items-center gap-2 font-semibold text-[color:var(--brand)]">Read for More <span>→</span></div>
+              <div className="mt-4 inline-flex items-center gap-2 font-semibold text-[color:var(--brand)]"><Link to={"/Warehouse"}>Read for More</Link> <span>→</span></div>
             </div>
             <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-md shadow-slate-900" data-aos="fade-up">
               <div className="text-5xl">🧪</div>
@@ -491,7 +491,7 @@ Ensuring adequate provision of administrative and financial support to all depar
               <p className="text-slate-600 mt-1">The Laboratory of the Ministry of Energy and Water Resources was established in November 2021 with the support from International Organization for Migration (IOM) . The laboratory was fully equiped in July 2022 through the support of Kismaayo urban
                  water supply project which enabled it to fully run on its current operational capacity.
 </p>
-              <div className="mt-4 inline-flex items-center gap-2 font-semibold text-[color:var(--brand)]">Read for More <span>→</span></div>
+              <div className="mt-4 inline-flex items-center gap-2 font-semibold text-[color:var(--brand)]"><Link to={"/WaterLabaratory"}>Read for More</Link> <span>→</span></div>
             </div>
 
             </div>
