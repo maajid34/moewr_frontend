@@ -32,9 +32,8 @@ export default function WaterProjectPhotosTable() {
       deletePhoto: (id) => [
         `/DeleteWaterProject/${id}/photos`,
         `/api/DeleteWaterProject/${id}/photos`,
-      ],
-
-      // FIX: delete via query param first (safer for servers that don't parse DELETE bodies)
+      ], // body: {index} or {imageName}
+      // FIX: add query-param variant so we can delete without a request body (fewer CORS/preflight issues)
       deletePhotoQuery: (id, index) => [
         `/DeleteWaterProject/${id}/photos?index=${encodeURIComponent(String(index))}`,
         `/api/DeleteWaterProject/${id}/photos?index=${encodeURIComponent(String(index))}`,
@@ -53,13 +52,16 @@ export default function WaterProjectPhotosTable() {
     if (!val) return "";
     if (/^https?:\/\//i.test(val)) return val;
     const fname = String(val).split(/[\\/]/).pop();
-    return `${IMG_BASE.replace(/\/+$/, "")}/allimages/${encodeURIComponent(fname)}`;
+    return `${IMG_BASE}/allimages/${encodeURIComponent(fname)}`;
   };
 
-  // FIX: helper to safely build absolute URLs with VITE_API_BASE_URL
-  const getApiBase = () =>
-    (import.meta.env.VITE_API_BASE_URL || "http://localhost:3000").replace(/\/+$/, "");
-  const abs = (path) => `${getApiBase()}${path.startsWith("/") ? path : `/${path}`}`;
+  // Helper to get raw value and filename for a row
+  const getRowRaw = (row) =>
+    typeof row === "string" ? row : row?.Image || row?.image || row?.url || "";
+  const getRowFilename = (row) => {
+    const raw = getRowRaw(row);
+    return raw ? String(raw).split(/[\\/]/).pop() : "";
+  };
 
   // load projects for select
   useEffect(() => {
@@ -74,7 +76,11 @@ export default function WaterProjectPhotosTable() {
           res = await api.get(PATHS.projects[1]);
         }
         if (!mounted) return;
-        const docs = Array.isArray(res.data) ? res.data : Array.isArray(res.data?.data) ? res.data.data : [];
+        const docs = Array.isArray(res.data)
+          ? res.data
+          : Array.isArray(res.data?.data)
+          ? res.data.data
+          : [];
         setProjects(docs);
       } catch (e) {
         setErr(e?.response?.data?.message || e?.message || "Failed to load projects");
@@ -113,88 +119,72 @@ export default function WaterProjectPhotosTable() {
   const handlePickProject = (e) => {
     const pid = e.target.value;
     setSelectedId(pid);
-    const found = projects.find((p) => p._id === pid);
-    setSelectedProjectName(found?.title || found?.name || pid);
+    setSelectedProjectName(
+      projects.find((p) => p._id === pid)?.title ||
+        projects.find((p) => p._id === pid)?.name ||
+        pid
+    );
     if (pid) loadPhotos(pid);
   };
 
-  // Extract file name from a row (supports {Image} or string)
-  const getRowFilename = (row) => {
-    const raw = typeof row === "string" ? row : row?.Image || row?.image || row?.url || "";
-    if (!raw) return "";
-    return String(raw).split(/[\\/]/).pop();
-  };
-
-  // delete by index (robust)
+  // FIX: robust delete — try query param first, then body {index}, then body {imageName}
   const handleDelete = async (index) => {
-    if (!selectedId) return;
-    if (!Number.isInteger(index) || index < 0 || index >= rows.length) return;
-
+    if (!selectedId && selectedId !== "0") return;
     const ok = window.confirm("Delete this photo?");
     if (!ok) return;
-
     setErr(null);
     setMsg(null);
 
-    // We'll try in this order:
-    // 1) DELETE with query param (?index=N)
-    // 2) DELETE with JSON body { index }
-    // 3) DELETE with JSON body { imageName }
-    const row = rows[index];
-    const imageName = getRowFilename(row);
+    const imageName = getRowFilename(rows[index]);
 
+    // 1) Try DELETE with query param (?index=N) using your `api` instance (avoids cross-origin body issues)
     try {
-      // 1) query param attempt
       try {
-        await axios.delete(abs(PATHS.deletePhotoQuery(selectedId, index)[0]));
+        await api.delete(PATHS.deletePhotoQuery(selectedId, index)[0]);
       } catch {
-        await axios.delete(abs(PATHS.deletePhotoQuery(selectedId, index)[1]));
+        await api.delete(PATHS.deletePhotoQuery(selectedId, index)[1]);
       }
-
-      // local update
       setRows((prev) => prev.filter((_, i) => i !== index));
       setMsg("Photo deleted ✅");
       return;
     } catch (e1) {
-      // continue to fallback attempts
+      /* continue */
     }
 
+    // 2) Fallback: DELETE with JSON body { index }
     try {
-      // 2) body with { index }
       try {
-        await axios.delete(abs(PATHS.deletePhoto(selectedId)[0]), {
+        await api.delete(PATHS.deletePhoto(selectedId)[0], {
           data: { index },
           headers: { "Content-Type": "application/json" },
         });
       } catch {
-        await axios.delete(abs(PATHS.deletePhoto(selectedId)[1]), {
+        await api.delete(PATHS.deletePhoto(selectedId)[1], {
           data: { index },
           headers: { "Content-Type": "application/json" },
         });
       }
-
       setRows((prev) => prev.filter((_, i) => i !== index));
       setMsg("Photo deleted ✅");
       return;
     } catch (e2) {
-      // continue to filename fallback
+      /* continue */
     }
 
+    // 3) Final fallback: DELETE with JSON body { imageName }
     try {
-      // 3) body with { imageName }
       if (!imageName) throw new Error("Missing imageName for fallback delete.");
       try {
-        await axios.delete(abs(PATHS.deletePhoto(selectedId)[0]), {
+        await api.delete(PATHS.deletePhoto(selectedId)[0], {
           data: { imageName },
           headers: { "Content-Type": "application/json" },
         });
       } catch {
-        await axios.delete(abs(PATHS.deletePhoto(selectedId)[1]), {
+        await api.delete(PATHS.deletePhoto(selectedId)[1], {
           data: { imageName },
           headers: { "Content-Type": "application/json" },
         });
       }
-
       setRows((prev) => prev.filter((_, i) => i !== index));
       setMsg("Photo deleted ✅");
     } catch (e3) {
@@ -226,45 +216,62 @@ export default function WaterProjectPhotosTable() {
     setMsg(null);
 
     try {
-      // 1) delete existing at index (same robust sequence)
-      await (async () => {
+      // delete existing at index (same robust sequence as handleDelete, but inline)
+      try {
+        try {
+          await api.delete(PATHS.deletePhotoQuery(selectedId, idx)[0]);
+        } catch {
+          await api.delete(PATHS.deletePhotoQuery(selectedId, idx)[1]);
+        }
+      } catch {
         try {
           try {
-            await axios.delete(abs(PATHS.deletePhotoQuery(selectedId, idx)[0]));
-          } catch {
-            await axios.delete(abs(PATHS.deletePhotoQuery(selectedId, idx)[1]));
-          }
-        } catch {
-          try {
-            await axios.delete(abs(PATHS.deletePhoto(selectedId)[0]), {
+            await api.delete(PATHS.deletePhoto(selectedId)[0], {
               data: { index: idx },
               headers: { "Content-Type": "application/json" },
             });
           } catch {
-            await axios.delete(abs(PATHS.deletePhoto(selectedId)[1]), {
+            await api.delete(PATHS.deletePhoto(selectedId)[1], {
               data: { index: idx },
+              headers: { "Content-Type": "application/json" },
+            });
+          }
+        } catch {
+          // last resort: by imageName
+          const imageName = getRowFilename(rows[idx]);
+          if (!imageName) throw new Error("Missing imageName for fallback delete.");
+          try {
+            await api.delete(PATHS.deletePhoto(selectedId)[0], {
+              data: { imageName },
+              headers: { "Content-Type": "application/json" },
+            });
+          } catch {
+            await api.delete(PATHS.deletePhoto(selectedId)[1], {
+              data: { imageName },
               headers: { "Content-Type": "application/json" },
             });
           }
         }
-      })();
+      }
 
-      // 2) append the new one
+      // append the new one
       const form = new FormData();
       form.append("photos", file);
-      await api
-        .post(PATHS.postPhotos(selectedId)[0], form, { headers: { "Content-Type": "multipart/form-data" } })
-        .catch(async () => {
-          await api.post(PATHS.postPhotos(selectedId)[1], form, {
-            headers: { "Content-Type": "multipart/form-data" },
-          });
+      try {
+        await api.post(PATHS.postPhotos(selectedId)[0], form, {
+          headers: { "Content-Type": "multipart/form-data" },
         });
+      } catch {
+        await api.post(PATHS.postPhotos(selectedId)[1], form, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+      }
 
       // reload list to reflect new order/state
       await loadPhotos(selectedId);
       setMsg("Photo replaced ✅");
-    } catch (e4) {
-      setErr(e4?.response?.data?.message || e4?.message || "Replace failed");
+    } catch (e) {
+      setErr(e?.response?.data?.message || e?.message || "Replace failed");
     } finally {
       setUploading(false);
     }
@@ -284,18 +291,20 @@ export default function WaterProjectPhotosTable() {
     try {
       const form = new FormData();
       list.forEach((f) => form.append("photos", f));
-      await api
-        .post(PATHS.postPhotos(selectedId)[0], form, { headers: { "Content-Type": "multipart/form-data" } })
-        .catch(async () => {
-          await api.post(PATHS.postPhotos(selectedId)[1], form, {
-            headers: { "Content-Type": "multipart/form-data" },
-          });
+      try {
+        await api.post(PATHS.postPhotos(selectedId)[0], form, {
+          headers: { "Content-Type": "multipart/form-data" },
         });
+      } catch {
+        await api.post(PATHS.postPhotos(selectedId)[1], form, {
+          headers: { "Content-Type": "multipart/form-data" },
+        });
+      }
 
       await loadPhotos(selectedId);
       setMsg("Photos appended ✅");
-    } catch (e5) {
-      setErr(e5?.response?.data?.message || e5?.message || "Upload failed");
+    } catch (e) {
+      setErr(e?.response?.data?.message || e?.message || "Upload failed");
     } finally {
       setUploading(false);
     }
@@ -371,7 +380,7 @@ export default function WaterProjectPhotosTable() {
               </tr>
             ) : (
               rows.map((p, i) => {
-                const raw = typeof p === "string" ? p : p?.Image || p?.image || p?.url || "";
+                const raw = getRowRaw(p);
                 const name = raw ? String(raw).split(/[\\/]/).pop() : "—";
                 return (
                   <tr key={`${name}-${i}`} className="hover:bg-slate-50">
