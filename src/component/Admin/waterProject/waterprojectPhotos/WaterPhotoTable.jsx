@@ -485,7 +485,7 @@ export default function WaterProjectPhotosTable() {
       readProjectOne: (id) => `/readProjectWaterSingal/waterProject/${id}`,
       postPhotos: (id) => `/waterProject/${id}/photos`,   // POST (append)
       putPhotos:  (id) => `/waterProject/${id}/photos`,   // PUT (replace with index)
-      deletePhoto:(id) => `/waterProject/${id}/photos`,   // DELETE (index in body)
+      deletePhoto:(id) => `/DeleteWaterProject/${id}/photos`,   // DELETE (index in body)
     }),
     []
   );
