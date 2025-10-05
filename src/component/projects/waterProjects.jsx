@@ -72,7 +72,18 @@ export default function WaterProject() {
 >
   Read for More
 </Link>
-<button className="mt-4 inline-block px-3 py-2 rounded-md text-black border border-black bg-white hover:bg-[#0A7FB8">{item.projectStage}</button>
+<button
+  className={`mt-4 inline-block px-3 py-2 rounded-md text-white border font-semibold ${
+    item.projectStage === "Project Completed"
+      ? "bg-red-600 hover:bg-red-700 border-red-600"
+      : item.projectStage === "Implementation Stage" ||
+        item.projectStage === "On-going Project"
+      ? "bg-green-600 hover:bg-green-700 border-green-600"
+      : "bg-gray-400 border-gray-400"
+  }`}
+>
+  {item.projectStage}
+</button>
               </div>
 
             </article>
