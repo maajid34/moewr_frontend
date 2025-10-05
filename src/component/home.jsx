@@ -136,22 +136,38 @@ useEffect(() => {
 
   // waterProject starts here
 
-   const handlWatereeReadData = () =>{
+//    const handlWatereeReadData = () =>{
 
-     axios.get("https://moewr-backend.onrender.com/readStageProjectWater").then((res) =>{
-      wsetdata(res.data)
+//      axios.get("https://moewr-backend.onrender.com/readStageProjectWater").then((res) =>{
+//       wsetdata(res.data)
     
       
       
              
-    }).catch((err) => {
-    console.error("Error fetching medicine data:", err);
-  });
+//     }).catch((err) => {
+//     console.error("Error fetching medicine data:", err);
+//   });
 
-}
-   useEffect(() =>{
-    handlWatereeReadData()
-  },[])
+// }
+//    useEffect(() =>{
+//     handlWatereeReadData()
+//   },[])
+  const handlWatereeReadData = () => {
+    axios
+      .get("https://moewr-backend.onrender.com/readStageProjectWater")
+      .then((res) => {
+        wsetdata(Array.isArray(res.data) ? res.data : []);
+      })
+      .catch((err) => {
+        console.error("Error fetching water project data:", err);
+        wsetdata([]);
+      })
+      .finally(() => setLoading(false));
+  };
+
+  useEffect(() => {
+    handlWatereeReadData();
+  }, []);
   // end here waterProject
 
 
@@ -651,39 +667,46 @@ Ensuring adequate provision of administrative and financial support to all depar
 
 
             {/* watere project */}
-            
-<section id="projects" className="bg-white/70 border-y ">
-        <div className="max-w-7xl mx-auto px-4 py-16 lg:py-20">
-          <h2 className="text-3xl font-bold tracking-tight" data-aos="fade-up">WATER PROJECTS</h2>
+<section id="projects" className="bg-white/70 border-y">
+      <div className="max-w-7xl mx-auto px-4 py-16 lg:py-20">
+        <h2 className="text-3xl font-bold tracking-tight" data-aos="fade-up">
+          WATER PROJECTS
+        </h2>
+
+        {loading ? (
+          <p className="mt-8 text-slate-600">Loading projects…</p>
+        ) : wData.length === 0 ? (
+          <p className="mt-8 text-slate-600">No projects found.</p>
+        ) : (
           <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-2">
-            {/* Project card */}
-          
-{
-    wData.map((item)=>{ 
-    
-           
-         return  <article className="rounded-xl border bg-white p-6 shadow-md box-shadow-slate-800 border-[var(--brand-dark)]" data-aos="zoom-in" data-aos-delay="150">
-              <h3 className="font-semibold text-lg">{item.title}</h3>
-              <p className="mt-2 text-sm text-slate-600">{item.desc}</p>
+            {wData.map((item) => (
+              <article
+                key={item._id}
+                className="rounded-xl border bg-white p-6 shadow-md border-[var(--brand-dark)]"
+                data-aos="zoom-in"
+                data-aos-delay="150"
+              >
+                <h3 className="font-semibold text-lg">{item.title}</h3>
+                <p className="mt-2 text-sm text-slate-600">{item.desc}</p>
 
-              <div className="flex justify-between ">
-              <Link
-  to={`/SingalProjectsWater/${item._id}`}
-  className="mt-4 inline-block px-3 py-2 rounded-md text-white bg-[#2FA8E1] hover:bg-[#0A7FB8]"
->
-  Read for More
-</Link>
-<button className="mt-4 inline-block px-3 py-2 rounded-md text-black border border-black bg-white hover:bg-[#0A7FB8">{item.projectStage}</button>
-              </div>
+                <div className="mt-4 flex justify-between items-center gap-2">
+                  <Link
+                    to={`/SingalProjectsWater/${item._id}`}
+                    className="inline-block px-3 py-2 rounded-md text-white bg-[#2FA8E1] hover:bg-[#0A7FB8]"
+                  >
+                    Read More
+                  </Link>
 
-            </article>
-            
-    })
-
-  }
-     </div>
-        </div>
-      </section>
+                  <span className="inline-block px-3 py-2 rounded-md text-black border border-black bg-white hover:bg-[#0A7FB8] hover:text-white">
+                    {item.projectStage}
+                  </span>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
 
       {/* Ministry Officials */}
      <section className="py-16">
