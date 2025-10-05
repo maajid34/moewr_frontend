@@ -158,12 +158,15 @@ const handlWatereeReadData = () => {
     .then((res) => {
       const norm = (s) => (s ?? "").toString().trim().toLowerCase();
 
-      const filtered = (res.data || []).filter((p) =>
-        norm(p.projectStage) === "implementation stage" &&
-        norm(p.status) === "on-going project"
+      // Include only implementation + ongoing
+      const filtered = (res.data || []).filter(
+        (p) =>
+          norm(p.projectStage) === "implementation stage" &&
+          norm(p.status) === "on-going project" &&
+          norm(p.projectStage) !== "project completed"
       );
 
-      wsetdata(filtered);   // IMPORTANT: set filtered list
+      wsetdata(filtered);
     })
     .catch((err) => {
       console.error("Error fetching water project data:", err);
