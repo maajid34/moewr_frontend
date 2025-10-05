@@ -165,7 +165,7 @@ const handlWatereeReadData = () => {
           norm(p.status) === "on-going project" &&
           norm(p.projectStage) !== "Project Completed"
       );
-      console.log
+      console.log(filtered)
 
       wsetdata(filtered);
     })
