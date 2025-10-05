@@ -116,7 +116,7 @@ useEffect(() => {
  const [wData, wsetdata] = useState([])
    const handleReadData = () =>{
 
-     axios.get("https://moewr-backend.onrender.com/readProjectEnergy/EnergyProject").then((res) =>{
+     axios.get("https://moewr-backend.onrender.com/readProjectEnergyStage").then((res) =>{
       setdata(res.data)
       
       
