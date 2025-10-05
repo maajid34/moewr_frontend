@@ -82,7 +82,7 @@ export default function EnergyProject() {
       : "bg-gray-400 border-gray-400"
   }`}
 >
-  {item.projectStage}
+  {item.projectSatge}
 </button>
 
 </div>
