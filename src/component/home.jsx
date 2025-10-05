@@ -159,8 +159,7 @@ const handlWatereeReadData = () => {
       // Filter only ongoing implementation stage projects
       const ongoingProjects = res.data.filter(
         (project) =>
-          project.projectStage === "Implementation Stage" &&
-          project.projectStage === "On-going Project"
+          project.projectStage !== "Project Completed" 
       );
 
       wsetdata(ongoingProjects);
