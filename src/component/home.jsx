@@ -136,22 +136,44 @@ useEffect(() => {
 
   // waterProject starts here
 
-   const handlWatereeReadData = () =>{
+//    const handlWatereeReadData = () =>{
 
-     axios.get("https://moewr-backend.onrender.com/readProjectWater/waterProject").then((res) =>{
-      wsetdata(res.data)
+//      axios.get("https://moewr-backend.onrender.com/readProjectWater/waterProject").then((res) =>{
+//       wsetdata(res.data)
     
       
       
              
-    }).catch((err) => {
-    console.error("Error fetching medicine data:", err);
-  });
+//     }).catch((err) => {
+//     console.error("Error fetching medicine data:", err);
+//   });
 
-}
-   useEffect(() =>{
-    handlWatereeReadData()
-  },[])
+// }
+//    useEffect(() =>{
+//     handlWatereeReadData()
+//   },[])
+const handlWatereeReadData = () => {
+  axios
+    .get("https://moewr-backend.onrender.com/readProjectWater/waterProject")
+    .then((res) => {
+      // Filter only ongoing implementation stage projects
+      const ongoingProjects = res.data.filter(
+        (project) =>
+          project.projectStage === "Implementation Stage" &&
+          project.status === "On-going Project"
+      );
+
+      wsetdata(ongoingProjects);
+    })
+    .catch((err) => {
+      console.error("Error fetching water project data:", err);
+    });
+};
+
+useEffect(() => {
+  handlWatereeReadData();
+}, []);
+
   // end here waterProject
 
 
