@@ -464,7 +464,7 @@ export default function Minister() {
                   {t("common.social_twitter")}
                 </a>
                 <a
-                  href="#"
+                  href="https://www.facebook.com/ahmedbaraki1?mibextid=wwXIfr&rdid=zZeP8bM1J6uOkNuD&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F16edKdHXrC%2F%3Fmibextid%3DwwXIfr"
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-[var(--blue)] text-[var(--blue)] hover:bg-[var(--blue)] hover:text-white transition"
                 >
                   <svg
