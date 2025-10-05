@@ -664,7 +664,7 @@ export default function Minister() {
         {/* CTA */}
         <div className="mt-8">
           <a
-            href="#"
+            href="https://www.facebook.com/ahmed.noor.9655806/"
             className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[var(--brand)] text-slate-900 font-semibold shadow hover:bg-[var(--brand-dark)] hover:text-white transition"
           >
             <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current">
