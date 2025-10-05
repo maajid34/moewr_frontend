@@ -714,7 +714,7 @@ Ensuring adequate provision of administrative and financial support to all depar
                   </a>
                 </p>
                 <a
-                  href="#"
+                  href="https://www.facebook.com/ahmedbaraki1?mibextid=wwXIfr&rdid=zZeP8bM1J6uOkNuD&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F16edKdHXrC%2F%3Fmibextid%3DwwXIfr"
                   className="mt-4 inline-block text-xs px-3 py-1 rounded bg-[var(--brand)] text-white hover:bg-[var(--brand-dark)]"
                 >
                   Facebook
@@ -772,7 +772,7 @@ Ensuring adequate provision of administrative and financial support to all depar
                   </a>
                 </p>
                 <a
-                  href="#"
+                  href="https://www.facebook.com/ahmed.noor.9655806/"
                   className="mt-4 inline-block text-xs px-3 py-1 rounded bg-[var(--brand)] text-white hover:bg-[var(--brand-dark)]"
                 >
                   Facebook
