@@ -136,43 +136,23 @@ useEffect(() => {
 
   // waterProject starts here
 
-//    const handlWatereeReadData = () =>{
+   const handlWatereeReadData = () =>{
 
-//      axios.get("https://moewr-backend.onrender.com/readProjectWater/waterProject").then((res) =>{
-//       wsetdata(res.data)
+     axios.get("https://moewr-backend.onrender.com/readStageProjectWater").then((res) =>{
+      wsetdata(res.data)
     
       
       
              
-//     }).catch((err) => {
-//     console.error("Error fetching medicine data:", err);
-//   });
+    }).catch((err) => {
+    console.error("Error fetching medicine data:", err);
+  });
 
-// }
-//    useEffect(() =>{
-//     handlWatereeReadData()
-//   },[])
-const handlWatereeReadData = () => {
-  axios
-    .get("https://moewr-backend.onrender.com/readProjectWater/waterProject")
-    .then((res) => {
-      const norm = (s) => (s ?? "").toString().trim().toLowerCase();
+}
+   useEffect(() =>{
+    handlWatereeReadData()
+  },[])
 
-      // Include only implementation + ongoing
-      const filtered = (res.data || []).filter(
-        (p) =>
-          norm(p.projectStage) === "implementation stage" &&
-          norm(p.status) === "on-going project" &&
-          norm(p.projectStage) !== "Project Completed"
-      );
-      console.log(filtered)
-
-      wsetdata(filtered);
-    })
-    .catch((err) => {
-      console.error("Error fetching water project data:", err);
-    });
-};
 
 useEffect(() => {
   handlWatereeReadData();
