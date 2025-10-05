@@ -160,7 +160,7 @@ const handlWatereeReadData = () => {
       const ongoingProjects = res.data.filter(
         (project) =>
           project.projectStage === "Implementation Stage" &&
-          project.status === "On-going Project"
+          project.projectStage === "On-going Project"
       );
 
       wsetdata(ongoingProjects);
