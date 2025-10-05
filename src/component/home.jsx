@@ -156,13 +156,14 @@ const handlWatereeReadData = () => {
   axios
     .get("https://moewr-backend.onrender.com/readProjectWater/waterProject")
     .then((res) => {
-      // Filter only ongoing implementation stage projects
-      const ongoingProjects = res.data.filter(
-        (project) =>
-          project.projectStage !== "Project Completed" 
+      const norm = (s) => (s ?? "").toString().trim().toLowerCase();
+
+      const filtered = (res.data || []).filter((p) =>
+        norm(p.projectStage) === "implementation stage" &&
+        norm(p.status) === "on-going project"
       );
 
-      wsetdata(ongoingProjects);
+      wsetdata(filtered);   // IMPORTANT: set filtered list
     })
     .catch((err) => {
       console.error("Error fetching water project data:", err);
@@ -172,6 +173,7 @@ const handlWatereeReadData = () => {
 useEffect(() => {
   handlWatereeReadData();
 }, []);
+
 
   // end here waterProject
 
