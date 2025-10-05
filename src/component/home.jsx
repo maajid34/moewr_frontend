@@ -149,9 +149,7 @@ useEffect(() => {
   });
 
 }
-   useEffect(() =>{
-    handlWatereeReadData()
-  },[])
+  
 
 
 useEffect(() => {
