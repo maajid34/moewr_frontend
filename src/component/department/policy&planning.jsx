@@ -597,7 +597,7 @@ export default function PlanningPolicy() {
         <section id="studies" className="py-14 sm:py-16">
           <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
             <div className="flex items-end justify-between flex-wrap gap-4">
-              <h2 className="text-3xl font-extrabold text-slate-900">Studies & Documents</h2>
+                <h2 className="text-3xl font-extrabold text-slate-900">Acts & Policies of the Ministry</h2>
               <span className="inline-flex h-2 w-28 rounded-full bg-[var(--brand)]" />
             </div>
 
@@ -676,47 +676,7 @@ export default function PlanningPolicy() {
           </div>
         </section>
 
-        {/* ===== 6) ACTS & POLICIES ===== */}
-        <section id="policies" className="py-14 sm:py-16 bg-[var(--brand)]/5">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-            <div className="flex items-end justify-between flex-wrap gap-4">
-              <h2 className="text-3xl font-extrabold text-slate-900">Acts & Policies of the Ministry</h2>
-              <span className="inline-flex h-2 w-28 rounded-full bg-[var(--brand)]" />
-            </div>
-
-            <div className="mt-8 grid md:grid-cols-2 gap-6">
-              <article className="rounded-2xl bg-white border border-slate-100 p-6 shadow-sm flex items-center gap-4">
-                <span className="w-12 h-12 rounded-xl bg-[var(--brand)] text-white flex items-center justify-center font-bold">PDF</span>
-                <div className="flex-1">
-                  <h3 className="font-semibold text-slate-900">Finance Policy & Procedures</h3>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    <a href="#" className="px-3 py-1.5 rounded-md bg-[var(--brand)] text-white text-sm font-semibold hover:bg-[var(--brand-dark)]">
-                      Download
-                    </a>
-                    <a href="#" className="px-3 py-1.5 rounded-md border border-[var(--brand)] text-[var(--brand)] text-sm font-semibold hover:bg-[var(--brand)]/10">
-                      View
-                    </a>
-                  </div>
-                </div>
-              </article>
-
-              <article className="rounded-2xl bg-white border border-slate-100 p-6 shadow-sm flex items-center gap-4">
-                <span className="w-12 h-12 rounded-xl bg-[var(--brand)] text-white flex items-center justify-center font-bold">PDF</span>
-                <div className="flex-1">
-                  <h3 className="font-semibold text-slate-900">Human Resource Policy & Procedures</h3>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    <a href="#" className="px-3 py-1.5 rounded-md bg-[var(--brand)] text-white text-sm font-semibold hover:bg-[var(--brand-dark)]">
-                      Download
-                    </a>
-                    <a href="#" className="px-3 py-1.5 rounded-md border border-[var(--brand)] text-[var(--brand)] text-sm font-semibold hover:bg-[var(--brand)]/10">
-                      View
-                    </a>
-                  </div>
-                </div>
-              </article>
-            </div>
-          </div>
-        </section>
+   
       </div>
       <MoewrFooter />
     </>
