@@ -1209,9 +1209,21 @@ export default function Energy() {
                       {t('common.readMore')}
                     </Link>
                     {/* fixed missing bracket in hover class */}
-                    <button className="mt-4 inline-block px-3 py-2 rounded-md text-black border border-black bg-white hover:bg-[#0A7FB8]">
+                    {/* <button className="mt-4 inline-block px-3 py-2 rounded-md text-black border border-black bg-white hover:bg-[#0A7FB8]">
                       {t(`dynamic.${item.projectSatge}`, { defaultValue: item.projectSatge })}
-                    </button>
+                    </button> */}
+                    <button
+  className={`mt-4 inline-block px-3 py-2 rounded-md text-white font-semibold border ${
+    item.projectSatge === "Project Completed"
+      ? "bg-red-600 hover:bg-red-700 border-red-600"
+      : item.projectSatge === "Implementation Stage" ||
+        item.projectSatge === "On-going Project"
+      ? "bg-green-600 hover:bg-green-700 border-green-600"
+      : "bg-gray-400 border-gray-400"
+  }`}
+>
+  {item.projectSatge}
+</button>
                   </div>
                 </article>
               ))}
