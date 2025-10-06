@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import img1 from '../../assets/man-writing-notebook.jpg'
 import img2 from '../../assets/planbg.png'
 import MoewrFooter from '../../pages/footer';
