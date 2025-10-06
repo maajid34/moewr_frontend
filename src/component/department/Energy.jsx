@@ -898,8 +898,8 @@ export default function Energy() {
           </div>
         </section>
 
-        {/* ===== 2) SERVICES ===== */}
-        <section id="services" className="max-w-7xl mx-auto px-4 py-16 lg:py-20">
+        {/* ===== 2) SERVICES =====
+      <section id="services" className="max-w-7xl mx-auto px-4 py-16 lg:py-20">
           <h2 className="text-3xl font-bold tracking-tight text-center m-5" data-aos="fade-up">
             {t('services.title')}
           </h2>
@@ -926,7 +926,7 @@ export default function Energy() {
               <p className="mt-1 text-slate-600 text-sm">{t('services.cards.kiosks.text')}</p>
             </div>
           </div>
-        </section>
+        </section> */}
 
         {/* ===== 7) DEPARTMENT MANDATES ===== */}
         <section id="mandates" className="bg-white/70 border-y">
