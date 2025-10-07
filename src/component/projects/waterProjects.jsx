@@ -10,6 +10,7 @@ import MoewrFooter from "../../pages/footer";
 
 export default function WaterProject() {
    const [Data, setData] = useState([])
+     const [searchTerm, setSearchTerm] = useState("");
      
    const handleReadData = () =>{
 
@@ -28,6 +29,13 @@ export default function WaterProject() {
    useEffect(() =>{
     handleReadData()
   },[])
+
+    // Filter logic (does not affect backend, just client-side filter)
+  const filteredData = Data.filter(
+    (item) =>
+      item.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.desc?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
   return (
 
 
@@ -54,11 +62,23 @@ export default function WaterProject() {
 <section id="projects" className="bg-white/70 border-y ">
         <div className="max-w-7xl mx-auto px-4 py-16 lg:py-20">
           <h2 className="text-3xl font-bold tracking-tight" data-aos="fade-up">WATER PROJECTS</h2>
+            {/* 🔍 Search Input */}
+            <div className="mt-6 mb-10">
+              <input
+                type="text"
+                placeholder="Search projects..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full md:w-1/2 border border-gray-900 rounded-lg px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#2FA8E1]"
+              />
+            </div>
           <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-2">
+            
+          
             {/* Project card */}
           
 {
-    Data.map((item)=>{ 
+    filteredData.map((item)=>{ 
     
            
          return  <article className="rounded-xl border bg-white p-6 shadow-md box-shadow-slate-800 border-[var(--brand-dark)]" data-aos="zoom-in" data-aos-delay="150">
