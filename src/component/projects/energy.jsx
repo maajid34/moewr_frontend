@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { useEffect } from "react";
-import axios from 'axios'
+// import { useState } from "react";
+// import { useEffect } from "react";
+// import axios from 'axios'
 
 // import img1 from '../../assets/home-g.jpg'
 
