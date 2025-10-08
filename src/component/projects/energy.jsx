@@ -114,6 +114,7 @@ import MoewrFooter from "../../pages/footer";
 export default function EnergyProject() {
   const [Data, setData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+   const [category,setCategory] = useState("")
 
   const handleReadData = () => {
     axios
@@ -131,11 +132,19 @@ export default function EnergyProject() {
   }, []);
 
   // Filter logic (does not affect backend, just client-side filter)
-  const filteredData = Data.filter(
-    (item) =>
-      item.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.desc?.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+// Filter logic (client-side)
+const filteredData = Data.filter((item) => {
+  const q = searchTerm.toLowerCase();
+  const matchesSearch =
+    item.title?.toLowerCase().includes(q) ||
+    item.desc?.toLowerCase().includes(q);
+
+  // When category is empty => "All"
+  const matchesCategory = category ? item.projectSatge === category : true;
+
+  return matchesSearch && matchesCategory;
+});
+
 
   return (
     <>
@@ -165,7 +174,7 @@ export default function EnergyProject() {
             </h2>
 
             {/* 🔍 Search Input */}
-            <div className="mt-6 mb-10">
+            <div className="mt-6 mb-10 flex justify-between">
               <input
                 type="text"
                 placeholder="Search projects..."
@@ -173,6 +182,41 @@ export default function EnergyProject() {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full md:w-1/2 border border-gray-900 rounded-lg px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#2FA8E1]"
               />
+              <div className="mr-5 space-x-4">
+  <label>
+    <input
+      name="category"
+      type="radio"
+      value=""
+      onChange={() => setCategory("")}
+      checked={category === ""}
+    />{" "}
+    All
+  </label>
+
+  <label>
+    <input
+      name="category"
+      type="radio"
+      value="Project Completed"
+      onChange={() => setCategory("Project Completed")}
+      checked={category === "Project Completed"}
+    />{" "}
+    Completed Project
+  </label>
+
+  <label>
+    <input
+      name="category"
+      type="radio"
+      value="Implementation Stage"
+      onChange={() => setCategory("Implementation Stage")}
+      checked={category === "Implementation Stage"}
+    />{" "}
+    Implementation Stage
+  </label>
+</div>
+
             </div>
 
             <div className="mt-10 grid gap-8 md:grid-cols-2 lg:grid-cols-2">

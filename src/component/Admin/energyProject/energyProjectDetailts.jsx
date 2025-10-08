@@ -942,7 +942,7 @@ export default function SingalProjectsEnergy() {
         setObjective(data.objective || "");
 
         // Components
-        setComponentTitle(data.componentTitle || "Project");
+        setComponentTitle(data.componentTitle || "");
         setComponentOne(data.componentOne || "");
         setComponentTwo(data.componentTwo || "");
         setComponentThree(data.componentThree || "");

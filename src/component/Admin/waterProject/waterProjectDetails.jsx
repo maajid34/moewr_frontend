@@ -958,7 +958,7 @@ export default function readProjectWaterSingal() {
       setLoading(true);
       setError(null);
       try {
-        const res = await axios.get(`${API}/readProjectWaterSingal/waterProject/${id}`);  ///
+        const res = await axios.get(`${API}/readProjectWaterSingal/waterProject/${id}`);  
         const data = Array.isArray(res.data) ? res.data[0] : (res.data?.data ?? res.data);
         if (!mounted || !data) return;
 
@@ -972,7 +972,7 @@ export default function readProjectWaterSingal() {
         setObjective(data.objective || "");
 
         // Components
-        setComponentTitle(data.componentTitle || "Project");
+        setComponentTitle(data.componentTitle || "");
         setComponentOne(data.componentOne || "");
         setComponentTwo(data.componentTwo || "");
         setComponentThree(data.componentThree || "");
