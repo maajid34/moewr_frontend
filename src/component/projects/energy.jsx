@@ -131,6 +131,12 @@ export default function EnergyProject() {
     handleReadData();
   }, []);
 
+
+  // count number
+
+
+
+  // end count
   // Filter logic (does not affect backend, just client-side filter)
 // Filter logic (client-side)
 const filteredData = Data.filter((item) => {

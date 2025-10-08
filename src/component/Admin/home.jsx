@@ -1,10 +1,12 @@
+
+
 // src/components/DashboardCards.jsx
 import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
 export default function DashboardCards() {
-  const API =  "https://moewr-backend.onrender.com";
+  const API = "https://moewr-backend.onrender.com";
 
   // --- axios client with token ---
   const http = useMemo(() => {
@@ -25,20 +27,21 @@ export default function DashboardCards() {
   const [totalEnergy, setTotalEnergy] = useState(0);
   const [totalWaterAchievements, setTotalWaterAchievements] = useState(0);
 
+  // NEW: energy breakdown
+  const [totalEnergyCompleted, setTotalEnergyCompleted] = useState(0);
+  const [totalEnergyImplementation, setTotalEnergyImplementation] = useState(0);
+  // NEW: Water breakdown
+  const [totalWaterCompleted, setTotalWaterCompleted] = useState(0);
+  const [totalWaterImplementation, setTotalWaterImplementation] = useState(0);
+
   // robust counter for various achievement shapes
   const countAchievements = (ach) => {
     if (!ach) return 0;
 
-    if (Array.isArray(ach)) {
-      // array of strings or objects
-      return ach.length;
-    }
-    if (typeof ach === "object") {
-      // single object like {title, detail, progress}
-      return 1;
-    }
+    if (Array.isArray(ach)) return ach.length;
+    if (typeof ach === "object") return 1;
+
     if (typeof ach === "string") {
-      // count non-empty lines (supports bullets or plain lines)
       const lines = ach
         .split(/\r?\n/)
         .map((s) => s.replace(/^[-*•]\s*/, "").trim())
@@ -62,9 +65,28 @@ export default function DashboardCards() {
           ? energyRes.data.data
           : [];
         if (!mounted) return;
+
         setTotalEnergy(energyList.length);
 
-        // Water projects (adjust this route if yours differs)
+        // NEW: compute completed & implementation counts from energyList
+        const completed = energyList.filter(
+          (p) => p.projectSatge === "Project Completed"
+        ).length;
+
+        const implementation = energyList.filter(
+          (p) =>
+            p.projectSatge === "Implementation Stage" ||
+            p.projectSatge === "On-going Project"
+        ).length;
+
+
+        setTotalEnergyCompleted(completed);
+        setTotalEnergyImplementation(implementation);
+
+
+     
+
+        // Water projects
         const waterRes = await http.get("/readProjectWater/WaterProject");
         const waterList = Array.isArray(waterRes.data)
           ? waterRes.data
@@ -74,6 +96,24 @@ export default function DashboardCards() {
         if (!mounted) return;
 
         setTotalWater(waterList.length);
+
+
+           // water complete and implemetation
+   const completeds = waterList.filter(
+          (p) => p.projectStage === "Project Completed"
+        ).length;
+
+        const implementations = waterList.filter(
+          (p) =>
+            p.projectStage === "Implementation Stage" ||
+            p.projectStage === "On-going Project"
+        ).length;
+
+
+        setTotalWaterCompleted(completeds);
+        setTotalWaterImplementation(implementations);
+
+        // water project complted liste end
 
         const achSum = waterList.reduce(
           (sum, p) => sum + countAchievements(p?.achievements),
@@ -106,7 +146,7 @@ export default function DashboardCards() {
           title="Total Water Projects"
           value={loading ? "…" : totalWater}
           accent="bg-sky-100 text-sky-700"
-          to="/WaterProjectsTable" // optional route
+          to="/WaterProjectsTable"
         />
 
         {/* Energy Projects */}
@@ -114,7 +154,7 @@ export default function DashboardCards() {
           title="Total Energy Projects"
           value={loading ? "…" : totalEnergy}
           accent="bg-emerald-100 text-emerald-700"
-          to="/EnergyProjectTable" // optional route
+          to="/EnergyProjectTable"
         />
 
         {/* Water Achievements */}
@@ -122,7 +162,37 @@ export default function DashboardCards() {
           title="Water Projects Achievements"
           value={loading ? "…" : totalWaterAchievements}
           accent="bg-amber-100 text-amber-700"
-          to="/WaterProjectsTable" // optional route
+          to="/WaterProjectsTable"
+        />
+
+        {/* NEW: Energy Completed (brand chip) */}
+        <StatCard
+          title="Energy Projects Completed"
+          value={loading ? "…" : totalEnergyCompleted}
+          accent="bg-[#E6F6FD] text-[#0A7FB8]" // brand-light bg + brand-dark text
+          to="/EnergyProjectTable"
+        />
+
+        {/* NEW: Energy Implementation (brand chip) */}
+        <StatCard
+          title="Energy Projects Implementation"
+          value={loading ? "…" : totalEnergyImplementation}
+          accent="bg-[#E6F6FD] text-[#2FA8E1]" // brand-light bg + brand primary text
+          to="/EnergyProjectTable"
+        />
+        {/* NEW: Water Implementation (brand chip) */}
+        <StatCard
+          title="Water Projects Implementation"
+          value={loading ? "…" : totalWaterImplementation}
+          accent="bg-[#E6F6FD] text-[#2FA8E1]" // brand-light bg + brand primary text
+          to="/EnergyProjectTable"
+        />
+        {/* NEW: Water Completed (brand chip) */}
+        <StatCard
+          title="Water Projects Completed"
+          value={loading ? "…" : totalWaterCompleted}
+          accent="bg-[#E6F6FD] text-[#2FA8E1]" // brand-light bg + brand primary text
+          to="/EnergyProjectTable"
         />
       </div>
     </section>
@@ -142,3 +212,4 @@ function StatCard({ title, value, accent, to }) {
 
   return to ? <Link to={to}>{content}</Link> : content;
 }
+
