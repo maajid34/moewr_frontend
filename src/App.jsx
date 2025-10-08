@@ -48,6 +48,7 @@ import WaterProjectPhotosTable from "./component/Admin/waterProject/waterproject
 import Warehosue from "./component/department/warehouse";
 import WaterLabaratory from "./component/department/waterLabaratory";
 import InventoryCreateForm from "./component/department/wareHouse/InventoryCreateForm";
+import InventoryTable from "./component/department/wareHouse/InventoryTable";
 
 
 
@@ -136,6 +137,7 @@ function App() {
 
 {/* ware house */}
 <Route path="/InventoryCreateForm" element={<DashboardLayout><InventoryCreateForm/></DashboardLayout>}/>
+<Route path="/InventoryTable" element={<DashboardLayout><InventoryTable/></DashboardLayout>}/>
  
       </Routes>
      

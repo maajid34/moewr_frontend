@@ -358,9 +358,10 @@ export default function AdminSidebar() {
               <i className="fa-solid fa-user text-base" />
               <span>Users</span>
             </Link>
-            <Link to="/InventoryCreateForm" className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium hover:bg-white/10">
+            
+            <Link to="/InventoryTable" className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium hover:bg-white/10">
               <i className="fa-solid fa-user text-base" />
-              <span>WareHouseForm</span>
+              <span>WareHouseTable</span>
             </Link>
 
             <div className="mt-3 border-t border-white/20 pt-3"></div>
