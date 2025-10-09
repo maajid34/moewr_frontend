@@ -219,7 +219,7 @@ const filteredData = Data.filter((item) => {
       onChange={() => setCategory("Implementation Stage")}
       checked={category === "Implementation Stage"}
     />{" "}
-    On-Going Projects
+    On-going Projects
   </label>
 </div>
 
